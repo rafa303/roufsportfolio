@@ -46,6 +46,8 @@
   .logo-mark::after{content:'';width:7px;height:7px;background:var(--green);display:block;}
   .logo-mark-lg{width:32px;height:32px;border-width:2px;}
   .logo-mark-lg::after{width:10px;height:10px;}
+  .logo-img{width:26px;height:26px;object-fit:contain;display:block;filter:drop-shadow(0 0 10px rgba(0,230,118,.14));}
+  .logo-img-lg{width:34px;height:34px;}
   .metric-block{display:flex;flex-direction:column;padding:0 14px;border-right:1px solid var(--border);min-width:120px;}
   .metric-label{font-size:10px;letter-spacing:1px;color:var(--text3);font-family:var(--mono);text-transform:uppercase;}
   .metric-value{font-size:16px;font-weight:700;color:var(--text1);letter-spacing:.5px;line-height:1.2;}
@@ -273,7 +275,7 @@
 <!-- ═══════════════ SCREEN 1: SETUP ═══════════════ -->
 <div id="screen1" class="screen active">
   <div class="s1-header">
-    <div class="logo-mark logo-mark-lg"></div>
+    <img class="logo-img logo-img-lg" src="LOGO%20CARGOARCH%20AI.png" alt="CargoArch AI Logo">
     <div class="s1-title">Cargo<span>Arch</span> AI</div>
     <div style="height:28px;width:1px;background:var(--border);margin:0 6px;"></div>
     <div style="font-size:11px;color:var(--text3);font-family:var(--mono);letter-spacing:1px;">SETUP &amp; CALIBRATION</div>
@@ -420,7 +422,7 @@
 <div id="screenCam" class="screen">
   <div class="topbar">
     <div class="topbar-logo">
-      <div class="logo-mark"></div>
+      <img class="logo-img" src="LOGO%20CARGOARCH%20AI.png" alt="CargoArch AI Logo">
       <div class="topbar-logo-text">Cargo<span>Arch</span></div>
     </div>
     <div class="metric-block" style="min-width:170px;">
@@ -509,7 +511,7 @@
 <div id="screen2" class="screen">
   <div class="topbar">
     <div class="topbar-logo">
-      <div class="logo-mark"></div>
+      <img class="logo-img" src="LOGO%20CARGOARCH%20AI.png" alt="CargoArch AI Logo">
       <div class="topbar-logo-text">Cargo<span>Arch</span></div>
     </div>
     <div class="metric-block">
@@ -671,7 +673,10 @@ window.addEventListener('DOMContentLoaded',()=>{
   const truck=document.getElementById('truck-type');
   const start=document.getElementById('start-btn');
   if(truck&&start){
-    const sync=()=>{start.disabled=!truck.value;};
+    const sync=()=>{
+      start.disabled=!truck.value;
+      renderSectorGrid(truck.value);
+    };
     truck.addEventListener('change',sync);
     sync();
   }
@@ -680,15 +685,29 @@ window.addEventListener('DOMContentLoaded',()=>{
 // ══════════════════════════════════════════════════════════
 //  SECTOR GRID (Screen 1)
 // ══════════════════════════════════════════════════════════
-(function buildGrid(){
+function renderSectorGrid(truck){
   const g=document.getElementById('sector-grid');if(!g)return;
-  const filled=[1,2,3,6,7,8,9,11,14,16,17],hl=[12];
-  for(let i=1;i<=25;i++){
-    const c=document.createElement('div');
-    c.className='grid-cell'+(filled.includes(i)?' filled':'')+(hl.includes(i)?' hl':'');
-    c.textContent=String(i).padStart(2,'0');g.appendChild(c);
+  g.innerHTML='';
+  const n=truck?getLoadingSectorCount(truck):0;
+  const cols=5,rows=5;
+  const startCol=Math.max(0,Math.floor((cols-n)/2));
+  for(let r=0;r<rows;r++){
+    for(let c=0;c<cols;c++){
+      const cell=document.createElement('div');
+      let cls='grid-cell';
+      let txt='—';
+      if(n>0&&c>=startCol&&c<startCol+n){
+        cls+=' filled';
+        const s=(c-startCol)+1;
+        txt=r===0?('S'+s):'';
+        if(r===0)cls+=' hl';
+      }
+      cell.className=cls;
+      cell.textContent=txt;
+      g.appendChild(cell);
+    }
   }
-})();
+}
 
 // ══════════════════════════════════════════════════════════
 //  TARE

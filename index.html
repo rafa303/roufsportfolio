@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Rafa Putra Ro'uf — Layouter, Programmer & 3D Builder. Gold Medal MTE 2026.">
+<meta name="description" content="Rafa Putra Ro'uf — Student • Graphic Designer • 3D Designer • Researcher • Web Developer.">
 <title>Rafa Putra Ro'uf — Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,6 +51,10 @@ body {
   overflow-x: hidden;
   cursor: none;
 }
+
+.t-id,.t-en{display:none;}
+body.lang-id .t-id{display:revert;}
+body.lang-en .t-en{display:revert;}
 
 /* ──────────────────────────────────────
    BACKGROUND LAYERS
@@ -200,6 +204,19 @@ nav.sc {
   animation:borderPulse 4s ease-in-out infinite;
 }
 .nav-btn:hover { background:var(--grad); color:#080a07; border-color:transparent; animation:none; }
+.lang-pill{
+  display:flex; gap:3px; list-style:none;
+  background:rgba(255,255,255,0.032);
+  border:1px solid var(--border); border-radius:50px; padding:4px;
+}
+.lang-opt{
+  display:flex; align-items:center; justify-content:center;
+  padding:8px 14px; border-radius:40px;
+  color:var(--g2); background:transparent; border:none;
+  font-size:12px; font-weight:600; cursor:pointer;
+  transition:all .32s var(--ease); letter-spacing:.06em;
+}
+.lang-opt:hover, .lang-opt.on{ color:var(--lime2); background:rgba(200,230,43,0.1); }
 .nav-ham {
   display:none; flex-direction:column; gap:5px;
   background:none; border:none; cursor:pointer; padding:4px;
@@ -394,6 +411,8 @@ section { padding:130px 56px; position:relative; z-index:2; }
   background:radial-gradient(ellipse at 65% 25%, rgba(200,230,43,0.06) 0%, transparent 55%);
 }
 .about-avatar { font-size:88px; z-index:1; }
+.about-photo{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;opacity:.92;filter:saturate(1.05) contrast(1.02);}
+.about-frame .about-frame-lbl{position:relative;}
 .about-frame-lbl { font-family:var(--mono); font-size:10px; letter-spacing:.2em; color:var(--g3); text-transform:uppercase; z-index:1; }
 
 .medal-badge {
@@ -473,7 +492,8 @@ section { padding:130px 56px; position:relative; z-index:2; }
   width:52px; height:52px; border-radius:14px;
   background:rgba(200,230,43,0.08); border:1px solid rgba(200,230,43,0.15);
   display:flex; align-items:center; justify-content:center;
-  font-size:23px; margin-bottom:22px; transition:all .35s var(--ease);
+  font-size:14px; margin-bottom:22px; transition:all .35s var(--ease);
+  font-family:var(--mono); font-weight:700; letter-spacing:.12em;
 }
 .sk-card:hover .sk-ico { transform:scale(1.1) rotate(6deg); background:rgba(200,230,43,0.15); }
 .sk-name { font-family:var(--serif); font-size:21px; font-weight:500; color:var(--white); margin-bottom:6px; }
@@ -600,6 +620,15 @@ section { padding:130px 56px; position:relative; z-index:2; }
   cursor:pointer; font-size:18px; color:var(--g2); transition:all .3s;
 }
 .m-close:hover { background:rgba(200,230,43,0.12); color:var(--lime); }
+.m-link{
+  display:inline-flex;align-items:center;gap:10px;
+  margin-top:16px;
+  padding:10px 14px;border-radius:999px;
+  background:rgba(200,230,43,0.08);border:1px solid rgba(200,230,43,0.18);
+  color:var(--lime);text-decoration:none;font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+  transition:all .3s var(--ease);
+}
+.m-link:hover{background:rgba(200,230,43,0.14);border-color:rgba(200,230,43,0.42);transform:translateY(-2px);}
 
 /* ──────────────────────────────────────
    ACHIEVEMENTS
@@ -737,7 +766,7 @@ footer {
 }
 </style>
 </head>
-<body>
+<body class="lang-id">
 
 <!-- BG LAYERS -->
 <canvas id="bg-canvas"></canvas>
@@ -763,26 +792,34 @@ footer {
 
 <!-- MOBILE NAV -->
 <div class="mob-nav" id="mobNav">
-  <a href="#hero" onclick="closeMob()">Home</a>
-  <a href="#about" onclick="closeMob()">About</a>
-  <a href="#skills" onclick="closeMob()">Skills</a>
-  <a href="#projects" onclick="closeMob()">Projects</a>
-  <a href="#contact" onclick="closeMob()">Contact</a>
+  <a href="#hero" onclick="closeMob()"><span class="t-id">Beranda</span><span class="t-en">Home</span></a>
+  <a href="#about" onclick="closeMob()"><span class="t-id">Tentang</span><span class="t-en">About</span></a>
+  <a href="#education" onclick="closeMob()"><span class="t-id">Pendidikan</span><span class="t-en">Education</span></a>
+  <a href="#experience" onclick="closeMob()"><span class="t-id">Pengalaman</span><span class="t-en">Experience</span></a>
+  <a href="#skills" onclick="closeMob()"><span class="t-id">Keahlian</span><span class="t-en">Skills</span></a>
+  <a href="#projects" onclick="closeMob()"><span class="t-id">Proyek</span><span class="t-en">Projects</span></a>
+  <a href="#achievements" onclick="closeMob()"><span class="t-id">Pencapaian</span><span class="t-en">Achievements</span></a>
+  <a href="#links" onclick="closeMob()"><span class="t-id">Tautan</span><span class="t-en">Links</span></a>
+  <a href="#contact" onclick="closeMob()"><span class="t-id">Kontak</span><span class="t-en">Contact</span></a>
 </div>
 
 <!-- NAV -->
 <nav id="nav">
   <a href="#hero" class="nav-logo">Rafa <div class="dot"></div></a>
   <ul class="nav-pill">
-    <li><a href="#hero" class="on">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#experience">Exp</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Works</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#hero" class="on"><span class="t-id">Beranda</span><span class="t-en">Home</span></a></li>
+    <li><a href="#about"><span class="t-id">Tentang</span><span class="t-en">About</span></a></li>
+    <li><a href="#education"><span class="t-id">Edukasi</span><span class="t-en">Education</span></a></li>
+    <li><a href="#experience"><span class="t-id">Pengalaman</span><span class="t-en">Exp</span></a></li>
+    <li><a href="#skills"><span class="t-id">Keahlian</span><span class="t-en">Skills</span></a></li>
+    <li><a href="#projects"><span class="t-id">Proyek</span><span class="t-en">Works</span></a></li>
+    <li><a href="#contact"><span class="t-id">Kontak</span><span class="t-en">Contact</span></a></li>
   </ul>
   <div style="display:flex;gap:10px;align-items:center">
-    <button class="nav-btn">Download CV</button>
+    <div class="lang-pill" id="langPill">
+      <button class="lang-opt on" data-lang="id" type="button">ID</button>
+      <button class="lang-opt" data-lang="en" type="button">EN</button>
+    </div>
     <button class="nav-ham" id="ham" onclick="toggleMob()" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -791,12 +828,11 @@ footer {
 
 <!-- SOCIAL -->
 <div class="socials">
-  <a href="#" title="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.39.6.11.8-.26.8-.58v-2.23c-3.34.73-4.03-1.42-4.03-1.42-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.77.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23A11.5 11.5 0 0112 5.8c1.02.005 2.05.14 3.01.4 2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.82 1.1.82 2.22v3.29c0 .32.19.7.8.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg></a>
-  <a href="#" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92C2.17 15.58 2.16 15.2 2.16 12c0-3.2.01-3.58.07-4.85C2.38 3.86 3.9 2.31 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.7.07 7.05.01 8.33 0 8.74 0 12c0 3.26.01 3.67.07 4.95.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24c3.26 0 3.67-.01 4.95-.07 4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95 0-3.26-.01-3.67-.07-4.95C23.73 2.7 21.3.27 16.95.07 15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 100 12.32A6.16 6.16 0 0012 5.84zM12 16a4 4 0 110-8 4 4 0 010 8zm6.4-11.85a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88z"/></svg></a>
-  <a href="#" title="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+  <a href="https://github.com/rafa303" target="_blank" rel="noopener" title="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.39.6.11.8-.26.8-.58v-2.23c-3.34.73-4.03-1.42-4.03-1.42-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.77.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23A11.5 11.5 0 0112 5.8c1.02.005 2.05.14 3.01.4 2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.82 1.1.82 2.22v3.29c0 .32.19.7.8.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg></a>
+  <a href="https://www.instagram.com/rouffs__/" target="_blank" rel="noopener" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92C2.17 15.58 2.16 15.2 2.16 12c0-3.2.01-3.58.07-4.85C2.38 3.86 3.9 2.31 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.7.07 7.05.01 8.33 0 8.74 0 12c0 3.26.01 3.67.07 4.95.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24c3.26 0 3.67-.01 4.95-.07 4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95 0-3.26-.01-3.67-.07-4.95C23.73 2.7 21.3.27 16.95.07 15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 100 12.32A6.16 6.16 0 0012 5.84zM12 16a4 4 0 110-8 4 4 0 010 8zm6.4-11.85a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88z"/></svg></a>
 </div>
 <div class="email-bar">
-  <a href="mailto:rafa@progresif.ac.id">rafa@progresif.ac.id</a>
+  <a href="mailto:rafaputrarouf@gmail.com">rafaputrarouf@gmail.com</a>
 </div>
 
 <!-- ═══════════════════════════════════
@@ -805,19 +841,18 @@ footer {
 <section id="hero">
   <canvas id="hero-canvas"></canvas>
   <div class="hero-inner">
-    <div class="hero-eyebrow"><span class="hero-dot"></span>Open to Collaboration</div>
-    <div class="hero-role">// Layouter · Programmer · 3D Builder</div>
+    <div class="hero-eyebrow"><span class="hero-dot"></span><span class="t-id">Terbuka untuk Kolaborasi</span><span class="t-en">Open to Collaboration</span></div>
+    <div class="hero-role">// Student • Graphic Designer • 3D Designer • Researcher • Web Developer</div>
     <h1 class="hero-h1">
       Rafa<br>
       <span class="grad-text">Putra</span><br>
       <span class="outline-text">Ro'uf</span>
     </h1>
-    <p class="hero-desc">
-      Menciptakan pengalaman digital yang <strong>presisi</strong>, estetik, dan berkesan — dari layout yang matang, kode yang bersih, hingga dunia 3D yang hidup.
-    </p>
+    <p class="hero-desc t-id">Saya adalah siswa SMA Progresif Bumi Shalawat yang memiliki minat pada bidang desain grafis, penelitian, desain 3D, dan pengembangan perangkat lunak.</p>
+    <p class="hero-desc t-en">I am a student at Progresif Bumi Shalawat High School with interests in graphic design, research, 3D design, and software development.</p>
     <div class="hero-ctas">
-      <a href="#projects" class="btn-a">Lihat Karya &rarr;</a>
-      <a href="#contact" class="btn-b">Hubungi Saya</a>
+      <a href="#projects" class="btn-a"><span class="t-id">Lihat Proyek</span><span class="t-en">View Projects</span> &rarr;</a>
+      <a href="#contact" class="btn-b"><span class="t-id">Hubungi Saya</span><span class="t-en">Contact Me</span></a>
     </div>
   </div>
 
@@ -873,72 +908,115 @@ footer {
     <div class="tilt-wrap" id="tiltCard">
       <div class="tilt-shine" id="tiltShine"></div>
       <div class="about-frame">
-        <div class="about-avatar">👤</div>
-        <div class="about-frame-lbl">// your photo here</div>
+        <img class="about-photo" src="/assets/profile.jpg" alt="Rafa Putra Ro'uf">
+        <div class="about-frame-lbl">// Rafa Putra Ro'uf</div>
       </div>
       <div class="medal-badge">
         <div class="medal-ico">🥇</div>
-        <div class="medal-lbl">Gold Medal</div>
+        <div class="medal-lbl"><span class="t-id">Medali Emas</span><span class="t-en">Gold Medal</span></div>
         <div class="medal-val">MTE 2026</div>
       </div>
     </div>
   </div>
   <div>
-    <div class="sec-lbl rv">About Me</div>
-    <h2 class="sec-h rv d1">Crafting<br><em>Digital</em><br>Experiences</h2>
-    <p class="sec-p rv d2">Saya adalah <em style="font-family:var(--serif);font-style:italic;color:var(--g1)">creative technologist</em> yang menggabungkan presisi layout, logika pemrograman, dan kekuatan visualisasi 3D untuk menciptakan karya yang tak terlupakan.</p>
-    <p style="color:var(--g3);margin-top:16px;font-size:15px;line-height:1.85;font-weight:300;max-width:500px" class="rv d3">Aktif di <strong style="color:var(--g2);font-weight:500">PTV (Progresif TV)</strong> dan <strong style="color:var(--g2);font-weight:500">Research SMA Progresif</strong> — tempat di mana ide bertemu eksekusi nyata.</p>
+    <div class="sec-lbl rv"><span class="t-id">Tentang Saya</span><span class="t-en">About Me</span></div>
+    <h2 class="sec-h rv d1"><span class="t-id">Membangun<br><em>Karya</em><br>Digital</span><span class="t-en">Crafting<br><em>Digital</em><br>Experiences</span></h2>
+    <p class="sec-p rv d2 t-id">Saya adalah siswa SMA Progresif Bumi Shalawat yang memiliki minat pada bidang desain grafis, penelitian, desain 3D, dan pengembangan perangkat lunak. Saya aktif dalam berbagai organisasi seperti Research SMA Progresif Bumi Shalawat dan Progresif TV.</p>
+    <p class="sec-p rv d2 t-en">I am a student at Progresif Bumi Shalawat High School with interests in graphic design, research, 3D design, and software development. I actively participate in organizations such as the Progresif Bumi Shalawat High School Research Club and Progresif TV.</p>
+    <p style="color:var(--g3);margin-top:16px;font-size:15px;line-height:1.85;font-weight:300;max-width:540px" class="rv d3 t-id">Dengan pengalaman lebih dari tiga tahun dalam desain tata letak dan desain visual, saya terus mengembangkan kemampuan di bidang desain 3D, pengembangan website, dan pengembangan aplikasi digital.</p>
+    <p style="color:var(--g3);margin-top:16px;font-size:15px;line-height:1.85;font-weight:300;max-width:540px" class="rv d3 t-en">With more than three years of experience in layout and visual design, I continue to expand my expertise in 3D design, website development, and digital application development.</p>
     <div class="about-info rv d4">
-      <div class="info-row"><span class="info-k">Nama</span><span class="info-v">Rafa Putra Ro'uf</span></div>
-      <div class="info-row"><span class="info-k">Lokasi</span><span class="info-v">Sidoarjo, Jawa Timur</span></div>
-      <div class="info-row"><span class="info-k">Institusi</span><span class="info-v">SMA Progresif Bumi Shalawat</span></div>
-      <div class="info-row"><span class="info-k">Organisasi</span><span class="info-v">PTV · Research SMA Progresif</span></div>
-      <div class="info-row"><span class="info-k">Status</span><span class="info-v" style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:600">Open to Collab ✦</span></div>
+      <div class="info-row"><span class="info-k"><span class="t-id">Nama</span><span class="t-en">Name</span></span><span class="info-v">Rafa Putra Ro'uf</span></div>
+      <div class="info-row"><span class="info-k"><span class="t-id">Lokasi</span><span class="t-en">Location</span></span><span class="info-v">Surabaya, East Java, Indonesia</span></div>
+      <div class="info-row"><span class="info-k"><span class="t-id">Institusi</span><span class="t-en">Institution</span></span><span class="info-v">SMA Progresif Bumi Shalawat</span></div>
+      <div class="info-row"><span class="info-k"><span class="t-id">Organisasi</span><span class="t-en">Organizations</span></span><span class="info-v">Progresif TV · Research SMA Progresif Bumi Shalawat</span></div>
+      <div class="info-row"><span class="info-k"><span class="t-id">Status</span><span class="t-en">Status</span></span><span class="info-v" style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:600"><span class="t-id">Terbuka Kolaborasi ✦</span><span class="t-en">Open to Collab ✦</span></span></div>
     </div>
   </div>
 </section>
 
 <!-- STATS -->
 <div class="stats-strip rv" style="margin-left:-56px;margin-right:-56px" id="statsWrap">
-  <div class="stat"><div class="stat-n"><span class="cu" data-t="3">0</span><em>+</em></div><div class="stat-l">Tahun Berkarya</div></div>
-  <div class="stat"><div class="stat-n"><span class="cu" data-t="20">0</span><em>+</em></div><div class="stat-l">Project Selesai</div></div>
-  <div class="stat"><div class="stat-n"><span class="cu" data-t="2">0</span></div><div class="stat-l">Organisasi Aktif</div></div>
+  <div class="stat"><div class="stat-n"><span class="cu" data-t="3">0</span><em>+</em></div><div class="stat-l"><span class="t-id">Tahun Berkarya</span><span class="t-en">Years of Work</span></div></div>
+  <div class="stat"><div class="stat-n"><span class="cu" data-t="10">0</span><em>+</em></div><div class="stat-l"><span class="t-id">Project Selesai</span><span class="t-en">Projects Completed</span></div></div>
+  <div class="stat"><div class="stat-n"><span class="cu" data-t="2">0</span></div><div class="stat-l"><span class="t-id">Organisasi Aktif</span><span class="t-en">Active Orgs</span></div></div>
   <div class="stat"><div class="stat-n">🥇</div><div class="stat-l">Gold Medal MTE 2026</div></div>
 </div>
+
+<!-- ═══════════════════════════════════
+     EDUCATION
+════════════════════════════════════ -->
+<section id="education">
+  <div style="max-width:700px">
+    <div class="sec-lbl rv"><span class="t-id">Pendidikan</span><span class="t-en">Education</span></div>
+    <h2 class="sec-h rv d1"><span class="t-id">Riwayat<br><em>Pendidikan</em></span><span class="t-en">Education<br><em>Journey</em></span></h2>
+    <p class="sec-p rv d2"><span class="t-id">Perjalanan akademik yang membentuk fondasi dan arah minat saya.</span><span class="t-en">My academic path that shaped my foundation and interests.</span></p>
+  </div>
+  <div class="timeline rv d3">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2025 — Present</div>
+      <div class="tl-title">SMA Progresif Bumi Shalawat</div>
+      <div class="tl-desc t-id">Fokus pada pengembangan akademik, multimedia, penelitian, organisasi, dan teknologi digital.</div>
+      <div class="tl-desc t-en">Focused on academics, multimedia, research, organizational activities, and digital technology.</div>
+      <div class="tl-tags"><span class="tag">Research</span><span class="tag">Multimedia</span><span class="tag">Technology</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2022 — 2025</div>
+      <div class="tl-title">IIS SMP Progresif Bumi Shalawat</div>
+      <div class="tl-desc t-id">Menempuh pendidikan menengah pertama dengan fokus pada pengembangan akademik, karakter, dan teknologi.</div>
+      <div class="tl-desc t-en">Completed junior high school education with a focus on academics, character development, and technology.</div>
+      <div class="tl-tags"><span class="tag">Academics</span><span class="tag">Character</span><span class="tag">Technology</span></div>
+    </div>
+  </div>
+</section>
 
 <!-- ═══════════════════════════════════
      EXPERIENCE
 ════════════════════════════════════ -->
 <section id="experience">
   <div style="max-width:700px">
-    <div class="sec-lbl rv">Experience</div>
-    <h2 class="sec-h rv d1">Perjalanan<br><em>Saya</em></h2>
-    <p class="sec-p rv d2">Setiap langkah membentuk kemampuan yang semakin dalam dan bermakna.</p>
+    <div class="sec-lbl rv"><span class="t-id">Pengalaman</span><span class="t-en">Experience</span></div>
+    <h2 class="sec-h rv d1"><span class="t-id">Perjalanan<br><em>Saya</em></span><span class="t-en">My<br><em>Experience</em></span></h2>
+    <p class="sec-p rv d2"><span class="t-id">Setiap langkah membentuk kemampuan yang semakin dalam dan bermakna.</span><span class="t-en">Every step shapes stronger skills and clearer direction.</span></p>
   </div>
   <div class="timeline rv d3">
     <div class="tl-item">
       <div class="tl-dot"></div>
-      <div class="tl-date">2026 — Sekarang</div>
-      <div class="tl-title">Media & Research Division</div>
-      <div class="tl-org">PTV (Progresif TV) · Research SMA Progresif</div>
-      <div class="tl-desc">Bertanggung jawab atas produksi konten visual, pengembangan sistem digital, dan riset teknologi terapan. Memimpin desain dan pengembangan media pembelajaran interaktif untuk komunitas sekolah.</div>
-      <div class="tl-tags"><span class="tag">Layout</span><span class="tag">Production</span><span class="tag">Research</span><span class="tag">Media</span></div>
+      <div class="tl-date">2026 — Present</div>
+      <div class="tl-title"><span class="t-id">Desainer 3D Freelance</span><span class="t-en">Freelance 3D Designer</span></div>
+      <div class="tl-org">Independent</div>
+      <div class="tl-desc t-id">Membuat berbagai model dan visualisasi 3D, termasuk proyek promosi Pondok Pesantren Progresif Bumi Shalawat melalui pengembangan game Roblox menggunakan Blender dan Roblox Studio.</div>
+      <div class="tl-desc t-en">Created various 3D models and visualizations, including promotional projects for Progresif Bumi Shalawat through a Roblox game developed using Blender and Roblox Studio.</div>
+      <div class="tl-tags"><span class="tag">Blender</span><span class="tag">3D Design</span><span class="tag">Roblox Studio</span></div>
     </div>
     <div class="tl-item">
       <div class="tl-dot"></div>
-      <div class="tl-date">2026</div>
-      <div class="tl-title">Gold Medal Winner — MTE</div>
-      <div class="tl-org">Multi-Technology & Engineering Competition 2026</div>
-      <div class="tl-desc">Meraih medali emas dalam kompetisi bergengsi yang menguji inovasi lintas bidang — teknologi, rekayasa, dan desain kreatif.</div>
-      <div class="tl-tags"><span class="tag">Competition</span><span class="tag">Gold Medal</span><span class="tag">Innovation</span></div>
+      <div class="tl-date">2025 — Present</div>
+      <div class="tl-title"><span class="t-id">Anggota Progresif TV</span><span class="t-en">Progresif TV Member</span></div>
+      <div class="tl-org">Progresif TV</div>
+      <div class="tl-desc t-id">Berpartisipasi dalam produksi konten multimedia, dokumentasi acara, desain visual, serta pengembangan website dan media digital pesantren.</div>
+      <div class="tl-desc t-en">Participated in multimedia production, event documentation, visual design, website development, and digital media initiatives for the boarding school.</div>
+      <div class="tl-tags"><span class="tag">Multimedia</span><span class="tag">Web Development</span><span class="tag">Design</span><span class="tag">Media</span></div>
     </div>
     <div class="tl-item">
       <div class="tl-dot"></div>
-      <div class="tl-date">2024 — 2025</div>
-      <div class="tl-title">3D Creator & Programmer</div>
-      <div class="tl-org">Freelance & Independent Projects</div>
-      <div class="tl-desc">Mengembangkan aset 3D dengan Blender, membangun game environment di Roblox Studio, dan mengerjakan proyek layout publikasi profesional menggunakan Photoshop.</div>
-      <div class="tl-tags"><span class="tag">Blender</span><span class="tag">Roblox Studio</span><span class="tag">Photoshop</span></div>
+      <div class="tl-date">2025 — Present</div>
+      <div class="tl-title"><span class="t-id">Peneliti Pelajar</span><span class="t-en">Student Researcher</span></div>
+      <div class="tl-org">Research SMA Progresif Bumi Shalawat</div>
+      <div class="tl-desc t-id">Terlibat dalam kegiatan penelitian, pengembangan ide inovatif, penyusunan karya ilmiah, dan eksplorasi solusi berbasis riset.</div>
+      <div class="tl-desc t-en">Engaged in research activities, innovation development, scientific writing, and research-based problem solving.</div>
+      <div class="tl-tags"><span class="tag">Research</span><span class="tag">Innovation</span><span class="tag">Scientific Writing</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2022 — Present</div>
+      <div class="tl-title"><span class="t-id">Desainer Tata Letak Freelance</span><span class="t-en">Freelance Layout Designer</span></div>
+      <div class="tl-org">Independent</div>
+      <div class="tl-desc t-id">Membuat desain promosi, media sosial, poster, banner, booklet, dan berbagai kebutuhan branding menggunakan Adobe Photoshop.</div>
+      <div class="tl-desc t-en">Designed promotional materials, social media content, posters, banners, booklets, and branding assets using Adobe Photoshop.</div>
+      <div class="tl-tags"><span class="tag">Graphic Design</span><span class="tag">Layout Design</span><span class="tag">Adobe Photoshop</span></div>
     </div>
   </div>
 </section>
@@ -949,18 +1027,18 @@ footer {
 <section id="skills">
   <div class="skills-head">
     <div>
-      <div class="sec-lbl rv">Skills</div>
-      <h2 class="sec-h rv d1">Senjata<br><em>Andalan</em></h2>
+      <div class="sec-lbl rv"><span class="t-id">Keahlian</span><span class="t-en">Skills</span></div>
+      <h2 class="sec-h rv d1"><span class="t-id">Senjata<br><em>Andalan</em></span><span class="t-en">Core<br><em>Skills</em></span></h2>
     </div>
-    <p class="sec-p rv d2" style="max-width:300px;font-size:15px">Tools & teknologi yang saya kuasai untuk mengeksekusi visi kreatif.</p>
+    <p class="sec-p rv d2" style="max-width:320px;font-size:15px"><span class="t-id">Tools & teknologi yang saya kuasai untuk mengeksekusi visi kreatif.</span><span class="t-en">Tools and technologies I use to execute creative ideas.</span></p>
   </div>
   <div class="skills-grid">
-    <div class="sk-card rv d1" style="--pct:90%"><div class="sk-ico">🎨</div><div class="sk-name">Photoshop</div><div class="sk-desc">Photo manipulation, graphic design, dan layout publikasi dengan presisi piksel.</div><div class="sk-bar-bg"><div class="sk-bar"></div></div><div class="sk-pct">90%</div></div>
-    <div class="sk-card rv d2" style="--pct:85%"><div class="sk-ico">🧊</div><div class="sk-name">Blender</div><div class="sk-desc">3D modeling, rigging, animasi, dan rendering realistis untuk berbagai kebutuhan visual.</div><div class="sk-bar-bg"><div class="sk-bar"></div></div><div class="sk-pct">85%</div></div>
-    <div class="sk-card rv d3" style="--pct:88%"><div class="sk-ico">🎮</div><div class="sk-name">Roblox Studio</div><div class="sk-desc">Game environment design, Lua scripting, dan dunia virtual yang immersive.</div><div class="sk-bar-bg"><div class="sk-bar"></div></div><div class="sk-pct">88%</div></div>
-    <div class="sk-card rv d1" style="--pct:82%"><div class="sk-ico">💻</div><div class="sk-name">VS Code</div><div class="sk-desc">Pengembangan web dan scripting dengan environment coding yang optimal.</div><div class="sk-bar-bg"><div class="sk-bar"></div></div><div class="sk-pct">82%</div></div>
-    <div class="sk-card rv d2" style="--pct:80%"><div class="sk-ico">📐</div><div class="sk-name">Layout & Desain</div><div class="sk-desc">Tipografi, grid sistem, dan hierarki visual untuk media cetak maupun digital.</div><div class="sk-bar-bg"><div class="sk-bar"></div></div><div class="sk-pct">80%</div></div>
-    <div class="sk-card rv d3" style="--pct:75%"><div class="sk-ico">🔬</div><div class="sk-name">Research & Riset</div><div class="sk-desc">Metodologi riset, analisis data, dan dokumentasi ilmiah untuk kompetisi.</div><div class="sk-bar-bg"><div class="sk-bar"></div></div><div class="sk-pct">75%</div></div>
+    <div class="sk-card rv d1" style="--pct:75%"><div class="sk-ico">PS</div><div class="sk-name">Adobe Photoshop</div><div class="sk-desc t-id">Editing foto, manipulasi gambar, desain promosi, dan tata letak visual.</div><div class="sk-desc t-en">Photo editing, image manipulation, promotional design, and visual layout creation.</div><div class="sk-bar-bg"><div class="sk-bar"></div></div><div class="sk-pct">75%</div></div>
+    <div class="sk-card rv d2" style="--pct:80%"><div class="sk-ico">BL</div><div class="sk-name">Blender</div><div class="sk-desc t-id">Pembuatan model 3D, visualisasi produk, dan desain lingkungan virtual.</div><div class="sk-desc t-en">3D modeling, product visualization, and virtual environment design.</div><div class="sk-bar-bg"><div class="sk-bar"></div></div><div class="sk-pct">80%</div></div>
+    <div class="sk-card rv d3" style="--pct:80%"><div class="sk-ico">&lt;/&gt;</div><div class="sk-name">Web Development</div><div class="sk-desc t-id">Pengembangan website dan aplikasi digital menggunakan teknologi web modern.</div><div class="sk-desc t-en">Website and digital application development using modern web technologies.</div><div class="sk-bar-bg"><div class="sk-bar"></div></div><div class="sk-pct">80%</div></div>
+    <div class="sk-card rv d1" style="--pct:95%"><div class="sk-ico">R&amp;D</div><div class="sk-name">Research</div><div class="sk-desc t-id">Analisis masalah, pengembangan ide, dan penyusunan penelitian ilmiah.</div><div class="sk-desc t-en">Problem analysis, idea development, and scientific research preparation.</div><div class="sk-bar-bg"><div class="sk-bar"></div></div><div class="sk-pct">95%</div></div>
+    <div class="sk-card rv d2" style="--pct:70%"><div class="sk-ico">UX</div><div class="sk-name">UI/UX Design</div><div class="sk-desc t-id">Perancangan antarmuka dan pengalaman pengguna untuk aplikasi digital.</div><div class="sk-desc t-en">Designing user interfaces and user experiences for digital products.</div><div class="sk-bar-bg"><div class="sk-bar"></div></div><div class="sk-pct">70%</div></div>
+    <div class="sk-card rv d3" style="--pct:75%"><div class="sk-ico">DOC</div><div class="sk-name">Technical Writing</div><div class="sk-desc t-id">Penyusunan dokumentasi proyek, laporan, dan karya ilmiah.</div><div class="sk-desc t-en">Project documentation, reporting, and scientific writing.</div><div class="sk-bar-bg"><div class="sk-bar"></div></div><div class="sk-pct">75%</div></div>
   </div>
 </section>
 
@@ -969,42 +1047,28 @@ footer {
 ════════════════════════════════════ -->
 <section id="projects">
   <div class="proj-head">
-    <div class="sec-lbl rv">Projects</div>
-    <h2 class="sec-h rv d1">Karya<br><em>Terbaik</em></h2>
-    <p class="sec-p rv d2">Proyek-proyek yang mencerminkan passion dan kemampuan lintas disiplin saya.</p>
+    <div class="sec-lbl rv"><span class="t-id">Proyek</span><span class="t-en">Projects</span></div>
+    <h2 class="sec-h rv d1"><span class="t-id">Karya<br><em>Terbaik</em></span><span class="t-en">Selected<br><em>Works</em></span></h2>
+    <p class="sec-p rv d2"><span class="t-id">Proyek-proyek yang mencerminkan passion dan kemampuan lintas disiplin saya.</span><span class="t-en">Projects that reflect my passion and cross-disciplinary skills.</span></p>
     <div class="proj-filter rv d3" id="filterBtns">
       <button class="pf-btn on" data-cat="all">Semua</button>
       <button class="pf-btn" data-cat="3d">3D</button>
-      <button class="pf-btn" data-cat="game">Game</button>
-      <button class="pf-btn" data-cat="layout">Layout</button>
       <button class="pf-btn" data-cat="web">Web</button>
       <button class="pf-btn" data-cat="research">Research</button>
     </div>
   </div>
   <div class="proj-grid" id="projGrid">
-    <div class="p-card rv d1 big" data-cat="3d" onclick="openM(0)">
-      <div class="p-thumb"><div class="p-thumb-bg" style="background:linear-gradient(135deg,#0f1a04,#1a2a08)">🧊</div><div class="p-over"></div><div class="p-badge">3D · Blender</div></div>
-      <div class="p-body"><div class="p-title">Archviz Interior Scene</div><div class="p-desc">Visualisasi arsitektur interior fotorealistis dengan lighting HDRI dan material PBR.</div><div class="p-foot"><div class="p-tags"><span class="p-tag">Blender</span><span class="p-tag"> · </span><span class="p-tag">Cycles</span><span class="p-tag"> · </span><span class="p-tag">PBR</span></div><div class="p-arrow">→</div></div></div>
+    <div class="p-card rv d1 big" data-cat="research" onclick="openM(0)">
+      <div class="p-thumb"><div class="p-thumb-bg" style="background-image:url('/assets/projects/nexlab.jpg');background-size:cover;background-position:center;"> </div><div class="p-over"></div><div class="p-badge">Research · NexLab</div></div>
+      <div class="p-body"><div class="p-title">NexLab</div><div class="p-desc t-id">Platform digital untuk mendukung pendidikan dan produktivitas.</div><div class="p-desc t-en">Digital platform designed to support education and productivity.</div><div class="p-foot"><div class="p-tags"><span class="p-tag">Web Development</span><span class="p-tag"> · </span><span class="p-tag">Software</span></div><div class="p-arrow">→</div></div></div>
     </div>
-    <div class="p-card rv d2" data-cat="game" onclick="openM(1)">
-      <div class="p-thumb"><div class="p-thumb-bg" style="background:linear-gradient(135deg,#02120a,#051f10)">🎮</div><div class="p-over"></div><div class="p-badge">Game</div></div>
-      <div class="p-body"><div class="p-title">Open World RPG Map</div><div class="p-desc">Dunia RPG open-world dengan terrain custom dan quest system Lua.</div><div class="p-foot"><div class="p-tags"><span class="p-tag">Roblox</span><span class="p-tag"> · </span><span class="p-tag">Lua</span></div><div class="p-arrow">→</div></div></div>
+    <div class="p-card rv d2" data-cat="web" onclick="openM(1)">
+      <div class="p-thumb"><div class="p-thumb-bg" style="background-image:url('/assets/projects/ptv.jpg');background-size:cover;background-position:center;"> </div><div class="p-over"></div><div class="p-badge">Web · Progresif TV</div></div>
+      <div class="p-body"><div class="p-title">Website Resmi Progresif TV</div><div class="p-desc t-id">Website resmi kanal media Progresif TV.</div><div class="p-desc t-en">Official website of the Progresif TV media channel.</div><div class="p-foot"><div class="p-tags"><span class="p-tag">Website</span><span class="p-tag"> · </span><span class="p-tag">Media</span></div><div class="p-arrow">→</div></div></div>
     </div>
-    <div class="p-card rv d1" data-cat="layout" onclick="openM(2)">
-      <div class="p-thumb"><div class="p-thumb-bg" style="background:linear-gradient(135deg,#161a04,#22280a)">📰</div><div class="p-over"></div><div class="p-badge">Layout</div></div>
-      <div class="p-body"><div class="p-title">Majalah PTV</div><div class="p-desc">Layout editorial majalah sekolah dengan tipografi dan grid sistem yang kuat.</div><div class="p-foot"><div class="p-tags"><span class="p-tag">Photoshop</span><span class="p-tag"> · </span><span class="p-tag">Print</span></div><div class="p-arrow">→</div></div></div>
-    </div>
-    <div class="p-card rv d2" data-cat="research" onclick="openM(3)">
-      <div class="p-thumb"><div class="p-thumb-bg" style="background:linear-gradient(135deg,#0a1a04,#122808)">🥇</div><div class="p-over"></div><div class="p-badge">Research</div></div>
-      <div class="p-body"><div class="p-title">MTE Gold Project</div><div class="p-desc">Proyek inovatif peraih medali emas di MTE 2026 tingkat nasional.</div><div class="p-foot"><div class="p-tags"><span class="p-tag">Innovation</span><span class="p-tag"> · </span><span class="p-tag">Engineering</span></div><div class="p-arrow">→</div></div></div>
-    </div>
-    <div class="p-card rv d3" data-cat="web" onclick="openM(4)">
-      <div class="p-thumb"><div class="p-thumb-bg" style="background:linear-gradient(135deg,#041a0e,#082a14)">🌐</div><div class="p-over"></div><div class="p-badge">Web</div></div>
-      <div class="p-body"><div class="p-title">Dashboard Monitoring</div><div class="p-desc">Web dashboard interaktif dengan visualisasi data dan chart real-time.</div><div class="p-foot"><div class="p-tags"><span class="p-tag">HTML/CSS</span><span class="p-tag"> · </span><span class="p-tag">JS</span></div><div class="p-arrow">→</div></div></div>
-    </div>
-    <div class="p-card rv d4" data-cat="3d" onclick="openM(5)">
-      <div class="p-thumb"><div class="p-thumb-bg" style="background:linear-gradient(135deg,#141a04,#1e2808)">🎬</div><div class="p-over"></div><div class="p-badge">Motion</div></div>
-      <div class="p-body"><div class="p-title">PTV Bumper Opening</div><div class="p-desc">Animasi motion graphic bumper PTV dengan efek 3D dan tipografi kinetik.</div><div class="p-foot"><div class="p-tags"><span class="p-tag">Blender</span><span class="p-tag"> · </span><span class="p-tag">Motion</span></div><div class="p-arrow">→</div></div></div>
+    <div class="p-card rv d3" data-cat="3d" onclick="openM(2)">
+      <div class="p-thumb"><div class="p-thumb-bg" style="background-image:url('/assets/projects/roblox-pbs.jpg');background-size:cover;background-position:center;"> </div><div class="p-over"></div><div class="p-badge">3D · Roblox</div></div>
+      <div class="p-body"><div class="p-title">Roblox Progresif Bumi Shalawat</div><div class="p-desc t-id">Visualisasi digital lingkungan pesantren dalam platform Roblox.</div><div class="p-desc t-en">Digital visualization of the boarding school environment within Roblox.</div><div class="p-foot"><div class="p-tags"><span class="p-tag">Blender</span><span class="p-tag"> · </span><span class="p-tag">Roblox Studio</span></div><div class="p-arrow">→</div></div></div>
     </div>
   </div>
 </section>
@@ -1013,14 +1077,51 @@ footer {
      ACHIEVEMENTS
 ════════════════════════════════════ -->
 <section id="achievements">
-  <div class="sec-lbl rv">Achievements</div>
-  <h2 class="sec-h rv d1">Pencapaian<br><em>&amp; Penghargaan</em></h2>
-  <p class="sec-p rv d2">Bukti nyata dari kerja keras dan dedikasi yang konsisten.</p>
+  <div class="sec-lbl rv"><span class="t-id">Pencapaian</span><span class="t-en">Achievements</span></div>
+  <h2 class="sec-h rv d1"><span class="t-id">Pencapaian<br><em>&amp; Penghargaan</em></span><span class="t-en">Awards<br><em>&amp; Highlights</em></span></h2>
+  <p class="sec-p rv d2"><span class="t-id">Bukti nyata dari kerja keras dan dedikasi yang konsisten.</span><span class="t-en">Highlights that reflect consistency and dedication.</span></p>
   <div class="ach-grid">
-    <div class="ach-card rv d1"><div class="ach-ico">🥇</div><div class="ach-title">Gold Medal — MTE 2026</div><div class="ach-det">Multi-Technology & Engineering · 2026</div><div class="ach-desc">Medali emas di kompetisi bergengsi nasional yang menguji inovasi teknologi, rekayasa, dan desain lintas bidang.</div></div>
-    <div class="ach-card rv d2"><div class="ach-ico">📡</div><div class="ach-title">Media Division — PTV</div><div class="ach-det">Progresif TV · SMA Progresif Bumi Shalawat</div><div class="ach-desc">Memimpin divisi media Progresif TV — bertanggung jawab atas produksi konten visual dan penyiaran sekolah.</div></div>
-    <div class="ach-card rv d3"><div class="ach-ico">🔬</div><div class="ach-title">Research Member</div><div class="ach-det">Research SMA Progresif · 2025–Sekarang</div><div class="ach-desc">Aktif berkontribusi dalam kegiatan riset dan pengembangan ilmiah di divisi penelitian sekolah.</div></div>
-    <div class="ach-card rv d4"><div class="ach-ico">🧊</div><div class="ach-title">3D Specialist — Self Taught</div><div class="ach-det">Blender · Roblox Studio · 2023–Sekarang</div><div class="ach-desc">Menguasai full pipeline 3D secara mandiri — modeling, rigging, hingga rendering — dalam waktu kurang dari dua tahun.</div></div>
+    <div class="ach-card rv d1"><div class="ach-ico">🥇</div><div class="ach-title"><span class="t-id">Peraih Medali Emas MTE</span><span class="t-en">Gold Medal Winner at MTE</span></div><div class="ach-det">Malaysia Technology Expo (MTE) · 2026</div><div class="ach-desc t-id">Meraih medali emas dalam kompetisi inovasi dan penelitian tingkat internasional.</div><div class="ach-desc t-en">Awarded a Gold Medal in an international innovation and research competition.</div></div>
+    <div class="ach-card rv d2"><div class="ach-ico">📡</div><div class="ach-title"><span class="t-id">Anggota Progresif TV</span><span class="t-en">Progresif TV Member</span></div><div class="ach-det">Progresif TV · 2025–Present</div><div class="ach-desc t-id">Berpartisipasi dalam produksi konten multimedia, dokumentasi acara, desain visual, serta pengembangan website dan media digital pesantren.</div><div class="ach-desc t-en">Participated in multimedia production, event documentation, visual design, website development, and digital media initiatives.</div></div>
+    <div class="ach-card rv d3"><div class="ach-ico">🔬</div><div class="ach-title"><span class="t-id">Peneliti Pelajar</span><span class="t-en">Student Researcher</span></div><div class="ach-det">Research SMA Progresif Bumi Shalawat · 2025–Present</div><div class="ach-desc t-id">Terlibat dalam kegiatan penelitian, pengembangan ide inovatif, penyusunan karya ilmiah, dan eksplorasi solusi berbasis riset.</div><div class="ach-desc t-en">Engaged in research activities, innovation development, scientific writing, and research-based problem solving.</div></div>
+    <div class="ach-card rv d4"><div class="ach-ico">🧊</div><div class="ach-title"><span class="t-id">Desainer 3D Freelance</span><span class="t-en">Freelance 3D Designer</span></div><div class="ach-det">Blender · Roblox Studio · 2026–Present</div><div class="ach-desc t-id">Membuat berbagai model dan visualisasi 3D untuk kebutuhan promosi dan dunia virtual.</div><div class="ach-desc t-en">Created 3D models and visualizations for promotional needs and virtual environments.</div></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     CERTIFICATES
+════════════════════════════════════ -->
+<section id="certificates">
+  <div class="sec-lbl rv"><span class="t-id">Sertifikat</span><span class="t-en">Certificates</span></div>
+  <h2 class="sec-h rv d1"><span class="t-id">Sertifikat<br><em>Utama</em></span><span class="t-en">Key<br><em>Certificates</em></span></h2>
+  <p class="sec-p rv d2"><span class="t-id">Dokumen pendukung yang memperkuat pencapaian.</span><span class="t-en">Supporting documents for achievements.</span></p>
+  <div class="ach-grid">
+    <div class="ach-card rv d2"><div class="ach-ico">📄</div><div class="ach-title">Gold Medal Certificate</div><div class="ach-det">Malaysia Technology Expo (MTE) · 2026</div><div class="ach-desc t-id">Sertifikat resmi medali emas MTE 2026.</div><div class="ach-desc t-en">Official Gold Medal certificate for MTE 2026.</div></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     LINKS
+════════════════════════════════════ -->
+<section id="links">
+  <div class="sec-lbl rv"><span class="t-id">Tautan</span><span class="t-en">Links</span></div>
+  <h2 class="sec-h rv d1"><span class="t-id">Publikasi<br><em>&amp; Referensi</em></span><span class="t-en">Press<br><em>&amp; Links</em></span></h2>
+  <p class="sec-p rv d2"><span class="t-id">Beberapa tautan penting terkait karya dan proyek.</span><span class="t-en">Key links related to my work and projects.</span></p>
+  <div class="ach-grid">
+    <a class="ach-card rv d1" href="https://progresiftv.id/" target="_blank" rel="noopener" style="text-decoration:none;">
+      <div class="ach-ico">🌐</div>
+      <div class="ach-title">Website Resmi Progresif TV</div>
+      <div class="ach-det">Progresif TV · 2025</div>
+      <div class="ach-desc t-id">Tautan ke website resmi Progresif TV.</div>
+      <div class="ach-desc t-en">Link to the official Progresif TV website.</div>
+    </a>
+    <a class="ach-card rv d2" href="https://drive.google.com/drive/folders/148t-hjbxlQBG0V5rcq0xYOYeYRE-217d?usp=drive_link" target="_blank" rel="noopener" style="text-decoration:none;">
+      <div class="ach-ico">📁</div>
+      <div class="ach-title">NexLab Development Project</div>
+      <div class="ach-det">Team Project · 2026</div>
+      <div class="ach-desc t-id">Dokumentasi dan aset proyek NexLab.</div>
+      <div class="ach-desc t-en">Documentation and assets for NexLab.</div>
+    </a>
   </div>
 </section>
 
@@ -1028,15 +1129,17 @@ footer {
      CONTACT
 ════════════════════════════════════ -->
 <section id="contact">
-  <div class="sec-lbl rv">Contact</div>
-  <h2 class="sec-h rv d1">Mari<br><em>Berkolaborasi</em></h2>
-  <p class="sec-p rv d2">Ada proyek menarik? Saya selalu terbuka untuk kolaborasi kreatif dan tantangan baru.</p>
+  <div class="sec-lbl rv"><span class="t-id">Kontak</span><span class="t-en">Contact</span></div>
+  <h2 class="sec-h rv d1"><span class="t-id">Mari<br><em>Berkolaborasi</em></span><span class="t-en">Let’s<br><em>Collaborate</em></span></h2>
+  <p class="sec-p rv d2"><span class="t-id">Ada proyek menarik? Saya selalu terbuka untuk kolaborasi kreatif dan tantangan baru.</span><span class="t-en">Have an interesting project? I’m open for creative collaboration.</span></p>
   <div class="contact-wrap">
     <div class="c-items rv d2">
-      <a href="mailto:rafa@progresif.ac.id" class="c-item"><div class="c-ico">✉️</div><div><div class="c-lbl">Email</div><div class="c-val">rafa@progresif.ac.id</div></div></a>
-      <a href="#" class="c-item"><div class="c-ico">📍</div><div><div class="c-lbl">Lokasi</div><div class="c-val">Sidoarjo, Jawa Timur, ID</div></div></a>
-      <a href="#" class="c-item"><div class="c-ico">🏫</div><div><div class="c-lbl">Institusi</div><div class="c-val">SMA Progresif Bumi Shalawat</div></div></a>
-      <a href="#" class="c-item"><div class="c-ico">📡</div><div><div class="c-lbl">Organisasi</div><div class="c-val">PTV · Research SMA Progresif</div></div></a>
+      <a href="mailto:rafaputrarouf@gmail.com" class="c-item"><div class="c-ico">✉️</div><div><div class="c-lbl">Email</div><div class="c-val">rafaputrarouf@gmail.com</div></div></a>
+      <div class="c-item"><div class="c-ico">📍</div><div><div class="c-lbl"><span class="t-id">Lokasi</span><span class="t-en">Location</span></div><div class="c-val">Surabaya, East Java, Indonesia</div></div></div>
+      <div class="c-item"><div class="c-ico">🏫</div><div><div class="c-lbl"><span class="t-id">Institusi</span><span class="t-en">Institution</span></div><div class="c-val">SMA Progresif Bumi Shalawat</div></div></div>
+      <div class="c-item"><div class="c-ico">📡</div><div><div class="c-lbl"><span class="t-id">Organisasi</span><span class="t-en">Organizations</span></div><div class="c-val">Progresif TV · Research SMA Progresif Bumi Shalawat</div></div></div>
+      <a href="https://github.com/rafa303" target="_blank" rel="noopener" class="c-item"><div class="c-ico">💻</div><div><div class="c-lbl">GitHub</div><div class="c-val">github.com/rafa303</div></div></a>
+      <a href="https://www.instagram.com/rouffs__/" target="_blank" rel="noopener" class="c-item"><div class="c-ico">📸</div><div><div class="c-lbl">Instagram</div><div class="c-val">@rouffs__</div></div></a>
     </div>
     <div class="c-form rv d3">
       <div class="f-grp"><label class="f-lbl">Nama Kamu</label><input type="text" class="f-in" placeholder="John Doe"></div>
@@ -1070,6 +1173,7 @@ footer {
       <div class="m-title" id="mTitle"></div>
       <div class="m-desc" id="mDesc"></div>
       <div class="m-tags" id="mTags"></div>
+      <a class="m-link" id="mLink" href="#" target="_blank" rel="noopener">OPEN LINK ↗</a>
     </div>
   </div>
 </div>
@@ -1156,6 +1260,21 @@ document.querySelectorAll('.pf-btn').forEach(btn=>{
   });
 });
 
+/* LANGUAGE */
+(function initLang(){
+  const pill=document.getElementById('langPill');
+  if(!pill)return;
+  const apply=(lng)=>{
+    document.body.classList.toggle('lang-id',lng==='id');
+    document.body.classList.toggle('lang-en',lng==='en');
+    pill.querySelectorAll('.lang-opt').forEach(b=>b.classList.toggle('on',b.dataset.lang===lng));
+    try{localStorage.setItem('lang',lng);}catch(_){}
+  };
+  const saved=(()=>{try{return localStorage.getItem('lang')}catch(_){return null}})();
+  apply(saved==='en'?'en':'id');
+  pill.querySelectorAll('.lang-opt').forEach(b=>b.addEventListener('click',()=>apply(b.dataset.lang)));
+})();
+
 /* INIT ALL */
 function initAll(){
   /* scroll reveal */
@@ -1175,21 +1294,33 @@ function initAll(){
 
 /* MODAL */
 const mData=[
-  {lbl:'3D · Blender · Cycles Render',title:'ARCHVIZ INTERIOR',bg:'linear-gradient(135deg,#0f1a04,#1a2a08)',ico:'🧊',desc:'Visualisasi arsitektur interior fotorealistis yang menggabungkan modeling presisi, material PBR, dan pencahayaan HDRI dramatis. Render ini mampu menggantikan foto sesungguhnya.',tags:['Blender','Cycles','HDRI','PBR','Archviz']},
-  {lbl:'Game Dev · Roblox Studio',title:'OPEN WORLD RPG',bg:'linear-gradient(135deg,#02120a,#051f10)',ico:'🎮',desc:'Dunia RPG open-world dengan terrain custom, sistem cuaca dinamis siklus siang-malam, quest system Lua, dan inventory management yang kompleks.',tags:['Roblox Studio','Lua','Game Design','3D Environment']},
-  {lbl:'Editorial Layout · Print',title:'MAJALAH PTV',bg:'linear-gradient(135deg,#161a04,#22280a)',ico:'📰',desc:'Desain layout komprehensif majalah tahunan PTV dengan tipografi editorial modern, grid system konsisten, dan hierarki visual yang kuat.',tags:['Photoshop','Editorial','Typography','Grid System','Print']},
-  {lbl:'Research · Innovation · Competition',title:'MTE GOLD PROJECT',bg:'linear-gradient(135deg,#0a1a04,#122808)',ico:'🥇',desc:'Proyek inovatif peraih medali emas MTE 2026 — menggabungkan riset akademik mendalam, prototype teknologi, dan presentasi meyakinkan juri nasional.',tags:['Research','Innovation','Technology','Engineering','Gold Medal']},
-  {lbl:'Web Development · Frontend',title:'DASHBOARD MONITORING',bg:'linear-gradient(135deg,#041a0e,#082a14)',ico:'🌐',desc:'Web dashboard interaktif untuk monitoring data riset dengan chart real-time dan sistem filter intuitif. Dibangun native tanpa framework berat.',tags:['HTML','CSS','JavaScript','Data Visualization','Responsive']},
-  {lbl:'Motion Graphics · 3D Animation',title:'PTV BUMPER',bg:'linear-gradient(135deg,#141a04,#1e2808)',ico:'🎬',desc:'Animasi motion graphic bumper pembuka Progresif TV — 3D dari Blender dipadukan tipografi kinetik yang menciptakan identitas visual berkesan.',tags:['Blender','Motion Graphics','Animation','Kinetic Type']},
+  {lbl:'Research · NexLab',title:'NexLab',img:'/assets/projects/nexlab.jpg',bg:'linear-gradient(135deg,#0a1a04,#122808)',ico:'🔬',descId:'Mengembangkan platform berbasis web yang berfokus pada efisiensi, produktivitas, dan pengelolaan informasi secara digital.',descEn:'Developed a web-based platform focused on efficiency, productivity, and digital information management.',tags:['Web Development','Software','Programming'],link:'https://drive.google.com/drive/folders/148t-hjbxlQBG0V5rcq0xYOYeYRE-217d?usp=drive_link'},
+  {lbl:'Web · Progresif TV',title:'Website Resmi Progresif TV',img:'/assets/projects/ptv.jpg',bg:'linear-gradient(135deg,#041a0e,#082a14)',ico:'🌐',descId:'Membantu mengembangkan website resmi Progresif TV sebagai pusat informasi, publikasi acara, dan distribusi konten media pesantren.',descEn:'Contributed to the development of the official Progresif TV website as a hub for information, event publications, and media content distribution.',tags:['Website','Programming','Media'],link:'https://progresiftv.id/'},
+  {lbl:'3D · Roblox',title:'Roblox Progresif Bumi Shalawat',img:'/assets/projects/roblox-pbs.jpg',bg:'linear-gradient(135deg,#0f1a04,#1a2a08)',ico:'🧊',descId:'Mengembangkan model dan lingkungan 3D yang merepresentasikan Pondok Pesantren Progresif Bumi Shalawat menggunakan Blender dan Roblox Studio.',descEn:'Developed 3D models and environments representing Progresif Bumi Shalawat using Blender and Roblox Studio.',tags:['3D Design','Blender','Roblox'],link:'https://www.roblox.com/games/114237776122517/Pesantren-Progresif-Bumi-Shalawat'},
 ];
 function openM(i){
   const d=mData[i];
-  document.getElementById('mThumb').style.background=d.bg;
-  document.getElementById('mThumb').innerHTML=`<span style="font-size:72px">${d.ico}</span>`;
+  const thumb=document.getElementById('mThumb');
+  thumb.style.background=d.bg;
+  if(d.img){
+    thumb.style.backgroundImage=`linear-gradient(to top, rgba(8,10,7,.82) 0%, transparent 70%), url('${d.img}')`;
+    thumb.style.backgroundSize='cover';
+    thumb.style.backgroundPosition='center';
+    thumb.innerHTML='';
+  }else{
+    thumb.style.backgroundImage='';
+    thumb.innerHTML=`<span style="font-size:72px">${d.ico}</span>`;
+  }
   document.getElementById('mLbl').textContent=d.lbl;
   document.getElementById('mTitle').textContent=d.title;
-  document.getElementById('mDesc').textContent=d.desc;
+  const isEn=document.body.classList.contains('lang-en');
+  document.getElementById('mDesc').textContent=isEn?(d.descEn||d.descId||''):(d.descId||d.descEn||'');
   document.getElementById('mTags').innerHTML=d.tags.map(t=>`<span class="tag">${t}</span>`).join('');
+  const ml=document.getElementById('mLink');
+  if(ml){
+    if(d.link){ml.href=d.link;ml.style.display='inline-flex';}
+    else{ml.href='#';ml.style.display='none';}
+  }
   document.getElementById('modalBg').classList.add('on');
   document.body.style.overflow='hidden';
 }

@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=800, initial-scale=1.0">
+<title>CargoArch AI</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap');
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  :root{
+    --bg:#121212;
+    --bg2:#1a1a1a;
+    --bg3:#222222;
+    --bg4:#2a2a2a;
+    --panel:#161616;
+    --border:#2e2e2e;
+    --border2:#3a3a3a;
+    --green:#00e676;
+    --green2:#00c853;
+    --green-dim:#004d1a;
+    --amber:#ffab00;
+    --red:#ef4444;
+    --red-dim:#3d0f0f;
+    --blue:#00b0ff;
+    --cyan:#00e5ff;
+    --text1:#e8e8e8;
+    --text2:#9a9a9a;
+    --text3:#5a5a5a;
+    --font:'Plus Jakarta Sans',sans-serif;
+    --mono:'Share Tech Mono',monospace;
+  }
+
+  html,body{
+    width:800px;height:480px;
+    overflow:hidden;
+    background:var(--bg);
+    color:var(--text1);
+    font-family:var(--font);
+    font-size:13px;
+    user-select:none;
+  }
+
+  /* ═══════════════════════════════════════ SCREENS ═══════ */
+  .screen{width:800px;height:480px;position:absolute;top:0;left:0;display:none;}
+  .screen.active{display:flex;}
+
+  /* ═══════════════════════════════════════ SCREEN 1 - SETUP ═══ */
+  #screen1{
+    flex-direction:column;
+    background:var(--bg);
+  }
+
+  .s1-header{
+    height:52px;
+    background:var(--panel);
+    border-bottom:1px solid var(--border);
+    display:flex;align-items:center;
+    padding:0 20px;
+    gap:12px;
+    flex-shrink:0;
+  }
+  .logo-mark{
+    width:32px;height:32px;
+    border:2px solid var(--green);
+    display:flex;align-items:center;justify-content:center;
+    transform:rotate(45deg);
+    position:relative;
+  }
+  .logo-mark::after{
+    content:'';width:10px;height:10px;
+    background:var(--green);
+    display:block;
+    transform:rotate(0deg);
+  }
+  .logo-img{display:block;object-fit:contain;}
+  .logo-img.lg{width:32px;height:32px;}
+  .logo-img.sm{width:24px;height:24px;}
+  .s1-title{
+    font-size:18px;font-weight:700;
+    letter-spacing:2px;
+    color:var(--text1);
+    text-transform:uppercase;
+  }
+  .s1-title span{color:var(--green);}
+  .s1-status{
+    margin-left:auto;
+    display:flex;align-items:center;gap:6px;
+    font-size:11px;color:var(--text2);font-family:var(--mono);
+  }
+  .dot-pulse{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--green);
+    animation:pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,230,118,.4)}50%{opacity:.7;box-shadow:0 0 0 6px rgba(0,230,118,0)}}
+
+  .s1-body{
+    flex:1;display:flex;
+    padding:24px 20px 16px;
+    gap:20px;
+  }
+
+  .s1-left{flex:1;display:flex;flex-direction:column;gap:16px;}
+  .s1-right{width:220px;display:flex;flex-direction:column;gap:14px;}
+
+  .field-group{display:flex;flex-direction:column;gap:6px;}
+  .field-label{
+    font-size:11px;font-weight:600;
+    letter-spacing:1.5px;
+    color:var(--text2);
+    text-transform:uppercase;
+    font-family:var(--mono);
+  }
+
+  .styled-select, .styled-input{
+    width:100%;height:40px;
+    background:var(--bg3);
+    border:1px solid var(--border2);
+    border-radius:4px;
+    color:var(--text1);
+    font-family:var(--font);
+    font-size:14px;font-weight:500;
+    padding:0 12px;
+    outline:none;
+    appearance:none;
+    transition:border-color .2s,background .2s;
+  }
+  .styled-select:focus,.styled-input:focus{
+    border-color:var(--green);
+    background:var(--bg4);
+    box-shadow:0 0 0 1px rgba(0,230,118,.15);
+  }
+  .select-wrap{position:relative;}
+  .select-wrap::after{
+    content:'▾';
+    position:absolute;right:12px;top:50%;transform:translateY(-50%);
+    color:var(--text2);pointer-events:none;
+  }
+
+  .tare-btn{
+    width:100%;height:56px;
+    background:transparent;
+    border:1.5px solid var(--border2);
+    border-radius:6px;
+    color:var(--text2);
+    font-family:var(--font);
+    font-size:15px;font-weight:600;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:all .2s;
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    margin-top:4px;
+  }
+  .tare-btn:hover{
+    border-color:var(--amber);color:var(--amber);
+    background:rgba(255,171,0,.05);
+  }
+  .tare-btn:active{transform:scale(.98);}
+  .tare-btn.tared{border-color:var(--green);color:var(--green);background:rgba(0,230,118,.06);}
+
+  .info-card{
+    background:var(--bg3);
+    border:1px solid var(--border);
+    border-radius:6px;
+    padding:14px;
+  }
+  .info-card-title{
+    font-size:10px;letter-spacing:1.5px;font-family:var(--mono);
+    color:var(--text3);text-transform:uppercase;margin-bottom:10px;
+  }
+  .info-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid var(--border);}
+  .info-row:last-child{border-bottom:none;}
+  .info-key{font-size:12px;color:var(--text2);}
+  .info-val{font-size:13px;font-weight:600;font-family:var(--mono);color:var(--text1);}
+  .info-val.green{color:var(--green);}
+  .info-val.amber{color:var(--amber);}
+
+  .grid-preview{
+    background:var(--bg3);border:1px solid var(--border);border-radius:6px;
+    padding:10px;display:grid;grid-template-columns:repeat(5,1fr);gap:3px;
+    flex:1;
+  }
+  .grid-cell{
+    border-radius:2px;height:18px;
+    background:var(--bg4);
+    border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;
+    font-size:9px;font-family:var(--mono);color:var(--text3);
+  }
+  .grid-cell.filled{background:rgba(0,230,118,.12);border-color:var(--green-dim);color:var(--green);}
+  .grid-cell.hl{background:rgba(0,230,118,.3);border-color:var(--green);color:var(--green);font-weight:700;}
+
+  .s1-footer{
+    height:56px;padding:0 20px;
+    display:flex;align-items:center;justify-content:space-between;
+    border-top:1px solid var(--border);
+    flex-shrink:0;
+  }
+  .s1-footer-info{font-size:11px;font-family:var(--mono);color:var(--text3);}
+  .start-btn{
+    height:44px;padding:0 36px;
+    background:var(--green);
+    border:none;border-radius:5px;
+    color:#000;
+    font-family:var(--font);
+    font-size:16px;font-weight:700;
+    letter-spacing:3px;text-transform:uppercase;
+    cursor:pointer;
+    transition:all .2s;
+    position:relative;overflow:hidden;
+  }
+  .start-btn::before{
+    content:'';position:absolute;inset:0;
+    background:rgba(255,255,255,0);
+    transition:background .15s;
+  }
+  .start-btn:hover::before{background:rgba(255,255,255,.1);}
+  .start-btn:active{transform:scale(.97);}
+
+  /* ═══════════════════════════════════════ SCREEN 2 - DASHBOARD ═══ */
+  #screen2{flex-direction:column;}
+
+  /* Top Bar */
+  .topbar{
+    height:48px;flex-shrink:0;
+    background:var(--panel);
+    border-bottom:1px solid var(--border);
+    display:flex;align-items:center;
+    padding:0 12px;gap:0;
+  }
+  .topbar-logo{
+    display:flex;align-items:center;gap:8px;
+    padding-right:12px;
+    border-right:1px solid var(--border);
+    margin-right:12px;
+  }
+  .topbar-logo-text{font-size:13px;font-weight:700;letter-spacing:1.5px;color:var(--text1);}
+  .topbar-logo-text span{color:var(--green);}
+
+  .metric-block{
+    display:flex;flex-direction:column;
+    padding:0 14px;
+    border-right:1px solid var(--border);
+    min-width:130px;
+  }
+  .metric-label{font-size:10px;letter-spacing:1px;color:var(--text3);font-family:var(--mono);text-transform:uppercase;}
+  .metric-value{font-size:16px;font-weight:700;color:var(--text1);letter-spacing:.5px;line-height:1.2;}
+  .metric-value .unit{font-size:11px;font-weight:400;color:var(--text2);}
+
+  .util-block{padding:0 14px;border-right:1px solid var(--border);min-width:160px;}
+  .util-label{font-size:10px;letter-spacing:1px;color:var(--text3);font-family:var(--mono);text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;}
+  .util-pct{font-size:13px;font-weight:700;color:var(--green);}
+  .util-bar{height:6px;background:var(--bg4);border-radius:3px;margin-top:4px;overflow:hidden;}
+  .util-fill{height:100%;background:var(--green);border-radius:3px;transition:width .5s ease;}
+
+  .topbar-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+  .status-chip{
+    display:flex;align-items:center;gap:5px;
+    background:rgba(0,230,118,.08);
+    border:1px solid rgba(0,230,118,.25);
+    border-radius:3px;padding:3px 10px;
+    font-size:11px;font-weight:600;letter-spacing:1px;color:var(--green);
+    font-family:var(--mono);text-transform:uppercase;
+  }
+  .time-chip{font-size:11px;font-family:var(--mono);color:var(--text3);}
+  .err-btn{
+    height:28px;padding:0 10px;
+    background:transparent;border:1px solid var(--border2);border-radius:3px;
+    color:var(--text3);font-size:10px;font-family:var(--mono);
+    cursor:pointer;letter-spacing:.5px;
+    transition:all .2s;
+  }
+  .err-btn:hover{border-color:var(--red);color:var(--red);}
+
+  /* Main Dashboard Area */
+  .dashboard-body{flex:1;display:flex;overflow:hidden;}
+
+  /* Left Panel */
+  .left-panel{
+    width:180px;flex-shrink:0;
+    background:var(--panel);
+    border-right:1px solid var(--border);
+    display:flex;flex-direction:column;
+    padding:10px;gap:8px;
+  }
+  .panel-title{
+    font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
+    font-family:var(--mono);color:var(--text3);
+    padding-bottom:6px;border-bottom:1px solid var(--border);
+    margin-bottom:2px;
+  }
+  .scan-row{
+    display:flex;justify-content:space-between;align-items:flex-start;
+    padding:5px 0;border-bottom:1px solid var(--border);
+  }
+  .scan-row:last-child{border-bottom:none;}
+  .scan-key{font-size:11px;color:var(--text3);font-family:var(--mono);}
+  .scan-val{font-size:12px;font-weight:600;color:var(--text1);text-align:right;font-family:var(--mono);}
+  .scan-val.green{color:var(--green);}
+  .scan-val.red{color:var(--red);}
+  .scan-val.amber{color:var(--amber);}
+  .scan-val.blue{color:var(--blue);}
+
+  .live-badge{
+    display:flex;align-items:center;gap:4px;
+    font-size:10px;letter-spacing:1px;font-family:var(--mono);
+    color:var(--green);
+  }
+  .live-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 1.5s infinite;}
+
+  .scan-card{
+    background:var(--bg3);border:1px solid var(--border);
+    border-radius:4px;padding:8px;
+    font-family:var(--mono);
+  }
+  .scan-card-header{
+    font-size:10px;color:var(--text3);letter-spacing:1px;
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:6px;
+  }
+
+  .waveform{width:100%;height:28px;position:relative;overflow:hidden;}
+  .waveform canvas{display:block;}
+
+  .pkg-counter{
+    background:var(--bg3);border:1px solid var(--border);border-radius:4px;
+    padding:8px;text-align:center;
+    margin-top:auto;
+  }
+  .pkg-counter-num{font-size:28px;font-weight:700;color:var(--green);line-height:1;font-family:var(--mono);}
+  .pkg-counter-label{font-size:10px;color:var(--text3);letter-spacing:1px;margin-top:2px;}
+
+  /* Center - 3D Canvas */
+  .center-view{
+    flex:1;position:relative;
+    background:#0d0d0d;
+    overflow:hidden;
+  }
+  #three-canvas{width:100%;height:100%;display:block;}
+  .canvas-overlay{
+    position:absolute;bottom:8px;left:50%;transform:translateX(-50%);
+    background:rgba(0,0,0,.7);
+    border:1px solid var(--border);
+    border-radius:3px;padding:4px 12px;
+    font-size:10px;font-family:var(--mono);color:var(--text3);
+    letter-spacing:.5px;
+    white-space:nowrap;
+  }
+  .scan-anim{
+    position:absolute;top:0;left:0;width:100%;height:3px;
+    background:linear-gradient(90deg,transparent 0%,var(--green) 50%,transparent 100%);
+    animation:scan-line 3s linear infinite;
+    opacity:.6;
+  }
+  @keyframes scan-line{0%{top:-3px}100%{top:calc(100% + 3px)}}
+
+  .pkg-label-overlay{
+    position:absolute;top:8px;left:8px;
+    background:rgba(0,0,0,.8);
+    border:1px solid var(--border);
+    border-radius:3px;padding:4px 8px;
+    font-size:11px;font-family:var(--mono);color:var(--cyan);
+    letter-spacing:.5px;
+  }
+
+  /* Right Panel */
+  .right-panel{
+    width:160px;flex-shrink:0;
+    background:var(--panel);
+    border-left:1px solid var(--border);
+    display:flex;flex-direction:column;
+    padding:10px;gap:8px;
+  }
+
+  .sector-box{
+    border:1px solid var(--border2);
+    border-radius:4px;padding:10px 8px;
+    text-align:center;cursor:pointer;
+    transition:all .2s;
+    background:var(--bg3);
+    position:relative;overflow:hidden;
+  }
+  .sector-box::before{content:'';position:absolute;inset:0;background:transparent;transition:background .2s;}
+  .sector-box:hover::before{background:rgba(255,255,255,.02);}
+  .sector-box.active{
+    border-color:var(--green);
+    background:rgba(0,230,118,.06);
+    box-shadow:0 0 12px rgba(0,230,118,.1);
+  }
+  .sector-box .sec-num{font-size:20px;font-weight:700;font-family:var(--mono);color:var(--text2);line-height:1;}
+  .sector-box.active .sec-num{color:var(--green);}
+  .sector-box .sec-lbl{font-size:10px;letter-spacing:1px;color:var(--text3);margin-top:3px;}
+  .sector-box.active .sec-lbl{color:var(--green);}
+  .active-arrow{
+    font-size:11px;font-family:var(--mono);color:var(--green);
+    margin-top:3px;
+    display:none;
+  }
+  .sector-box.active .active-arrow{display:block;}
+  .sector-box.reject{
+    border-color:rgba(239,68,68,.35);
+    background:rgba(239,68,68,.06);
+    cursor:default;
+  }
+  .sector-box.reject:hover::before{background:transparent;}
+  .sector-box.reject .sec-num{color:var(--red);}
+  .sector-box.reject .sec-lbl{color:rgba(239,68,68,.8);}
+
+  .sorter-dir{
+    font-size:11px;font-family:var(--mono);color:var(--text2);
+    text-align:center;padding:6px 0;
+    border-top:1px solid var(--border);
+  }
+  .sorter-dir span{color:var(--green);font-weight:700;}
+
+  .mini-stat{
+    background:var(--bg3);border:1px solid var(--border);
+    border-radius:4px;padding:8px;
+  }
+  .mini-stat-label{font-size:10px;color:var(--text3);letter-spacing:1px;font-family:var(--mono);}
+  .mini-stat-val{font-size:16px;font-weight:700;color:var(--amber);font-family:var(--mono);margin-top:2px;}
+
+  .route-mini{
+    background:var(--bg3);border:1px solid var(--border);
+    border-radius:4px;padding:8px;flex:1;
+    overflow:hidden;
+  }
+  .route-stop{
+    display:flex;align-items:center;gap:6px;
+    padding:3px 0;border-bottom:1px solid var(--border);
+    font-size:10px;font-family:var(--mono);
+  }
+  .route-stop:last-child{border-bottom:none;}
+  .stop-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+  .stop-name{color:var(--text2);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+  .stop-pkgs{color:var(--text3);}
+
+  /* ═══════════════════════════════════════ SCREEN 3 - ERROR ═══ */
+  #screen3{
+    position:fixed;
+    inset:0;
+    z-index:100;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    gap:0;
+  }
+  #screen3.active{display:flex;}
+
+  .error-overlay-bg{
+    position:absolute;inset:0;
+    background:rgba(20,5,5,.96);
+    animation:err-flicker .08s ease infinite;
+  }
+  @keyframes err-flicker{0%,100%{opacity:1}50%{opacity:.97}}
+
+  .error-stripe{
+    position:absolute;top:0;left:0;width:100%;height:5px;
+    background:repeating-linear-gradient(90deg,var(--red) 0px,var(--red) 20px,transparent 20px,transparent 40px);
+    animation:stripe-move 1s linear infinite;
+  }
+  .error-stripe.bottom{top:auto;bottom:0;}
+  @keyframes stripe-move{from{background-position:0}to{background-position:40px}}
+
+  .error-content{
+    position:relative;z-index:2;
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
+    text-align:center;
+    padding:20px;
+    gap:14px;
+  }
+
+  .error-icon{
+    width:72px;height:72px;
+    border:3px solid var(--red);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:36px;
+    animation:err-pulse 1s ease-in-out infinite;
+  }
+  @keyframes err-pulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.5)}50%{box-shadow:0 0 0 12px rgba(239,68,68,0)}}
+
+  .error-code{
+    font-size:11px;font-family:var(--mono);
+    color:rgba(239,68,68,.7);letter-spacing:3px;
+    text-transform:uppercase;
+  }
+
+  .error-title{
+    font-size:32px;font-weight:700;
+    color:#fff;letter-spacing:2px;
+    line-height:1.1;
+    text-shadow:0 0 40px rgba(239,68,68,.4);
+  }
+  .error-title .red{color:var(--red);}
+
+  .error-sub{
+    font-size:13px;
+    color:rgba(255,255,255,.6);
+    max-width:500px;line-height:1.6;
+    font-family:var(--mono);
+  }
+
+  .error-sub em{color:rgba(255,255,255,.9);font-style:normal;font-weight:700;}
+
+  .resume-btn{
+    margin-top:6px;
+    height:44px;padding:0 40px;
+    background:transparent;
+    border:1.5px solid rgba(255,255,255,.3);
+    border-radius:5px;
+    color:rgba(255,255,255,.8);
+    font-family:var(--font);font-size:14px;font-weight:600;
+    letter-spacing:2px;text-transform:uppercase;
+    cursor:pointer;
+    transition:all .2s;
+  }
+  .resume-btn:hover{
+    border-color:#fff;color:#fff;
+    background:rgba(255,255,255,.05);
+  }
+  .resume-btn:active{transform:scale(.97);}
+
+  .error-counter{
+    position:absolute;bottom:20px;right:20px;
+    font-size:10px;font-family:var(--mono);color:rgba(239,68,68,.5);
+    letter-spacing:1px;
+  }
+  .error-reject-label{
+    position:absolute;bottom:20px;left:20px;
+    background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);
+    border-radius:3px;padding:4px 12px;
+    font-size:11px;font-family:var(--mono);color:var(--red);letter-spacing:1px;
+  }
+
+  .demo-modal{
+    position:fixed;inset:0;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(0,0,0,.78);
+    z-index:200;
+  }
+  .demo-modal.hidden{display:none;}
+  .demo-modal-card{
+    width:540px;max-width:92%;
+    background:var(--panel);
+    border:1px solid var(--border2);
+    border-radius:10px;
+    padding:18px 18px 14px;
+    box-shadow:0 0 50px rgba(0,0,0,.65);
+  }
+  .demo-modal-title{
+    font-size:12px;letter-spacing:2px;
+    color:var(--text3);
+    font-family:var(--mono);
+    text-transform:uppercase;
+    display:flex;align-items:center;justify-content:space-between;
+    margin-bottom:10px;
+  }
+  .demo-modal-title .tag{
+    color:var(--green);
+    border:1px solid rgba(0,230,118,.25);
+    background:rgba(0,230,118,.07);
+    padding:2px 8px;border-radius:999px;
+    letter-spacing:1px;
+  }
+  .demo-modal-msg{
+    font-size:15px;
+    color:var(--text1);
+    line-height:1.55;
+    margin-bottom:14px;
+  }
+  .demo-modal-actions{display:flex;justify-content:flex-end;gap:10px;}
+  .demo-modal-btn{
+    height:40px;padding:0 22px;
+    background:var(--green);
+    border:none;border-radius:6px;
+    color:#000;
+    font-family:var(--font);
+    font-size:14px;font-weight:800;
+    letter-spacing:2px;text-transform:uppercase;
+    cursor:pointer;
+    transition:transform .15s, filter .15s;
+  }
+  .demo-modal-btn:active{transform:scale(.98);}
+  .demo-modal-btn.secondary{
+    background:transparent;
+    border:1px solid var(--border2);
+    color:var(--text2);
+  }
+  .demo-modal-btn.secondary:hover{border-color:var(--green);color:var(--green);}
+
+  /* scrollbar hide */
+  ::-webkit-scrollbar{display:none;}
+</style>
+</head>
+<body>
+
+<div class="demo-modal" id="demo-modal" role="dialog" aria-modal="true">
+  <div class="demo-modal-card">
+    <div class="demo-modal-title">
+      <span>Demo / Prototype</span>
+      <span class="tag">INPUT LINK</span>
+    </div>
+    <div class="demo-modal-msg">ini adalah Input Link Demo / Prototype kami!</div>
+    <div class="demo-modal-actions">
+      <button class="demo-modal-btn secondary" onclick="closeDemoModal()">TUTUP</button>
+      <button class="demo-modal-btn" onclick="closeDemoModal()">OK</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ SCREEN 1: SETUP ═══════════════ -->
+<div id="screen1" class="screen active">
+  <div class="s1-header">
+    <img class="logo-img lg" src="LOGO%20CARGOARCH%20AI.png" alt="CargoArch AI">
+    <div class="s1-title">Cargo<span>Arch</span> AI</div>
+    <div style="height:28px;width:1px;background:var(--border);margin:0 6px;"></div>
+    <div style="font-size:11px;color:var(--text3);font-family:var(--mono);letter-spacing:1px;">SETUP &amp; CALIBRATION</div>
+    <div class="s1-status">
+      <div class="dot-pulse"></div>
+      SYSTEM READY · EDGE MODE
+    </div>
+  </div>
+
+  <div class="s1-body">
+    <div class="s1-left">
+      <!-- Tare -->
+      <div class="field-group">
+        <div class="field-label">⚖ Kalibrasi Timbangan</div>
+        <button class="tare-btn" id="tare-btn" onclick="handleTare()">
+          <span id="tare-icon">◎</span>
+          <span id="tare-text">TARE / ZERO SCALE</span>
+        </button>
+      </div>
+
+      <!-- Truck Type -->
+      <div class="field-group">
+        <div class="field-label">🚛 Jenis Truk</div>
+        <div class="select-wrap">
+          <select class="styled-select" id="truck-type">
+            <option value="">-- Pilih Jenis Truk --</option>
+            <option value="container">Container (Balance OFF)</option>
+            <option value="tronton">Tronton (20 Ton)</option>
+            <option value="fuso">Mitsubishi Fuso (8 Ton)</option>
+            <option value="engkel">Engkel (4 Ton)</option>
+            <option value="trailer">Trailer 40ft (32 Ton)</option>
+            <option value="pickup">Pickup L300 (1 Ton)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Route -->
+      <div class="field-group">
+        <div class="field-label">📍 Rute / Itinerary</div>
+        <div style="display:flex;gap:8px;">
+          <div class="select-wrap" style="flex:1;">
+            <select class="styled-select" id="route-stop-1">
+              <option value="">--</option>
+              <option value="JKT" selected>JKT · Jakarta</option>
+              <option value="BDG">BDG · Bandung</option>
+              <option value="SMG">SMG · Semarang</option>
+              <option value="SBY">SBY · Surabaya</option>
+              <option value="DPS">DPS · Denpasar</option>
+              <option value="MLG">MLG · Malang</option>
+              <option value="YGY">YGY · Yogyakarta</option>
+              <option value="BPN">BPN · Balikpapan</option>
+            </select>
+          </div>
+          <div class="select-wrap" style="flex:1;">
+            <select class="styled-select" id="route-stop-2">
+              <option value="">--</option>
+              <option value="JKT">JKT · Jakarta</option>
+              <option value="BDG" selected>BDG · Bandung</option>
+              <option value="SMG">SMG · Semarang</option>
+              <option value="SBY">SBY · Surabaya</option>
+              <option value="DPS">DPS · Denpasar</option>
+              <option value="MLG">MLG · Malang</option>
+              <option value="YGY">YGY · Yogyakarta</option>
+              <option value="BPN">BPN · Balikpapan</option>
+            </select>
+          </div>
+          <div class="select-wrap" style="flex:1;">
+            <select class="styled-select" id="route-stop-3">
+              <option value="">--</option>
+              <option value="JKT">JKT · Jakarta</option>
+              <option value="BDG">BDG · Bandung</option>
+              <option value="SMG" selected>SMG · Semarang</option>
+              <option value="SBY">SBY · Surabaya</option>
+              <option value="DPS">DPS · Denpasar</option>
+              <option value="MLG">MLG · Malang</option>
+              <option value="YGY">YGY · Yogyakarta</option>
+              <option value="BPN">BPN · Balikpapan</option>
+            </select>
+          </div>
+          <div class="select-wrap" style="flex:1;">
+            <select class="styled-select" id="route-stop-4">
+              <option value="">--</option>
+              <option value="JKT">JKT · Jakarta</option>
+              <option value="BDG">BDG · Bandung</option>
+              <option value="SMG">SMG · Semarang</option>
+              <option value="SBY" selected>SBY · Surabaya</option>
+              <option value="DPS">DPS · Denpasar</option>
+              <option value="MLG">MLG · Malang</option>
+              <option value="YGY">YGY · Yogyakarta</option>
+              <option value="BPN">BPN · Balikpapan</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Container dim preview -->
+      <div class="field-group">
+        <div class="field-label">📐 Dimensi Kontainer</div>
+        <div style="display:flex;gap:8px;">
+          <div style="flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:8px;text-align:center;">
+            <div style="font-size:10px;color:var(--text3);font-family:var(--mono);">PANJANG</div>
+            <div style="display:flex;align-items:baseline;justify-content:center;gap:6px;margin-top:4px;">
+              <input class="styled-input" id="cont-l" type="number" value="13620" min="1000" step="10" style="height:32px;padding:0 10px;text-align:center;font-family:var(--mono);font-weight:700;color:var(--blue);">
+              <span style="font-size:10px;color:var(--text2);font-family:var(--mono);">mm</span>
+            </div>
+          </div>
+          <div style="flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:8px;text-align:center;">
+            <div style="font-size:10px;color:var(--text3);font-family:var(--mono);">LEBAR</div>
+            <div style="display:flex;align-items:baseline;justify-content:center;gap:6px;margin-top:4px;">
+              <input class="styled-input" id="cont-w" type="number" value="2480" min="500" step="10" style="height:32px;padding:0 10px;text-align:center;font-family:var(--mono);font-weight:700;color:var(--blue);">
+              <span style="font-size:10px;color:var(--text2);font-family:var(--mono);">mm</span>
+            </div>
+          </div>
+          <div style="flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:8px;text-align:center;">
+            <div style="font-size:10px;color:var(--text3);font-family:var(--mono);">TINGGI</div>
+            <div style="display:flex;align-items:baseline;justify-content:center;gap:6px;margin-top:4px;">
+              <input class="styled-input" id="cont-h" type="number" value="2700" min="500" step="10" style="height:32px;padding:0 10px;text-align:center;font-family:var(--mono);font-weight:700;color:var(--blue);">
+              <span style="font-size:10px;color:var(--text2);font-family:var(--mono);">mm</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="s1-right">
+      <!-- System Info -->
+      <div class="info-card">
+        <div class="info-card-title">System Info</div>
+        <div class="info-row">
+          <span class="info-key">Device</span>
+          <span class="info-val green">Orange Pi 5</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">Camera</span>
+          <span class="info-val green">4K · READY</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">Timbangan</span>
+          <span class="info-val amber" id="scale-status">UNCAL</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">AI Model</span>
+          <span class="info-val green">YOLOv8n</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">OCR</span>
+          <span class="info-val green">PaddleOCR</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">Temp CPU</span>
+          <span class="info-val amber">47°C</span>
+        </div>
+      </div>
+
+      <!-- Sector Grid Preview -->
+      <div style="font-size:10px;letter-spacing:1.5px;color:var(--text3);font-family:var(--mono);text-transform:uppercase;">Peta Sektor</div>
+      <div class="grid-preview" id="sector-grid"></div>
+    </div>
+  </div>
+
+  <div class="s1-footer">
+    <div class="s1-footer-info">
+      v2.4.1 · CargoArch AI Edge · 2025-05-21
+    </div>
+    <button class="start-btn" onclick="startSession()">▶ &nbsp;START</button>
+  </div>
+</div>
+
+<!-- ═══════════════ SCREEN 2: DASHBOARD ═══════════════ -->
+<div id="screen2" class="screen">
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-logo">
+      <img class="logo-img sm" src="LOGO%20CARGOARCH%20AI.png" alt="CargoArch AI">
+      <div class="topbar-logo-text">Cargo<span>Arch</span></div>
+    </div>
+
+    <div class="metric-block">
+      <div class="metric-label">Total Muatan</div>
+      <div class="metric-value"><span id="pkg-count">0</span> <span class="unit">/ 50 pkt</span></div>
+    </div>
+
+    <div class="metric-block">
+      <div class="metric-label">Total Berat</div>
+      <div class="metric-value"><span id="weight-val">0.0</span> <span class="unit">Kg</span></div>
+    </div>
+
+    <div class="util-block">
+      <div class="util-label">
+        <span>Utilisasi Volume</span>
+        <span class="util-pct" id="util-pct">0%</span>
+      </div>
+      <div class="util-bar"><div class="util-fill" id="util-fill" style="width:0%"></div></div>
+    </div>
+
+    <div class="metric-block" style="border-right:none;">
+      <div class="metric-label">Rute Aktif</div>
+      <div class="metric-value" style="font-size:12px;color:var(--cyan);" id="active-route">JKT→SBY</div>
+    </div>
+
+    <div class="topbar-right">
+      <div class="status-chip"><div class="dot-pulse" style="width:6px;height:6px;"></div>SCANNING</div>
+      <div class="time-chip" id="live-time">--:--:--</div>
+      <button class="err-btn" onclick="showError()">⚠ ERR</button>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="dashboard-body">
+    <!-- LEFT: Scan Data -->
+    <div class="left-panel">
+      <div class="panel-title" style="display:flex;justify-content:space-between;align-items:center;">
+        <span>Live Scan</span>
+        <span class="live-badge"><span class="live-dot"></span>LIVE</span>
+      </div>
+
+      <div class="scan-card">
+        <div class="scan-card-header">
+          <span style="color:var(--text3);">RESI (OCR)</span>
+          <span style="color:var(--green);font-size:9px;" id="resi-status">✓ READ</span>
+        </div>
+        <div style="font-size:18px;font-weight:700;color:var(--green);font-family:var(--mono);" id="resi-val">JKT-992</div>
+      </div>
+
+      <div class="scan-card">
+        <div class="scan-card-header">
+          <span style="color:var(--text3);">YOLO DETECT</span>
+          <span style="color:var(--amber);font-size:9px;">⚡ 12ms</span>
+        </div>
+        <div style="font-size:13px;font-weight:700;color:var(--red);font-family:var(--mono);" id="yolo-val">⚠ FRAGILE</div>
+        <div style="font-size:10px;color:var(--text3);margin-top:2px;font-family:var(--mono);">conf: 0.97</div>
+      </div>
+
+      <div class="scan-card">
+        <div class="scan-card-header">
+          <span style="color:var(--text3);">DIMENSI (mm)</span>
+        </div>
+        <div style="font-size:13px;font-weight:700;color:var(--blue);font-family:var(--mono);" id="dim-val">100×100×100</div>
+      </div>
+
+      <div class="scan-card">
+        <div class="scan-card-header">
+          <span style="color:var(--text3);">BERAT AKTUAL</span>
+          <span style="color:var(--green);font-size:9px;">⚡ LIVE</span>
+        </div>
+        <div style="font-size:18px;font-weight:700;color:var(--amber);font-family:var(--mono);" id="weight-scan">1.2 Kg</div>
+      </div>
+
+      <div class="scan-card">
+        <div class="scan-card-header">
+          <span style="color:var(--text3);">AI DECISION</span>
+          <span style="color:var(--cyan);font-size:9px;">EDGE</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;gap:10px;font-family:var(--mono);">
+          <div style="color:var(--text3);font-size:10px;letter-spacing:1px;">SEKTOR</div>
+          <div style="color:var(--green);font-size:12px;font-weight:700;" id="ai-sector">S2</div>
+        </div>
+        <div style="display:flex;justify-content:space-between;gap:10px;font-family:var(--mono);margin-top:4px;">
+          <div style="color:var(--text3);font-size:10px;letter-spacing:1px;">PRIORITY</div>
+          <div style="color:var(--amber);font-size:12px;font-weight:700;" id="ai-priority">MED</div>
+        </div>
+        <div style="display:flex;justify-content:space-between;gap:10px;font-family:var(--mono);margin-top:4px;">
+          <div style="color:var(--text3);font-size:10px;letter-spacing:1px;">RULE</div>
+          <div style="color:var(--text2);font-size:11px;font-weight:700;" id="ai-rule">STANDARD</div>
+        </div>
+      </div>
+
+      <!-- Waveform for weight sensor -->
+      <div class="waveform">
+        <canvas id="wave-canvas" width="160" height="28"></canvas>
+      </div>
+
+      <div class="pkg-counter">
+        <div class="pkg-counter-num" id="pkg-count2">00</div>
+        <div class="pkg-counter-label">PAKET MASUK</div>
+      </div>
+    </div>
+
+    <!-- CENTER: Three.js -->
+    <div class="center-view">
+      <div class="scan-anim"></div>
+      <canvas id="three-canvas"></canvas>
+      <div class="pkg-label-overlay" id="pkg-label">PKT #000 · READY</div>
+      <div class="canvas-overlay">↔ Swipe to Pan &nbsp;·&nbsp; ⊕ Pinch to Zoom &nbsp;·&nbsp; ↻ Drag to Rotate</div>
+    </div>
+
+    <!-- RIGHT: Sorter -->
+    <div class="right-panel">
+      <div class="panel-title">Sorter Status</div>
+
+      <div style="font-size:10px;letter-spacing:1px;color:var(--text3);font-family:var(--mono);text-align:center;">ARAH SEKTOR:</div>
+
+      <div id="sector-list" style="display:flex;flex-direction:column;gap:8px;"></div>
+
+      <div class="sorter-dir">→ Sektor <span id="active-sec-label">2</span></div>
+
+      <div class="mini-stat">
+        <div class="mini-stat-label">BERAT SEKTOR</div>
+        <div class="mini-stat-val" id="sector-weight">0.0 Kg</div>
+      </div>
+
+      <div class="mini-stat" id="balance-card">
+        <div class="mini-stat-label">KESEIMBANGAN</div>
+        <div class="mini-stat-val" id="balance-score" style="color:var(--green);">100%</div>
+      </div>
+
+      <div class="route-mini">
+        <div style="font-size:10px;color:var(--text3);letter-spacing:1px;font-family:var(--mono);margin-bottom:5px;">STOP LIST</div>
+        <div id="route-stop-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ SCREEN 3: ERROR OVERLAY ═══════════════ -->
+<div id="screen3" class="screen">
+  <div class="error-overlay-bg"></div>
+  <div class="error-stripe"></div>
+  <div class="error-stripe bottom"></div>
+
+  <div class="error-content">
+    <div class="error-code">// CARGOARCH ERROR CODE: E-004 — OCR_FAIL</div>
+    <div class="error-icon">✗</div>
+    <div class="error-title">ERROR: <span class="red">RESI TIDAK TERBACA</span></div>
+    <div class="error-sub">
+      Lengan Sorter mengarahkan ke<br>
+      <em>Sektor 0 (Keranjang Reject)</em>.<br>
+      Harap ambil &amp; scan ulang secara manual.
+    </div>
+    <button class="resume-btn" onclick="resumeScan()">◀ &nbsp;RESUME SCANNING</button>
+  </div>
+
+  <div class="error-reject-label">⛔ REJECT · SEKTOR 0</div>
+  <div class="error-counter" id="err-counter">AUTO-RESUME: 30s</div>
+</div>
+
+<script>
+// ═══════════════════════════════ SCREEN NAV ═══════════════════════
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+const appState = {
+  truckType:'',
+  loadingSectors:3,
+  stops:[],
+  activeSector:1,
+  stopCounts:{},
+  sectorWeights:{},
+  scanCount:0,
+  loadedCount:0,
+  totalWeight:0,
+  balanceEnabled:true,
+  containerMm:{l:13620,w:2480,h:2700},
+  timers:{time:null,wave:null,pkt:null},
+  three:null
+};
+
+function closeDemoModal(){
+  const m = document.getElementById('demo-modal');
+  if(m) m.classList.add('hidden');
+}
+window.addEventListener('keydown', e=>{
+  if(e.key === 'Escape') closeDemoModal();
+});
+
+const CITY_NAMES = {
+  JKT:'Jakarta',
+  BDG:'Bandung',
+  SMG:'Semarang',
+  SBY:'Surabaya',
+  DPS:'Denpasar',
+  MLG:'Malang',
+  YGY:'Yogyakarta',
+  BPN:'Balikpapan'
+};
+function cityName(code){
+  return CITY_NAMES[code] || code;
+}
+function getStopsFromUI(){
+  const ids = ['route-stop-1','route-stop-2','route-stop-3','route-stop-4'];
+  const stops = ids.map(id=>{
+    const el = document.getElementById(id);
+    return el ? el.value : '';
+  }).filter(Boolean);
+  return stops.length ? stops : ['JKT','BDG','SMG','SBY'];
+}
+function getLoadingSectorCount(truck){
+  if(truck === 'container') return 3;
+  if(truck === 'trailer') return 5;
+  if(truck === 'tronton') return 3;
+  return 4;
+}
+function buildRouteStopList(stops){
+  const wrap = document.getElementById('route-stop-list');
+  if(!wrap) return;
+  wrap.innerHTML = '';
+  const colors = ['#ef4444','var(--green)','var(--amber)','var(--blue)','var(--cyan)'];
+  stops.forEach((stop,i)=>{
+    const row = document.createElement('div');
+    row.className = 'route-stop';
+    const dot = document.createElement('div');
+    dot.className = 'stop-dot';
+    dot.style.background = colors[i % colors.length];
+    const name = document.createElement('div');
+    name.className = 'stop-name';
+    name.textContent = cityName(stop);
+    const pkgs = document.createElement('div');
+    pkgs.className = 'stop-pkgs';
+    pkgs.id = 'stop-pkgs-'+i;
+    pkgs.textContent = '0 pkt';
+    row.appendChild(dot);
+    row.appendChild(name);
+    row.appendChild(pkgs);
+    wrap.appendChild(row);
+  });
+}
+function buildSectorList(){
+  const list = document.getElementById('sector-list');
+  if(!list) return;
+  list.innerHTML = '';
+
+  const reject = document.createElement('div');
+  reject.className = 'sector-box reject';
+  reject.id = 'sec0';
+  reject.innerHTML = '<div class="sec-num">S0</div><div class="sec-lbl">REJECT</div>';
+  list.appendChild(reject);
+
+  for(let i=1;i<=appState.loadingSectors;i++){
+    const stopIdx = appState.stops.length - i;
+    const lbl = (stopIdx >= 0 ? cityName(appState.stops[stopIdx]) : ('ZONE '+i)).toUpperCase();
+    const box = document.createElement('div');
+    box.className = 'sector-box selectable' + (i===appState.activeSector ? ' active':'');
+    box.id = 'sec'+i;
+    box.onclick = ()=>setSector(i);
+    box.innerHTML = `<div class="sec-num">S${i}</div><div class="sec-lbl">${lbl}</div><div class="active-arrow">▶ AKTIF</div>`;
+    list.appendChild(box);
+  }
+
+  const a = document.getElementById('active-sec-label');
+  if(a) a.textContent = appState.activeSector;
+}
+function updateSectorWeight(){
+  const el = document.getElementById('sector-weight');
+  if(!el) return;
+  const w = appState.sectorWeights[appState.activeSector] || 0;
+  el.textContent = w.toFixed(1)+' Kg';
+}
+function startSession(){
+  const truck = document.getElementById('truck-type').value;
+  if(!truck){alert('Pilih jenis truk terlebih dahulu!');return;}
+
+  const contL = Number(document.getElementById('cont-l').value) || 13620;
+  const contW = Number(document.getElementById('cont-w').value) || 2480;
+  const contH = Number(document.getElementById('cont-h').value) || 2700;
+  appState.containerMm = {
+    l: Math.max(1000, contL),
+    w: Math.max(500, contW),
+    h: Math.max(500, contH)
+  };
+
+  appState.truckType = truck;
+  appState.balanceEnabled = truck !== 'container';
+  appState.loadingSectors = getLoadingSectorCount(truck);
+  appState.stops = getStopsFromUI();
+  appState.activeSector = 1;
+  appState.stopCounts = {};
+  appState.sectorWeights = {};
+  appState.scanCount = 0;
+  appState.loadedCount = 0;
+  appState.totalWeight = 0;
+  appState.stops.forEach((s)=>appState.stopCounts[s]=0);
+  for(let i=1;i<=appState.loadingSectors;i++) appState.sectorWeights[i]=0;
+
+  const shortRoute = appState.stops;
+  const r = shortRoute.length > 1 ? shortRoute[0]+'→'+shortRoute[shortRoute.length-1] : (shortRoute[0] || '--');
+  document.getElementById('active-route').textContent = r;
+
+  document.getElementById('pkg-count').textContent = '0';
+  document.getElementById('pkg-count2').textContent = '00';
+  document.getElementById('weight-val').textContent = '0.0';
+  document.getElementById('util-pct').textContent = '0%';
+  document.getElementById('util-fill').style.width = '0%';
+  document.getElementById('resi-status').textContent = '✓ READ';
+  document.getElementById('resi-status').style.color = 'var(--green)';
+  document.getElementById('resi-val').textContent = 'READY';
+  document.getElementById('resi-val').style.color = 'var(--green)';
+  document.getElementById('yolo-val').textContent = '● NORMAL';
+  document.getElementById('yolo-val').style.color = 'var(--green)';
+  document.getElementById('dim-val').textContent = '—';
+  document.getElementById('weight-scan').textContent = '—';
+  document.getElementById('pkg-label').textContent = 'PKT #000 · READY';
+  document.getElementById('ai-sector').textContent = '—';
+  document.getElementById('ai-sector').style.color = 'var(--text2)';
+  document.getElementById('ai-priority').textContent = '—';
+  document.getElementById('ai-priority').style.color = 'var(--text2)';
+  document.getElementById('ai-rule').textContent = '—';
+  document.getElementById('ai-rule').style.color = 'var(--text2)';
+
+  buildRouteStopList(appState.stops);
+  buildSectorList();
+  updateSectorWeight();
+  const b = document.getElementById('balance-card');
+  if(b) b.style.display = appState.balanceEnabled ? '' : 'none';
+  const bs = document.getElementById('balance-score');
+  if(bs){
+    bs.textContent = '100%';
+    bs.style.color = 'var(--green)';
+  }
+
+  showScreen('screen2');
+  initThreeJS();
+  startLiveUpdates();
+}
+
+// ═══════════════════════════════ TARE ═══════════════════════════
+function handleTare(){
+  const btn = document.getElementById('tare-btn');
+  const icon = document.getElementById('tare-icon');
+  const text = document.getElementById('tare-text');
+  const scaleStatus = document.getElementById('scale-status');
+  btn.style.opacity = '.5';
+  btn.disabled = true;
+  text.textContent = 'ZEROING...';
+  icon.textContent = '◌';
+  setTimeout(()=>{
+    btn.classList.add('tared');
+    btn.style.opacity = '1';
+    btn.disabled = false;
+    icon.textContent = '✓';
+    text.textContent = 'TARED — ZERO OK';
+    scaleStatus.textContent = 'OK';
+    scaleStatus.style.color = 'var(--green)';
+  }, 1500);
+}
+
+// ═══════════════════════════════ SECTOR SELECT ═══════════════════
+function setSector(n){
+  appState.activeSector = n;
+  document.querySelectorAll('.sector-box.selectable').forEach(el=>el.classList.remove('active'));
+  const s = document.getElementById('sec'+n);
+  if(s) s.classList.add('active');
+  const a = document.getElementById('active-sec-label');
+  if(a) a.textContent = n;
+  updateSectorWeight();
+}
+
+// ═══════════════════════════════ ERROR ═══════════════════════════
+let errTimer;
+function showError(){
+  clearInterval(errTimer);
+  document.getElementById('screen3').classList.add('active');
+  let t = 30;
+  document.getElementById('err-counter').textContent = 'AUTO-RESUME: '+t+'s';
+  errTimer = setInterval(()=>{
+    t--;
+    document.getElementById('err-counter').textContent = 'AUTO-RESUME: '+t+'s';
+    if(t<=0){ clearInterval(errTimer); resumeScan(); }
+  }, 1000);
+}
+function resumeScan(){
+  clearInterval(errTimer);
+  document.getElementById('screen3').classList.remove('active');
+}
+
+// ═══════════════════════════════ SECTOR GRID (Screen 1) ═════════
+(function buildGrid(){
+  const g = document.getElementById('sector-grid');
+  const filled = [1,2,3,6,7,8,9,11,14,16,17];
+  const hl = [12];
+  for(let i=1;i<=25;i++){
+    const c = document.createElement('div');
+    c.className = 'grid-cell' + (filled.includes(i)?' filled':'') + (hl.includes(i)?' hl':'');
+    c.textContent = String(i).padStart(2,'0');
+    g.appendChild(c);
+  }
+})();
+
+// ═══════════════════════════════ LIVE TIME ═══════════════════════
+function startLiveUpdates(){
+  if(appState.timers.time) clearInterval(appState.timers.time);
+  appState.timers.time = setInterval(()=>{
+    const now = new Date();
+    document.getElementById('live-time').textContent =
+      now.toTimeString().slice(0,8);
+  }, 1000);
+  startWaveform();
+  startPacketSim();
+}
+
+// ═══════════════════════════════ WAVEFORM ═══════════════════════
+function startWaveform(){
+  const canvas = document.getElementById('wave-canvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let pts = Array(80).fill(14);
+  if(appState.timers.wave) clearInterval(appState.timers.wave);
+  appState.timers.wave = setInterval(()=>{
+    pts.shift();
+    pts.push(14 + (Math.random()-0.5)*18);
+    ctx.clearRect(0,0,160,28);
+    ctx.strokeStyle = 'rgba(0,230,118,0.7)';
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    pts.forEach((y,i)=>{ i===0?ctx.moveTo(i*2,y):ctx.lineTo(i*2,y); });
+    ctx.stroke();
+  }, 80);
+}
+
+// ═══════════════════════════════ PACKET SIMULATOR ═══════════════
+const yoloPool = [
+  {t:'⚠ FRAGILE',cCss:'var(--red)',cHex:0xef4444,k:'fragile'},
+  {t:'● NORMAL',cCss:'var(--green)',cHex:0x00e676,k:'normal'},
+  {t:'▲ HEAVY',cCss:'var(--amber)',cHex:0xffab00,k:'heavy'},
+  {t:'✦ LIQUID',cCss:'var(--blue)',cHex:0x00b0ff,k:'liquid'},
+];
+
+function startPacketSim(){
+  if(appState.timers.pkt) clearInterval(appState.timers.pkt);
+  appState.timers.pkt = setInterval(()=>{
+    if(appState.scanCount >= 50) return;
+    appState.scanCount++;
+
+    const yolo = yoloPool[Math.floor(Math.random()*yoloPool.length)];
+    const weight = +(Math.random()*4 + 0.6).toFixed(1);
+    const dims = [
+      Math.ceil(Math.random()*60+20)*10,
+      Math.ceil(Math.random()*40+20)*10,
+      Math.ceil(Math.random()*35+10)*10
+    ];
+
+    const ocrFail = Math.random() < 0.07;
+    const stop = appState.stops[Math.floor(Math.random()*appState.stops.length)] || 'UNK';
+    const resi = ocrFail ? '—' : `${stop}-${String(Math.floor(Math.random()*900+100))}`;
+
+    let sector = 0;
+    if(!ocrFail){
+      const idx = Math.max(0, appState.stops.indexOf(stop));
+      const s = appState.stops.length - idx;
+      sector = Math.max(1, Math.min(appState.loadingSectors, s));
+    }
+
+    let priority = 'LOW', prColor = 'var(--green)', rule = 'STANDARD', ruleColor = 'var(--text2)';
+    if(ocrFail){
+      priority = 'REJECT'; prColor = 'var(--red)'; rule = 'OCR_FAIL'; ruleColor = 'var(--red)';
+    }else if(yolo.k === 'fragile'){
+      priority = 'HIGH'; prColor = 'var(--red)'; rule = 'FRAGILE_TOP'; ruleColor = 'var(--red)';
+    }else if(weight >= 3.5 || yolo.k === 'heavy'){
+      priority = 'MED'; prColor = 'var(--amber)'; rule = 'HEAVY_BOTTOM'; ruleColor = 'var(--amber)';
+    }else if(yolo.k === 'liquid'){
+      priority = 'MED'; prColor = 'var(--blue)'; rule = 'LIQUID_STABLE'; ruleColor = 'var(--blue)';
+    }
+
+    if(sector > 0){
+      appState.loadedCount++;
+      appState.totalWeight = +(appState.totalWeight + weight).toFixed(1);
+      appState.stopCounts[stop] = (appState.stopCounts[stop] || 0) + 1;
+      appState.sectorWeights[sector] = +( (appState.sectorWeights[sector] || 0) + weight ).toFixed(1);
+    }
+
+    const util = Math.min(99, Math.round((appState.loadedCount/50)*100));
+
+    document.getElementById('pkg-count').textContent = appState.loadedCount;
+    document.getElementById('pkg-count2').textContent = String(appState.scanCount).padStart(2,'0');
+    document.getElementById('weight-val').textContent = appState.totalWeight.toFixed(1);
+    document.getElementById('util-pct').textContent = util+'%';
+    document.getElementById('util-fill').style.width = util+'%';
+
+    document.getElementById('resi-val').textContent = resi;
+    document.getElementById('resi-status').textContent = ocrFail ? '✗ FAIL' : '✓ READ';
+    document.getElementById('resi-status').style.color = ocrFail ? 'var(--red)' : 'var(--green)';
+    document.getElementById('resi-val').style.color = ocrFail ? 'var(--red)' : 'var(--green)';
+
+    document.getElementById('yolo-val').textContent = yolo.t;
+    document.getElementById('yolo-val').style.color = yolo.cCss;
+    document.getElementById('dim-val').textContent = dims.join('×');
+    document.getElementById('weight-scan').textContent = weight.toFixed(1)+' Kg';
+
+    const posLbl = sector === 0 ? 'REJECT' : (sector === 1 ? 'DEEP' : (sector === appState.loadingSectors ? 'OUTER' : 'MID'));
+    document.getElementById('ai-sector').textContent = sector === 0 ? 'S0 (REJECT)' : `S${sector} (${posLbl})`;
+    document.getElementById('ai-sector').style.color = sector === 0 ? 'var(--red)' : 'var(--green)';
+    document.getElementById('ai-priority').textContent = priority;
+    document.getElementById('ai-priority').style.color = prColor;
+    document.getElementById('ai-rule').textContent = rule;
+    document.getElementById('ai-rule').style.color = ruleColor;
+
+    if(ocrFail){
+      showError();
+    }else{
+      resumeScan();
+    }
+
+    if(sector > 0){
+      setSector(sector);
+      updateSectorWeight();
+      appState.stops.forEach((s,i)=>{
+        const el = document.getElementById('stop-pkgs-'+i);
+        if(el) el.textContent = (appState.stopCounts[s] || 0)+' pkt';
+      });
+      if(appState.three && appState.three.addBox) appState.three.addBox(dims, yolo.cHex, weight, sector);
+      if(appState.three && appState.three.getBalancePct && appState.balanceEnabled){
+        const pct = appState.three.getBalancePct();
+        const b = document.getElementById('balance-score');
+        if(b){
+          b.textContent = pct+'%';
+          b.style.color = pct >= 85 ? 'var(--green)' : (pct >= 70 ? 'var(--amber)' : 'var(--red)');
+        }
+      }
+    }
+
+    document.getElementById('pkg-label').textContent = `PKT #${String(appState.scanCount).padStart(3,'0')} · ${resi}`;
+  }, 3200);
+}
+
+// ═══════════════════════════════ THREE.JS ═══════════════════════
+function initThreeJS(){
+  const canvas = document.getElementById('three-canvas');
+  const W = canvas.parentElement.clientWidth;
+  const H = canvas.parentElement.clientHeight;
+
+  const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+  renderer.setSize(W, H);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0x0d0d0d, 1);
+
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x0d0d0d, 0.035);
+
+  const camera = new THREE.PerspectiveCamera(45, W/H, 0.1, 100);
+  camera.position.set(6, 4, 8);
+  camera.lookAt(0, 1, 0);
+
+  // Lighting
+  scene.add(new THREE.AmbientLight(0x303030));
+  const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+  dirLight.position.set(5,8,5);
+  scene.add(dirLight);
+  const greenLight = new THREE.PointLight(0x00e676, 1.2, 15);
+  greenLight.position.set(-3, 5, 3);
+  scene.add(greenLight);
+  const blueLight = new THREE.PointLight(0x0088ff, 0.6, 12);
+  blueLight.position.set(4, 2, -2);
+  scene.add(blueLight);
+
+  const baseMm = {l:13620,w:2480,h:2700};
+  const mm = appState.containerMm || baseMm;
+  const cW = 5 * (mm.l / baseMm.l);
+  const cD = 2 * (mm.w / baseMm.w);
+  const cH = 2.5 * (mm.h / baseMm.h);
+  const containerGeo = new THREE.BoxGeometry(cW, cH, cD);
+  const wireframe = new THREE.LineSegments(
+    new THREE.EdgesGeometry(containerGeo),
+    new THREE.LineBasicMaterial({color:0x00e676, opacity:.35, transparent:true})
+  );
+  wireframe.position.y = cH/2;
+  scene.add(wireframe);
+
+  // Floor grid
+  const gridHelper = new THREE.GridHelper(12, 20, 0x1a1a1a, 0x1a1a1a);
+  scene.add(gridHelper);
+
+  const boxes = [];
+  const boxGroup = new THREE.Group();
+  boxGroup.position.set(-cW/2+0.1, 0.01, -cD/2+0.05);
+  scene.add(boxGroup);
+
+  function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
+  const stack = {
+    heights:{},
+    lanes:{},
+    laneIndex:{},
+    balance:{sumW:0,sumWX:0,sumWZ:0}
+  };
+  function laneFor(sector){
+    if(!stack.lanes[sector]){
+      stack.lanes[sector] = [0, -1, 1, -2, 2, -3, 3];
+      stack.laneIndex[sector] = 0;
+    }
+    const i = stack.laneIndex[sector];
+    stack.laneIndex[sector] = (i + 1) % stack.lanes[sector].length;
+    return stack.lanes[sector][i];
+  }
+  function addBox(dims, color, weight, sector){
+    const w = clamp((dims[0]/mm.l)*cW, 0.25, cW*0.45);
+    const d = clamp((dims[1]/mm.w)*cD, 0.18, cD*0.70);
+    const h = clamp((dims[2]/mm.h)*cH, 0.18, cH*0.60);
+
+    const s = Math.max(1, Math.min(appState.loadingSectors, sector || appState.loadingSectors));
+    const zStart = ((s - 1) / appState.loadingSectors) * cD;
+    const zEnd = (s / appState.loadingSectors) * cD;
+    const zMid = (zStart + zEnd) / 2;
+    const z = clamp(zMid - d/2, zStart, zEnd - d);
+
+    if(!stack.heights[s]) stack.heights[s] = 0;
+    if(stack.heights[s] + h > cH) return false;
+
+    const lane = laneFor(s);
+    const xCenter = cW/2 + lane * (cW/10);
+    const x = clamp(xCenter - w/2, 0, cW - w);
+
+    const y = stack.heights[s];
+
+    const geo = new THREE.BoxGeometry(w, h, d);
+    const mat = new THREE.MeshLambertMaterial({color});
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.position.set(x + w/2, y + h/2, z + d/2);
+
+    const edges = new THREE.LineSegments(
+      new THREE.EdgesGeometry(geo),
+      new THREE.LineBasicMaterial({color:0x000000, opacity:.4, transparent:true})
+    );
+    mesh.add(edges);
+
+    boxGroup.add(mesh);
+    boxes.push({mesh, y0:mesh.position.y, delay:Math.random()*2});
+
+    stack.heights[s] += h;
+
+    const wgt = Number(weight) || 1;
+    stack.balance.sumW += wgt;
+    stack.balance.sumWX += wgt * (mesh.position.x - cW/2);
+    stack.balance.sumWZ += wgt * (mesh.position.z - cD/2);
+    return true;
+  }
+
+  function getBalancePct(){
+    if(!appState.balanceEnabled) return 100;
+    if(stack.balance.sumW <= 0) return 100;
+    const cx = stack.balance.sumWX / stack.balance.sumW;
+    const cz = stack.balance.sumWZ / stack.balance.sumW;
+    const xPct = 100 - clamp((Math.abs(cx)/(cW/2))*100, 0, 100);
+    const zPct = 100 - clamp((Math.abs(cz)/(cD/2))*100, 0, 100);
+    return Math.round((xPct*0.6 + zPct*0.4));
+  }
+
+  appState.three = {addBox, getBalancePct};
+
+  // Scan plane (animated)
+  const scanGeo = new THREE.PlaneGeometry(cW, cD);
+  const scanMat = new THREE.MeshBasicMaterial({
+    color:0x00e676, opacity:.08, transparent:true, side:THREE.DoubleSide
+  });
+  const scanPlane = new THREE.Mesh(scanGeo, scanMat);
+  scanPlane.rotation.x = -Math.PI/2;
+  scene.add(scanPlane);
+
+  // Orbit controls (manual)
+  let isDragging = false, lastX=0, lastY=0;
+  let theta=0.6, phi=0.45, radius=10;
+
+  canvas.addEventListener('mousedown', e=>{isDragging=true;lastX=e.clientX;lastY=e.clientY;});
+  canvas.addEventListener('mousemove', e=>{
+    if(!isDragging) return;
+    theta -= (e.clientX-lastX)*0.01;
+    phi   -= (e.clientY-lastY)*0.008;
+    phi = Math.max(0.1, Math.min(1.2, phi));
+    lastX=e.clientX; lastY=e.clientY;
+    updateCamera();
+  });
+  canvas.addEventListener('mouseup', ()=>isDragging=false);
+  canvas.addEventListener('wheel', e=>{
+    radius = Math.max(4, Math.min(18, radius + e.deltaY*0.01));
+    updateCamera();
+  });
+
+  // Touch
+  let touch0={x:0,y:0}, pinch0=0;
+  canvas.addEventListener('touchstart', e=>{
+    if(e.touches.length===1){isDragging=true;touch0={x:e.touches[0].clientX,y:e.touches[0].clientY};}
+    if(e.touches.length===2){
+      pinch0=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+    }
+  },{passive:true});
+  canvas.addEventListener('touchmove', e=>{
+    if(e.touches.length===1 && isDragging){
+      theta -= (e.touches[0].clientX-touch0.x)*0.012;
+      phi   -= (e.touches[0].clientY-touch0.y)*0.01;
+      phi = Math.max(0.1, Math.min(1.2, phi));
+      touch0={x:e.touches[0].clientX,y:e.touches[0].clientY};
+      updateCamera();
+    }
+    if(e.touches.length===2){
+      const p = Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+      radius = Math.max(4, Math.min(18, radius-(p-pinch0)*0.04));
+      pinch0=p; updateCamera();
+    }
+  },{passive:true});
+  canvas.addEventListener('touchend',()=>isDragging=false);
+
+  function updateCamera(){
+    camera.position.x = radius * Math.sin(phi)*Math.sin(theta);
+    camera.position.y = radius * Math.cos(phi);
+    camera.position.z = radius * Math.sin(phi)*Math.cos(theta);
+    camera.lookAt(0, 1, 0);
+  }
+  updateCamera();
+
+  let scanY = 0, scanDir = 1;
+  let autoRotate = true;
+  canvas.addEventListener('mousedown',()=>autoRotate=false);
+
+  const clock = new THREE.Clock();
+  function animate(){
+    requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+
+    // Auto rotate slowly
+    if(autoRotate){ theta += 0.003; updateCamera(); }
+
+    // Scan plane movement
+    scanY += scanDir * 0.025;
+    if(scanY > cH) { scanDir=-1; }
+    if(scanY < 0)  { scanDir=1; }
+    scanPlane.position.y = scanY;
+    scanMat.opacity = 0.04 + 0.05*Math.sin(t*3);
+
+    renderer.render(scene, camera);
+  }
+  animate();
+}
+</script>
+</body>
+</html>

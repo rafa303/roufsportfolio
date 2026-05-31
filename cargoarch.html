@@ -275,6 +275,7 @@
     transition:all .2s;
   }
   .err-btn:hover{border-color:var(--red);color:var(--red);}
+  .info-btn:hover{border-color:var(--cyan);color:var(--cyan);}
 
   /* Main Dashboard Area */
   .dashboard-body{flex:1;display:flex;overflow:hidden;}
@@ -615,6 +616,53 @@
   </div>
 </div>
 
+<div class="demo-modal hidden" id="about-modal" role="dialog" aria-modal="true">
+  <div class="demo-modal-card">
+    <div class="demo-modal-title">
+      <span>CargoArch AI</span>
+      <span class="tag">RESEARCH</span>
+    </div>
+    <div class="demo-modal-msg" style="margin-bottom:12px;">
+      <div style="font-size:12px;color:var(--text2);font-family:var(--mono);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">Inti Inovasi</div>
+      <div style="color:var(--text1);line-height:1.6;">
+        Edge-AI scanning paket (OCR + deteksi fragile + dimensi + berat) → optimasi loading &amp; sorting berbasis sektor (LIFO) → digital twin 3D real-time.
+      </div>
+      <div style="height:10px;"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:10px;">
+          <div style="font-size:10px;color:var(--text3);font-family:var(--mono);letter-spacing:1px;">TARGET</div>
+          <div style="margin-top:6px;display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--text2);"><span>Utilisasi</span><span style="color:var(--green);font-weight:700;">≥ 85%</span></div>
+          <div style="margin-top:4px;display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--text2);"><span>OCR</span><span style="color:var(--green);font-weight:700;">≥ 90%</span></div>
+          <div style="margin-top:4px;display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--text2);"><span>Sorting</span><span style="color:var(--green);font-weight:700;">≥ 95%</span></div>
+          <div style="margin-top:4px;display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--text2);"><span>Latency</span><span style="color:var(--cyan);font-weight:700;">&lt; 2s/pkt</span></div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:10px;">
+          <div style="font-size:10px;color:var(--text3);font-family:var(--mono);letter-spacing:1px;">KENAPA SEKTOR (LIFO)</div>
+          <div style="margin-top:6px;font-size:12px;color:var(--text2);line-height:1.55;">
+            S1 = terdalam (tujuan paling jauh), sektor terbesar = terluar (tujuan paling dekat). Tiap sektor ditumpuk LIFO agar bongkar cepat sesuai urutan rute.
+          </div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:10px;">
+          <div style="font-size:10px;color:var(--text3);font-family:var(--mono);letter-spacing:1px;">PHYSICS</div>
+          <div style="margin-top:6px;font-size:12px;color:var(--text2);line-height:1.55;">
+            Mode truk mempertimbangkan keseimbangan (CoG) untuk stabilitas berkendara, terutama truk besar. Mode container memprioritaskan utilisasi &amp; urutan bongkar.
+          </div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:10px;">
+          <div style="font-size:10px;color:var(--text3);font-family:var(--mono);letter-spacing:1px;">KENAPA 800×480</div>
+          <div style="margin-top:6px;font-size:12px;color:var(--text2);line-height:1.55;">
+            UI dikunci 800×480 untuk layar LCD 5&quot; (kiosk) agar layout presisi, terbaca dari jarak dekat, dan performa stabil di perangkat edge.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="demo-modal-actions">
+      <button class="demo-modal-btn secondary" onclick="closeAboutModal()">TUTUP</button>
+      <button class="demo-modal-btn" onclick="closeAboutModal()">OK</button>
+    </div>
+  </div>
+</div>
+
 <!-- ═══════════════ SCREEN 1: SETUP ═══════════════ -->
 <div id="screen1" class="screen active">
   <div class="s1-header">
@@ -626,6 +674,7 @@
       <div class="dot-pulse"></div>
       SYSTEM READY · EDGE MODE
     </div>
+    <button class="err-btn info-btn" style="margin-left:10px;" onclick="openAboutModal()">ℹ INFO</button>
   </div>
 
   <div class="s1-body">
@@ -822,6 +871,7 @@
     <div class="topbar-right">
       <div class="status-chip"><div class="dot-pulse" style="width:6px;height:6px;"></div>SCANNING</div>
       <div class="time-chip" id="live-time">--:--:--</div>
+      <button class="err-btn info-btn" onclick="openAboutModal()">ℹ INFO</button>
       <button class="err-btn" onclick="showError()">⚠ ERR</button>
     </div>
   </div>
@@ -982,8 +1032,19 @@ function closeDemoModal(){
   const m = document.getElementById('demo-modal');
   if(m) m.classList.add('hidden');
 }
+function openAboutModal(){
+  const m = document.getElementById('about-modal');
+  if(m) m.classList.remove('hidden');
+}
+function closeAboutModal(){
+  const m = document.getElementById('about-modal');
+  if(m) m.classList.add('hidden');
+}
 window.addEventListener('keydown', e=>{
-  if(e.key === 'Escape') closeDemoModal();
+  if(e.key === 'Escape'){
+    closeDemoModal();
+    closeAboutModal();
+  }
 });
 
 const CITY_NAMES = {

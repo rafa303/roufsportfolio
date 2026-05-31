@@ -602,21 +602,7 @@
 </head>
 <body>
 
-<div class="demo-modal" id="demo-modal" role="dialog" aria-modal="true">
-  <div class="demo-modal-card">
-    <div class="demo-modal-title">
-      <span>Demo / Prototype</span>
-      <span class="tag">INPUT LINK</span>
-    </div>
-    <div class="demo-modal-msg">ini adalah Input Link Demo / Prototype kami!</div>
-    <div class="demo-modal-actions">
-      <button class="demo-modal-btn secondary" onclick="closeDemoModal()">TUTUP</button>
-      <button class="demo-modal-btn" onclick="closeDemoModal()">OK</button>
-    </div>
-  </div>
-</div>
-
-<div class="demo-modal hidden" id="about-modal" role="dialog" aria-modal="true">
+<div class="demo-modal" id="about-modal" role="dialog" aria-modal="true">
   <div class="demo-modal-card">
     <div class="demo-modal-title">
       <span>CargoArch AI</span>
@@ -1028,10 +1014,6 @@ const appState = {
   three:null
 };
 
-function closeDemoModal(){
-  const m = document.getElementById('demo-modal');
-  if(m) m.classList.add('hidden');
-}
 function openAboutModal(){
   const m = document.getElementById('about-modal');
   if(m) m.classList.remove('hidden');
@@ -1042,7 +1024,6 @@ function closeAboutModal(){
 }
 window.addEventListener('keydown', e=>{
   if(e.key === 'Escape'){
-    closeDemoModal();
     closeAboutModal();
   }
 });

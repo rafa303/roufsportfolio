@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARCHIF - Research SMASIF</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://unpkg.com/lenis@1.1.2/dist/lenis.min.js"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        // Fokus ke warna utama logo, dihilangkan warna rainbow yang terlalu banyak
+                        brand: {
+                            blue: '#1E3A8A',    
+                            cyan: '#06B6D4',    
+                            orange: '#F97316',  
+                            dark: '#0F172A',
+                            soft: '#F1F5F9'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base Smooth Scroll */
+        html.lenis { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
+
+        body { 
+            background-color: #F8FAFC; 
+            color: #334155; 
+            overflow-x: hidden;
+            /* Background gradasi + Grid Line agar tidak polos */
+            background-image: 
+                linear-gradient(rgba(6, 182, 212, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(6, 182, 212, 0.05) 1px, transparent 1px),
+                radial-gradient(at 0% 0%, rgba(6, 182, 212, 0.08) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(30, 58, 138, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.08) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(30, 58, 138, 0.05) 0px, transparent 50%);
+            background-size: 30px 30px, 30px 30px, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+            background-attachment: fixed;
+        }
+        
+        /* Premium Glassmorphism (Lebih bersih) */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 32px 0 rgba(30, 58, 138, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-panel:hover {
+            box-shadow: 0 12px 40px 0 rgba(6, 182, 212, 0.1);
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.85);
+        }
+
+        /* Glass panel tanpa efek hover untuk Modal */
+        .glass-static {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 32px 0 rgba(30, 58, 138, 0.05);
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Absensi Buttons */
+        .absensi-btn {
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.5);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .absensi-btn:hover { background: rgba(255, 255, 255, 0.95); border-color: #06B6D4; box-shadow: 0 10px 24px rgba(6, 182, 212, 0.12); transform: translateY(-1px); }
+        .absensi-btn:focus-visible {
+            outline: none;
+            border-color: #06B6D4;
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.16);
+        }
+        .absensi-btn.active { background: #06B6D4; border-color: #06B6D4; color: white; font-weight: 600; box-shadow: 0 12px 24px rgba(6, 182, 212, 0.18); }
+        .absensi-btn-mood.active { background: #F97316; border-color: #F97316; color: white; }
+        .hub-time-empty {
+            position: relative;
+            overflow: hidden;
+            border: 1px dashed rgba(255, 255, 255, 0.55);
+            background:
+                radial-gradient(circle at top left, rgba(6, 182, 212, 0.12), transparent 42%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.06));
+        }
+        .hub-time-empty::before {
+            content: '';
+            position: absolute;
+            inset: auto 18px 18px 18px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(30, 58, 138, 0.22), transparent);
+        }
+        .tahap-card {
+            background: rgba(255, 255, 255, 0.55);
+            border: 1px solid rgba(226, 232, 240, 0.9);
+        }
+        .tahap-select {
+            background: rgba(248, 250, 252, 0.95);
+            border: 1px solid #E2E8F0;
+            color: #475569;
+        }
+        .tahap-select:focus {
+            outline: none;
+            border-color: #06B6D4;
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15);
+        }
+        .tahap-note {
+            width: 100%;
+            background: rgba(248, 250, 252, 0.95);
+            border: 1px solid #E2E8F0;
+            color: #475569;
+            resize: vertical;
+            min-height: 70px;
+        }
+        .tahap-note:focus {
+            outline: none;
+            border-color: #06B6D4;
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15);
+        }
+        .progress-card-detail {
+            display: none;
+        }
+        .progress-card-detail.open {
+            display: block;
+        }
+        .progress-detail-toggle {
+            border: 1px solid rgba(6, 182, 212, 0.18);
+            background: rgba(255, 255, 255, 0.72);
+            color: #1E3A8A;
+        }
+        .progress-stage-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            padding: 2px 10px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            white-space: nowrap;
+        }
+        .stage-belum { background: rgba(148, 163, 184, 0.16); color: #475569; }
+        .stage-progress { background: rgba(249, 115, 22, 0.16); color: #C2410C; }
+        .stage-hampir { background: rgba(6, 182, 212, 0.16); color: #0E7490; }
+        .stage-selesai { background: rgba(16, 185, 129, 0.16); color: #047857; }
+        .progress-overview-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+        }
+        .progress-details-panel {
+            display: none;
+        }
+        .progress-details-panel.open {
+            display: block;
+        }
+
+        .team-card {
+            background: rgba(255, 255, 255, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+        .team-card:hover {
+            border-color: var(--cat, #06B6D4);
+            box-shadow: 0 12px 40px 0 rgba(6, 182, 212, 0.12);
+        }
+        .team-accent {
+            height: 4px;
+            width: 100%;
+            background: linear-gradient(90deg, var(--cat, #06B6D4), rgba(255, 255, 255, 0));
+        }
+        .team-cover {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.35);
+        }
+        .team-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .cat-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            border: 1px solid transparent;
+            white-space: nowrap;
+            line-height: 1.6;
+        }
+        .cat-FTR { background: rgba(30, 58, 138, 0.14); color: #1E3A8A; border-color: rgba(30, 58, 138, 0.25); }
+        .cat-ISH { background: rgba(245, 158, 11, 0.18); color: #B45309; border-color: rgba(245, 158, 11, 0.28); }
+        .cat-MST { background: rgba(124, 58, 237, 0.16); color: #6D28D9; border-color: rgba(124, 58, 237, 0.26); }
+        .cat-AAK { background: rgba(249, 115, 22, 0.16); color: #C2410C; border-color: rgba(249, 115, 22, 0.26); }
+        .cat-TD { background: rgba(16, 185, 129, 0.16); color: #047857; border-color: rgba(16, 185, 129, 0.26); }
+        .cat-KKPD { background: rgba(6, 182, 212, 0.16); color: #0E7490; border-color: rgba(6, 182, 212, 0.26); }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-cyan selection:text-white">
+
+    <!-- Modal Pop-up Presensi Peringatan -->
+    <div id="absenModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-900/40 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+        <div id="modal-content" class="glass-static w-[90%] max-w-md rounded-[2rem] p-8 text-center transform scale-95 transition-transform duration-300">
+            <div class="w-16 h-16 rounded-full bg-brand-orange/20 text-brand-orange flex items-center justify-center mx-auto mb-4 text-3xl">
+                <i class="fa-solid fa-clipboard-user"></i>
+            </div>
+            <h3 class="font-heading font-bold text-2xl text-slate-800 mb-2">Perhatian!</h3>
+            <p class="text-slate-500 mb-6 text-sm">Sistem mendeteksi kamu belum mengisi presensi riset hari ini. Wajib isi presensi dulu ya sebelum lanjut!</p>
+            <a href="#hub" onclick="closeModal()" class="inline-block w-full bg-brand-blue hover:bg-brand-cyan text-white font-bold py-3 px-6 rounded-xl transition-colors shadow-md">
+                Siap, Isi Presensi
+            </a>
+        </div>
+    </div>
+
+    <nav class="glass-nav sticky top-0 z-50 w-full">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            
+            <!-- Logo & Title (Lebih clean) -->
+            <a href="#" class="flex items-center gap-3 group">
+                <!-- GANTI src="logo_custom_kamu.png" DENGAN NAMA FILE LOGO ASLIMU NANTI -->
+                <img src="./logo.png" alt="Logo" class="h-10 object-contain transition-transform duration-300 group-hover:scale-105" id="custom-logo">
+                <span class="font-heading font-bold text-xl text-brand-dark tracking-tight uppercase">RESEARCH SMASIF</span>
+            </a>
+            
+            <!-- Menu santai -->
+            <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+                <a href="#evaluasi" class="nav-link hover:text-brand-cyan transition-colors">Evaluasi</a>
+                <a href="#galeri" class="nav-link hover:text-brand-cyan transition-colors">Galeri</a>
+                <a href="#hub" class="nav-link hover:text-brand-cyan transition-colors">Presensi</a>
+                <a href="#arsip" class="nav-link hover:text-brand-cyan transition-colors">Arsip Tim</a>
+            </div>
+
+            <a href="#hub" class="nav-link bg-brand-blue hover:bg-brand-cyan text-white text-sm font-semibold px-6 py-2.5 rounded-full transition-colors duration-300">
+                Isi Presensi
+            </a>
+        </div>
+    </nav>
+
+    <section class="relative pt-24 pb-16 px-6 max-w-7xl mx-auto flex flex-col items-center text-center min-h-[75vh] justify-center reveal active">
+        
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel text-brand-blue text-xs font-bold uppercase tracking-widest mb-6">
+            <i class="fa-solid fa-flask text-brand-cyan"></i> OPSI-FIKSI 2026
+        </div>
+        
+        <h1 class="font-heading text-5xl md:text-7xl font-extrabold text-brand-dark tracking-tight leading-tight max-w-4xl mb-6">
+            Walk Through <br> 
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan">Knowledge.</span>
+        </h1>
+        
+        <!-- Copywriting lebih profesional tapi tetap ramah -->
+        <p class="text-slate-500 text-lg md:text-xl max-w-2xl font-light leading-relaxed mb-10">
+            Pusat data digital untuk menyimpan dokumen riset, memantau evaluasi, dan merekam jejak inovasi kita secara kolaboratif dan terstruktur.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+            <a href="#arsip" class="nav-link bg-brand-blue hover:bg-brand-dark text-white px-8 py-4 rounded-full font-semibold transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
+                Lihat Arsip Tim <i class="fa-solid fa-arrow-down"></i>
+            </a>
+            <a href="#hub" class="nav-link glass-panel text-brand-blue px-8 py-4 rounded-full font-semibold flex items-center justify-center gap-2">
+                <i class="fa-solid fa-clipboard-user"></i> Presensi Kehadiran
+            </a>
+        </div>
+    </section>
+
+    <!-- Background Dekoratif Tambahan biar nggak polos -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-brand-cyan/10 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-[-10%] right-[-5%] w-[30rem] h-[30rem] bg-brand-blue/5 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
+    </div>
+
+    <section class="py-12 px-6 max-w-7xl mx-auto reveal">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <!-- Tampilan Card lebih clean dan seragam -->
+            <a href="https://drive.google.com/drive/folders/1Zm3qYZRhK9ArADpTvO1FxhsA_VrPdXHx?usp=drive_link" target="_blank" class="glass-panel p-6 rounded-3xl group block">
+                <div class="w-12 h-12 rounded-2xl bg-blue-50 text-brand-blue flex items-center justify-center mb-4 group-hover:bg-brand-blue group-hover:text-white transition-colors duration-300">
+                    <i class="fa-solid fa-book-open text-xl"></i>
+                </div>
+                <h3 class="font-heading font-bold text-slate-800 text-lg mb-1">Panduan Riset</h3>
+                <p class="text-sm text-slate-500 font-light mb-4">SOP dan format baku OPSI-FIKSI.</p>
+                <span class="text-xs font-semibold text-brand-blue flex items-center gap-1 group-hover:translate-x-1 transition-transform">Buka Folder <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
+            </a>
+
+            <a href="https://drive.google.com/drive/folders/1c0xntzZqn-zo0S6h62hMssGiHbs7J7TS?usp=drive_link" target="_blank" class="glass-panel p-6 rounded-3xl group block">
+                <div class="w-12 h-12 rounded-2xl bg-cyan-50 text-brand-cyan flex items-center justify-center mb-4 group-hover:bg-brand-cyan group-hover:text-white transition-colors duration-300">
+                    <i class="fa-solid fa-chalkboard-user text-xl"></i>
+                </div>
+                <h3 class="font-heading font-bold text-slate-800 text-lg mb-1">Materi Bimbingan</h3>
+                <p class="text-sm text-slate-500 font-light mb-4">Referensi dan materi dari mentor.</p>
+                <span class="text-xs font-semibold text-brand-cyan flex items-center gap-1 group-hover:translate-x-1 transition-transform">Buka Folder <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
+            </a>
+
+            <a href="https://docs.google.com/spreadsheets/d/1z6yH97xuOzRdmEfHi-v5WNlE2-9sJuG8P1m4LD_DRn0/edit?usp=sharing" target="_blank" class="glass-panel p-6 rounded-3xl group block">
+                <div class="w-12 h-12 rounded-2xl bg-orange-50 text-brand-orange flex items-center justify-center mb-4 group-hover:bg-brand-orange group-hover:text-white transition-colors duration-300">
+                    <i class="fa-solid fa-users text-xl"></i>
+                </div>
+                <h3 class="font-heading font-bold text-slate-800 text-lg mb-1">Data Mentor</h3>
+                <p class="text-sm text-slate-500 font-light mb-4">Daftar alokasi pembimbing UM.</p>
+                <span class="text-xs font-semibold text-brand-orange flex items-center gap-1 group-hover:translate-x-1 transition-transform">Lihat Data <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
+            </a>
+
+            <a href="#hub" class="glass-panel p-6 rounded-3xl group block">
+                <div class="w-12 h-12 rounded-2xl bg-slate-100 text-slate-700 flex items-center justify-center mb-4 group-hover:bg-slate-700 group-hover:text-white transition-colors duration-300">
+                    <i class="fa-solid fa-calendar-days text-xl"></i>
+                </div>
+                <h3 class="font-heading font-bold text-slate-800 text-lg mb-1">Lini Masa</h3>
+                <p class="text-sm text-slate-500 font-light mb-4">Jadwal kegiatan dan deadline.</p>
+                <span class="text-xs font-semibold text-slate-700 flex items-center gap-1 group-hover:translate-x-1 transition-transform">Lihat Kalender <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
+            </a>
+
+        </div>
+    </section>
+
+    <section id="galeri" class="py-20 px-6 max-w-7xl mx-auto reveal">
+        <div class="text-center mb-12">
+            <h2 class="font-heading text-3xl font-bold text-slate-900 mb-3">Galeri Dokumentasi</h2>
+            <p class="text-slate-500 font-light">Rekam jejak kegiatan dan progres riset tim selama di laboratorium maupun asrama.</p>
+        </div>
+        
+        <!-- Grid dokumentasi dengan tempat foto custom -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]">
+            <div class="col-span-2 row-span-2 rounded-3xl overflow-hidden glass-panel p-2">
+                <div class="w-full h-full rounded-2xl flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-white/70 to-brand-soft border border-dashed border-slate-200 text-slate-400">
+                    <i class="fa-regular fa-image text-4xl"></i>
+                    <div class="text-center">
+                        <div class="text-xs font-extrabold uppercase tracking-widest text-slate-500">Dokumentasi Utama</div>
+                        <div class="text-xs font-semibold">Belum ada foto</div>
+                    </div>
+                </div>
+            </div>
+            <div class="rounded-3xl overflow-hidden glass-panel p-2">
+                <div class="w-full h-full rounded-2xl flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-white/70 to-brand-soft border border-dashed border-slate-200 text-slate-400">
+                    <i class="fa-regular fa-image text-2xl"></i>
+                    <div class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Coming Soon</div>
+                </div>
+            </div>
+            <div class="rounded-3xl overflow-hidden glass-panel p-2">
+                <div class="w-full h-full rounded-2xl flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-white/70 to-brand-soft border border-dashed border-slate-200 text-slate-400">
+                    <i class="fa-regular fa-image text-2xl"></i>
+                    <div class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Coming Soon</div>
+                </div>
+            </div>
+            <div class="col-span-2 rounded-3xl overflow-hidden glass-panel p-2">
+                <div class="w-full h-full rounded-2xl flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-white/70 to-brand-soft border border-dashed border-slate-200 text-slate-400">
+                    <i class="fa-regular fa-image text-3xl"></i>
+                    <div class="text-center">
+                        <div class="text-xs font-extrabold uppercase tracking-widest text-slate-500">Dokumentasi Kegiatan</div>
+                        <div class="text-xs font-semibold">Belum ada foto</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="hub" class="py-16 px-6 max-w-7xl mx-auto reveal">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start lg:items-stretch">
+            
+            <!-- Kolom Absen + Kotak Waktu -->
+            <div class="lg:col-span-5 flex flex-col gap-6 lg:h-full">
+                <div class="glass-panel rounded-[2rem] p-8 flex flex-col">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 rounded-2xl bg-brand-cyan flex items-center justify-center text-white shadow-lg">
+                            <i class="fa-solid fa-clipboard-check text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-heading font-bold text-slate-800 text-xl xl:text-2xl leading-tight whitespace-nowrap">Sistem Presensi</h3>
+                            <p class="text-sm text-slate-500 font-medium text-brand-orange"><i class="fa-solid fa-circle-exclamation text-xs"></i> Wajib diisi sebelum riset</p>
+                        </div>
+                    </div>
+
+                    <div class="rounded-2xl bg-white/50 border border-slate-100 p-3 flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-widest">
+                        <span id="step-chip-1" class="px-3 py-1 rounded-full bg-brand-blue text-white">Langkah 1</span>
+                        <span id="step-chip-2" class="px-3 py-1 rounded-full bg-slate-100 text-slate-500">Langkah 2</span>
+                    </div>
+
+                    <div id="absensi-step-1" class="space-y-6">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Pilih Kelompok Riset</label>
+                            <select id="kelompok" class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-brand-cyan cursor-pointer shadow-sm transition-all">
+                                <option value="" disabled selected>Pilih kelompok Anda...</option>
+                                <option value="FTR_Adly_Imam">FTR_Adly_Imam</option>
+                                <option value="FTR_Saif_Aldero">FTR_Saif_Aldero</option>
+                                <option value="ISH_Rafa-Ichsan">ISH_Rafa-Ichsan</option>
+                                <option value="FTR_Azrul_Rafif">FTR_Azrul_Rafif</option>
+                                <option value="FTR_Drestra_Satria">FTR_Drestra_Satria</option>
+                                <option value="MST_Arum_Aulia">MST_Arum_Aulia</option>
+                                <option value="FTR_Rayya_Syakira">FTR_Rayya_Syakira</option>
+                                <option value="MST_Syifa_Amanda">MST_Syifa_Amanda</option>
+                                <option value="MST_Karin_Naura">MST_Karin_Naura</option>
+                                <option value="AAK_Zida_Nindy">AAK_Zida_Nindy</option>
+                                <option value="MST_Syaukie_Rafi">MST_Syaukie_Rafi</option>
+                                <option value="TD_Aqil_Yusuf">TD_Aqil_Yusuf</option>
+                                <option value="KKPD_Alya_Queenta">KKPD_Alya_Queenta</option>
+                                <option value="FTR_Cayla_Nardin">FTR_Cayla_Nardin</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Lokasi Pengerjaan</label>
+                            <div class="grid grid-cols-2 gap-3" id="lokasi-group">
+                                <button onclick="setOpt('lokasi', 'Lab', this)" class="absensi-btn py-3 rounded-xl text-sm font-medium text-slate-600"><i class="fa-solid fa-flask mr-1"></i> Laboratorium</button>
+                                <button onclick="setOpt('lokasi', 'Asrama', this)" class="absensi-btn py-3 rounded-xl text-sm font-medium text-slate-600"><i class="fa-solid fa-building-user mr-1"></i> Asrama / Kamar</button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Kondisi Tim (Mood & Fokus)</label>
+                            <div class="grid grid-cols-3 gap-3" id="mood-group">
+                                <button onclick="setOpt('mood', 'Produktif', this)" class="absensi-btn absensi-btn-mood py-3 rounded-xl flex flex-col items-center">
+                                    <span class="text-xl mb-1">🚀</span><span class="text-[10px] font-bold">PRODUKTIF</span>
+                                </button>
+                                <button onclick="setOpt('mood', 'Stuck', this)" class="absensi-btn absensi-btn-mood py-3 rounded-xl flex flex-col items-center">
+                                    <span class="text-xl mb-1">🤯</span><span class="text-[10px] font-bold">KENDALA</span>
+                                </button>
+                                <button onclick="setOpt('mood', 'Santai', this)" class="absensi-btn absensi-btn-mood py-3 rounded-xl flex flex-col items-center">
+                                    <span class="text-xl mb-1">📚</span><span class="text-[10px] font-bold">LITERASI</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="absensi-step-2" class="space-y-6 hidden">
+                        <div class="tahap-card rounded-2xl p-4">
+                            <div class="flex items-start justify-between gap-3 mb-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Posisi Penelitian</label>
+                                    <p class="text-[11px] text-slate-500">Pilih status tiap tahapan, lalu tambahkan satu catatan umum bila perlu.</p>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-[10px] font-extrabold uppercase tracking-widest text-slate-400">Estimasi Progress</div>
+                                    <div id="tahap-progress-text" class="font-heading text-lg font-bold text-brand-blue">0%</div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-3">
+                                <div class="tahap-card rounded-2xl p-3">
+                                    <div class="grid grid-cols-1 sm:grid-cols-[1fr_auto] items-center gap-3 mb-3">
+                                        <span class="text-sm font-semibold text-slate-700">Instrumen / Alat</span>
+                                        <select onchange="setTahap('instrumen', this.value)" class="tahap-select rounded-xl px-3 py-2 text-sm">
+                                            <option value="">Pilih status</option>
+                                            <option value="Belum">Belum</option>
+                                            <option value="Belum Selesai">Belum Selesai</option>
+                                            <option value="Hampir Selesai">Hampir Selesai</option>
+                                            <option value="Selesai">Selesai</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="tahap-card rounded-2xl p-3">
+                                    <div class="grid grid-cols-1 sm:grid-cols-[1fr_auto] items-center gap-3 mb-3">
+                                        <span class="text-sm font-semibold text-slate-700">Implementasi / Pengembangan</span>
+                                        <select onchange="setTahap('implementasi', this.value)" class="tahap-select rounded-xl px-3 py-2 text-sm">
+                                            <option value="">Pilih status</option>
+                                            <option value="Belum">Belum</option>
+                                            <option value="Belum Selesai">Belum Selesai</option>
+                                            <option value="Hampir Selesai">Hampir Selesai</option>
+                                            <option value="Selesai">Selesai</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="tahap-card rounded-2xl p-3">
+                                    <div class="grid grid-cols-1 sm:grid-cols-[1fr_auto] items-center gap-3 mb-3">
+                                        <span class="text-sm font-semibold text-slate-700">Pengambilan Data</span>
+                                        <select onchange="setTahap('pengambilanData', this.value)" class="tahap-select rounded-xl px-3 py-2 text-sm">
+                                            <option value="">Pilih status</option>
+                                            <option value="Belum">Belum</option>
+                                            <option value="Belum Selesai">Belum Selesai</option>
+                                            <option value="Hampir Selesai">Hampir Selesai</option>
+                                            <option value="Selesai">Selesai</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="tahap-card rounded-2xl p-3">
+                                    <div class="grid grid-cols-1 sm:grid-cols-[1fr_auto] items-center gap-3 mb-3">
+                                        <span class="text-sm font-semibold text-slate-700">Analisis / Validasi</span>
+                                        <select onchange="setTahap('analisisValidasi', this.value)" class="tahap-select rounded-xl px-3 py-2 text-sm">
+                                            <option value="">Pilih status</option>
+                                            <option value="Belum">Belum</option>
+                                            <option value="Belum Selesai">Belum Selesai</option>
+                                            <option value="Hampir Selesai">Hampir Selesai</option>
+                                            <option value="Selesai">Selesai</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="tahap-card rounded-2xl p-3">
+                                    <div class="grid grid-cols-1 sm:grid-cols-[1fr_auto] items-center gap-3 mb-3">
+                                        <span class="text-sm font-semibold text-slate-700">PPT / Presentasi</span>
+                                        <select onchange="setTahap('presentasiPpt', this.value)" class="tahap-select rounded-xl px-3 py-2 text-sm">
+                                            <option value="">Pilih status</option>
+                                            <option value="Belum">Belum</option>
+                                            <option value="Belum Selesai">Belum Selesai</option>
+                                            <option value="Hampir Selesai">Hampir Selesai</option>
+                                            <option value="Selesai">Selesai</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="tahap-card rounded-2xl p-3">
+                                    <div class="grid grid-cols-1 sm:grid-cols-[1fr_auto] items-center gap-3 mb-3">
+                                        <span class="text-sm font-semibold text-slate-700">Laporan Akhir</span>
+                                        <select onchange="setTahap('laporanAkhir', this.value)" class="tahap-select rounded-xl px-3 py-2 text-sm">
+                                            <option value="">Pilih status</option>
+                                            <option value="Belum">Belum</option>
+                                            <option value="Belum Selesai">Belum Selesai</option>
+                                            <option value="Hampir Selesai">Hampir Selesai</option>
+                                            <option value="Selesai">Selesai</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Catatan Umum (Opsional)</label>
+                                    <textarea id="catatan-umum" oninput="setGeneralNote(this.value)" class="tahap-note rounded-2xl px-3 py-3 text-sm" placeholder="Tulis ringkasan kendala, progres, atau kebutuhan tim di sini..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <div id="absensi-step-1-actions">
+                            <button onclick="nextAbsensiStep()" class="w-full bg-brand-dark text-white font-bold py-3 rounded-xl hover:bg-brand-blue transition-colors shadow-md hover:shadow-lg">
+                                Lanjut ke Posisi Penelitian
+                            </button>
+                        </div>
+                        <div id="absensi-step-2-actions" class="hidden flex gap-3">
+                            <button onclick="prevAbsensiStep()" class="flex-1 bg-white/80 text-slate-700 font-bold py-3 rounded-xl border border-slate-200 hover:border-brand-cyan transition-colors">
+                                Kembali
+                            </button>
+                            <button onclick="kirimAbsen()" class="flex-1 bg-brand-dark text-white font-bold py-3 rounded-xl hover:bg-brand-blue transition-colors shadow-md hover:shadow-lg">
+                                Selesai
+                            </button>
+                        </div>
+                        <div id="status-msg" class="text-center text-sm font-semibold h-5 mt-3"></div>
+                        <div class="mt-4 rounded-2xl bg-white/60 border border-slate-100 p-4">
+                            <div class="flex items-center justify-between gap-3">
+                                <div class="text-[11px] font-extrabold uppercase tracking-widest text-slate-700">Status Hari Ini</div>
+                                <span id="absen-status-mini" class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-slate-100 text-slate-600">-</span>
+                            </div>
+                            <div class="mt-2 text-xs text-slate-500 leading-relaxed">
+                                Isi presensi di kiri, lalu lanjut isi logbook di panel kanan biar progress tim rapi.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-[2rem] p-6 flex flex-col lg:flex-1">
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-2xl bg-white text-brand-blue flex items-center justify-center shadow-sm">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <div>
+                            <div class="text-[11px] font-extrabold uppercase tracking-[0.18em] text-brand-blue">Waktu Sekarang</div>
+                            <h4 class="font-heading text-lg font-bold text-slate-800 mt-1">Jam & kalender hari ini</h4>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex flex-col gap-4 text-sm">
+                        <div class="rounded-[1.75rem] bg-white/90 border border-white/70 p-5">
+                            <div class="text-[10px] font-extrabold uppercase tracking-widest text-slate-400">Jam</div>
+                            <div id="live-clock" class="mt-3 font-heading text-5xl sm:text-6xl font-extrabold text-slate-800 tracking-tight leading-none">00:00:00</div>
+                            <p class="mt-3 text-xs text-slate-500">Waktu lokal perangkat kamu</p>
+                        </div>
+                        <div class="rounded-[1.75rem] bg-gradient-to-br from-brand-blue/10 to-brand-cyan/10 border border-white/70 p-4 flex flex-col justify-center">
+                            <div class="text-[10px] font-extrabold uppercase tracking-widest text-slate-400">Tanggal</div>
+                            <div id="live-day" class="mt-2 font-heading text-lg sm:text-xl font-bold text-brand-blue capitalize">Senin</div>
+                            <p id="live-date" class="mt-1 text-sm sm:text-base text-slate-700 leading-relaxed">1 Januari 2026</p>
+                        </div>
+                        <div class="hub-time-empty hidden lg:flex lg:flex-1 rounded-[1.75rem]"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kolom Kalender & Logbook Google Form -->
+            <div class="lg:col-span-7 flex flex-col gap-6">
+                
+                <!-- Logbook Google Form Embed -->
+                <div class="glass-panel rounded-[2rem] p-6 flex flex-col">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fa-solid fa-book-journal-whills text-brand-orange text-xl"></i>
+                        <div>
+                            <h3 class="font-heading font-bold text-slate-800 text-xl">Logbook Google Form</h3>
+                            <p class="text-[10px] text-slate-500 font-bold uppercase">Wajib diisi sebagai laporan riset</p>
+                        </div>
+                    </div>
+                    <!-- Wrapper dengan tinggi tetap/minimum agar iframe tidak menyusut -->
+                    <div class="w-full h-[600px] lg:h-[680px] rounded-2xl overflow-hidden bg-white border border-slate-100">
+                        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdWkc8fTsv74HDfFbSmz6JrHKDdgd9S51keOcZ9tPAbNIx8YA/viewform?embedded=true" class="w-full h-full border-0" frameborder="0" marginheight="0" marginwidth="0">Memuat…</iframe>
+                    </div>
+                </div>
+
+                <!-- Kalender -->
+                <div class="glass-panel rounded-[2rem] p-6 flex flex-col">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fa-solid fa-calendar-check text-brand-blue text-xl"></i>
+                        <h3 class="font-heading font-bold text-slate-800 text-xl">Timeline Agenda</h3>
+                    </div>
+                    <!-- Wrapper dengan tinggi tetap/minimum -->
+                    <div class="w-full h-[450px] lg:h-[500px] rounded-2xl overflow-hidden bg-white/50 border border-slate-100">
+                        <iframe src="https://www.google.com/calendar/embed?color=%231E3A8A&src=c_8ac709600c9abca6423a35a5d75ccf533abde9d5eb43916feee603159553a38a@group.calendar.google.com&showTitle=0&showPrint=0&showTabs=1&showCalendars=0&showTz=0" class="w-full h-full border-0" frameborder="0" scrolling="no"></iframe>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="evaluasi" class="py-20 px-6 reveal">
+        <div class="max-w-7xl mx-auto glass-panel rounded-[2.5rem] p-6 md:p-12">
+            
+            <div class="text-center mb-10 md:mb-14">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 text-brand-cyan text-xs font-bold uppercase mb-4">
+                    <i class="fa-solid fa-bars-progress"></i> Live Tinjauan Progres
+                </div>
+                <h2 class="font-heading text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+                    Monitoring Progres Riset
+                </h2>
+                <p class="text-slate-600 leading-relaxed max-w-2xl mx-auto text-sm md:text-base">
+                    Pantau progres tiap tim secara ringkas. Klik <b>See Details</b> untuk melihat tahapan detail dan catatan masing-masing tim.
+                </p>
+            </div>
+
+            <!-- Average Progress Card -->
+            <div class="w-full max-w-3xl mx-auto bg-white/60 rounded-[2rem] p-6 md:p-8 mb-12 border border-slate-100 shadow-sm text-center">
+                <h3 class="font-heading font-bold text-slate-700 mb-2">Rata-rata Penyelesaian Research SMASIF</h3>
+                <div class="flex items-center justify-center gap-2 mb-4">
+                    <span class="text-4xl md:text-5xl font-extrabold text-brand-dark" id="avg-progress-text">0%</span>
+                </div>
+                <div class="w-full bg-slate-200 rounded-full h-3 md:h-4 overflow-hidden">
+                    <div id="avg-progress-bar" class="bg-gradient-to-r from-brand-blue to-brand-cyan h-full rounded-full transition-all duration-[1500ms] ease-out w-0"></div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 items-start mb-8" id="progress-summary-grid">
+                <!-- Diisi oleh JavaScript -->
+            </div>
+
+            <div class="text-center">
+                <button type="button" id="progress-overview-toggle" onclick="toggleProgressOverview(this)" class="progress-detail-toggle inline-flex items-center gap-2 rounded-full px-5 py-3 text-xs font-bold uppercase tracking-wider transition-colors hover:bg-brand-blue hover:text-white">
+                    <i class="fa-solid fa-chevron-down text-[10px]"></i> See More
+                </button>
+            </div>
+
+            <div id="progress-details-panel" class="progress-details-panel mt-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6" id="progress-grid">
+                    <!-- Diisi oleh JavaScript -->
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="arsip" class="py-20 px-6 reveal">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-10 text-center md:text-left">
+                <h2 class="font-heading text-3xl font-bold text-slate-900 mb-2">Arsip Drive Tim</h2>
+                <p class="text-slate-500 font-light">Klik folder tim kamu buat upload atau ngecek file riset.</p>
+            </div>
+
+            <!-- Grid Teams (Dibuat lewat JavaScript agar rapi) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" id="team-grid">
+                <!-- Javascript will populate this -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-12 py-10 px-6 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto flex flex-col items-center justify-center gap-2 text-center">
+            <span class="font-heading font-bold text-slate-800">RESEARCH SMASIF &copy; 2026</span>
+            <span class="text-sm text-slate-500">Walk Through Knowledge.</span>
+        </div>
+    </footer>
+
+    <!-- Tombol Scroll ke Atas -->
+    <button id="scrollToTop" class="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-brand-dark text-white flex items-center justify-center shadow-lg opacity-0 translate-y-10 transition-all duration-300 z-50 hover:bg-brand-cyan hover:-translate-y-1">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Smooth Scroll Setup
+        const lenis = new Lenis({
+            duration: 0.8, // Diubah agar scroll lebih natural dan tidak terlalu licin
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+        });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+
+        // Lenis anchor link integration (Agar klik menu jalan mulus)
+        document.querySelectorAll('a.nav-link, a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if(targetId && targetId.startsWith('#') && targetId.length > 1) {
+                    e.preventDefault();
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        lenis.scrollTo(targetElement);
+                    }
+                }
+            });
+        });
+
+        // Scroll to Top Logic
+        const topBtn = document.getElementById('scrollToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                topBtn.classList.remove('opacity-0', 'translate-y-10');
+                topBtn.classList.add('cursor-pointer');
+            } else {
+                topBtn.classList.add('opacity-0', 'translate-y-10');
+                topBtn.classList.remove('cursor-pointer');
+            }
+        });
+        topBtn.addEventListener('click', () => { window.scrollTo({top: 0, behavior: 'smooth'}); });
+
+        // Intersection Observer (Animasi muncul saat di-scroll)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+        const modal = document.getElementById('absenModal');
+        const modalContent = document.getElementById('modal-content');
+
+        function getTodayDateStr() {
+            const now = new Date();
+            const cycleDate = new Date(now);
+
+            // Hari presensi berganti pada pukul 06.00, bukan pukul 00.00.
+            if (cycleDate.getHours() < 6) {
+                cycleDate.setDate(cycleDate.getDate() - 1);
+            }
+
+            const year = cycleDate.getFullYear();
+            const month = String(cycleDate.getMonth() + 1).padStart(2, '0');
+            const day = String(cycleDate.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        function openModal() {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            requestAnimationFrame(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+            });
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300);
+        }
+
+        const teams = [
+            { name: "FTR_Adly_Imam", id: "1kBXRRt-ZP4YwHZBzeUSdDr2re14RWUEP", img: "AdlyImam.png" },
+            { name: "FTR_Saif_Aldero", id: "1R3KHLT2cEmhbhn0SGx_QJW5UEKGuKl0y", img: "SaifDero.png" },
+            { name: "ISH_Rafa-Ichsan", id: "1v1nB534GT7Sxvl06sqci10e4jTLAIYsQ", img: "RafaIchsan.png" },
+            { name: "FTR_Azrul_Rafif", id: "1KB7KGyg_gDjh50ZXbHby7iW80rsBOPhf", img: "AzrulRafif.png" },
+            { name: "FTR_Drestra_Satria", id: "1atL6OhUinCPy_lHR3rdLX2EDkPsC_5yE", img: "DrestraSatria.png" },
+            { name: "MST_Arum_Aulia", id: "1ZyWqNmUwcqGSWFyxIA7ydgrwmdl0rGFl", img: "ArumAulia.png" },
+            { name: "FTR_Rayya_Syakira", id: "1-SNoEb7_htM2P00Rnl088xvE274Pmgma", img: "RayyaSyakira.png" },
+            { name: "MST_Syifa_Amanda", id: "1f5C7seC0pufWsBj5F9B2iJszgCcivpGw", img: "SyifaAmanda.png" },
+            { name: "MST_Karin_Naura", id: "1JQ6hQVbAVQeDU0pQwJ1zarIpFBbsxgeX", img: "KarinNaura.png" },
+            { name: "AAK_Zida_Nindy", id: "1dXoAWAw7FlKQR1323k5GbTkwOA35o5wn", img: "ZidaNindy.png" },
+            { name: "MST_Syaukie_Rafi", id: "1XZp0BfzsJYYtbquIQ1mchq2pVIuOgX3v", img: "SyaukieRafi.png" },
+            { name: "TD_Aqil_Yusuf", id: "10clXzwQK4gRKYwpXp26W9VloNEEu1dx2", img: "AqilYusuf.png" },
+            { name: "KKPD_Alya_Queenta", id: "13KSWxSOHhrl38z16n2iku3aZWCxlly_W", img: "AlyaQueenta.png" },
+            { name: "FTR_Cayla_Nardin", id: "1xqcmQV873znffkpYHw8wafuylZ91S6YA", img: "CaylaNardin.png" }
+        ];
+
+        const grid = document.getElementById('team-grid');
+        function renderTeams() {
+            const categoryOrder = ['FTR', 'ISH', 'MST', 'AAK', 'TD', 'KKPD'];
+            const categoryMeta = {
+                FTR: { color: '#1E3A8A' },
+                ISH: { color: '#F59E0B' },
+                MST: { color: '#7C3AED' },
+                AAK: { color: '#F97316' },
+                TD: { color: '#10B981' },
+                KKPD: { color: '#06B6D4' }
+            };
+
+            grid.innerHTML = teams.map((team) => {
+                const category = (team.name.split('_')[0] || '').trim();
+                const meta = categoryMeta[category] || { color: '#64748B' };
+                const imgSrc = `./${team.img}`;
+                const badgeClass = categoryOrder.includes(category) ? `cat-badge cat-${category}` : 'cat-badge';
+                return `
+                <a href="https://drive.google.com/drive/folders/${team.id}?usp=drive_link" target="_blank" 
+                   class="team-card group flex flex-col rounded-3xl overflow-hidden transition-all"
+                   style="--cat: ${meta.color};">
+                    <div class="team-accent"></div>
+                    <div class="team-cover border-b border-white/50">
+                        <img src="${imgSrc}" alt="${team.name}" class="group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-4 flex flex-col flex-grow bg-white/50">
+                        <div class="flex items-center gap-2 mb-3 min-w-0">
+                            <h3 class="font-bold text-slate-800 text-sm truncate" title="${team.name}">${team.name}</h3>
+                            <span class="${badgeClass}">${category || 'TIM'}</span>
+                        </div>
+                        <div class="mt-auto text-xs font-semibold text-slate-500 flex items-center gap-1">
+                            Buka Arsip <i class="fa-solid fa-arrow-right-long opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all"></i>
+                        </div>
+                    </div>
+                </a>
+            `;
+            }).join('');
+        }
+
+        const researchStages = [
+            { key: 'instrumen', label: 'Instrumen / Alat' },
+            { key: 'implementasi', label: 'Implementasi / Pengembangan' },
+            { key: 'pengambilanData', label: 'Pengambilan Data' },
+            { key: 'analisisValidasi', label: 'Analisis / Validasi' },
+            { key: 'presentasiPpt', label: 'PPT / Presentasi' },
+            { key: 'laporanAkhir', label: 'Laporan Akhir' }
+        ];
+
+        // Logic Progress Bar Evaluasi
+        const totalAspek = researchStages.length;
+
+        const tahapScoreMap = {
+            'Belum': 0,
+            'Belum Selesai': 50,
+            'Hampir Selesai': 80,
+            'Selesai': 100
+        };
+
+        function createDefaultTahapan(defaultValue = '') {
+            return researchStages.reduce((acc, stage) => {
+                acc[stage.key] = defaultValue;
+                return acc;
+            }, {});
+        }
+
+        // Semua tim dimulai dari 0% sampai ada update data riset yang nyata.
+        const teamProgressData = teams.map((team) => ({
+            name: team.name,
+            stages: createDefaultTahapan('Belum'),
+            note: ''
+        }));
+
+        function getStageToneClass(status) {
+            if (status === 'Selesai') return 'stage-selesai';
+            if (status === 'Hampir Selesai') return 'stage-hampir';
+            if (status === 'Belum Selesai') return 'stage-progress';
+            return 'stage-belum';
+        }
+
+        function getProgressFromStages(stages) {
+            const stageValues = researchStages.map((stage) => stages[stage.key] || 'Belum');
+            const totalScore = stageValues.reduce((sum, tahap) => sum + (tahapScoreMap[tahap] || 0), 0);
+
+            return {
+                totalTahap: totalAspek,
+                completedTahap: stageValues.filter((tahap) => tahap === 'Selesai').length,
+                percentage: Math.round(totalScore / totalAspek)
+            };
+        }
+
+        function renderProgress() {
+            const gridProgress = document.getElementById('progress-grid');
+            const summaryGrid = document.getElementById('progress-summary-grid');
+            gridProgress.innerHTML = '';
+            summaryGrid.innerHTML = '';
+            let totalPercentage = 0;
+            const progressResults = [];
+
+            teamProgressData.forEach((team, index) => {
+                const progress = getProgressFromStages(team.stages);
+                totalPercentage += progress.percentage;
+                progressResults.push({ team, progress, index });
+                
+                // Pewarnaan dinamis berdasarkan progres
+                let colorClass = 'bg-brand-blue';
+                let textColor = 'text-brand-blue';
+                if(progress.percentage >= 80) { colorClass = 'bg-brand-cyan'; textColor = 'text-brand-cyan'; }
+                if(progress.percentage <= 40) { colorClass = 'bg-brand-orange'; textColor = 'text-brand-orange'; }
+
+                const detailRows = researchStages.map((stage) => {
+                    const status = team.stages[stage.key] || 'Belum';
+                    return `
+                        <div class="rounded-2xl border border-slate-100 bg-white/70 p-4">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="text-sm font-bold text-slate-800">${stage.label}</div>
+                                <span class="progress-stage-badge ${getStageToneClass(status)}">${status}</span>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                gridProgress.innerHTML += `
+                    <div class="bg-white/50 rounded-2xl p-5 border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex justify-between items-start gap-3 mb-3">
+                            <div class="min-w-0">
+                                <h4 class="font-bold text-slate-800 text-sm truncate pr-2" title="${team.name}">${team.name}</h4>
+                                <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mt-1">${progress.completedTahap} dari ${totalAspek} Tahap Selesai</p>
+                            </div>
+                            <span class="text-sm font-extrabold ${textColor}">${progress.percentage}%</span>
+                        </div>
+                        <div class="w-full bg-slate-200 rounded-full h-2 mb-2">
+                            <div class="${colorClass} h-2 rounded-full transition-all duration-[1500ms] ease-out" style="width: 0%" data-width="${progress.percentage}%"></div>
+                        </div>
+                        <button type="button" onclick="toggleProgressDetail(${index}, this)" class="progress-detail-toggle mt-4 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors hover:bg-brand-blue hover:text-white">
+                            <i class="fa-solid fa-chevron-down text-[10px]"></i> See Details
+                        </button>
+                        <div id="progress-detail-${index}" class="progress-card-detail mt-4 space-y-3">
+                            ${detailRows}
+                            <div class="rounded-2xl border border-slate-100 bg-white/70 p-4">
+                                <div class="text-[11px] font-extrabold uppercase tracking-widest text-slate-500 mb-2">Catatan Umum</div>
+                                <p class="text-xs text-slate-500 leading-relaxed">${team.note || 'Belum ada catatan.'}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Hitung dan render rata-rata
+            const avgPercentage = Math.round(totalPercentage / teamProgressData.length);
+            document.getElementById('avg-progress-text').innerText = `${avgPercentage}%`;
+
+            // Acak urutan tim untuk ditampilkan secara random (bukan top 3 saja)
+            const shuffledTeams = [...progressResults].sort(() => 0.5 - Math.random());
+            const randomThree = shuffledTeams.slice(0, 3);
+            const tiltAngles = ['-3deg', '2deg', '-2deg'];
+
+            summaryGrid.innerHTML = randomThree.map((item, idx) => {
+                const badgeClass = item.progress.percentage >= 80
+                    ? 'text-brand-cyan'
+                    : item.progress.percentage <= 40
+                        ? 'text-brand-orange'
+                        : 'text-brand-blue';
+                
+                // Ambil kategori dari nama tim (misal: FTR, ISH, MST)
+                const category = item.team.name.split('_')[0] || 'TIM';
+
+                return `
+                    <div class="progress-overview-card rounded-[1.75rem] p-5 transition-transform" style="transform: rotate(${tiltAngles[idx] || '0deg'});">
+                        <div class="text-[10px] font-extrabold uppercase tracking-[0.22em] text-slate-400 mb-3">Team ${category}</div>
+                        <div class="font-heading text-lg font-bold text-slate-800 truncate" title="${item.team.name}">${item.team.name}</div>
+                        <div class="mt-4 flex items-end justify-between gap-3">
+                            <span class="text-3xl font-extrabold ${badgeClass}">${item.progress.percentage}%</span>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">${item.progress.completedTahap}/${totalAspek} tahap</span>
+                        </div>
+                        <div class="mt-4 h-2 rounded-full bg-slate-200 overflow-hidden">
+                            <div class="h-full rounded-full bg-gradient-to-r from-brand-blue to-brand-cyan" style="width: ${item.progress.percentage}%"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            // Trigger animasi lebar bar setelah dirender (delay sedikit agar transisi terlihat)
+            setTimeout(() => {
+                document.getElementById('avg-progress-bar').style.width = `${avgPercentage}%`;
+                document.querySelectorAll('#progress-grid [data-width]').forEach(bar => {
+                    bar.style.width = bar.getAttribute('data-width');
+                });
+            }, 300);
+        }
+
+        function toggleProgressOverview(button) {
+            const panel = document.getElementById('progress-details-panel');
+            if (!panel) return;
+
+            const isOpen = panel.classList.toggle('open');
+            button.innerHTML = isOpen
+                ? '<i class="fa-solid fa-chevron-up text-[10px]"></i> Hide Details'
+                : '<i class="fa-solid fa-chevron-down text-[10px]"></i> See More';
+        }
+
+        function toggleProgressDetail(index, button) {
+            const panel = document.getElementById(`progress-detail-${index}`);
+            if (!panel) return;
+
+            const isOpen = panel.classList.toggle('open');
+            button.innerHTML = isOpen
+                ? '<i class="fa-solid fa-chevron-up text-[10px]"></i> Hide Details'
+                : '<i class="fa-solid fa-chevron-down text-[10px]"></i> See Details';
+        }
+
+        function updateAbsenStatusMini() {
+            const el = document.getElementById('absen-status-mini');
+            if (!el) return;
+
+            const todayDateStr = getTodayDateStr();
+            const lastAbsen = localStorage.getItem('statusAbsenArchif');
+
+            if (lastAbsen === todayDateStr) {
+                el.textContent = 'SUDAH';
+                el.className = 'text-[11px] font-bold px-2.5 py-1 rounded-full bg-brand-cyan/15 text-brand-cyan border border-brand-cyan/25';
+                return;
+            }
+
+            el.textContent = 'BELUM';
+            el.className = 'text-[11px] font-bold px-2.5 py-1 rounded-full bg-brand-orange/15 text-brand-orange border border-brand-orange/25';
+        }
+
+        function updateDateTimeCard() {
+            const clockEl = document.getElementById('live-clock');
+            const dayEl = document.getElementById('live-day');
+            const dateEl = document.getElementById('live-date');
+            if (!clockEl || !dayEl || !dateEl) return;
+
+            const now = new Date();
+            clockEl.textContent = now.toLocaleTimeString('id-ID', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            dayEl.textContent = now.toLocaleDateString('id-ID', {
+                weekday: 'long'
+            });
+            dateEl.textContent = now.toLocaleDateString('id-ID', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+        }
+
+        function initModalLogic() {
+            const todayDateStr = getTodayDateStr();
+            const lastAbsen = localStorage.getItem('statusAbsenArchif');
+            if (lastAbsen !== todayDateStr) openModal();
+            updateAbsenStatusMini();
+            updateTahapSummary();
+            updateAbsensiStepUI();
+        }
+
+
+        // Absensi Logic (Custom App Script / Bebas)
+        let dataAbsen = {
+            lokasi: '',
+            mood: '',
+            tahapan: createDefaultTahapan(),
+            catatanUmum: ''
+        };
+        let currentAbsensiStep = 1;
+        let isSubmitting = false;
+
+        function setOpt(jenis, value, element) {
+            const group = document.getElementById(jenis + '-group');
+            group.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+            dataAbsen[jenis] = value;
+        }
+
+        function setTahap(jenis, value) {
+            dataAbsen.tahapan[jenis] = value;
+            updateTahapSummary();
+        }
+
+        function setGeneralNote(value) {
+            dataAbsen.catatanUmum = value.trim();
+        }
+
+        function updateAbsensiStepUI() {
+            const isStepOne = currentAbsensiStep === 1;
+            document.getElementById('absensi-step-1').classList.toggle('hidden', !isStepOne);
+            document.getElementById('absensi-step-2').classList.toggle('hidden', isStepOne);
+            document.getElementById('absensi-step-1-actions').classList.toggle('hidden', !isStepOne);
+            document.getElementById('absensi-step-2-actions').classList.toggle('hidden', isStepOne);
+
+            document.getElementById('step-chip-1').className = isStepOne
+                ? 'px-3 py-1 rounded-full bg-brand-blue text-white'
+                : 'px-3 py-1 rounded-full bg-slate-100 text-slate-500';
+            document.getElementById('step-chip-2').className = isStepOne
+                ? 'px-3 py-1 rounded-full bg-slate-100 text-slate-500'
+                : 'px-3 py-1 rounded-full bg-brand-blue text-white';
+        }
+
+        function validatePrimaryStep() {
+            return Boolean(
+                document.getElementById('kelompok').value &&
+                dataAbsen.lokasi &&
+                dataAbsen.mood
+            );
+        }
+
+        function nextAbsensiStep() {
+            const msg = document.getElementById('status-msg');
+            if (!validatePrimaryStep()) {
+                msg.style.color = '#F97316';
+                msg.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Lengkapi kelompok, lokasi, dan mood dulu ya.';
+                return;
+            }
+
+            msg.innerHTML = '';
+            currentAbsensiStep = 2;
+            updateAbsensiStepUI();
+        }
+
+        function prevAbsensiStep() {
+            document.getElementById('status-msg').innerHTML = '';
+            currentAbsensiStep = 1;
+            updateAbsensiStepUI();
+        }
+
+        function getTahapProgress() {
+            const tahapValues = researchStages.map((stage) => dataAbsen.tahapan[stage.key]);
+            const selected = tahapValues.filter(Boolean);
+            const totalScore = tahapValues.reduce((sum, tahap) => sum + (tahapScoreMap[tahap] || 0), 0);
+
+            return {
+                totalTahap: totalAspek,
+                completedTahap: tahapValues.filter((tahap) => tahap === 'Selesai').length,
+                isComplete: selected.length === totalAspek,
+                percentage: Math.round(totalScore / totalAspek)
+            };
+        }
+
+        function updateTahapSummary() {
+            const summaryEl = document.getElementById('tahap-progress-text');
+            if (!summaryEl) return;
+
+            const tahapProgress = getTahapProgress();
+            summaryEl.textContent = `${tahapProgress.percentage}%`;
+        }
+
+        function resetAbsenForm() {
+            document.getElementById('kelompok').value = '';
+            document.querySelectorAll('.absensi-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tahap-select').forEach(select => { select.value = ''; });
+            document.getElementById('catatan-umum').value = '';
+            dataAbsen = {
+                lokasi: '',
+                mood: '',
+                tahapan: createDefaultTahapan(),
+                catatanUmum: ''
+            };
+            currentAbsensiStep = 1;
+            updateAbsensiStepUI();
+            updateTahapSummary();
+        }
+
+        async function kirimAbsen() {
+            const kelompok = document.getElementById('kelompok').value;
+            const msg = document.getElementById('status-msg');
+            const tahapProgress = getTahapProgress();
+            
+            if(!validatePrimaryStep()) {
+                msg.style.color = '#F97316'; 
+                msg.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Mohon lengkapi semua isian presensi.';
+                return;
+            }
+            if(!tahapProgress.isComplete) {
+                msg.style.color = '#F97316';
+                msg.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Mohon isi status untuk semua tahapan penelitian.';
+                return;
+            }
+
+            if (isSubmitting) return;
+            isSubmitting = true;
+
+            msg.style.color = '#1E3A8A'; 
+            msg.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Memproses data...';
+
+            const urlScript = 'https://script.google.com/macros/s/AKfycbx4dNgGetal9e37_myv9wKcrwltumo5bkiR3xMCjHhORmaLtIzuA3zRxJTKOT7DiNHS/exec';
+            if (!urlScript) {
+                msg.style.color = '#F97316';
+                msg.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> URL Apps Script belum diisi. Tambahkan URL Web App di variabel <b>urlScript</b>.';
+                isSubmitting = false;
+                return;
+            }
+
+            const todayDateStr = getTodayDateStr();
+            const payload = {
+                kelompok,
+                lokasi: dataAbsen.lokasi,
+                mood: dataAbsen.mood,
+                tanggal: todayDateStr,
+                timestamp: new Date().toISOString(),
+                instrumen: dataAbsen.tahapan.instrumen,
+                implementasi: dataAbsen.tahapan.implementasi,
+                pengambilanData: dataAbsen.tahapan.pengambilanData,
+                analisisValidasi: dataAbsen.tahapan.analisisValidasi,
+                presentasiPpt: dataAbsen.tahapan.presentasiPpt,
+                laporanAkhir: dataAbsen.tahapan.laporanAkhir,
+                catatanUmum: dataAbsen.catatanUmum,
+                progressPersen: String(tahapProgress.percentage),
+                tahapSelesai: String(tahapProgress.completedTahap)
+            };
+
+            try {
+                // Pakai form-urlencoded sederhana agar tidak memicu preflight CORS.
+                const formBody = new URLSearchParams(payload);
+                await fetch(urlScript, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: formBody
+                });
+
+                localStorage.setItem('statusAbsenArchif', todayDateStr);
+                updateAbsenStatusMini();
+
+                msg.style.color = '#06B6D4';
+                msg.innerHTML = '<i class="fa-solid fa-circle-check"></i> Presensi berhasil direkam. Jangan lupa isi form logbook ya!';
+                closeModal();
+
+                setTimeout(() => {
+                    msg.innerHTML = '';
+                    resetAbsenForm();
+                }, 3000);
+            } catch (err) {
+                msg.style.color = '#F97316';
+                msg.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Gagal mengirim presensi: ${String(err?.message || err)}`;
+            } finally {
+                isSubmitting = false;
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initModalLogic();
+            renderTeams();
+            renderProgress();
+            updateDateTimeCard();
+            setInterval(updateDateTimeCard, 1000);
+            setInterval(updateAbsenStatusMini, 60000);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARCHIF Admin Panel</title>
+    <link rel="icon" type="image/png" href="./logo.png">
+    <link rel="shortcut icon" type="image/png" href="./logo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Plus Jakarta Sans', 'sans-serif']
+                    },
+                    colors: {
+                        brand: {
+                            blue: '#1E3A8A',
+                            cyan: '#06B6D4',
+                            orange: '#F97316',
+                            dark: '#0F172A',
+                            soft: '#F8FAFC'
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            background:
+                radial-gradient(circle at top left, rgba(6, 182, 212, 0.08), transparent 34%),
+                radial-gradient(circle at top right, rgba(30, 58, 138, 0.08), transparent 32%),
+                #F8FAFC;
+        }
+        body.is-locked {
+            overflow: hidden;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.74);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 0 18px 44px rgba(15, 23, 42, 0.08);
+        }
+        .admin-lock-overlay {
+            background:
+                radial-gradient(circle at top left, rgba(6, 182, 212, 0.18), transparent 38%),
+                radial-gradient(circle at bottom right, rgba(30, 58, 138, 0.16), transparent 36%),
+                rgba(15, 23, 42, 0.66);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+        .admin-lock-input,
+        .admin-filter-input,
+        .admin-filter-select {
+            width: 100%;
+            border-radius: 1rem;
+            border: 1px solid #CBD5E1;
+            background: rgba(248, 250, 252, 0.98);
+            padding: 0.9rem 1rem;
+            color: #0F172A;
+        }
+        .admin-lock-input:focus,
+        .admin-filter-input:focus,
+        .admin-filter-select:focus {
+            outline: none;
+            border-color: #06B6D4;
+            box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.12);
+        }
+        .summary-card {
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            background: rgba(255, 255, 255, 0.78);
+        }
+        .flow-card {
+            border: 1px solid rgba(226, 232, 240, 0.92);
+            background: rgba(255, 255, 255, 0.82);
+        }
+        .flow-detail-panel {
+            display: none;
+        }
+        .flow-detail-panel.open {
+            display: block;
+        }
+        .flow-toggle-btn {
+            border: 1px solid rgba(6, 182, 212, 0.18);
+            background: rgba(255, 255, 255, 0.72);
+            color: #1E3A8A;
+        }
+        .flow-action-btn {
+            border: 1px solid rgba(226, 232, 240, 0.95);
+            background: rgba(255, 255, 255, 0.88);
+            color: #334155;
+        }
+        .flow-stage {
+            position: relative;
+            border-radius: 1rem;
+            border: 1px solid rgba(226, 232, 240, 0.95);
+            background: rgba(248, 250, 252, 0.92);
+            padding: 0.9rem;
+        }
+        .flow-stage::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -12px;
+            width: 24px;
+            height: 2px;
+            background: rgba(148, 163, 184, 0.35);
+            transform: translateY(-50%);
+        }
+        .flow-stage:last-child::after {
+            display: none;
+        }
+        .stage-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            padding: 4px 10px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            white-space: nowrap;
+        }
+        .stage-belum { background: rgba(148, 163, 184, 0.16); color: #475569; }
+        .stage-progress { background: rgba(249, 115, 22, 0.16); color: #C2410C; }
+        .stage-hampir { background: rgba(6, 182, 212, 0.16); color: #0E7490; }
+        .stage-selesai { background: rgba(16, 185, 129, 0.16); color: #047857; }
+        .category-chip {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            padding: 4px 10px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            border: 1px solid transparent;
+        }
+        .cat-FTR { background: rgba(30, 58, 138, 0.14); color: #1E3A8A; border-color: rgba(30, 58, 138, 0.24); }
+        .cat-ISH { background: rgba(245, 158, 11, 0.16); color: #B45309; border-color: rgba(245, 158, 11, 0.28); }
+        .cat-MST { background: rgba(124, 58, 237, 0.16); color: #6D28D9; border-color: rgba(124, 58, 237, 0.24); }
+        .cat-AAK { background: rgba(249, 115, 22, 0.16); color: #C2410C; border-color: rgba(249, 115, 22, 0.24); }
+        .cat-TD { background: rgba(16, 185, 129, 0.16); color: #047857; border-color: rgba(16, 185, 129, 0.24); }
+        .cat-KKPD { background: rgba(6, 182, 212, 0.16); color: #0E7490; border-color: rgba(6, 182, 212, 0.24); }
+        .attendance-chip,
+        .stagnant-chip {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            padding: 4px 10px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            white-space: nowrap;
+            border: 1px solid transparent;
+        }
+        .attendance-present { background: rgba(16, 185, 129, 0.14); color: #047857; border-color: rgba(16, 185, 129, 0.24); }
+        .attendance-absent { background: rgba(249, 115, 22, 0.14); color: #C2410C; border-color: rgba(249, 115, 22, 0.24); }
+        .stagnant-safe { background: rgba(6, 182, 212, 0.12); color: #0E7490; border-color: rgba(6, 182, 212, 0.2); }
+        .stagnant-alert { background: rgba(239, 68, 68, 0.12); color: #B91C1C; border-color: rgba(239, 68, 68, 0.22); }
+        .response-card {
+            border: 1px solid rgba(226, 232, 240, 0.95);
+            background: rgba(255, 255, 255, 0.88);
+        }
+        .response-table-frame {
+            max-height: 720px;
+            overflow: auto;
+        }
+        .response-table thead th {
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            background: rgba(248, 250, 252, 0.96);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: inset 0 -1px 0 rgba(226, 232, 240, 0.95);
+        }
+        .response-table tbody tr:nth-child(4n + 1) {
+            background: rgba(255, 255, 255, 0.96);
+        }
+        .response-table tbody tr:nth-child(4n + 2) {
+            background: rgba(248, 250, 252, 0.96);
+        }
+        .response-table tbody tr:nth-child(4n + 3) {
+            background: rgba(239, 246, 255, 0.88);
+        }
+        .response-table tbody tr:nth-child(4n + 4) {
+            background: rgba(240, 253, 250, 0.88);
+        }
+        .response-table tbody tr:hover {
+            background: rgba(224, 242, 254, 0.92);
+        }
+        .mini-stage-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.75rem;
+        }
+        @media (min-width: 1024px) {
+            .mini-stage-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+    </style>
+</head>
+<body class="is-locked font-sans text-slate-700 selection:bg-brand-cyan selection:text-white">
+    <div id="adminLockGate" class="admin-lock-overlay fixed inset-0 z-[120] flex items-center justify-center px-6">
+        <div class="glass-panel w-full max-w-md rounded-[2rem] p-8 text-center">
+            <div class="w-16 h-16 rounded-full bg-brand-blue/10 text-brand-blue flex items-center justify-center mx-auto mb-5 text-3xl">
+                <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-blue/10 text-brand-blue text-[11px] font-extrabold uppercase tracking-[0.2em] mb-4">
+                <i class="fa-solid fa-lock"></i> Admin Only
+            </div>
+            <h1 class="font-heading text-3xl font-extrabold text-slate-900 mb-3">ARCHIF Admin Panel</h1>
+            <p class="text-sm text-slate-500 leading-relaxed mb-6">Masukkan PIN admin untuk membuka data monitoring detail, respons tim, dan panel kalender. Setelah valid, akses diingat selama 1 minggu di browser ini.</p>
+            <form id="adminLockForm" class="space-y-4">
+                <input id="adminPinInput" type="password" inputmode="text" autocomplete="current-password" class="admin-lock-input" placeholder="Masukkan PIN admin">
+                <button id="adminPinSubmit" type="submit" class="w-full inline-flex items-center justify-center rounded-2xl bg-brand-blue px-6 py-3.5 font-bold text-white transition-colors hover:bg-brand-cyan">
+                    Buka Admin Panel
+                </button>
+            </form>
+            <p id="adminLockMessage" class="mt-4 min-h-[20px] text-sm font-semibold text-slate-500"></p>
+        </div>
+    </div>
+
+    <div class="min-h-screen">
+        <nav class="sticky top-0 z-50 border-b border-white/60 bg-white/70 backdrop-blur-xl">
+            <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4">
+                <div class="flex items-center gap-3">
+                    <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-brand-blue text-white shadow-lg">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <div>
+                        <div class="font-heading text-xl font-extrabold text-brand-dark">ARCHIF Admin Panel</div>
+                        <div class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Monitoring Detail Spreadsheet</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="hidden rounded-full bg-slate-100 px-4 py-2 text-xs font-semibold text-slate-500 md:inline-flex">
+                        Update terakhir: <span id="updatedAtText" class="ml-2 text-brand-blue">-</span>
+                    </div>
+                    <a href="./archif_premium_glassmorphism_santai_clean.html" class="inline-flex items-center justify-center rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-600 transition-colors hover:border-brand-cyan hover:text-brand-blue">
+                        Buka Halaman Utama
+                    </a>
+                    <button id="logoutAdminBtn" type="button" class="inline-flex items-center justify-center rounded-full bg-brand-dark px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-blue">
+                        Keluar
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <main class="mx-auto max-w-7xl px-6 py-10">
+            <section class="glass-panel rounded-[2.2rem] p-8">
+                <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+                    <div class="max-w-2xl">
+                        <div class="inline-flex items-center gap-2 rounded-full bg-brand-cyan/10 px-4 py-2 text-[11px] font-extrabold uppercase tracking-[0.2em] text-brand-cyan">
+                            <i class="fa-solid fa-layer-group"></i> Control Center
+                        </div>
+                        <h2 class="mt-4 font-heading text-4xl font-extrabold text-slate-900">Monitoring progres, filter tim, dan audit respons tim</h2>
+                        <p class="mt-3 text-sm leading-relaxed text-slate-500">Panel ini membaca data terbaru langsung dari Google Spreadsheet melalui Apps Script. Semua status memakai data terbaru per tim.</p>
+                    </div>
+                    <div class="w-full xl:w-auto xl:min-w-[340px]">
+                        <select id="teamFilter" class="admin-filter-select">
+                            <option value="ALL">Semua tim</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+                <div class="summary-card rounded-[1.75rem] p-5">
+                    <div class="text-[11px] font-extrabold uppercase tracking-[0.18em] text-slate-400">Total Tim</div>
+                    <div id="statTotalTeams" class="mt-3 font-heading text-4xl font-extrabold text-brand-dark">0</div>
+                    <p class="mt-2 text-sm text-slate-500">Tim yang terdaftar pada dashboard.</p>
+                </div>
+                <div class="summary-card rounded-[1.75rem] p-5">
+                    <div class="text-[11px] font-extrabold uppercase tracking-[0.18em] text-slate-400">Tim Aktif</div>
+                    <div id="statActiveTeams" class="mt-3 font-heading text-4xl font-extrabold text-brand-blue">0</div>
+                    <p class="mt-2 text-sm text-slate-500">Tim dengan progres di atas 0%.</p>
+                </div>
+                <div class="summary-card rounded-[1.75rem] p-5">
+                    <div class="text-[11px] font-extrabold uppercase tracking-[0.18em] text-slate-400">Rata-rata</div>
+                    <div id="statAverageProgress" class="mt-3 font-heading text-4xl font-extrabold text-brand-cyan">0%</div>
+                    <p class="mt-2 text-sm text-slate-500">Progress rata-rata semua tim.</p>
+                </div>
+                <div class="summary-card rounded-[1.75rem] p-5">
+                    <div class="text-[11px] font-extrabold uppercase tracking-[0.18em] text-slate-400">Tim Selesai</div>
+                    <div id="statCompletedTeams" class="mt-3 font-heading text-4xl font-extrabold text-emerald-600">0</div>
+                    <p class="mt-2 text-sm text-slate-500">Tim yang sudah 100%.</p>
+                </div>
+                <div class="summary-card rounded-[1.75rem] p-5">
+                    <div class="text-[11px] font-extrabold uppercase tracking-[0.18em] text-slate-400">Total Respons</div>
+                    <div id="statTotalResponses" class="mt-3 font-heading text-4xl font-extrabold text-brand-orange">0</div>
+                    <p class="mt-2 text-sm text-slate-500">Histori respons terbaru dari spreadsheet.</p>
+                </div>
+                <div class="summary-card rounded-[1.75rem] p-5">
+                    <div class="text-[11px] font-extrabold uppercase tracking-[0.18em] text-slate-400">Sudah Presensi</div>
+                    <div id="statPresentToday" class="mt-3 font-heading text-4xl font-extrabold text-emerald-600">0</div>
+                    <p id="attendanceDateText" class="mt-2 text-sm text-slate-500">Status presensi hari ini.</p>
+                </div>
+                <div class="summary-card rounded-[1.75rem] p-5">
+                    <div class="text-[11px] font-extrabold uppercase tracking-[0.18em] text-slate-400">Belum Presensi</div>
+                    <div id="statAbsentToday" class="mt-3 font-heading text-4xl font-extrabold text-brand-orange">0</div>
+                    <p class="mt-2 text-sm text-slate-500">Tim yang belum mengisi presensi pada siklus aktif.</p>
+                </div>
+                <div class="summary-card rounded-[1.75rem] p-5">
+                    <div class="text-[11px] font-extrabold uppercase tracking-[0.18em] text-slate-400">Tim Stagnan</div>
+                    <div id="statStagnantTeams" class="mt-3 font-heading text-4xl font-extrabold text-rose-600">0</div>
+                    <p class="mt-2 text-sm text-slate-500">Tidak update progres selama 7 hari atau lebih.</p>
+                </div>
+            </section>
+
+            <section class="mt-8 grid gap-8 xl:grid-cols-[1.4fr_0.9fr]">
+                <div class="glass-panel rounded-[2rem] p-6">
+                    <div class="flex items-center justify-between gap-4">
+                        <div>
+                            <div class="text-[11px] font-extrabold uppercase tracking-[0.18em] text-brand-blue">Flow Chart Progress</div>
+                            <h3 class="mt-2 font-heading text-2xl font-extrabold text-slate-900">Detail progress terbaru per tim</h3>
+                        </div>
+                        <div id="flowCountText" class="rounded-full bg-slate-100 px-4 py-2 text-xs font-bold text-slate-500">0 tim</div>
+                    </div>
+                    <div id="flowGrid" class="mt-6 grid gap-5"></div>
+                </div>
+
+                <div class="glass-panel rounded-[2rem] p-6">
+                    <div class="flex items-center gap-3">
+                        <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-brand-blue/10 text-brand-blue">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+                        <div>
+                            <div class="text-[11px] font-extrabold uppercase tracking-[0.18em] text-brand-blue">Agenda Calendar</div>
+                            <h3 class="mt-1 font-heading text-2xl font-extrabold text-slate-900">Kalender riset</h3>
+                        </div>
+                    </div>
+                    <div class="mt-5 overflow-hidden rounded-[1.6rem] border border-slate-100 bg-white">
+                        <iframe src="https://www.google.com/calendar/embed?color=%231E3A8A&src=c_8ac709600c9abca6423a35a5d75ccf533abde9d5eb43916feee603159553a38a@group.calendar.google.com&showTitle=0&showPrint=0&showTabs=1&showCalendars=0&showTz=0" class="h-[560px] w-full border-0" frameborder="0" scrolling="yes"></iframe>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mt-8 glass-panel rounded-[2rem] p-6">
+                <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+                    <div>
+                        <div class="text-[11px] font-extrabold uppercase tracking-[0.18em] text-brand-orange">Logbook Form Responses</div>
+                        <h3 class="mt-2 font-heading text-2xl font-extrabold text-slate-900">Respons detail logbook per tim</h3>
+                        <p class="mt-2 text-sm text-slate-500">Menampilkan jawaban asli dari spreadsheet hasil `Logbook Google Form` jika spreadsheet eksternalnya sudah dihubungkan ke Apps Script.</p>
+                    </div>
+                    <div class="flex flex-col items-end gap-2">
+                        <div id="responseSourceText" class="rounded-full bg-slate-100 px-4 py-2 text-xs font-bold text-slate-500">Sumber: -</div>
+                        <div id="responseCountText" class="rounded-full bg-slate-100 px-4 py-2 text-xs font-bold text-slate-500">0 respons</div>
+                    </div>
+                </div>
+                <div id="responseGrid" class="mt-6 grid gap-5"></div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const API_CONFIG = {
+            webAppUrl: 'https://script.google.com/macros/s/AKfycbwkzEmj46F25R3FM6NuKzC7O6Ov1pjz0QlLEcs1c5E_0-Uu-Ya4kkDMa3RWL-Jb-a83/exec'
+        };
+        const ACCESS_SCOPE_ADMIN = 'admin';
+        const ADMIN_PIN_STORAGE_KEY = 'archifAdminPin';
+        const ADMIN_UNLOCK_UNTIL_STORAGE_KEY = 'archifAdminUnlockUntil';
+        const PIN_REMEMBER_DURATION_MS = 7 * 24 * 60 * 60 * 1000;
+        const TEAM_META = {
+            "FTR_Adly_Imam": {
+                displayName: "SmartMine - Adly Imam"
+            },
+            "FTR_Saif_Aldero": {
+                displayName: "BriVate - Saif Aldero"
+            },
+            "ISH_Rafa-Ichsan": {
+                displayName: "Labcraft - Rafa Putra ISH",
+                aliases: ["labcraft", "rafa putra ish", "rafa putra", "rafa ichsan", "ish rafa ichsan"]
+            },
+            "FTR_Azrul_Rafif": {
+                displayName: "TB-Dec - Azrul Rafif"
+            },
+            "FTR_Drestra_Satria": {
+                displayName: "MicroTic - Drestra Satria"
+            },
+            "MST_Arum_Aulia": {
+                displayName: "Frontiers - Arum Aulia"
+            },
+            "FTR_Rayya_Syakira": {
+                displayName: "IDRONIC - Rayya Syakira"
+            },
+            "MST_Syifa_Amanda": {
+                displayName: "Forence - Syifa Amanda"
+            },
+            "MST_Karin_Naura": {
+                displayName: "Optima - Karin Naura"
+            },
+            "AAK_Zida_Nindy": {
+                displayName: "Dermalyze - Zida Nindy"
+            },
+            "MST_Syaukie_Rafi": {
+                displayName: "Osvera - Syaukie Rafi"
+            },
+            "TD_Aqil_Yusuf": {
+                displayName: "HydroSense - Aqil Yusuf"
+            },
+            "KKPD_Alya_Queenta": {
+                displayName: "Econix - Alya Queenta"
+            },
+            "FTR_Cayla_Nardin": {
+                displayName: "NirFarm - Cayla Nardin"
+            }
+        };
+        const stageLabels = [
+            { key: 'instrumen', label: 'Instrumen / Alat' },
+            { key: 'implementasi', label: 'Implementasi / Pengembangan' },
+            { key: 'pengambilanData', label: 'Pengambilan Data' },
+            { key: 'analisisValidasi', label: 'Analisis / Validasi' },
+            { key: 'presentasiPpt', label: 'Penyusunan Draft Laporan' },
+            { key: 'laporanAkhir', label: 'Finalisasi dan Revisian' }
+        ];
+        const fiksiStageLabels = [
+            { key: 'instrumen', label: 'Pengembangan Produk / Solusi' },
+            { key: 'implementasi', label: 'Validasi Pasar & Konsumen' },
+            { key: 'pengambilanData', label: 'Produksi / Pembuatan Prototipe' },
+            { key: 'analisisValidasi', label: 'Model Bisnis & Strategi Usaha' },
+            { key: 'presentasiPpt', label: 'Branding, Promosi, dan Penjualan' },
+            { key: 'laporanAkhir', label: 'Pitch Deck, Presentasi, dan Finalisasi' }
+        ];
+        const fiksiCategories = new Set(['AAK', 'KKPD', 'TD']);
+        const TEAM_DRIVE_MAP = {
+            "FTR_Adly_Imam": "1kBXRRt-ZP4YwHZBzeUSdDr2re14RWUEP",
+            "FTR_Saif_Aldero": "1R3KHLT2cEmhbhn0SGx_QJW5UEKGuKl0y",
+            "ISH_Rafa-Ichsan": "1v1nB534GT7Sxvl06sqci10e4jTLAIYsQ",
+            "FTR_Azrul_Rafif": "1KB7KGyg_gDjh50ZXbHby7iW80rsBOPhf",
+            "FTR_Drestra_Satria": "1atL6OhUinCPy_lHR3rdLX2EDkPsC_5yE",
+            "MST_Arum_Aulia": "1ZyWqNmUwcqGSWFyxIA7ydgrwmdl0rGFl",
+            "FTR_Rayya_Syakira": "1-SNoEb7_htM2P00Rnl088xvE274Pmgma",
+            "MST_Syifa_Amanda": "1f5C7seC0pufWsBj5F9B2iJszgCcivpGw",
+            "MST_Karin_Naura": "1JQ6hQVbAVQeDU0pQwJ1zarIpFBbsxgeX",
+            "AAK_Zida_Nindy": "1dXoAWAw7FlKQR1323k5GbTkwOA35o5wn",
+            "MST_Syaukie_Rafi": "1XZp0BfzsJYYtbquIQ1mchq2pVIuOgX3v",
+            "TD_Aqil_Yusuf": "10clXzwQK4gRKYwpXp26W9VloNEEu1dx2",
+            "KKPD_Alya_Queenta": "13KSWxSOHhrl38z16n2iku3aZWCxlly_W",
+            "FTR_Cayla_Nardin": "1xqcmQV873znffkpYHw8wafuylZ91S6YA"
+        };
+
+        let adminPayloadCache = {
+            teamProgress: [],
+            responseLogs: [],
+            stats: null,
+            updatedAt: '',
+            responseSource: 'internalPresensiLog',
+            attendanceDate: ''
+        };
+
+        function getStageToneClass(status) {
+            if (status === '100%') return 'stage-selesai';
+            if (status === '80%' || status === '60%') return 'stage-hampir';
+            if (status === '40%' || status === '20%') return 'stage-progress';
+            return 'stage-belum';
+        }
+
+        function getCategory(teamName) {
+            return String(teamName || '').trim().split('_')[0] || 'LAIN';
+        }
+
+        function getStageConfigForTeam(teamName) {
+            return fiksiCategories.has(getCategory(teamName)) ? fiksiStageLabels : stageLabels;
+        }
+
+        function getDisplayTeamName(teamName) {
+            return TEAM_META[String(teamName || '').trim()]?.displayName || String(teamName || '').trim();
+        }
+
+        function getDisplayTeamCaption(teamName) {
+            const canonicalName = String(teamName || '').trim();
+            const displayName = getDisplayTeamName(canonicalName);
+            return displayName === canonicalName ? displayName : `${displayName} (${canonicalName})`;
+        }
+
+        function buildCategoryChip(category) {
+            return `<span class="category-chip cat-${category}">${category}</span>`;
+        }
+
+        function buildAttendanceChip(isPresent) {
+            return isPresent
+                ? '<span class="attendance-chip attendance-present">PRESENSI MASUK</span>'
+                : '<span class="attendance-chip attendance-absent">BELUM PRESENSI</span>';
+        }
+
+        function buildStagnantChip(daysSinceUpdate) {
+            const safeDays = Number.isFinite(Number(daysSinceUpdate)) ? Number(daysSinceUpdate) : 999;
+            if (safeDays >= 999) {
+                return '<span class="stagnant-chip stagnant-alert">BELUM ADA UPDATE</span>';
+            }
+            return safeDays >= 7
+                ? `<span class="stagnant-chip stagnant-alert">STAGNAN ${safeDays} HARI</span>`
+                : `<span class="stagnant-chip stagnant-safe">UPDATE ${safeDays} HARI LALU</span>`;
+        }
+
+        function buildDriveLink(teamName) {
+            const driveId = TEAM_DRIVE_MAP[String(teamName || '').trim()];
+            if (!driveId) return '';
+            return `
+                <a href="https://drive.google.com/drive/folders/${driveId}?usp=drive_link" target="_blank" class="flow-action-btn inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] transition-colors hover:border-brand-cyan hover:text-brand-blue">
+                    <i class="fa-solid fa-folder-open text-[10px]"></i> Buka Arsip
+                </a>
+            `;
+        }
+
+        function formatDateTime(value) {
+            if (!value) return '-';
+            const date = new Date(value);
+            if (Number.isNaN(date.getTime())) return value;
+            return date.toLocaleString('id-ID', {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        function formatDateOnly(value) {
+            if (!value) return '-';
+            if (/^\d{4}-\d{2}-\d{2}$/.test(String(value).trim())) {
+                const [year, month, day] = String(value).trim().split('-');
+                return `${Number(day)} ${new Date(Number(year), Number(month) - 1, Number(day)).toLocaleDateString('id-ID', { month: 'long' })} ${year}`;
+            }
+            const date = new Date(value);
+            if (Number.isNaN(date.getTime())) return value;
+            return date.toLocaleDateString('id-ID', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+        }
+
+        function escapeHtml(value) {
+            return String(value ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function getPreferredResponseHeaders(records = []) {
+            const preferredOrder = [
+                'Timestamp',
+                'Email Address',
+                'Nama Tim',
+                'Tanggal',
+                'Status',
+                'Bantuan yang dibutuhkan dari pembimbing',
+                'Dokumentasi',
+                'Deskripsi kegiatan yang dilakukan!',
+                'Hasil yang yang di capai?',
+                'Kendala kegiatan yag sudah dilakukan',
+                'Saya menyatakan isian ini benar',
+                'Target yang harus di capai minggu ini?',
+                'Tindak lanjut akan dilaksanakan',
+                'Score',
+                'Deskripsi kegiatan yang dilakukan',
+                'Hasil yang yang di capai',
+                'Kendala kegiatan yang sudah dilakukan',
+                'Target yang harus di capai minggu ini'
+            ];
+            const existing = new Set();
+            records.forEach((record) => {
+                Object.keys(record.answers || {}).forEach((key) => {
+                    if (key) existing.add(key);
+                });
+            });
+
+            const ordered = preferredOrder.filter((key) => existing.has(key));
+            const remaining = [...existing].filter((key) => !ordered.includes(key)).sort((a, b) => a.localeCompare(b, 'id'));
+            return [...ordered, ...remaining];
+        }
+
+        function getStoredAdminPin() {
+            return localStorage.getItem(ADMIN_PIN_STORAGE_KEY) || '';
+        }
+
+        function getStoredAdminUnlockUntil() {
+            return Number(localStorage.getItem(ADMIN_UNLOCK_UNTIL_STORAGE_KEY) || 0);
+        }
+
+        function isAdminUnlockStillValid() {
+            return getStoredAdminUnlockUntil() > Date.now();
+        }
+
+        function setAdminUnlockState(isUnlocked, pin = '') {
+            if (isUnlocked) {
+                localStorage.setItem(ADMIN_PIN_STORAGE_KEY, pin);
+                localStorage.setItem(ADMIN_UNLOCK_UNTIL_STORAGE_KEY, String(Date.now() + PIN_REMEMBER_DURATION_MS));
+                document.body.classList.remove('is-locked');
+                document.getElementById('adminLockGate')?.classList.add('hidden');
+                return;
+            }
+
+            localStorage.removeItem(ADMIN_PIN_STORAGE_KEY);
+            localStorage.removeItem(ADMIN_UNLOCK_UNTIL_STORAGE_KEY);
+            document.body.classList.add('is-locked');
+            document.getElementById('adminLockGate')?.classList.remove('hidden');
+        }
+
+        function buildApiUrl(params = {}, options = {}) {
+            const query = new URLSearchParams({
+                ...params,
+                _ts: String(Date.now())
+            });
+
+            if (options.includeAuth !== false) {
+                const pin = getStoredAdminPin();
+                if (pin) {
+                    query.set('pin', pin);
+                    query.set('scope', ACCESS_SCOPE_ADMIN);
+                }
+            }
+
+            return `${API_CONFIG.webAppUrl}?${query.toString()}`;
+        }
+
+        function fetchAppsScriptJson(params = {}, options = {}) {
+            return new Promise((resolve, reject) => {
+                const callbackName = `archifAdminJsonp_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+                const script = document.createElement('script');
+                const cleanup = () => {
+                    delete window[callbackName];
+                    script.remove();
+                };
+
+                window[callbackName] = (payload) => {
+                    cleanup();
+                    resolve(payload);
+                };
+
+                script.onerror = () => {
+                    cleanup();
+                    reject(new Error('Gagal memuat data admin dari Apps Script.'));
+                };
+
+                script.src = buildApiUrl({
+                    ...params,
+                    callback: callbackName
+                }, options);
+                document.body.appendChild(script);
+            });
+        }
+
+        function populateTeamFilter(teamProgress = [], responseLogs = []) {
+            const select = document.getElementById('teamFilter');
+            const currentValue = select.value;
+            const uniqueTeams = [];
+
+            [...(teamProgress || []), ...(responseLogs || [])].forEach((record) => {
+                const teamName = String(record.name || record.kelompok || '').trim();
+                if (!teamName || uniqueTeams.includes(teamName)) return;
+                uniqueTeams.push(teamName);
+            });
+
+            uniqueTeams.sort((a, b) => a.localeCompare(b, 'id'));
+            select.innerHTML = '<option value="ALL">Semua tim</option>' + uniqueTeams.map((teamName) => (
+                `<option value="${teamName}">${getDisplayTeamCaption(teamName)}</option>`
+            )).join('');
+            if ([...select.options].some((option) => option.value === currentValue)) {
+                select.value = currentValue;
+            }
+        }
+
+        function renderSummary(stats = {}) {
+            document.getElementById('statTotalTeams').textContent = String(stats.totalTeams || 0);
+            document.getElementById('statActiveTeams').textContent = String(stats.activeTeams || 0);
+            document.getElementById('statAverageProgress').textContent = `${stats.averageProgress || 0}%`;
+            document.getElementById('statCompletedTeams').textContent = String(stats.completedTeams || 0);
+            document.getElementById('statTotalResponses').textContent = String(stats.totalResponses || 0);
+            document.getElementById('statPresentToday').textContent = String(stats.presentToday || 0);
+            document.getElementById('statAbsentToday').textContent = String(stats.absentToday || 0);
+            document.getElementById('statStagnantTeams').textContent = String(stats.stagnantTeams || 0);
+            document.getElementById('attendanceDateText').textContent = adminPayloadCache.attendanceDate
+                ? `Status presensi untuk ${formatDateOnly(adminPayloadCache.attendanceDate)}.`
+                : 'Status presensi hari ini.';
+        }
+
+        function getFilteredTeamProgress() {
+            const selectedTeam = document.getElementById('teamFilter').value;
+
+            return (adminPayloadCache.teamProgress || []).filter((record) => {
+                return selectedTeam === 'ALL' || record.name === selectedTeam;
+            });
+        }
+
+        function getFilteredResponses() {
+            const selectedTeam = document.getElementById('teamFilter').value;
+
+            return (adminPayloadCache.responseLogs || []).filter((record) => {
+                return selectedTeam === 'ALL' || record.kelompok === selectedTeam;
+            });
+        }
+
+        function toggleFlowDetail(index, button) {
+            const panel = document.getElementById(`flow-detail-${index}`);
+            if (!panel || !button) return;
+            const isOpen = panel.classList.toggle('open');
+            button.innerHTML = isOpen
+                ? '<i class="fa-solid fa-chevron-up text-[10px]"></i> Sembunyikan Detail'
+                : '<i class="fa-solid fa-chevron-down text-[10px]"></i> Lihat Detail';
+        }
+
+        function renderFlowGrid() {
+            const flowGrid = document.getElementById('flowGrid');
+            const records = getFilteredTeamProgress();
+            document.getElementById('flowCountText').textContent = `${records.length} tim`;
+
+            if (!records.length) {
+                flowGrid.innerHTML = `
+                    <div class="rounded-[1.6rem] border border-dashed border-slate-200 bg-white/70 p-8 text-center text-sm text-slate-500">
+                        Tidak ada tim yang cocok dengan filter saat ini.
+                    </div>
+                `;
+                return;
+            }
+
+            flowGrid.innerHTML = records.map((record, index) => {
+                const activeStageLabels = getStageConfigForTeam(record.name);
+                const stageItems = activeStageLabels.map((stage) => {
+                    const status = record.stages?.[stage.key] || '0%';
+                    return `
+                        <div class="flow-stage">
+                            <div class="text-[11px] font-extrabold uppercase tracking-[0.15em] text-slate-400">${stage.label}</div>
+                            <div class="mt-3 flex items-center justify-between gap-3">
+                                <span class="text-sm font-bold text-slate-700">${status}</span>
+                                <span class="stage-badge ${getStageToneClass(status)}">${status}</span>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                return `
+                    <article class="flow-card rounded-[1.8rem] p-5">
+                        <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                            <div>
+                                <div class="flex flex-wrap items-center gap-3">
+                                    <h4 class="font-heading text-xl font-extrabold text-slate-900" title="${getDisplayTeamCaption(record.name)}">${getDisplayTeamName(record.name)}</h4>
+                                    ${buildCategoryChip(getCategory(record.name))}
+                                    ${buildAttendanceChip(record.attendanceToday)}
+                                    ${buildStagnantChip(record.daysSinceUpdate)}
+                                </div>
+                                ${getDisplayTeamName(record.name) === record.name ? '' : `<div class="mt-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-400">${record.name}</div>`}
+                                <div class="mt-2 text-sm text-slate-500">Update terakhir: ${formatDateTime(record.updatedAt || record.tanggal)}</div>
+                            </div>
+                            <div class="flex flex-wrap items-center gap-3">
+                                <div class="rounded-[1.3rem] bg-brand-blue/10 px-4 py-3 text-right">
+                                    <div class="text-[11px] font-extrabold uppercase tracking-[0.18em] text-brand-blue">Progress</div>
+                                    <div class="mt-1 font-heading text-3xl font-extrabold text-brand-dark">${record.progressPersen || 0}%</div>
+                                </div>
+                                <button type="button" onclick="toggleFlowDetail(${index}, this)" class="flow-toggle-btn inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] transition-colors hover:bg-brand-blue hover:text-white">
+                                    <i class="fa-solid fa-chevron-down text-[10px]"></i> Lihat Detail
+                                </button>
+                                ${buildDriveLink(record.name)}
+                            </div>
+                        </div>
+                        <div class="mt-5">
+                            <div class="h-3 overflow-hidden rounded-full bg-slate-200">
+                                <div class="h-full rounded-full bg-gradient-to-r from-brand-blue to-brand-cyan" style="width: ${record.progressPersen || 0}%"></div>
+                            </div>
+                            <div class="mt-3 text-sm text-slate-500">${record.note || 'Belum ada catatan terbaru untuk tim ini.'}</div>
+                        </div>
+                        <div id="flow-detail-${index}" class="flow-detail-panel mt-5">
+                            <div class="grid gap-4 xl:grid-cols-3">
+                                ${stageItems}
+                            </div>
+                            <div class="mt-5 rounded-[1.4rem] border border-slate-100 bg-slate-50/90 p-4">
+                                <div class="text-[11px] font-extrabold uppercase tracking-[0.15em] text-slate-400">Catatan terbaru</div>
+                                <p class="mt-2 text-sm leading-relaxed text-slate-600">${record.note || 'Belum ada catatan untuk tim ini.'}</p>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        function renderResponses() {
+            const responseGrid = document.getElementById('responseGrid');
+            const records = getFilteredResponses();
+            document.getElementById('responseCountText').textContent = `${records.length} respons`;
+
+            if (!records.length) {
+                responseGrid.innerHTML = `
+                    <div class="rounded-[1.6rem] border border-dashed border-slate-200 bg-white/70 p-8 text-center text-sm text-slate-500">
+                        Belum ada respons yang cocok dengan filter aktif.
+                    </div>
+                `;
+                return;
+            }
+
+            const headers = getPreferredResponseHeaders(records);
+            const headerMarkup = headers.map((header) => (
+                `<th class="whitespace-nowrap px-4 py-3 text-left text-[11px] font-extrabold uppercase tracking-[0.14em] text-slate-500">${escapeHtml(header)}</th>`
+            )).join('');
+            const rowsMarkup = records.map((record) => {
+                const answerCells = headers.map((header) => {
+                    const normalizedHeader = header.trim().toLowerCase();
+                    let value = record.answers?.[header] || '-';
+                    if (normalizedHeader === 'timestamp') {
+                        value = formatDateTime(record.timestamp || record.createdAt || record.updatedAt || value);
+                    }
+                    if (normalizedHeader === 'tanggal') {
+                        value = formatDateOnly(record.timestamp || record.createdAt || record.updatedAt || value);
+                    }
+                    const isDocumentation = header.toLowerCase() === 'dokumentasi' && /^https?:\/\//i.test(value);
+                    const content = isDocumentation
+                        ? `<a href="${escapeHtml(value)}" target="_blank" class="font-semibold text-brand-blue underline decoration-brand-cyan/50 underline-offset-4">Buka Link</a>`
+                        : escapeHtml(value);
+                    return `<td class="align-top px-4 py-3 text-sm leading-relaxed text-slate-700">${content}</td>`;
+                }).join('');
+
+                return `
+                    <tr class="border-b border-slate-100 last:border-b-0">
+                        ${answerCells}
+                    </tr>
+                `;
+            }).join('');
+
+            responseGrid.innerHTML = `
+                <div class="overflow-hidden rounded-[1.6rem] border border-slate-100 bg-white/92">
+                    <div class="response-table-frame overflow-x-auto">
+                        <table class="response-table min-w-full border-separate border-spacing-0">
+                            <thead>
+                                <tr>${headerMarkup}</tr>
+                            </thead>
+                            <tbody>
+                                ${rowsMarkup}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderAll() {
+            renderSummary(adminPayloadCache.stats || {});
+            renderFlowGrid();
+            renderResponses();
+            document.getElementById('updatedAtText').textContent = formatDateTime(adminPayloadCache.updatedAt);
+            document.getElementById('responseSourceText').textContent = adminPayloadCache.responseSource === 'logbookFormResponses'
+                ? 'Sumber: Sheet logbook'
+                : 'Sumber: Log presensi internal';
+        }
+
+        async function loadAdminDashboard() {
+            const payload = await fetchAppsScriptJson({ action: 'adminDashboard' });
+            if (!payload || payload.ok === false) {
+                throw new Error(payload?.message || 'Dashboard admin gagal dimuat.');
+            }
+
+            adminPayloadCache = {
+                teamProgress: payload.teamProgress || [],
+                responseLogs: payload.responseLogs || [],
+                stats: payload.stats || {},
+                updatedAt: payload.updatedAt || '',
+                responseSource: payload.responseSource || 'internalPresensiLog',
+                attendanceDate: payload.attendanceDate || ''
+            };
+            populateTeamFilter(payload.teamProgress || [], payload.responseLogs || []);
+            renderAll();
+        }
+
+        async function verifyAdminPin(pin) {
+            return fetchAppsScriptJson({
+                action: 'auth',
+                pin: String(pin || '').trim(),
+                scope: ACCESS_SCOPE_ADMIN
+            }, { includeAuth: false });
+        }
+
+        async function handleAdminUnlock(event) {
+            event.preventDefault();
+            const input = document.getElementById('adminPinInput');
+            const button = document.getElementById('adminPinSubmit');
+            const message = document.getElementById('adminLockMessage');
+            const pin = input?.value?.trim() || '';
+
+            if (!pin) {
+                message.textContent = 'PIN admin wajib diisi.';
+                message.className = 'mt-4 min-h-[20px] text-sm font-semibold text-brand-orange';
+                return;
+            }
+
+            button.disabled = true;
+            button.classList.add('opacity-70', 'pointer-events-none');
+            message.textContent = 'Memverifikasi PIN admin...';
+            message.className = 'mt-4 min-h-[20px] text-sm font-semibold text-brand-blue';
+
+            try {
+                const payload = await verifyAdminPin(pin);
+                if (!payload || payload.ok === false) {
+                    throw new Error(payload?.message || 'PIN admin tidak valid.');
+                }
+
+                setAdminUnlockState(true, pin);
+                input.value = '';
+                await loadAdminDashboard();
+            } catch (error) {
+                setAdminUnlockState(false);
+                message.textContent = String(error?.message || error);
+                message.className = 'mt-4 min-h-[20px] text-sm font-semibold text-brand-orange';
+            } finally {
+                button.disabled = false;
+                button.classList.remove('opacity-70', 'pointer-events-none');
+            }
+        }
+
+        async function tryRestoreAdminSession() {
+            const pin = getStoredAdminPin();
+            if (!pin || !isAdminUnlockStillValid()) {
+                setAdminUnlockState(false);
+                return;
+            }
+
+            try {
+                const payload = await verifyAdminPin(pin);
+                if (!payload || payload.ok === false) {
+                    throw new Error(payload?.message || 'Sesi admin tidak valid.');
+                }
+                setAdminUnlockState(true, pin);
+                await loadAdminDashboard();
+            } catch (error) {
+                setAdminUnlockState(false);
+                document.getElementById('adminLockMessage').textContent = 'Masa akses admin 1 minggu berakhir, silakan masukkan PIN lagi.';
+            }
+        }
+
+        function logoutAdmin() {
+            setAdminUnlockState(false);
+            location.reload();
+        }
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            document.getElementById('adminLockForm').addEventListener('submit', handleAdminUnlock);
+            document.getElementById('teamFilter').addEventListener('change', renderAll);
+            document.getElementById('logoutAdminBtn').addEventListener('click', logoutAdmin);
+            await tryRestoreAdminSession();
+            if (document.body.classList.contains('is-locked')) {
+                document.getElementById('adminPinInput')?.focus();
+            }
+        });
+    </script>
+</body>
+</html>

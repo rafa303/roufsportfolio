@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ARCHIF - Research SMASIF</title>
+    <link rel="icon" type="image/png" href="./logo.png">
+    <link rel="shortcut icon" type="image/png" href="./logo.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,10 +54,53 @@
 
     <style>
         /* Base Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 96px;
+        }
         html.lenis { height: auto; }
         .lenis.lenis-smooth { scroll-behavior: auto; }
         .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
         .lenis.lenis-stopped { overflow: hidden; }
+        .section-anchor { scroll-margin-top: 110px; }
+        body.is-locked {
+            overflow: hidden;
+        }
+        .site-lock-overlay {
+            background:
+                radial-gradient(circle at top left, rgba(6, 182, 212, 0.18), transparent 38%),
+                radial-gradient(circle at bottom right, rgba(30, 58, 138, 0.16), transparent 34%),
+                rgba(15, 23, 42, 0.62);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+        .site-lock-panel {
+            background: rgba(255, 255, 255, 0.86);
+            border: 1px solid rgba(255, 255, 255, 0.92);
+            box-shadow: 0 24px 80px rgba(15, 23, 42, 0.22);
+        }
+        .site-lock-input {
+            width: 100%;
+            border-radius: 1rem;
+            border: 1px solid #CBD5E1;
+            background: rgba(248, 250, 252, 0.96);
+            padding: 0.95rem 1rem;
+            font-size: 0.95rem;
+            color: #0F172A;
+        }
+        .site-lock-input:focus {
+            outline: none;
+            border-color: #06B6D4;
+            box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.14);
+        }
+        body.is-locked nav,
+        body.is-locked section,
+        body.is-locked footer,
+        body.is-locked #scrollToTop,
+        body.is-locked .reveal {
+            pointer-events: none;
+            user-select: none;
+        }
 
         body { 
             background-color: #F8FAFC; 
@@ -86,7 +131,7 @@
         .glass-panel:hover {
             box-shadow: 0 12px 40px 0 rgba(6, 182, 212, 0.1);
             transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.7);
         }
 
         /* Glass panel tanpa efek hover untuk Modal */
@@ -131,6 +176,13 @@
         }
         .absensi-btn.active { background: #06B6D4; border-color: #06B6D4; color: white; font-weight: 600; box-shadow: 0 12px 24px rgba(6, 182, 212, 0.18); }
         .absensi-btn-mood.active { background: #F97316; border-color: #F97316; color: white; }
+        .submit-btn-disabled {
+            opacity: 0.72;
+            cursor: not-allowed;
+            pointer-events: none;
+            box-shadow: none;
+            transform: none;
+        }
         .hub-time-empty {
             position: relative;
             overflow: hidden;
@@ -146,19 +198,73 @@
             height: 1px;
             background: linear-gradient(90deg, transparent, rgba(30, 58, 138, 0.22), transparent);
         }
+        .team-suggestion-btn {
+            border: 1px solid rgba(6, 182, 212, 0.16);
+            background: rgba(255, 255, 255, 0.8);
+            color: #1E3A8A;
+            transition: all 0.2s ease;
+        }
+        .team-suggestion-btn:hover {
+            background: rgba(6, 182, 212, 0.12);
+            border-color: rgba(6, 182, 212, 0.28);
+        }
         .tahap-card {
             background: rgba(255, 255, 255, 0.55);
             border: 1px solid rgba(226, 232, 240, 0.9);
         }
-        .tahap-select {
-            background: rgba(248, 250, 252, 0.95);
-            border: 1px solid #E2E8F0;
-            color: #475569;
-        }
-        .tahap-select:focus {
+        .tahap-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 10px;
+            border-radius: 9999px;
+            background: linear-gradient(90deg, #06B6D4 var(--slider-progress, 0%), #E2E8F0 var(--slider-progress, 0%));
             outline: none;
-            border-color: #06B6D4;
-            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15);
+            cursor: pointer;
+        }
+        .tahap-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 9999px;
+            background: #1E3A8A;
+            border: 3px solid #ffffff;
+            box-shadow: 0 6px 16px rgba(30, 58, 138, 0.22);
+        }
+        .tahap-slider::-moz-range-thumb {
+            width: 22px;
+            height: 22px;
+            border-radius: 9999px;
+            background: #1E3A8A;
+            border: 3px solid #ffffff;
+            box-shadow: 0 6px 16px rgba(30, 58, 138, 0.22);
+        }
+        .tahap-slider:focus-visible {
+            box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.14);
+        }
+        .tahap-slider-label {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.88);
+            border: 1px solid rgba(226, 232, 240, 0.95);
+            color: #1E3A8A;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            white-space: nowrap;
+        }
+        .tahap-scale {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            gap: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            color: #94A3B8;
+            text-align: center;
         }
         .tahap-note {
             width: 100%;
@@ -256,7 +362,27 @@
         .cat-KKPD { background: rgba(6, 182, 212, 0.16); color: #0E7490; border-color: rgba(6, 182, 212, 0.26); }
     </style>
 </head>
-<body class="antialiased selection:bg-brand-cyan selection:text-white">
+<body class="antialiased selection:bg-brand-cyan selection:text-white is-locked">
+
+    <div id="siteLockGate" class="site-lock-overlay fixed inset-0 z-[120] flex items-center justify-center px-6">
+        <div class="site-lock-panel w-full max-w-md rounded-[2rem] p-8 text-center">
+            <div class="w-16 h-16 rounded-full bg-brand-blue/10 text-brand-blue flex items-center justify-center mx-auto mb-5 text-3xl">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-blue/10 text-brand-blue text-[11px] font-extrabold uppercase tracking-[0.2em] mb-4">
+                <i class="fa-solid fa-lock"></i> Protected Access
+            </div>
+            <h2 class="font-heading text-3xl font-extrabold text-slate-900 mb-3">Masukkan PIN Akses</h2>
+            <p class="text-sm text-slate-500 leading-relaxed mb-6">Halaman riset ini dikunci dengan PIN. Setelah PIN valid, akses akan diingat di browser ini selama 1 minggu.</p>
+            <form id="siteLockForm" class="space-y-4">
+                <input id="sitePinInput" type="password" inputmode="text" autocomplete="current-password" class="site-lock-input" placeholder="Masukkan PIN situs">
+                <button type="submit" id="sitePinSubmit" class="w-full inline-flex items-center justify-center bg-brand-blue hover:bg-brand-cyan text-white font-bold py-3.5 px-6 rounded-2xl transition-colors">
+                    Buka Halaman
+                </button>
+            </form>
+            <p id="siteLockMessage" class="mt-4 min-h-[20px] text-sm font-semibold text-slate-500"></p>
+        </div>
+    </div>
 
     <!-- Modal Pop-up Presensi Peringatan -->
     <div id="absenModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-900/40 backdrop-blur-sm opacity-0 transition-opacity duration-300">
@@ -266,7 +392,7 @@
             </div>
             <h3 class="font-heading font-bold text-2xl text-slate-800 mb-2">Perhatian!</h3>
             <p class="text-slate-500 mb-6 text-sm">Sistem mendeteksi kamu belum mengisi presensi riset hari ini. Wajib isi presensi dulu ya sebelum lanjut!</p>
-            <a href="#hub" onclick="closeModal()" class="inline-block w-full bg-brand-blue hover:bg-brand-cyan text-white font-bold py-3 px-6 rounded-xl transition-colors shadow-md">
+            <a href="#presensi-panel" onclick="closeModal()" class="inline-flex items-center justify-center w-full bg-brand-blue hover:bg-brand-cyan text-white font-bold py-3 px-6 rounded-xl transition-colors shadow-md">
                 Siap, Isi Presensi
             </a>
         </div>
@@ -279,18 +405,18 @@
             <a href="#" class="flex items-center gap-3 group">
                 <!-- GANTI src="logo_custom_kamu.png" DENGAN NAMA FILE LOGO ASLIMU NANTI -->
                 <img src="./logo.png" alt="Logo" class="h-10 object-contain transition-transform duration-300 group-hover:scale-105" id="custom-logo">
-                <span class="font-heading font-bold text-xl text-brand-dark tracking-tight uppercase">RESEARCH SMASIF</span>
+                <span class="font-heading font-bold text-xl text-brand-dark tracking-tight">Research SMASIF</span>
             </a>
             
             <!-- Menu santai -->
             <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
                 <a href="#evaluasi" class="nav-link hover:text-brand-cyan transition-colors">Evaluasi</a>
-                <a href="#galeri" class="nav-link hover:text-brand-cyan transition-colors">Galeri</a>
-                <a href="#hub" class="nav-link hover:text-brand-cyan transition-colors">Presensi</a>
+                <a href="#logbook-panel" class="nav-link hover:text-brand-cyan transition-colors">Logbook</a>
+                <a href="#presensi-panel" class="nav-link hover:text-brand-cyan transition-colors">Presensi</a>
                 <a href="#arsip" class="nav-link hover:text-brand-cyan transition-colors">Arsip Tim</a>
             </div>
 
-            <a href="#hub" class="nav-link bg-brand-blue hover:bg-brand-cyan text-white text-sm font-semibold px-6 py-2.5 rounded-full transition-colors duration-300">
+            <a href="#presensi-panel" class="nav-link inline-flex items-center justify-center min-h-[44px] bg-brand-blue hover:bg-brand-cyan text-white text-sm font-semibold px-6 py-2.5 rounded-full transition-colors duration-300">
                 Isi Presensi
             </a>
         </div>
@@ -316,7 +442,7 @@
             <a href="#arsip" class="nav-link bg-brand-blue hover:bg-brand-dark text-white px-8 py-4 rounded-full font-semibold transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
                 Lihat Arsip Tim <i class="fa-solid fa-arrow-down"></i>
             </a>
-            <a href="#hub" class="nav-link glass-panel text-brand-blue px-8 py-4 rounded-full font-semibold flex items-center justify-center gap-2">
+            <a href="#presensi-panel" class="nav-link glass-panel text-brand-blue px-8 py-4 rounded-full font-semibold flex items-center justify-center gap-2">
                 <i class="fa-solid fa-clipboard-user"></i> Presensi Kehadiran
             </a>
         </div>
@@ -371,53 +497,12 @@
         </div>
     </section>
 
-    <section id="galeri" class="py-20 px-6 max-w-7xl mx-auto reveal">
-        <div class="text-center mb-12">
-            <h2 class="font-heading text-3xl font-bold text-slate-900 mb-3">Galeri Dokumentasi</h2>
-            <p class="text-slate-500 font-light">Rekam jejak kegiatan dan progres riset tim selama di laboratorium maupun asrama.</p>
-        </div>
-        
-        <!-- Grid dokumentasi dengan tempat foto custom -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]">
-            <div class="col-span-2 row-span-2 rounded-3xl overflow-hidden glass-panel p-2">
-                <div class="w-full h-full rounded-2xl flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-white/70 to-brand-soft border border-dashed border-slate-200 text-slate-400">
-                    <i class="fa-regular fa-image text-4xl"></i>
-                    <div class="text-center">
-                        <div class="text-xs font-extrabold uppercase tracking-widest text-slate-500">Dokumentasi Utama</div>
-                        <div class="text-xs font-semibold">Belum ada foto</div>
-                    </div>
-                </div>
-            </div>
-            <div class="rounded-3xl overflow-hidden glass-panel p-2">
-                <div class="w-full h-full rounded-2xl flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-white/70 to-brand-soft border border-dashed border-slate-200 text-slate-400">
-                    <i class="fa-regular fa-image text-2xl"></i>
-                    <div class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Coming Soon</div>
-                </div>
-            </div>
-            <div class="rounded-3xl overflow-hidden glass-panel p-2">
-                <div class="w-full h-full rounded-2xl flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-white/70 to-brand-soft border border-dashed border-slate-200 text-slate-400">
-                    <i class="fa-regular fa-image text-2xl"></i>
-                    <div class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Coming Soon</div>
-                </div>
-            </div>
-            <div class="col-span-2 rounded-3xl overflow-hidden glass-panel p-2">
-                <div class="w-full h-full rounded-2xl flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-white/70 to-brand-soft border border-dashed border-slate-200 text-slate-400">
-                    <i class="fa-regular fa-image text-3xl"></i>
-                    <div class="text-center">
-                        <div class="text-xs font-extrabold uppercase tracking-widest text-slate-500">Dokumentasi Kegiatan</div>
-                        <div class="text-xs font-semibold">Belum ada foto</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section id="hub" class="py-16 px-6 max-w-7xl mx-auto reveal">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start lg:items-stretch">
             
             <!-- Kolom Absen + Kotak Waktu -->
             <div class="lg:col-span-5 flex flex-col gap-6 lg:h-full">
-                <div class="glass-panel rounded-[2rem] p-8 flex flex-col">
+                <div id="presensi-panel" class="glass-panel section-anchor rounded-[2rem] p-8 flex flex-col">
                     <div class="flex items-center gap-4 mb-8">
                         <div class="w-12 h-12 rounded-2xl bg-brand-cyan flex items-center justify-center text-white shadow-lg">
                             <i class="fa-solid fa-clipboard-check text-xl"></i>
@@ -436,23 +521,13 @@
                     <div id="absensi-step-1" class="space-y-6">
                         <div>
                             <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Pilih Kelompok Riset</label>
-                            <select id="kelompok" class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-brand-cyan cursor-pointer shadow-sm transition-all">
-                                <option value="" disabled selected>Pilih kelompok Anda...</option>
-                                <option value="FTR_Adly_Imam">FTR_Adly_Imam</option>
-                                <option value="FTR_Saif_Aldero">FTR_Saif_Aldero</option>
-                                <option value="ISH_Rafa-Ichsan">ISH_Rafa-Ichsan</option>
-                                <option value="FTR_Azrul_Rafif">FTR_Azrul_Rafif</option>
-                                <option value="FTR_Drestra_Satria">FTR_Drestra_Satria</option>
-                                <option value="MST_Arum_Aulia">MST_Arum_Aulia</option>
-                                <option value="FTR_Rayya_Syakira">FTR_Rayya_Syakira</option>
-                                <option value="MST_Syifa_Amanda">MST_Syifa_Amanda</option>
-                                <option value="MST_Karin_Naura">MST_Karin_Naura</option>
-                                <option value="AAK_Zida_Nindy">AAK_Zida_Nindy</option>
-                                <option value="MST_Syaukie_Rafi">MST_Syaukie_Rafi</option>
-                                <option value="TD_Aqil_Yusuf">TD_Aqil_Yusuf</option>
-                                <option value="KKPD_Alya_Queenta">KKPD_Alya_Queenta</option>
-                                <option value="FTR_Cayla_Nardin">FTR_Cayla_Nardin</option>
+                            <input id="kelompok" list="kelompok-list" autocomplete="off" class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-brand-cyan shadow-sm transition-all" placeholder="Cari atau pilih kelompok Anda...">
+                            <datalist id="kelompok-list"></datalist>
+                            <select id="kelompok-select" class="mt-3 w-full bg-white border border-slate-200 text-slate-700 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-brand-cyan shadow-sm transition-all">
+                                <option value="">Pilih cepat dari daftar tim...</option>
                             </select>
+                            <div id="recent-team-suggestions" class="mt-3 flex flex-wrap gap-2"></div>
+                            <p id="kelompok-helper" class="mt-2 text-[11px] text-slate-400">Saran tim terakhir akan muncul di sini.</p>
                         </div>
 
                         <div>
@@ -466,14 +541,14 @@
                         <div>
                             <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Kondisi Tim (Mood & Fokus)</label>
                             <div class="grid grid-cols-3 gap-3" id="mood-group">
-                                <button onclick="setOpt('mood', 'Produktif', this)" class="absensi-btn absensi-btn-mood py-3 rounded-xl flex flex-col items-center">
-                                    <span class="text-xl mb-1">🚀</span><span class="text-[10px] font-bold">PRODUKTIF</span>
+                                <button onclick="setOpt('mood', 'Progres Lancar', this)" class="absensi-btn absensi-btn-mood py-3 rounded-xl flex flex-col items-center">
+                                    <span class="text-xl mb-1">🚀</span><span class="text-[10px] font-bold">LANCAR</span>
                                 </button>
-                                <button onclick="setOpt('mood', 'Stuck', this)" class="absensi-btn absensi-btn-mood py-3 rounded-xl flex flex-col items-center">
-                                    <span class="text-xl mb-1">🤯</span><span class="text-[10px] font-bold">KENDALA</span>
+                                <button onclick="setOpt('mood', 'Butuh Arahan', this)" class="absensi-btn absensi-btn-mood py-3 rounded-xl flex flex-col items-center">
+                                    <span class="text-xl mb-1">🧩</span><span class="text-[10px] font-bold">ARAHAN</span>
                                 </button>
-                                <button onclick="setOpt('mood', 'Santai', this)" class="absensi-btn absensi-btn-mood py-3 rounded-xl flex flex-col items-center">
-                                    <span class="text-xl mb-1">📚</span><span class="text-[10px] font-bold">LITERASI</span>
+                                <button onclick="setOpt('mood', 'Fokus Review', this)" class="absensi-btn absensi-btn-mood py-3 rounded-xl flex flex-col items-center">
+                                    <span class="text-xl mb-1">📝</span><span class="text-[10px] font-bold">REVIEW</span>
                                 </button>
                             </div>
                         </div>
@@ -483,8 +558,8 @@
                         <div class="tahap-card rounded-2xl p-4">
                             <div class="flex items-start justify-between gap-3 mb-4">
                                 <div>
-                                    <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Posisi Penelitian</label>
-                                    <p class="text-[11px] text-slate-500">Pilih status tiap tahapan, lalu tambahkan satu catatan umum bila perlu.</p>
+                                    <label id="stage-panel-title" class="block text-xs font-bold text-slate-500 uppercase mb-1">Posisi Penelitian</label>
+                                    <p id="stage-panel-description" class="text-[11px] text-slate-500">Pilih status tiap tahapan, lalu tambahkan satu catatan umum bila perlu.</p>
                                 </div>
                                 <div class="text-right">
                                     <div class="text-[10px] font-extrabold uppercase tracking-widest text-slate-400">Estimasi Progress</div>
@@ -495,74 +570,62 @@
                             <div class="space-y-3">
                                 <div class="tahap-card rounded-2xl p-3">
                                     <div class="grid grid-cols-1 sm:grid-cols-[1fr_auto] items-center gap-3 mb-3">
-                                        <span class="text-sm font-semibold text-slate-700">Instrumen / Alat</span>
-                                        <select onchange="setTahap('instrumen', this.value)" class="tahap-select rounded-xl px-3 py-2 text-sm">
-                                            <option value="">Pilih status</option>
-                                            <option value="Belum">Belum</option>
-                                            <option value="Belum Selesai">Belum Selesai</option>
-                                            <option value="Hampir Selesai">Hampir Selesai</option>
-                                            <option value="Selesai">Selesai</option>
-                                        </select>
+                                        <span id="stage-label-instrumen" class="text-sm font-semibold text-slate-700">Instrumen / Alat</span>
+                                        <span id="instrumen-value" class="tahap-slider-label">0% - Belum Mulai</span>
+                                    </div>
+                                    <input id="tahap-instrumen" type="range" min="0" max="5" step="1" value="0" oninput="setTahap('instrumen', this.value)" class="tahap-slider" style="--slider-progress: 0%;">
+                                    <div class="tahap-scale mt-3">
+                                        <span>0%</span><span>20%</span><span>40%</span><span>60%</span><span>80%</span><span>100%</span>
                                     </div>
                                 </div>
                                 <div class="tahap-card rounded-2xl p-3">
                                     <div class="grid grid-cols-1 sm:grid-cols-[1fr_auto] items-center gap-3 mb-3">
-                                        <span class="text-sm font-semibold text-slate-700">Implementasi / Pengembangan</span>
-                                        <select onchange="setTahap('implementasi', this.value)" class="tahap-select rounded-xl px-3 py-2 text-sm">
-                                            <option value="">Pilih status</option>
-                                            <option value="Belum">Belum</option>
-                                            <option value="Belum Selesai">Belum Selesai</option>
-                                            <option value="Hampir Selesai">Hampir Selesai</option>
-                                            <option value="Selesai">Selesai</option>
-                                        </select>
+                                        <span id="stage-label-implementasi" class="text-sm font-semibold text-slate-700">Implementasi / Pengembangan</span>
+                                        <span id="implementasi-value" class="tahap-slider-label">0% - Belum Mulai</span>
+                                    </div>
+                                    <input id="tahap-implementasi" type="range" min="0" max="5" step="1" value="0" oninput="setTahap('implementasi', this.value)" class="tahap-slider" style="--slider-progress: 0%;">
+                                    <div class="tahap-scale mt-3">
+                                        <span>0%</span><span>20%</span><span>40%</span><span>60%</span><span>80%</span><span>100%</span>
                                     </div>
                                 </div>
                                 <div class="tahap-card rounded-2xl p-3">
                                     <div class="grid grid-cols-1 sm:grid-cols-[1fr_auto] items-center gap-3 mb-3">
-                                        <span class="text-sm font-semibold text-slate-700">Pengambilan Data</span>
-                                        <select onchange="setTahap('pengambilanData', this.value)" class="tahap-select rounded-xl px-3 py-2 text-sm">
-                                            <option value="">Pilih status</option>
-                                            <option value="Belum">Belum</option>
-                                            <option value="Belum Selesai">Belum Selesai</option>
-                                            <option value="Hampir Selesai">Hampir Selesai</option>
-                                            <option value="Selesai">Selesai</option>
-                                        </select>
+                                        <span id="stage-label-pengambilanData" class="text-sm font-semibold text-slate-700">Pengambilan Data</span>
+                                        <span id="pengambilanData-value" class="tahap-slider-label">0% - Belum Mulai</span>
+                                    </div>
+                                    <input id="tahap-pengambilanData" type="range" min="0" max="5" step="1" value="0" oninput="setTahap('pengambilanData', this.value)" class="tahap-slider" style="--slider-progress: 0%;">
+                                    <div class="tahap-scale mt-3">
+                                        <span>0%</span><span>20%</span><span>40%</span><span>60%</span><span>80%</span><span>100%</span>
                                     </div>
                                 </div>
                                 <div class="tahap-card rounded-2xl p-3">
                                     <div class="grid grid-cols-1 sm:grid-cols-[1fr_auto] items-center gap-3 mb-3">
-                                        <span class="text-sm font-semibold text-slate-700">Analisis / Validasi</span>
-                                        <select onchange="setTahap('analisisValidasi', this.value)" class="tahap-select rounded-xl px-3 py-2 text-sm">
-                                            <option value="">Pilih status</option>
-                                            <option value="Belum">Belum</option>
-                                            <option value="Belum Selesai">Belum Selesai</option>
-                                            <option value="Hampir Selesai">Hampir Selesai</option>
-                                            <option value="Selesai">Selesai</option>
-                                        </select>
+                                        <span id="stage-label-analisisValidasi" class="text-sm font-semibold text-slate-700">Analisis / Validasi</span>
+                                        <span id="analisisValidasi-value" class="tahap-slider-label">0% - Belum Mulai</span>
+                                    </div>
+                                    <input id="tahap-analisisValidasi" type="range" min="0" max="5" step="1" value="0" oninput="setTahap('analisisValidasi', this.value)" class="tahap-slider" style="--slider-progress: 0%;">
+                                    <div class="tahap-scale mt-3">
+                                        <span>0%</span><span>20%</span><span>40%</span><span>60%</span><span>80%</span><span>100%</span>
                                     </div>
                                 </div>
                                 <div class="tahap-card rounded-2xl p-3">
                                     <div class="grid grid-cols-1 sm:grid-cols-[1fr_auto] items-center gap-3 mb-3">
-                                        <span class="text-sm font-semibold text-slate-700">PPT / Presentasi</span>
-                                        <select onchange="setTahap('presentasiPpt', this.value)" class="tahap-select rounded-xl px-3 py-2 text-sm">
-                                            <option value="">Pilih status</option>
-                                            <option value="Belum">Belum</option>
-                                            <option value="Belum Selesai">Belum Selesai</option>
-                                            <option value="Hampir Selesai">Hampir Selesai</option>
-                                            <option value="Selesai">Selesai</option>
-                                        </select>
+                                        <span id="stage-label-presentasiPpt" class="text-sm font-semibold text-slate-700">Penyusunan Draft Laporan</span>
+                                        <span id="presentasiPpt-value" class="tahap-slider-label">0% - Belum Mulai</span>
+                                    </div>
+                                    <input id="tahap-presentasiPpt" type="range" min="0" max="5" step="1" value="0" oninput="setTahap('presentasiPpt', this.value)" class="tahap-slider" style="--slider-progress: 0%;">
+                                    <div class="tahap-scale mt-3">
+                                        <span>0%</span><span>20%</span><span>40%</span><span>60%</span><span>80%</span><span>100%</span>
                                     </div>
                                 </div>
                                 <div class="tahap-card rounded-2xl p-3">
                                     <div class="grid grid-cols-1 sm:grid-cols-[1fr_auto] items-center gap-3 mb-3">
-                                        <span class="text-sm font-semibold text-slate-700">Laporan Akhir</span>
-                                        <select onchange="setTahap('laporanAkhir', this.value)" class="tahap-select rounded-xl px-3 py-2 text-sm">
-                                            <option value="">Pilih status</option>
-                                            <option value="Belum">Belum</option>
-                                            <option value="Belum Selesai">Belum Selesai</option>
-                                            <option value="Hampir Selesai">Hampir Selesai</option>
-                                            <option value="Selesai">Selesai</option>
-                                        </select>
+                                        <span id="stage-label-laporanAkhir" class="text-sm font-semibold text-slate-700">Finalisasi dan Revisian</span>
+                                        <span id="laporanAkhir-value" class="tahap-slider-label">0% - Belum Mulai</span>
+                                    </div>
+                                    <input id="tahap-laporanAkhir" type="range" min="0" max="5" step="1" value="0" oninput="setTahap('laporanAkhir', this.value)" class="tahap-slider" style="--slider-progress: 0%;">
+                                    <div class="tahap-scale mt-3">
+                                        <span>0%</span><span>20%</span><span>40%</span><span>60%</span><span>80%</span><span>100%</span>
                                     </div>
                                 </div>
                                 <div>
@@ -583,7 +646,7 @@
                             <button onclick="prevAbsensiStep()" class="flex-1 bg-white/80 text-slate-700 font-bold py-3 rounded-xl border border-slate-200 hover:border-brand-cyan transition-colors">
                                 Kembali
                             </button>
-                            <button onclick="kirimAbsen()" class="flex-1 bg-brand-dark text-white font-bold py-3 rounded-xl hover:bg-brand-blue transition-colors shadow-md hover:shadow-lg">
+                            <button id="submit-absen-btn" onclick="kirimAbsen()" class="flex-1 bg-brand-dark text-white font-bold py-3 rounded-xl hover:bg-brand-blue transition-colors shadow-md hover:shadow-lg">
                                 Selesai
                             </button>
                         </div>
@@ -630,7 +693,7 @@
             <div class="lg:col-span-7 flex flex-col gap-6">
                 
                 <!-- Logbook Google Form Embed -->
-                <div class="glass-panel rounded-[2rem] p-6 flex flex-col">
+                <div id="logbook-panel" class="glass-panel section-anchor rounded-[2rem] p-6 flex flex-col">
                     <div class="flex items-center gap-3 mb-4">
                         <i class="fa-solid fa-book-journal-whills text-brand-orange text-xl"></i>
                         <div>
@@ -645,14 +708,14 @@
                 </div>
 
                 <!-- Kalender -->
-                <div class="glass-panel rounded-[2rem] p-6 flex flex-col">
+                <div id="calendar-panel" class="glass-panel section-anchor rounded-[2rem] p-6 flex flex-col">
                     <div class="flex items-center gap-3 mb-4">
                         <i class="fa-solid fa-calendar-check text-brand-blue text-xl"></i>
                         <h3 class="font-heading font-bold text-slate-800 text-xl">Timeline Agenda</h3>
                     </div>
                     <!-- Wrapper dengan tinggi tetap/minimum -->
                     <div class="w-full h-[450px] lg:h-[500px] rounded-2xl overflow-hidden bg-white/50 border border-slate-100">
-                        <iframe src="https://www.google.com/calendar/embed?color=%231E3A8A&src=c_8ac709600c9abca6423a35a5d75ccf533abde9d5eb43916feee603159553a38a@group.calendar.google.com&showTitle=0&showPrint=0&showTabs=1&showCalendars=0&showTz=0" class="w-full h-full border-0" frameborder="0" scrolling="no"></iframe>
+                        <iframe src="https://www.google.com/calendar/embed?color=%231E3A8A&src=c_8ac709600c9abca6423a35a5d75ccf533abde9d5eb43916feee603159553a38a@group.calendar.google.com&showTitle=0&showPrint=0&showTabs=1&showCalendars=0&showTz=0" class="w-full h-full border-0" frameborder="0" scrolling="yes"></iframe>
                     </div>
                 </div>
 
@@ -733,28 +796,6 @@
     </button>
 
     <script>
-        // Smooth Scroll Setup
-        const lenis = new Lenis({
-            duration: 0.8, // Diubah agar scroll lebih natural dan tidak terlalu licin
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-        });
-        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
-        requestAnimationFrame(raf);
-
-        // Lenis anchor link integration (Agar klik menu jalan mulus)
-        document.querySelectorAll('a.nav-link, a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const targetId = this.getAttribute('href');
-                if(targetId && targetId.startsWith('#') && targetId.length > 1) {
-                    e.preventDefault();
-                    const targetElement = document.querySelector(targetId);
-                    if(targetElement) {
-                        lenis.scrollTo(targetElement);
-                    }
-                }
-            });
-        });
-
         // Scroll to Top Logic
         const topBtn = document.getElementById('scrollToTop');
         window.addEventListener('scroll', () => {
@@ -831,8 +872,137 @@
             { name: "KKPD_Alya_Queenta", id: "13KSWxSOHhrl38z16n2iku3aZWCxlly_W", img: "AlyaQueenta.png" },
             { name: "FTR_Cayla_Nardin", id: "1xqcmQV873znffkpYHw8wafuylZ91S6YA", img: "CaylaNardin.png" }
         ];
+        const TEAM_META = {
+            "FTR_Adly_Imam": {
+                displayName: "SmartMine - Adly Imam"
+            },
+            "FTR_Saif_Aldero": {
+                displayName: "BriVate - Saif Aldero"
+            },
+            "ISH_Rafa-Ichsan": {
+                displayName: "Labcraft - Rafa Putra ISH",
+                aliases: ["labcraft", "rafa putra ish", "rafa putra", "rafa ichsan", "ish rafa ichsan"]
+            },
+            "FTR_Azrul_Rafif": {
+                displayName: "TB-Dec - Azrul Rafif"
+            },
+            "FTR_Drestra_Satria": {
+                displayName: "MicroTic - Drestra Satria"
+            },
+            "MST_Arum_Aulia": {
+                displayName: "Frontiers - Arum Aulia"
+            },
+            "FTR_Rayya_Syakira": {
+                displayName: "IDRONIC - Rayya Syakira"
+            },
+            "MST_Syifa_Amanda": {
+                displayName: "Forence - Syifa Amanda"
+            },
+            "MST_Karin_Naura": {
+                displayName: "Optima - Karin Naura"
+            },
+            "AAK_Zida_Nindy": {
+                displayName: "Dermalyze - Zida Nindy"
+            },
+            "MST_Syaukie_Rafi": {
+                displayName: "Osvera - Syaukie Rafi"
+            },
+            "TD_Aqil_Yusuf": {
+                displayName: "HydroSense - Aqil Yusuf"
+            },
+            "KKPD_Alya_Queenta": {
+                displayName: "Econix - Alya Queenta"
+            },
+            "FTR_Cayla_Nardin": {
+                displayName: "NirFarm - Cayla Nardin"
+            }
+        };
+        const DEFAULT_TEAM_HINT = 'Pilih tim lewat pencarian atau dropdown daftar tim untuk memuat progres terakhir.';
 
+        const API_CONFIG = {
+            webAppUrl: 'https://script.google.com/macros/s/AKfycbwkzEmj46F25R3FM6NuKzC7O6Ov1pjz0QlLEcs1c5E_0-Uu-Ya4kkDMa3RWL-Jb-a83/exec'
+        };
+        const ACCESS_SCOPE_SITE = 'site';
+        const SITE_PIN_STORAGE_KEY = 'archifSitePin';
+        const SITE_UNLOCK_UNTIL_STORAGE_KEY = 'archifSiteUnlockUntil';
+        const PIN_REMEMBER_DURATION_MS = 7 * 24 * 60 * 60 * 1000;
+        const LOCAL_STORAGE_LAST_TEAM_KEY = 'lastKelompokArchif';
         const grid = document.getElementById('team-grid');
+        const teamNameSet = new Set(teams.map((team) => team.name));
+        const teamDirectory = teams.reduce((acc, team) => {
+            acc[team.name] = {
+                ...team,
+                ...(TEAM_META[team.name] || {})
+            };
+            return acc;
+        }, {});
+        const teamLookup = buildTeamLookup();
+        const progressDataCache = new Map();
+        let appInitialized = false;
+        function normalizeTeamLookupKey(value) {
+            return String(value || '')
+                .trim()
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '');
+        }
+        function buildTeamLookup() {
+            const lookup = new Map();
+            teams.forEach((team) => {
+                const meta = teamDirectory[team.name] || {};
+                [team.name, meta.displayName, ...getDerivedTeamAliases(team.name, meta), ...(meta.aliases || [])].forEach((alias) => {
+                    const normalizedKey = normalizeTeamLookupKey(alias);
+                    if (normalizedKey) {
+                        lookup.set(normalizedKey, team.name);
+                    }
+                });
+            });
+            return lookup;
+        }
+        function getDerivedTeamAliases(teamName, meta = {}) {
+            const aliases = [];
+            const safeTeamName = String(teamName || '').trim();
+            const safeDisplayName = String(meta.displayName || '').trim();
+
+            if (safeDisplayName) {
+                aliases.push(safeDisplayName);
+                aliases.push(safeDisplayName.split(' - ')[0]);
+            }
+
+            const personName = safeTeamName
+                .split('_')
+                .slice(1)
+                .join(' ')
+                .replace(/-/g, ' ')
+                .trim();
+
+            if (personName) {
+                aliases.push(personName);
+            }
+
+            return aliases.filter((alias, index, arr) => {
+                const normalized = normalizeTeamLookupKey(alias);
+                return normalized && arr.findIndex((item) => normalizeTeamLookupKey(item) === normalized) === index;
+            });
+        }
+        function resolveCanonicalTeamName(value) {
+            const trimmedValue = String(value || '').trim();
+            if (!trimmedValue) return '';
+            if (teamNameSet.has(trimmedValue)) return trimmedValue;
+            return teamLookup.get(normalizeTeamLookupKey(trimmedValue)) || '';
+        }
+        function getDisplayTeamName(teamName) {
+            const canonicalName = resolveCanonicalTeamName(teamName) || String(teamName || '').trim();
+            return teamDirectory[canonicalName]?.displayName || canonicalName;
+        }
+        function getDisplayTeamCaption(teamName) {
+            const canonicalName = resolveCanonicalTeamName(teamName) || String(teamName || '').trim();
+            const displayName = getDisplayTeamName(canonicalName);
+            return displayName === canonicalName ? displayName : `${displayName} (${canonicalName})`;
+        }
+        function getTeamCategory(teamName) {
+            const canonicalName = resolveCanonicalTeamName(teamName) || String(teamName || '').trim();
+            return canonicalName.split('_')[0] || '';
+        }
         function renderTeams() {
             const categoryOrder = ['FTR', 'ISH', 'MST', 'AAK', 'TD', 'KKPD'];
             const categoryMeta = {
@@ -849,6 +1019,8 @@
                 const meta = categoryMeta[category] || { color: '#64748B' };
                 const imgSrc = `./${team.img}`;
                 const badgeClass = categoryOrder.includes(category) ? `cat-badge cat-${category}` : 'cat-badge';
+                const displayName = getDisplayTeamName(team.name);
+                const caption = displayName === team.name ? '' : `<p class="mt-1 text-[11px] text-slate-400 truncate" title="${team.name}">${team.name}</p>`;
                 return `
                 <a href="https://drive.google.com/drive/folders/${team.id}?usp=drive_link" target="_blank" 
                    class="team-card group flex flex-col rounded-3xl overflow-hidden transition-all"
@@ -859,9 +1031,10 @@
                     </div>
                     <div class="p-4 flex flex-col flex-grow bg-white/50">
                         <div class="flex items-center gap-2 mb-3 min-w-0">
-                            <h3 class="font-bold text-slate-800 text-sm truncate" title="${team.name}">${team.name}</h3>
+                            <h3 class="font-bold text-slate-800 text-sm truncate" title="${displayName}">${displayName}</h3>
                             <span class="${badgeClass}">${category || 'TIM'}</span>
                         </div>
+                        ${caption}
                         <div class="mt-auto text-xs font-semibold text-slate-500 flex items-center gap-1">
                             Buka Arsip <i class="fa-solid fa-arrow-right-long opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all"></i>
                         </div>
@@ -876,19 +1049,64 @@
             { key: 'implementasi', label: 'Implementasi / Pengembangan' },
             { key: 'pengambilanData', label: 'Pengambilan Data' },
             { key: 'analisisValidasi', label: 'Analisis / Validasi' },
-            { key: 'presentasiPpt', label: 'PPT / Presentasi' },
-            { key: 'laporanAkhir', label: 'Laporan Akhir' }
+            { key: 'presentasiPpt', label: 'Penyusunan Draft Laporan' },
+            { key: 'laporanAkhir', label: 'Finalisasi dan Revisian' }
         ];
+        const fiksiStages = [
+            { key: 'instrumen', label: 'Pengembangan Produk / Solusi' },
+            { key: 'implementasi', label: 'Validasi Pasar & Konsumen' },
+            { key: 'pengambilanData', label: 'Produksi / Pembuatan Prototipe' },
+            { key: 'analisisValidasi', label: 'Model Bisnis & Strategi Usaha' },
+            { key: 'presentasiPpt', label: 'Branding, Promosi, dan Penjualan' },
+            { key: 'laporanAkhir', label: 'Pitch Deck, Presentasi, dan Finalisasi' }
+        ];
+        const fiksiCategories = new Set(['AAK', 'KKPD', 'TD']);
 
         // Logic Progress Bar Evaluasi
         const totalAspek = researchStages.length;
 
         const tahapScoreMap = {
-            'Belum': 0,
-            'Belum Selesai': 50,
-            'Hampir Selesai': 80,
-            'Selesai': 100
+            '0%': 0,
+            '20%': 20,
+            '40%': 40,
+            '60%': 60,
+            '80%': 80,
+            '100%': 100
         };
+        const tahapOptions = ['0%', '20%', '40%', '60%', '80%', '100%'];
+        const tahapLabelMap = {
+            '0%': 'Belum Mulai',
+            '20%': 'Baru Mulai',
+            '40%': 'Tahap Awal',
+            '60%': 'Sudah Berjalan',
+            '80%': 'Hampir Selesai',
+            '100%': 'Selesai'
+        };
+
+        function getStageConfigForTeam(teamName) {
+            return fiksiCategories.has(getTeamCategory(teamName)) ? fiksiStages : researchStages;
+        }
+
+        function updateStageLabelsForTeam(teamName) {
+            const isFiksiTeam = fiksiCategories.has(getTeamCategory(teamName));
+            const stageConfig = getStageConfigForTeam(teamName);
+            stageConfig.forEach((stage) => {
+                const labelEl = document.getElementById(`stage-label-${stage.key}`);
+                if (labelEl) {
+                    labelEl.textContent = stage.label;
+                }
+            });
+            const titleEl = document.getElementById('stage-panel-title');
+            const descEl = document.getElementById('stage-panel-description');
+            if (titleEl) {
+                titleEl.textContent = isFiksiTeam ? 'Posisi Pengembangan FIKSI' : 'Posisi Penelitian';
+            }
+            if (descEl) {
+                descEl.textContent = isFiksiTeam
+                    ? 'Pilih status tiap tahapan pengembangan usaha FIKSI, lalu tambahkan catatan umum bila perlu.'
+                    : 'Pilih status tiap tahapan, lalu tambahkan satu catatan umum bila perlu.';
+            }
+        }
 
         function createDefaultTahapan(defaultValue = '') {
             return researchStages.reduce((acc, stage) => {
@@ -897,27 +1115,458 @@
             }, {});
         }
 
+        function normalizePercentValue(value) {
+            if (typeof value === 'number' && Number.isFinite(value)) {
+                const scaled = value > 0 && value <= 1 ? value * 100 : value;
+                return `${snapPercentToStageStep(scaled)}%`;
+            }
+
+            const raw = String(value || '').trim().replace(',', '.');
+            if (!raw) return '0%';
+
+            if (raw.includes('%')) {
+                return `${snapPercentToStageStep(parseFloat(raw))}%`;
+            }
+
+            const numeric = Number(raw);
+            if (!Number.isFinite(numeric)) return '0%';
+            const scaled = numeric > 0 && numeric <= 1 ? numeric * 100 : numeric;
+            return `${snapPercentToStageStep(scaled)}%`;
+        }
+
+        function snapPercentToStageStep(value) {
+            const safeValue = Math.max(0, Math.min(100, Number(value) || 0));
+            return [0, 20, 40, 60, 80, 100].reduce((closest, step) => (
+                Math.abs(step - safeValue) < Math.abs(closest - safeValue) ? step : closest
+            ), 0);
+        }
+
+        function normalizeStagesObject(stages = {}) {
+            return researchStages.reduce((acc, stage) => {
+                acc[stage.key] = normalizePercentValue(stages[stage.key] || '0%');
+                return acc;
+            }, {});
+        }
+
         // Semua tim dimulai dari 0% sampai ada update data riset yang nyata.
         const teamProgressData = teams.map((team) => ({
             name: team.name,
-            stages: createDefaultTahapan('Belum'),
+            stages: createDefaultTahapan('0%'),
             note: ''
         }));
 
         function getStageToneClass(status) {
-            if (status === 'Selesai') return 'stage-selesai';
-            if (status === 'Hampir Selesai') return 'stage-hampir';
-            if (status === 'Belum Selesai') return 'stage-progress';
+            if (status === '100%') return 'stage-selesai';
+            if (status === '80%' || status === '60%') return 'stage-hampir';
+            if (status === '40%' || status === '20%') return 'stage-progress';
             return 'stage-belum';
         }
 
+        function getTahapValueFromIndex(index) {
+            return tahapOptions[Number(index)] || '0%';
+        }
+
+        function getTahapIndexFromValue(value) {
+            const foundIndex = tahapOptions.indexOf(value);
+            return foundIndex >= 0 ? foundIndex : 0;
+        }
+
+        function getTahapDisplay(value) {
+            return `${value} - ${tahapLabelMap[value] || 'Belum Mulai'}`;
+        }
+
+        function syncTahapInputs() {
+            researchStages.forEach((stage) => {
+                const value = dataAbsen.tahapan[stage.key] || '0%';
+                const sliderEl = document.getElementById(`tahap-${stage.key}`);
+                const labelEl = document.getElementById(`${stage.key}-value`);
+                const sliderIndex = getTahapIndexFromValue(value);
+
+                if (sliderEl) {
+                    sliderEl.value = String(sliderIndex);
+                    sliderEl.style.setProperty('--slider-progress', `${sliderIndex * 20}%`);
+                }
+
+                if (labelEl) {
+                    labelEl.textContent = getTahapDisplay(value);
+                }
+            });
+        }
+
+        function fillKelompokOptions() {
+            const datalist = document.getElementById('kelompok-list');
+            const select = document.getElementById('kelompok-select');
+            if (datalist) {
+                datalist.innerHTML = teams.map((team) => {
+                    const displayName = getDisplayTeamName(team.name);
+                    return `<option value="${displayName}"></option>`;
+                }).join('');
+            }
+            if (!select) return;
+            select.innerHTML = `
+                <option value="">Pilih cepat dari daftar tim...</option>
+                ${teams.map((team) => {
+                    const displayName = getDisplayTeamName(team.name);
+                    return `<option value="${team.name}">${displayName}</option>`;
+                }).join('')}
+            `;
+        }
+
+        function upsertProgressCache(record) {
+            if (!record || !record.name) return;
+            progressDataCache.set(record.name, {
+                name: record.name,
+                stages: normalizeStagesObject(record.stages || {}),
+                note: record.note || ''
+            });
+        }
+
+        function applyProgressData(records = []) {
+            progressDataCache.clear();
+            teamProgressData.forEach((team) => {
+                team.stages = createDefaultTahapan('0%');
+                team.note = '';
+            });
+
+            records.forEach((record) => {
+                upsertProgressCache(record);
+                const matchedTeam = teamProgressData.find((team) => team.name === record.name);
+                if (!matchedTeam) return;
+
+                matchedTeam.stages = normalizeStagesObject(record.stages || {});
+                matchedTeam.note = record.note || '';
+            });
+        }
+
+        function updateKelompokHelper(message, tone = 'muted') {
+            const helper = document.getElementById('kelompok-helper');
+            if (!helper) return;
+
+            helper.textContent = message;
+            helper.className = tone === 'active'
+                ? 'mt-2 text-[11px] text-brand-blue font-medium'
+                : 'mt-2 text-[11px] text-slate-400';
+        }
+
+        function loadTeamProgressToForm(teamName, options = {}) {
+            const canonicalName = resolveCanonicalTeamName(teamName);
+            if (!canonicalName) return false;
+            const displayName = getDisplayTeamName(canonicalName);
+            updateStageLabelsForTeam(canonicalName);
+
+            const cached = progressDataCache.get(canonicalName);
+            if (!cached) {
+                dataAbsen.tahapan = createDefaultTahapan('0%');
+                dataAbsen.catatanUmum = '';
+                document.getElementById('catatan-umum').value = '';
+                syncTahapInputs();
+                updateTahapSummary();
+                if (!options.silent) {
+                    updateKelompokHelper(`Tim ${displayName} belum punya riwayat progres tersimpan.`, 'muted');
+                }
+                return true;
+            }
+
+            dataAbsen.tahapan = {
+                ...createDefaultTahapan('0%'),
+                ...normalizeStagesObject(cached.stages)
+            };
+            dataAbsen.catatanUmum = cached.note || '';
+            document.getElementById('catatan-umum').value = dataAbsen.catatanUmum;
+            syncTahapInputs();
+            updateTahapSummary();
+
+            if (!options.silent) {
+                updateKelompokHelper(`Progress terakhir untuk ${displayName} berhasil dimuat.`, 'active');
+            }
+
+            return true;
+        }
+
+        function applyTeamSelection(teamName, options = {}) {
+            const input = document.getElementById('kelompok');
+            const select = document.getElementById('kelompok-select');
+            if (!input) return false;
+
+            const rawValue = String(teamName || '').trim();
+            const canonicalName = resolveCanonicalTeamName(rawValue);
+            input.value = rawValue;
+            if (!canonicalName) {
+                if (select) select.value = '';
+                if (!options.silent) {
+                    updateKelompokHelper('Nama tim belum cocok dengan daftar yang tersedia.', 'muted');
+                }
+                return false;
+            }
+
+            input.value = getDisplayTeamName(canonicalName);
+            if (select) {
+                select.value = canonicalName;
+            }
+
+            if (!options.skipStorage) {
+                localStorage.setItem(LOCAL_STORAGE_LAST_TEAM_KEY, canonicalName);
+            }
+
+            return loadTeamProgressToForm(canonicalName, options);
+        }
+
+        function renderRecentTeamSuggestions(recentTeams = []) {
+            const container = document.getElementById('recent-team-suggestions');
+            if (!container) return;
+
+            const localLastTeam = localStorage.getItem(LOCAL_STORAGE_LAST_TEAM_KEY);
+            const uniqueTeams = [];
+
+            [localLastTeam, ...recentTeams].forEach((teamName) => {
+                const canonicalName = resolveCanonicalTeamName(teamName);
+                if (!canonicalName || uniqueTeams.includes(canonicalName)) return;
+                uniqueTeams.push(canonicalName);
+            });
+
+            if (!uniqueTeams.length) {
+                container.innerHTML = '';
+                updateKelompokHelper('Belum ada saran tim dari riwayat sebelumnya.', 'muted');
+                return;
+            }
+
+            container.innerHTML = uniqueTeams.slice(0, 6).map((teamName) => `
+                <button type="button" onclick="applyTeamSelection('${teamName}', { silent: false })" class="team-suggestion-btn rounded-full px-3 py-1.5 text-[11px] font-bold">
+                    ${getDisplayTeamName(teamName)}
+                </button>
+            `).join('');
+
+            updateKelompokHelper('Pilih salah satu saran tim di bawah agar lebih cepat.', 'muted');
+        }
+
+        function getStoredSitePin() {
+            return localStorage.getItem(SITE_PIN_STORAGE_KEY) || '';
+        }
+
+        function getStoredSiteUnlockUntil() {
+            return Number(localStorage.getItem(SITE_UNLOCK_UNTIL_STORAGE_KEY) || 0);
+        }
+
+        function isSiteUnlockStillValid() {
+            return getStoredSiteUnlockUntil() > Date.now();
+        }
+
+        function setSiteUnlockState(isUnlocked, pin = '') {
+            if (isUnlocked) {
+                localStorage.setItem(SITE_PIN_STORAGE_KEY, pin);
+                localStorage.setItem(SITE_UNLOCK_UNTIL_STORAGE_KEY, String(Date.now() + PIN_REMEMBER_DURATION_MS));
+                document.body.classList.remove('is-locked');
+                document.getElementById('siteLockGate')?.classList.add('hidden');
+                return;
+            }
+
+            localStorage.removeItem(SITE_PIN_STORAGE_KEY);
+            localStorage.removeItem(SITE_UNLOCK_UNTIL_STORAGE_KEY);
+            document.body.classList.add('is-locked');
+            document.getElementById('siteLockGate')?.classList.remove('hidden');
+        }
+
+        function buildApiUrl(params = {}, options = {}) {
+            const query = new URLSearchParams({
+                ...params,
+                _ts: String(Date.now())
+            });
+            const shouldIncludeAuth = options.includeAuth !== false;
+            const scope = options.scope || ACCESS_SCOPE_SITE;
+            if (shouldIncludeAuth) {
+                const pin = getStoredSitePin();
+                if (pin) {
+                    query.set('pin', pin);
+                    query.set('scope', scope);
+                }
+            }
+            return `${API_CONFIG.webAppUrl}?${query.toString()}`;
+        }
+
+        function fetchAppsScriptJson(params = {}, options = {}) {
+            return new Promise((resolve, reject) => {
+                const callbackName = `archifJsonp_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+                const script = document.createElement('script');
+                const cleanup = () => {
+                    delete window[callbackName];
+                    script.remove();
+                };
+
+                window[callbackName] = (payload) => {
+                    cleanup();
+                    resolve(payload);
+                };
+
+                script.onerror = () => {
+                    cleanup();
+                    reject(new Error('Gagal memuat data dari Apps Script.'));
+                };
+
+                script.src = buildApiUrl({
+                    ...params,
+                    callback: callbackName
+                }, options);
+                document.body.appendChild(script);
+            });
+        }
+
+        async function verifySitePin(pin) {
+            return fetchAppsScriptJson({
+                action: 'auth',
+                pin: String(pin || '').trim(),
+                scope: ACCESS_SCOPE_SITE
+            }, { includeAuth: false });
+        }
+
+        function initializeMainApp() {
+            if (appInitialized) return;
+            appInitialized = true;
+
+            initModalLogic();
+            renderTeams();
+            renderProgress();
+            updateDateTimeCard();
+            document.getElementById('kelompok').addEventListener('change', function () {
+                applyTeamSelection(this.value, { silent: false });
+            });
+            document.getElementById('kelompok-select').addEventListener('change', function () {
+                if (!this.value) return;
+                applyTeamSelection(this.value, { silent: false });
+            });
+            document.getElementById('kelompok').addEventListener('blur', function () {
+                const typedValue = this.value.trim();
+                if (resolveCanonicalTeamName(typedValue)) {
+                    applyTeamSelection(typedValue, { silent: true });
+                }
+            });
+            const lenis = new Lenis({
+                duration: 0.8,
+                smoothWheel: true,
+                lerp: 0.11
+            });
+            window.archifLenis = lenis;
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+            document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    if (!targetId || targetId === '#') return;
+                    if (!document.querySelector(targetId)) return;
+                    e.preventDefault();
+                    scrollToHashTarget(targetId);
+                });
+            });
+            if (window.location.hash) {
+                setTimeout(() => scrollToHashTarget(window.location.hash, { duration: 0.55 }), 120);
+            }
+            refreshRemoteData({ silent: true });
+            setInterval(updateDateTimeCard, 1000);
+            setInterval(updateAbsenStatusMini, 60000);
+            setInterval(() => refreshRemoteData({ silent: true, skipAutofill: true }), 120000);
+        }
+
+        async function handleSiteUnlockSubmit(event) {
+            event.preventDefault();
+            const input = document.getElementById('sitePinInput');
+            const button = document.getElementById('sitePinSubmit');
+            const message = document.getElementById('siteLockMessage');
+            const pin = input?.value?.trim() || '';
+
+            if (!pin) {
+                message.textContent = 'PIN wajib diisi dulu ya.';
+                message.className = 'mt-4 min-h-[20px] text-sm font-semibold text-brand-orange';
+                return;
+            }
+
+            button.disabled = true;
+            button.classList.add('submit-btn-disabled');
+            message.textContent = 'Memverifikasi PIN...';
+            message.className = 'mt-4 min-h-[20px] text-sm font-semibold text-brand-blue';
+
+            try {
+                const payload = await verifySitePin(pin);
+                if (!payload || payload.ok === false) {
+                    throw new Error(payload?.message || 'PIN tidak valid.');
+                }
+
+                setSiteUnlockState(true, pin);
+                input.value = '';
+                message.textContent = '';
+                initializeMainApp();
+            } catch (error) {
+                setSiteUnlockState(false);
+                message.textContent = String(error?.message || error);
+                message.className = 'mt-4 min-h-[20px] text-sm font-semibold text-brand-orange';
+            } finally {
+                button.disabled = false;
+                button.classList.remove('submit-btn-disabled');
+            }
+        }
+
+        async function tryRestoreSiteSession() {
+            const rememberedPin = getStoredSitePin();
+            if (!rememberedPin || !isSiteUnlockStillValid()) {
+                setSiteUnlockState(false);
+                return false;
+            }
+
+            try {
+                const payload = await verifySitePin(rememberedPin);
+                if (!payload || payload.ok === false) {
+                    throw new Error(payload?.message || 'Sesi akses sudah tidak valid.');
+                }
+
+                setSiteUnlockState(true, rememberedPin);
+                initializeMainApp();
+                return true;
+            } catch (error) {
+                setSiteUnlockState(false);
+                document.getElementById('siteLockMessage').textContent = 'Masa akses 1 minggu berakhir, silakan masukkan PIN lagi.';
+                return false;
+            }
+        }
+
+        async function refreshRemoteData(options = {}) {
+            if (!API_CONFIG.webAppUrl) return;
+
+            try {
+                const payload = await fetchAppsScriptJson({ action: 'bootstrap' });
+                if (!payload || payload.ok === false) {
+                    throw new Error(payload?.message || 'Bootstrap data tidak valid.');
+                }
+
+                applyProgressData(payload.teamProgress || []);
+                renderRecentTeamSuggestions(payload.recentTeams || []);
+                renderProgress();
+
+                const currentTeam = resolveCanonicalTeamName(document.getElementById('kelompok')?.value?.trim());
+                if (currentTeam) {
+                    loadTeamProgressToForm(currentTeam, { silent: true });
+                } else if (!options.skipAutofill) {
+                    const suggestedTeam = payload.recentTeams?.[0] || localStorage.getItem(LOCAL_STORAGE_LAST_TEAM_KEY);
+                    if (suggestedTeam) {
+                        applyTeamSelection(suggestedTeam, { silent: true });
+                    }
+                }
+            } catch (error) {
+                console.error(error);
+                if (!options.silent) {
+                    updateKelompokHelper('Riwayat tim dan monitoring belum berhasil dimuat dari server.', 'muted');
+                }
+            }
+        }
+
         function getProgressFromStages(stages) {
-            const stageValues = researchStages.map((stage) => stages[stage.key] || 'Belum');
+            const normalizedStages = normalizeStagesObject(stages || {});
+            const stageValues = researchStages.map((stage) => normalizedStages[stage.key] || '0%');
             const totalScore = stageValues.reduce((sum, tahap) => sum + (tahapScoreMap[tahap] || 0), 0);
 
             return {
                 totalTahap: totalAspek,
-                completedTahap: stageValues.filter((tahap) => tahap === 'Selesai').length,
+                completedTahap: stageValues.filter((tahap) => tahap === '100%').length,
                 percentage: Math.round(totalScore / totalAspek)
             };
         }
@@ -942,11 +1591,13 @@
                 if(progress.percentage <= 40) { colorClass = 'bg-brand-orange'; textColor = 'text-brand-orange'; }
 
                 const detailRows = researchStages.map((stage) => {
-                    const status = team.stages[stage.key] || 'Belum';
+                    const stageConfig = getStageConfigForTeam(team.name);
+                    const stageLabel = (stageConfig.find((item) => item.key === stage.key) || stage).label;
+                    const status = team.stages[stage.key] || '0%';
                     return `
                         <div class="rounded-2xl border border-slate-100 bg-white/70 p-4">
                             <div class="flex items-start justify-between gap-3">
-                                <div class="text-sm font-bold text-slate-800">${stage.label}</div>
+                                <div class="text-sm font-bold text-slate-800">${stageLabel}</div>
                                 <span class="progress-stage-badge ${getStageToneClass(status)}">${status}</span>
                             </div>
                         </div>
@@ -957,7 +1608,8 @@
                     <div class="bg-white/50 rounded-2xl p-5 border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
                         <div class="flex justify-between items-start gap-3 mb-3">
                             <div class="min-w-0">
-                                <h4 class="font-bold text-slate-800 text-sm truncate pr-2" title="${team.name}">${team.name}</h4>
+                                <h4 class="font-bold text-slate-800 text-sm truncate pr-2" title="${getDisplayTeamCaption(team.name)}">${getDisplayTeamName(team.name)}</h4>
+                                ${getDisplayTeamName(team.name) === team.name ? '' : `<p class="mt-1 text-[10px] font-semibold text-slate-400 uppercase tracking-wider">${team.name}</p>`}
                                 <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mt-1">${progress.completedTahap} dari ${totalAspek} Tahap Selesai</p>
                             </div>
                             <span class="text-sm font-extrabold ${textColor}">${progress.percentage}%</span>
@@ -1001,7 +1653,8 @@
                 return `
                     <div class="progress-overview-card rounded-[1.75rem] p-5 transition-transform" style="transform: rotate(${tiltAngles[idx] || '0deg'});">
                         <div class="text-[10px] font-extrabold uppercase tracking-[0.22em] text-slate-400 mb-3">Team ${category}</div>
-                        <div class="font-heading text-lg font-bold text-slate-800 truncate" title="${item.team.name}">${item.team.name}</div>
+                        <div class="font-heading text-lg font-bold text-slate-800 truncate" title="${getDisplayTeamCaption(item.team.name)}">${getDisplayTeamName(item.team.name)}</div>
+                        ${getDisplayTeamName(item.team.name) === item.team.name ? '' : `<div class="mt-1 text-[11px] text-slate-400 truncate">${item.team.name}</div>`}
                         <div class="mt-4 flex items-end justify-between gap-3">
                             <span class="text-3xl font-extrabold ${badgeClass}">${item.progress.percentage}%</span>
                             <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">${item.progress.completedTahap}/${totalAspek} tahap</span>
@@ -1081,13 +1734,42 @@
             });
         }
 
+        function getStickyOffset() {
+            const nav = document.querySelector('nav.glass-nav');
+            return (nav ? nav.offsetHeight : 0) + 18;
+        }
+
+        function scrollToHashTarget(hash, options = {}) {
+            if (!hash || !hash.startsWith('#') || hash.length <= 1) return;
+
+            const targetElement = document.querySelector(hash);
+            if (!targetElement) return;
+
+            const offset = getStickyOffset();
+            if (window.archifLenis) {
+                window.archifLenis.scrollTo(targetElement, {
+                    offset: -offset,
+                    duration: options.duration ?? 0.7
+                });
+                return;
+            }
+
+            const top = targetElement.getBoundingClientRect().top + window.scrollY - offset;
+            window.scrollTo({ top, behavior: 'smooth' });
+        }
+
         function initModalLogic() {
             const todayDateStr = getTodayDateStr();
             const lastAbsen = localStorage.getItem('statusAbsenArchif');
             if (lastAbsen !== todayDateStr) openModal();
             updateAbsenStatusMini();
+            fillKelompokOptions();
+            syncTahapInputs();
             updateTahapSummary();
+            updateStageLabelsForTeam('');
             updateAbsensiStepUI();
+            renderRecentTeamSuggestions([]);
+            updateKelompokHelper(DEFAULT_TEAM_HINT, 'muted');
         }
 
 
@@ -1095,11 +1777,33 @@
         let dataAbsen = {
             lokasi: '',
             mood: '',
-            tahapan: createDefaultTahapan(),
+            tahapan: createDefaultTahapan('0%'),
             catatanUmum: ''
         };
         let currentAbsensiStep = 1;
         let isSubmitting = false;
+        const SUBMIT_DEBOUNCE_MS = 5000;
+        let lastSubmitAt = 0;
+        let submitReleaseTimer = null;
+
+        function setSubmitButtonState(disabled, labelText = 'Selesai') {
+            const submitBtn = document.getElementById('submit-absen-btn');
+            if (!submitBtn) return;
+
+            submitBtn.disabled = disabled;
+            submitBtn.classList.toggle('submit-btn-disabled', disabled);
+            submitBtn.textContent = labelText;
+        }
+
+        function scheduleSubmitRelease() {
+            const remainingMs = Math.max(0, SUBMIT_DEBOUNCE_MS - (Date.now() - lastSubmitAt));
+            window.clearTimeout(submitReleaseTimer);
+            submitReleaseTimer = window.setTimeout(() => {
+                if (!isSubmitting) {
+                    setSubmitButtonState(false, 'Selesai');
+                }
+            }, remainingMs);
+        }
 
         function setOpt(jenis, value, element) {
             const group = document.getElementById(jenis + '-group');
@@ -1108,8 +1812,20 @@
             dataAbsen[jenis] = value;
         }
 
-        function setTahap(jenis, value) {
-            dataAbsen.tahapan[jenis] = value;
+        function setTahap(jenis, sliderIndex) {
+            const tahapValue = getTahapValueFromIndex(sliderIndex);
+            dataAbsen.tahapan[jenis] = tahapValue;
+
+            const labelEl = document.getElementById(`${jenis}-value`);
+            if (labelEl) {
+                labelEl.textContent = getTahapDisplay(tahapValue);
+            }
+
+            const sliderEl = document.getElementById(`tahap-${jenis}`);
+            if (sliderEl) {
+                sliderEl.style.setProperty('--slider-progress', `${Number(sliderIndex) * 20}%`);
+            }
+
             updateTahapSummary();
         }
 
@@ -1134,7 +1850,7 @@
 
         function validatePrimaryStep() {
             return Boolean(
-                document.getElementById('kelompok').value &&
+                resolveCanonicalTeamName(document.getElementById('kelompok').value.trim()) &&
                 dataAbsen.lokasi &&
                 dataAbsen.mood
             );
@@ -1144,7 +1860,7 @@
             const msg = document.getElementById('status-msg');
             if (!validatePrimaryStep()) {
                 msg.style.color = '#F97316';
-                msg.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Lengkapi kelompok, lokasi, dan mood dulu ya.';
+                msg.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Lengkapi kelompok yang valid, lokasi, dan mood dulu ya.';
                 return;
             }
 
@@ -1166,7 +1882,7 @@
 
             return {
                 totalTahap: totalAspek,
-                completedTahap: tahapValues.filter((tahap) => tahap === 'Selesai').length,
+                completedTahap: tahapValues.filter((tahap) => tahap === '100%').length,
                 isComplete: selected.length === totalAspek,
                 percentage: Math.round(totalScore / totalAspek)
             };
@@ -1182,22 +1898,27 @@
 
         function resetAbsenForm() {
             document.getElementById('kelompok').value = '';
+            document.getElementById('kelompok-select').value = '';
             document.querySelectorAll('.absensi-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.tahap-select').forEach(select => { select.value = ''; });
             document.getElementById('catatan-umum').value = '';
             dataAbsen = {
                 lokasi: '',
                 mood: '',
-                tahapan: createDefaultTahapan(),
+                tahapan: createDefaultTahapan('0%'),
                 catatanUmum: ''
             };
+            syncTahapInputs();
             currentAbsensiStep = 1;
             updateAbsensiStepUI();
             updateTahapSummary();
+            updateStageLabelsForTeam('');
+            updateKelompokHelper(DEFAULT_TEAM_HINT, 'muted');
+            setSubmitButtonState(false, 'Selesai');
         }
 
         async function kirimAbsen() {
-            const kelompok = document.getElementById('kelompok').value;
+            const kelompokRaw = document.getElementById('kelompok').value.trim();
+            const kelompok = resolveCanonicalTeamName(kelompokRaw);
             const msg = document.getElementById('status-msg');
             const tahapProgress = getTahapProgress();
             
@@ -1212,22 +1933,35 @@
                 return;
             }
 
+            const remainingDebounce = SUBMIT_DEBOUNCE_MS - (Date.now() - lastSubmitAt);
+            if (remainingDebounce > 0) {
+                msg.style.color = '#F97316';
+                msg.innerHTML = `<i class="fa-solid fa-hourglass-half"></i> Tunggu ${Math.ceil(remainingDebounce / 1000)} detik sebelum mengirim lagi.`;
+                return;
+            }
+
             if (isSubmitting) return;
             isSubmitting = true;
+            lastSubmitAt = Date.now();
+            setSubmitButtonState(true, 'Mengirim...');
+            scheduleSubmitRelease();
 
             msg.style.color = '#1E3A8A'; 
             msg.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Memproses data...';
 
-            const urlScript = 'https://script.google.com/macros/s/AKfycbx4dNgGetal9e37_myv9wKcrwltumo5bkiR3xMCjHhORmaLtIzuA3zRxJTKOT7DiNHS/exec';
-            if (!urlScript) {
+            if (!API_CONFIG.webAppUrl) {
                 msg.style.color = '#F97316';
-                msg.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> URL Apps Script belum diisi. Tambahkan URL Web App di variabel <b>urlScript</b>.';
+                msg.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> URL Apps Script belum diisi. Tambahkan URL Web App di variabel <b>API_CONFIG.webAppUrl</b>.';
                 isSubmitting = false;
+                scheduleSubmitRelease();
                 return;
             }
 
             const todayDateStr = getTodayDateStr();
             const payload = {
+                action: 'submit',
+                scope: ACCESS_SCOPE_SITE,
+                pin: getStoredSitePin(),
                 kelompok,
                 lokasi: dataAbsen.lokasi,
                 mood: dataAbsen.mood,
@@ -1247,14 +1981,28 @@
             try {
                 // Pakai form-urlencoded sederhana agar tidak memicu preflight CORS.
                 const formBody = new URLSearchParams(payload);
-                await fetch(urlScript, {
+                await fetch(API_CONFIG.webAppUrl, {
                     method: 'POST',
                     mode: 'no-cors',
                     body: formBody
                 });
 
                 localStorage.setItem('statusAbsenArchif', todayDateStr);
+                localStorage.setItem(LOCAL_STORAGE_LAST_TEAM_KEY, kelompok);
                 updateAbsenStatusMini();
+                upsertProgressCache({
+                    name: kelompok,
+                    stages: {
+                        instrumen: dataAbsen.tahapan.instrumen,
+                        implementasi: dataAbsen.tahapan.implementasi,
+                        pengambilanData: dataAbsen.tahapan.pengambilanData,
+                        analisisValidasi: dataAbsen.tahapan.analisisValidasi,
+                        presentasiPpt: dataAbsen.tahapan.presentasiPpt,
+                        laporanAkhir: dataAbsen.tahapan.laporanAkhir
+                    },
+                    note: dataAbsen.catatanUmum
+                });
+                await refreshRemoteData({ skipAutofill: true, silent: true });
 
                 msg.style.color = '#06B6D4';
                 msg.innerHTML = '<i class="fa-solid fa-circle-check"></i> Presensi berhasil direkam. Jangan lupa isi form logbook ya!';
@@ -1269,16 +2017,16 @@
                 msg.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Gagal mengirim presensi: ${String(err?.message || err)}`;
             } finally {
                 isSubmitting = false;
+                scheduleSubmitRelease();
             }
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            initModalLogic();
-            renderTeams();
-            renderProgress();
-            updateDateTimeCard();
-            setInterval(updateDateTimeCard, 1000);
-            setInterval(updateAbsenStatusMini, 60000);
+        window.addEventListener('DOMContentLoaded', async () => {
+            document.getElementById('siteLockForm')?.addEventListener('submit', handleSiteUnlockSubmit);
+            const restored = await tryRestoreSiteSession();
+            if (!restored) {
+                document.getElementById('sitePinInput')?.focus();
+            }
         });
     </script>
 </body>

@@ -360,6 +360,64 @@
         .cat-AAK { background: rgba(249, 115, 22, 0.16); color: #C2410C; border-color: rgba(249, 115, 22, 0.26); }
         .cat-TD { background: rgba(16, 185, 129, 0.16); color: #047857; border-color: rgba(16, 185, 129, 0.26); }
         .cat-KKPD { background: rgba(6, 182, 212, 0.16); color: #0E7490; border-color: rgba(6, 182, 212, 0.26); }
+        .mobile-nav-panel {
+            display: none;
+        }
+        .mobile-nav-panel.open {
+            display: flex;
+        }
+        @media (hover: none) {
+            .glass-panel:hover,
+            .team-card:hover,
+            .absensi-btn:hover {
+                transform: none;
+            }
+        }
+        @media (max-width: 1023px) {
+            body {
+                background-attachment: scroll;
+            }
+            .section-anchor {
+                scroll-margin-top: 132px;
+            }
+            .glass-panel:hover,
+            .team-card:hover {
+                transform: none;
+            }
+            .tahap-slider-label {
+                width: 100%;
+                white-space: normal;
+                text-align: center;
+                line-height: 1.35;
+            }
+        }
+        @media (max-width: 767px) {
+            html {
+                scroll-padding-top: 124px;
+            }
+            .site-lock-panel,
+            #modal-content {
+                padding: 1.5rem;
+                border-radius: 1.5rem;
+            }
+            .site-lock-panel h2,
+            #modal-content h3 {
+                font-size: 1.5rem;
+            }
+            .tahap-scale {
+                font-size: 9px;
+                gap: 2px;
+            }
+            .progress-overview-card {
+                transform: none !important;
+            }
+            #scrollToTop {
+                width: 2.75rem;
+                height: 2.75rem;
+                right: 1rem;
+                bottom: 1rem;
+            }
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-brand-cyan selection:text-white is-locked">
@@ -399,13 +457,13 @@
     </div>
 
     <nav class="glass-nav sticky top-0 z-50 w-full">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-3">
             
             <!-- Logo & Title (Lebih clean) -->
-            <a href="#" class="flex items-center gap-3 group">
+            <a href="#" class="flex min-w-0 items-center gap-3 group">
                 <!-- GANTI src="logo_custom_kamu.png" DENGAN NAMA FILE LOGO ASLIMU NANTI -->
-                <img src="./logo.png" alt="Logo" class="h-10 object-contain transition-transform duration-300 group-hover:scale-105" id="custom-logo">
-                <span class="font-heading font-bold text-xl text-brand-dark tracking-tight">Research SMASIF</span>
+                <img src="./logo.png" alt="Logo" class="h-9 sm:h-10 object-contain transition-transform duration-300 group-hover:scale-105" id="custom-logo">
+                <span class="font-heading font-bold text-base sm:text-xl text-brand-dark tracking-tight leading-tight">Research SMASIF</span>
             </a>
             
             <!-- Menu santai -->
@@ -416,33 +474,49 @@
                 <a href="#arsip" class="nav-link hover:text-brand-cyan transition-colors">Arsip Tim</a>
             </div>
 
-            <a href="#presensi-panel" class="nav-link inline-flex items-center justify-center min-h-[44px] bg-brand-blue hover:bg-brand-cyan text-white text-sm font-semibold px-6 py-2.5 rounded-full transition-colors duration-300">
+            <div class="hidden md:flex items-center">
+                <a href="#presensi-panel" class="nav-link inline-flex items-center justify-center min-h-[44px] bg-brand-blue hover:bg-brand-cyan text-white text-sm font-semibold px-6 py-2.5 rounded-full transition-colors duration-300">
+                    Isi Presensi
+                </a>
+            </div>
+            <button id="mobile-nav-toggle" type="button" class="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-200 bg-white/80 text-brand-dark shadow-sm transition-colors hover:border-brand-cyan hover:text-brand-blue" aria-expanded="false" aria-controls="mobile-nav-panel" aria-label="Buka menu navigasi">
+                <i class="fa-solid fa-bars text-base"></i>
+            </button>
+        </div>
+        <div id="mobile-nav-panel" class="mobile-nav-panel md:hidden border-t border-white/60 px-4 sm:px-6 pb-4">
+            <div class="flex flex-col gap-2 pt-4 text-sm font-semibold text-slate-600">
+                <a href="#evaluasi" class="nav-link inline-flex min-h-[44px] items-center rounded-2xl px-4 py-3 hover:bg-white/80 hover:text-brand-cyan transition-colors">Evaluasi</a>
+                <a href="#logbook-panel" class="nav-link inline-flex min-h-[44px] items-center rounded-2xl px-4 py-3 hover:bg-white/80 hover:text-brand-cyan transition-colors">Logbook</a>
+                <a href="#presensi-panel" class="nav-link inline-flex min-h-[44px] items-center rounded-2xl px-4 py-3 hover:bg-white/80 hover:text-brand-cyan transition-colors">Presensi</a>
+                <a href="#arsip" class="nav-link inline-flex min-h-[44px] items-center rounded-2xl px-4 py-3 hover:bg-white/80 hover:text-brand-cyan transition-colors">Arsip Tim</a>
+                <a href="#presensi-panel" class="nav-link inline-flex min-h-[48px] items-center justify-center bg-brand-blue hover:bg-brand-cyan text-white text-sm font-semibold px-6 py-3 rounded-full transition-colors duration-300 mt-2">
                 Isi Presensi
-            </a>
+                </a>
+            </div>
         </div>
     </nav>
 
-    <section class="relative pt-24 pb-16 px-6 max-w-7xl mx-auto flex flex-col items-center text-center min-h-[75vh] justify-center reveal active">
+    <section class="relative pt-20 sm:pt-24 pb-14 sm:pb-16 px-4 sm:px-6 max-w-7xl mx-auto flex flex-col items-center text-center min-h-[70vh] sm:min-h-[75vh] justify-center reveal active">
         
         <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel text-brand-blue text-xs font-bold uppercase tracking-widest mb-6">
             <i class="fa-solid fa-flask text-brand-cyan"></i> OPSI-FIKSI 2026
         </div>
         
-        <h1 class="font-heading text-5xl md:text-7xl font-extrabold text-brand-dark tracking-tight leading-tight max-w-4xl mb-6">
+        <h1 class="font-heading text-4xl sm:text-5xl md:text-7xl font-extrabold text-brand-dark tracking-tight leading-tight max-w-4xl mb-6">
             Walk Through <br> 
             <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan">Knowledge.</span>
         </h1>
         
         <!-- Copywriting lebih profesional tapi tetap ramah -->
-        <p class="text-slate-500 text-lg md:text-xl max-w-2xl font-light leading-relaxed mb-10">
+        <p class="text-slate-500 text-base sm:text-lg md:text-xl max-w-2xl font-light leading-relaxed mb-8 sm:mb-10">
             Pusat data digital untuk menyimpan dokumen riset, memantau evaluasi, dan merekam jejak inovasi kita secara kolaboratif dan terstruktur.
         </p>
         
         <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-            <a href="#arsip" class="nav-link bg-brand-blue hover:bg-brand-dark text-white px-8 py-4 rounded-full font-semibold transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
+            <a href="#arsip" class="nav-link bg-brand-blue hover:bg-brand-dark text-white px-6 sm:px-8 py-4 rounded-full font-semibold transition-all hover:-translate-y-1 flex items-center justify-center gap-2 w-full sm:w-auto">
                 Lihat Arsip Tim <i class="fa-solid fa-arrow-down"></i>
             </a>
-            <a href="#presensi-panel" class="nav-link glass-panel text-brand-blue px-8 py-4 rounded-full font-semibold flex items-center justify-center gap-2">
+            <a href="#presensi-panel" class="nav-link glass-panel text-brand-blue px-6 sm:px-8 py-4 rounded-full font-semibold flex items-center justify-center gap-2 w-full sm:w-auto">
                 <i class="fa-solid fa-clipboard-user"></i> Presensi Kehadiran
             </a>
         </div>
@@ -454,7 +528,7 @@
         <div class="absolute bottom-[-10%] right-[-5%] w-[30rem] h-[30rem] bg-brand-blue/5 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
     </div>
 
-    <section class="py-12 px-6 max-w-7xl mx-auto reveal">
+    <section class="py-12 px-4 sm:px-6 max-w-7xl mx-auto reveal">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             
             <!-- Tampilan Card lebih clean dan seragam -->
@@ -497,18 +571,18 @@
         </div>
     </section>
 
-    <section id="hub" class="py-16 px-6 max-w-7xl mx-auto reveal">
+    <section id="hub" class="py-14 sm:py-16 px-4 sm:px-6 max-w-7xl mx-auto reveal">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start lg:items-stretch">
             
             <!-- Kolom Absen + Kotak Waktu -->
             <div class="lg:col-span-5 flex flex-col gap-6 lg:h-full">
-                <div id="presensi-panel" class="glass-panel section-anchor rounded-[2rem] p-8 flex flex-col">
-                    <div class="flex items-center gap-4 mb-8">
+                <div id="presensi-panel" class="glass-panel section-anchor rounded-[1.75rem] sm:rounded-[2rem] p-5 sm:p-8 flex flex-col">
+                    <div class="flex items-start sm:items-center gap-4 mb-8">
                         <div class="w-12 h-12 rounded-2xl bg-brand-cyan flex items-center justify-center text-white shadow-lg">
                             <i class="fa-solid fa-clipboard-check text-xl"></i>
                         </div>
                         <div>
-                            <h3 class="font-heading font-bold text-slate-800 text-xl xl:text-2xl leading-tight whitespace-nowrap">Sistem Presensi</h3>
+                            <h3 class="font-heading font-bold text-slate-800 text-lg sm:text-xl xl:text-2xl leading-tight">Sistem Presensi</h3>
                             <p class="text-sm text-slate-500 font-medium text-brand-orange"><i class="fa-solid fa-circle-exclamation text-xs"></i> Wajib diisi sebelum riset</p>
                         </div>
                     </div>
@@ -532,7 +606,7 @@
 
                         <div>
                             <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Lokasi Pengerjaan</label>
-                            <div class="grid grid-cols-2 gap-3" id="lokasi-group">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="lokasi-group">
                                 <button onclick="setOpt('lokasi', 'Lab', this)" class="absensi-btn py-3 rounded-xl text-sm font-medium text-slate-600"><i class="fa-solid fa-flask mr-1"></i> Laboratorium</button>
                                 <button onclick="setOpt('lokasi', 'Asrama', this)" class="absensi-btn py-3 rounded-xl text-sm font-medium text-slate-600"><i class="fa-solid fa-building-user mr-1"></i> Asrama / Kamar</button>
                             </div>
@@ -540,7 +614,7 @@
 
                         <div>
                             <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Kondisi Tim (Mood & Fokus)</label>
-                            <div class="grid grid-cols-3 gap-3" id="mood-group">
+                            <div class="grid grid-cols-3 gap-2 sm:gap-3" id="mood-group">
                                 <button onclick="setOpt('mood', 'Progres Lancar', this)" class="absensi-btn absensi-btn-mood py-3 rounded-xl flex flex-col items-center">
                                     <span class="text-xl mb-1">🚀</span><span class="text-[10px] font-bold">LANCAR</span>
                                 </button>
@@ -642,7 +716,7 @@
                                 Lanjut ke Posisi Penelitian
                             </button>
                         </div>
-                        <div id="absensi-step-2-actions" class="hidden flex gap-3">
+                        <div id="absensi-step-2-actions" class="hidden flex flex-col sm:flex-row gap-3">
                             <button onclick="prevAbsensiStep()" class="flex-1 bg-white/80 text-slate-700 font-bold py-3 rounded-xl border border-slate-200 hover:border-brand-cyan transition-colors">
                                 Kembali
                             </button>
@@ -663,7 +737,7 @@
                     </div>
                 </div>
 
-                <div class="glass-panel rounded-[2rem] p-6 flex flex-col lg:flex-1">
+                <div class="glass-panel rounded-[1.75rem] sm:rounded-[2rem] p-5 sm:p-6 flex flex-col lg:flex-1">
                     <div class="flex items-start gap-3">
                         <div class="w-10 h-10 rounded-2xl bg-white text-brand-blue flex items-center justify-center shadow-sm">
                             <i class="fa-solid fa-clock"></i>
@@ -676,7 +750,7 @@
                     <div class="mt-4 flex flex-col gap-4 text-sm">
                         <div class="rounded-[1.75rem] bg-white/90 border border-white/70 p-5">
                             <div class="text-[10px] font-extrabold uppercase tracking-widest text-slate-400">Jam</div>
-                            <div id="live-clock" class="mt-3 font-heading text-5xl sm:text-6xl font-extrabold text-slate-800 tracking-tight leading-none">00:00:00</div>
+                            <div id="live-clock" class="mt-3 font-heading text-4xl sm:text-6xl font-extrabold text-slate-800 tracking-tight leading-none">00:00:00</div>
                             <p class="mt-3 text-xs text-slate-500">Waktu lokal perangkat kamu</p>
                         </div>
                         <div class="rounded-[1.75rem] bg-gradient-to-br from-brand-blue/10 to-brand-cyan/10 border border-white/70 p-4 flex flex-col justify-center">
@@ -693,7 +767,7 @@
             <div class="lg:col-span-7 flex flex-col gap-6">
                 
                 <!-- Logbook Google Form Embed -->
-                <div id="logbook-panel" class="glass-panel section-anchor rounded-[2rem] p-6 flex flex-col">
+                <div id="logbook-panel" class="glass-panel section-anchor rounded-[1.75rem] sm:rounded-[2rem] p-5 sm:p-6 flex flex-col">
                     <div class="flex items-center gap-3 mb-4">
                         <i class="fa-solid fa-book-journal-whills text-brand-orange text-xl"></i>
                         <div>
@@ -702,19 +776,19 @@
                         </div>
                     </div>
                     <!-- Wrapper dengan tinggi tetap/minimum agar iframe tidak menyusut -->
-                    <div class="w-full h-[600px] lg:h-[680px] rounded-2xl overflow-hidden bg-white border border-slate-100">
+                    <div class="w-full h-[460px] sm:h-[600px] lg:h-[680px] rounded-2xl overflow-hidden bg-white border border-slate-100">
                         <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdWkc8fTsv74HDfFbSmz6JrHKDdgd9S51keOcZ9tPAbNIx8YA/viewform?embedded=true" class="w-full h-full border-0" frameborder="0" marginheight="0" marginwidth="0">Memuat…</iframe>
                     </div>
                 </div>
 
                 <!-- Kalender -->
-                <div id="calendar-panel" class="glass-panel section-anchor rounded-[2rem] p-6 flex flex-col">
+                <div id="calendar-panel" class="glass-panel section-anchor rounded-[1.75rem] sm:rounded-[2rem] p-5 sm:p-6 flex flex-col">
                     <div class="flex items-center gap-3 mb-4">
                         <i class="fa-solid fa-calendar-check text-brand-blue text-xl"></i>
                         <h3 class="font-heading font-bold text-slate-800 text-xl">Timeline Agenda</h3>
                     </div>
                     <!-- Wrapper dengan tinggi tetap/minimum -->
-                    <div class="w-full h-[450px] lg:h-[500px] rounded-2xl overflow-hidden bg-white/50 border border-slate-100">
+                    <div class="w-full h-[340px] sm:h-[420px] lg:h-[500px] rounded-2xl overflow-hidden bg-white/50 border border-slate-100">
                         <iframe src="https://www.google.com/calendar/embed?color=%231E3A8A&src=c_8ac709600c9abca6423a35a5d75ccf533abde9d5eb43916feee603159553a38a@group.calendar.google.com&showTitle=0&showPrint=0&showTabs=1&showCalendars=0&showTz=0" class="w-full h-full border-0" frameborder="0" scrolling="yes"></iframe>
                     </div>
                 </div>
@@ -723,8 +797,8 @@
         </div>
     </section>
 
-    <section id="evaluasi" class="py-20 px-6 reveal">
-        <div class="max-w-7xl mx-auto glass-panel rounded-[2.5rem] p-6 md:p-12">
+    <section id="evaluasi" class="py-16 sm:py-20 px-4 sm:px-6 reveal">
+        <div class="max-w-7xl mx-auto glass-panel rounded-[2rem] sm:rounded-[2.5rem] p-5 sm:p-6 md:p-12">
             
             <div class="text-center mb-10 md:mb-14">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 text-brand-cyan text-xs font-bold uppercase mb-4">
@@ -768,7 +842,7 @@
         </div>
     </section>
 
-    <section id="arsip" class="py-20 px-6 reveal">
+    <section id="arsip" class="py-16 sm:py-20 px-4 sm:px-6 reveal">
         <div class="max-w-7xl mx-auto">
             <div class="mb-10 text-center md:text-left">
                 <h2 class="font-heading text-3xl font-bold text-slate-900 mb-2">Arsip Drive Tim</h2>
@@ -783,7 +857,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="mt-12 py-10 px-6 border-t border-slate-200">
+    <footer class="mt-12 py-10 px-4 sm:px-6 border-t border-slate-200">
         <div class="max-w-7xl mx-auto flex flex-col items-center justify-center gap-2 text-center">
             <span class="font-heading font-bold text-slate-800">RESEARCH SMASIF &copy; 2026</span>
             <span class="text-sm text-slate-500">Walk Through Knowledge.</span>
@@ -1456,8 +1530,14 @@
                     if (!targetId || targetId === '#') return;
                     if (!document.querySelector(targetId)) return;
                     e.preventDefault();
+                    closeMobileNav();
                     scrollToHashTarget(targetId);
                 });
+            });
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 768) {
+                    closeMobileNav();
+                }
             });
             if (window.location.hash) {
                 setTimeout(() => scrollToHashTarget(window.location.hash, { duration: 0.55 }), 120);
@@ -1737,6 +1817,26 @@
         function getStickyOffset() {
             const nav = document.querySelector('nav.glass-nav');
             return (nav ? nav.offsetHeight : 0) + 18;
+        }
+
+        function toggleMobileNav(forceOpen) {
+            const panel = document.getElementById('mobile-nav-panel');
+            const button = document.getElementById('mobile-nav-toggle');
+            if (!panel || !button) return;
+
+            const shouldOpen = typeof forceOpen === 'boolean'
+                ? forceOpen
+                : !panel.classList.contains('open');
+
+            panel.classList.toggle('open', shouldOpen);
+            button.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+            button.innerHTML = shouldOpen
+                ? '<i class="fa-solid fa-xmark text-lg"></i>'
+                : '<i class="fa-solid fa-bars text-base"></i>';
+        }
+
+        function closeMobileNav() {
+            toggleMobileNav(false);
         }
 
         function scrollToHashTarget(hash, options = {}) {
@@ -2023,6 +2123,7 @@
 
         window.addEventListener('DOMContentLoaded', async () => {
             document.getElementById('siteLockForm')?.addEventListener('submit', handleSiteUnlockSubmit);
+            document.getElementById('mobile-nav-toggle')?.addEventListener('click', () => toggleMobileNav());
             const restored = await tryRestoreSiteSession();
             if (!restored) {
                 document.getElementById('sitePinInput')?.focus();

@@ -1,458 +1,478 @@
 [
-  {
-    "Natural Citronella Repellent: Pemanfaatan Limbah Kertas Minyak sebagai Obat Nyamuk dengan Penambahan Ekstrak Serai": "Kreativitas sangat baik, kemampuan berpikir kritis saat uji coba perlu ditingkatkan.",
-    "narasi": "Kelompok sangat kompak membagi tugas riset. Saat hasil kurang maksimal, mereka segera berdiskusi mencari literatur baru."
-  },
-  {
-    "Penerapan Deep Learning pada Decision Support System dalam Perancangan Konsep Chatbot Interaktif \"Loopa\"": "Siswa menunjukkan inovasi kreatif, namun nalar kritis terhadap efisiensi sistem perlu pendampingan.",
-    "narasi": "Kerja sama tim terlihat kuat dari awal. Menghadapi kendala coding, mereka bersama-sama mencari solusi secara sistematis."
-  },
-  {
-    "Personalisasi Rekomendasi Material Health-Conscious Fashion bagi Remaja Urban": "Ide gotong royong sangat solid, kemandirian mencari referensi lanjutan perlu dibiasakan.",
-    "narasi": "Mereka menyatukan berbagai ide dengan kepala dingin. Perbedaan pendapat diselesaikan melalui diskusi yang logis."
-  },
-  {
-    "ArgoGenius: Inovasi Platform Pertanian Cerdas berbasis Al dan Sistem Hidroponik untuk Optimalisasi Lahan Sempit di Era Krisis Iklim": "Kreativitas dan kolaborasi luar biasa, evaluasi kritis terhadap data perlu dipertajam.",
-    "narasi": "Sinergi kelompok sangat bagus dalam setiap tahapan. Ketika sensor gagal, mereka mengevaluasi penyebabnya tanpa menyerah."
-  },
-  {
-    "Website Cek Kesehatan Berbasis Al": "Semangat gotong royong sangat baik, nalar kritis pada validitas data perlu dilatih.",
-    "narasi": "Setiap anggota mengambil peran dengan dedikasi. Masalah teknis diatasi dengan mencari alternatif bersama-sama."
-  },
-  {
-    "Studi Eksperimental Thermoelectric Generator (Teg) Dalam Memanen Energi Dari Panas Buangan Ac Atau Kulkas Rumah Tangga Menggunakan Efek Seebeck": "Siswa sangat kreatif bereksperimen, namun analisis kritis terhadap efisiensi daya perlu ditingkatkan.",
-    "narasi": "Kelompok membagi waktu pengerjaan dengan rapi. Kendala suhu pada eksperimen diselesaikan lewat pengujian ulang yang teliti."
-  },
-  {
-    "Fit-live": "Inovasi sangat baik, gotong royong perlu dipertahankan sambil memacu kemandirian berpikir kritis.",
-    "narasi": "Tim bekerja cepat dan saling melengkapi. Saat menghadapi kebuntuan ide, mereka proaktif melakukan curah pendapat."
-  },
-  {
-    "Penerapan Sistem Kombinasi Bioflok-Akuaponik sebagai Solusi penghematan biaya.": "Kolaborasi tim sangat baik, analisis kritis terhadap dampak lingkungan proyek bisa dikembangkan lagi.",
-    "narasi": "Pembagian tugas observasi berjalan sangat lancar. Mereka mencari solusi alternatif ketika bibit tanaman bermasalah."
-  },
-  {
-    "Penyegar nafas berbahan dasar Tanaman stevia": "Kreativitas pengolahan bahan unggul, nalar kritis dalam uji kualitas perlu didorong.",
-    "narasi": "Siswa saling bantu meracik komposisi bahan. Ketidaksesuaian rasa awal diperbaiki dengan menimbang ulang takaran secara presisi."
-  },
-  {
-    "Analisis Potensi Energi Listrik dari Limbah Peternakan Melalui Sistem Biogas sebagai Upaya Pemanfaatan Energi Terbarukan": "Gotong royong luar biasa, kemandirian mengevaluasi sumber literatur perlu terus dilatih.",
-    "narasi": "Tim menunjukkan sinergi kuat saat mengambil sampel. Kegagalan fermentasi awal disikapi dengan memperbaiki kondisi suhu reaktor."
-  },
-  {
-    "HydroPlast Block: Inovasi Paving Berpori Ramah Lingkungan dari Limbah Plastik dan Agregat Organik sebagai Solusi Resapan Air dan Pencegahan Banjir Perkotaan": "Daya cipta sangat kreatif, analisis kritis terhadap daya tahan produk harus dibiasakan.",
-    "narasi": "Mereka bekerja ekstra kompak mendaur ulang material. Retaknya purwarupa awal diselesaikan dengan mengubah proporsi campuran."
-  },
-  {
-    "Perancangan Chatbot Berbasis Al sebagai Media Dukungan Psikologis bagi Anak Muda": "Kreativitas digital sangat baik, pemikiran kritis terhadap privasi pengguna butuh arahan.",
-    "narasi": "Anggota tim saling mendukung menyusun alur percakapan. Saat sistem merespons error, mereka membedah kode secara bersama-sama."
-  },
-  {
-    "Teknologi Siaga Bencana: Prototipe Sensor Pintar untuk Deteksi Dini Banjir dan Peningkatan Ketahanan Komunitas.": "Semangat kolaborasi menonjol, namun nalar kritis tentang sensitivitas alat perlu digali.",
-    "narasi": "Tugas kalibrasi dibagi rata tanpa tumpang tindih. Mereka segera merombak sirkuit ketika alarm gagal berbunyi tepat waktu."
-  },
-  {
-    "Merevolusi Mobilitas Tunanetra: Implementasi Computer Vision Berbasis Aplikasi Smartphone TRAE (Tunanetra Real-Time Application Equipment) Terintegrasi Sensor Suara": "Inovasi sosial yang sangat kreatif, nalar kritis pengujian lapangan perlu ditingkatkan.",
-    "narasi": "Kelompok ini sangat suportif satu sama lain. Delay pada sensor dipecahkan lewat optimalisasi program bersama."
-  },
-  {
-    "Step to Power: Inovasi Sepatu Piezoelectric Penghasil Energi Listrik Ramah Lingkungan": "Siswa sangat tanggap dan gotong royong, evaluasi kritis konversi energi perlu dibiasakan.",
-    "narasi": "Pemasangan elemen piezoelektrik dilakukan bahu-membahu. Output tegangan yang kecil membuat mereka berdiskusi mengganti susunan rangkaian."
-  },
-  {
-    "Pengembangan Peredam Suara Eco - Acoustic Berbasis Serabut Kelapa sebagai Bahan Ramah Lingkungan": "Kreativitas pemanfaatan limbah sangat bagus, pemikiran kritis pada pengujian akustik perlu diarahkan.",
-    "narasi": "Tim merakit bahan dengan sangat rapi dan bagi peran. Lemahnya daya redam awal diatasi dengan menambah ketebalan lapisan serabut."
-  },
-  {
-    "TERRA- Smart Monitoring Technology for Environmental Root Response Analysis Guna Meningkatkan Kepedulian Siswa Pada Taman Sekolah": "Kerja tim sangat solid, kemandirian analitik terhadap data lingkungan harus dilatih.",
-    "narasi": "Sinergi observasi lapangan berjalan sangat lancar. Kendala penempatan alat didiskusikan secara musyawarah mufakat."
-  },
-  {
-    "EcoBreath: Inovasi Alat Penyaring CO2 Ramah Lingkungan untuk Udara Lebih Bersih": "Desain produk sangat kreatif, analisis kritis daya saring alat perlu terus dibiasakan.",
-    "narasi": "Masing-masing anggota bertanggung jawab atas modul filternya. Kebocoran udara diatasi dengan penyegelan ulang yang teliti."
-  },
-  {
-    "GTA (GROW TOGETHER with ABK) Website Edukasi Digital Untuk Pendampingan dan Dukungan Orang Tua Anak Berkebutuhan Khusus": "Gotong royong sosial sangat tinggi, evaluasi kritis materi edukasi harus dipertajam.",
-    "narasi": "Mereka berbagi tugas mencari data secara harmonis. Kesulitan desain antarmuka diselesaikan lewat tutor sebaya dalam kelompok."
-  },
-  {
-    "PENGEMBANGAN BIO BATERAI BERBASIS HIDROGEL PVA DENGAN EKSTRAK KULIT JERUK DENGAN INOVASI COLLOIDAL TIO2 UNTUK PENYIMPANAN ENERGI RAMAH LINGKUNGAN": "Ide sangat progresif dan kolaboratif, kemampuan memverifikasi data eksperimen perlu ditingkatkan.",
-    "narasi": "Proses pencampuran zat kimia dikerjakan dengan sangat kompak. Drop tegangan pada baterai dianalisis bersama hingga ditemukan sebabnya."
-  },
-  {
-    "Pemanfaatan Limbah Kapas Micellar Water sebagai Media Tanam Biodegradable Melalui Detoksifikasi, Adsorpsi Biochar, dan Penguatan Struktur Selulosa": "Pendekatan inovatif sangat kreatif, ketajaman kritis mengukur tingkat residu perlu dipandu.",
-    "narasi": "Kerja laboratorium dibagi bergiliran tanpa ego. Pertumbuhan tanaman yang lambat membuat mereka mengevaluasi kembali pH tanah."
-  },
-  {
-    "MOTECTOR (Moisture Detector) - Rancang Bangun Pendeteksi Kelembapan Tanah di Lahan Pertanian Berbasis loT": "Semangat gotong royong teknis sangat baik, daya kritis pada stabilitas jaringan alat perlu dibiasakan.",
-    "narasi": "Proses penyolderan dan coding dikerjakan bersama-sama. Saat koneksi terputus, mereka segera mencari masalah pada modul WiFi."
-  },
-  {
-    "AI-NINE: Anti-rain Electric Clothesline": "Sangat inovatif mengaplikasikan otomatisasi, analisis kritis terhadap keamanan listrik harus diutamakan.",
-    "narasi": "Tim merakit perangkat mekanis jemuran dengan kompak. Respon sensor lambat dikoreksi lewat pengaturan ambang batas cahaya."
-  },
-  {
-    "Pengembangan Alat Pengingat Minum Air Berbasis Buzzer dan Timer untuk Siswa": "Ide kreatif sederhana dan bermanfaat, kemampuan kritis menganalisis perilaku pengguna perlu dilatih.",
-    "narasi": "Semua anggota aktif mendesain prototipe. Suara buzzer yang mengganggu membuat mereka cepat mencari opsi volume yang pas."
-  },
-  {
-    "Rancang Bangun Kincir Air Hibrida sebagai Pemanen Energi Air Hujan untuk Pembangkitan Listrik Skala Kecil": "Kreativitas desain sangat tinggi, nalar kritis mengoptimalkan debit air perlu pendampingan.",
-    "narasi": "Pembuatan kincir dibagi berdasarkan kemampuan tiap anak. Putaran yang tersendat diperbaiki dengan mengatur sudut sudu kincir."
-  },
-  {
-    "Pengolahan Limbah Plastik Polethylene Terephthlate (PET) dan Serbuk Kayu Sebagai Material Alternatif Untuk Pembuatan Kursi": "Gotong royong fisik luar biasa, analisis kritis kekuatan struktur material perlu ditingkatkan.",
-    "narasi": "Proses peleburan dan pencetakan dikerjakan saling bahu-membahu. Ketidaksempurnaan cetakan dievaluasi dengan menaikkan suhu pemanasan."
-  },
-  {
-    "Pengembangan Smart Air Purifer Berbasis Al dan IOT dengan Kontrol Filtrasi Otomatis Untuk Mitigasi Polusi Urban": "Penggunaan teknologi canggih terlihat, namun kemandirian kritis dalam kalibrasi sensor butuh latihan.",
-    "narasi": "Integrasi sistem dilakukan secara bersama-sama penuh antusiasme. Kegagalan pembacaan debu disikapi dengan memprogram ulang sensitivitasnya."
-  },
-  {
-    "Analisis Potensi Limbah Singkong (Manihot Esculenta) Sebagai Bahan Baku Bioetanol Dalam Upaya Pemanfaatan Biomassa Lokal Menuju Transisi Energi Terbarukan": "Inisiatif pemanfaatan lokal sangat baik, nalar kritis terkait kemurnian hasil akhir perlu diasah.",
-    "narasi": "Proses distilasi diawasi tim secara bergantian. Hasil fermentasi yang gagal membuat mereka mengecek kembali sterilisasi alat."
-  },
-  {
-    "Hugspice: Inovasi Pembuatan Rempah Celup Sebagai Alternatif Pereda Nyeri Haid": "Kreativitas produk kesehatan sangat baik, evaluasi kritis terhadap efek samping harus ditekankan.",
-    "narasi": "Anggota berbagi tugas menimbang bahan alami dengan teliti. Kritik mengenai aroma langsung ditanggapi dengan meramu kombinasi baru."
-  },
-  {
-    "Eco Turbine Ventilator Kaleng Bekas Untuk Memperbaiki Kenyamanan Termal Pada Bangunan Di Daerah Tropis": "Ide daur ulang sangat brilian, gotong royong tinggi, tapi nalar kritis aerodinamika perlu dibiasakan.",
-    "narasi": "Mereka mengumpulkan kaleng bekas bersama-sama tanpa sungkan. Saat putaran kurang lancar, poros turbin dievaluasi secara logis."
-  },
-  {
-    "PEMBUATAN BRIKET DARI SERBUK GERGAJI KAYU KERING": "Siswa menunjukkan komitmen gotong royong, nalar kritis efisiensi pembakaran briket harus ditingkatkan.",
-    "narasi": "Pencetakan briket dilakukan dengan sangat kompak. Briket yang mudah hancur memicu diskusi untuk menambah takaran perekat."
-  },
-  {
-    "Implementasi CCTV Berbasis Internet of Things (IoT) Sebagai Smart Security untuk Mengurangi Tindakan Kejahatan Di Masyarakat": "Kreativitas sistem keamanan baik, analisis kritis terhadap cakupan blind spot harus diperhatikan.",
-    "narasi": "Konfigurasi server kamera dikerjakan saling bantu. Masalah delay transmisi video segera mereka telusuri ke pengaturan jaringan."
-  },
-  {
-    "Rancang Bangun AE-Rofit sebagai Penyedia Air Bersih Alternatif Berbasis Modul TEC dan Batu Zeolit": "Eksplorasi teknologi yang kreatif, namun pemikiran kritis terhadap debit air bersih yang dihasilkan perlu diasah.",
-    "narasi": "Masing-masing mendapat tugas merakit modul penyaring. Saat air masih keruh, kelompok sepakat menambah lapisan zeolit."
-  },
-  {
-    "Grow T sebagai Inovasi Media Tanam Sekali Pakai Berbasis Ampas Teh sebagai Upaya Pemenuhan Gizi Sayuran pada Masyarakat Indonesia": "Ide sangat praktis dan gotong royong, kemandirian evaluasi nutrisi tanaman perlu terus dilatih.",
-    "narasi": "Tim bekerja sangat rajin menyiapkan ampas teh. Pertumbuhan yang stagnan membuat mereka secara logis mencari campuran pupuk pendamping."
-  },
-  {
-    "HOME \"Hybrid Of Microfiltration Equipment\" Sistem Filtrasi Air Sederhana Ramah Lingkungan untuk Pengolahan Air Sumur Rumah Tangga": "Kreativitas sangat terlihat, namun nalar kritis uji kelayakan air baku butuh perhatian.",
-    "narasi": "Proses pembuatan alat dipimpin dan dibagi tugasnya dengan adil. Kebocoran pipa segera diatasi dengan diskusi cepat dan pengeleman ulang."
-  },
-  {
-    "Pemanfaatan Limbah Minyak Jelantah dan Ampas Kopi dalam Pembuatan Sabun Padat Organk": "Penerapan konsep ramah lingkungan luar biasa, analisis kritis terhadap reaksi saponifikasi harus diperkuat.",
-    "narasi": "Penuangan cetakan sabun diawasi bersama demi keamanan. Tekstur yang terlalu lembek dibahas bersama untuk mengubah rasio soda api."
-  },
-  {
-    "Efektivitas Filtrasi Biologis Terhadap Penurunan Kadar Amonia pada Sistem Budidaya kuaponik": "Semangat gotong royong siswa solid, kemandirian berpikir kritis saat uji coba kualitas air butuh pendampingan.",
-    "narasi": "Kelompok berbagi beban memantau kadar air secara bergilir. Tingginya amonia disikapi dengan segera menambah media filter biologis."
-  },
-  {
-    "Pemanfaatan Kulit Pisang dan Kulit Buah Naga sebagai Bahan Dasar Pembuatan Bioleather Ramah Lingkungan": "Eksplorasi material yang sangat kreatif, analisis ketahanan tarik bahan kritis perlu ditingkatkan.",
-    "narasi": "Proses pengeringan bahan dijaga secara bergiliran. Kegagalan tekstur kulit diselesaikan dengan mencari metode penyamakan alternatif."
-  },
-  {
-    "Optimasi Waktu Adsorpsi Klorofil Rumput Liar untuk Meningkatkan Karakteristik Elektrik DSSC": "Kreativitas sains menonjol, pemahaman kritis soal kurva tegangan sel perlu dibiasakan.",
-    "narasi": "Mereka bekerja teliti saat ekstraksi klorofil bersama-sama. Degradasi sel yang cepat didiskusikan untuk mencari pelarut yang lebih baik."
-  },
-  {
-    "PEMANFAATAN EKSTRAK DAUN PEGAGAN (Centella asiatica (L.)) SEBAGAI SABUN CAIR ANTIOKSIDAN BEBAS Sodium Lauryl Sulfate (SLS) UNTUK MENCEGAH PENUAAN DINI": "Ide produk kosmetik mandiri sangat bagus, evaluasi kritis uji klinis sederhana perlu dilatih.",
-    "narasi": "Tim berbagi tugas peracikan dengan rapi dan hati-hati. Terpisahnya fasa cairan sabun dievaluasi dengan mengatur ulang suhu pengadukan."
-  },
-  {
-    "PENGEMBANGAN SISTEM KEAMANAN PINTU DENGAN PENGGABUNGAN METODE FISHERFACE DAN PENGAWASAN KAMERA BERBASIS IOT": "Kemampuan coding yang kreatif dan solid, daya kritis pada pencahayaan kamera perlu diperhatikan.",
-    "narasi": "Pembagian modul program dikerjakan penuh tanggung jawab. Wajah yang gagal dikenali membuat mereka menambah dataset pelatihan."
-  },
-  {
-    "Sistem Penampungan Air Hujan Berfilter (SKYFILTER) Solusi Efektif Untuk Penanganan Permasalahan Hujan Mikroplastik": "Inisiatif pelestarian yang kreatif, nalar kritis uji mikroskopis mikroplastik harus diasah.",
-    "narasi": "Tim merakit tangki air bersama-sama di lapangan. Filter yang sering mampat dievaluasi dengan merancang ulang skema penyaringan."
-  },
-  {
-    "Digital Health: Aplikasi Cerdas Deteksi Penyakit Jantung Iskemik": "Ide aplikasi sangat inovatif, namun evaluasi kritis akurasi data medis perlu pendampingan ahli.",
-    "narasi": "Antarmuka dan basis data dibagi pengerjaannya dengan adil. Kesalahan output deteksi diselesaikan dengan memeriksa ulang logika algoritma."
-  },
-  {
-    "Pemanfaatan Gas Oxy-Hidrogen Dari Air Sebagai Energi Terbarukan Dengan Metode Pemecahan H2O Menggunakan Katalisator Kalium Hidroksida Melalui Single Wet Cell Elektrolisis Untuk Sumber Energi Alternatif Dan Mengurangi Emisi Karbon": "Eksperimen yang berani dan kreatif, analisis kritis keamanan ledakan gas sangat perlu diutamakan.",
-    "narasi": "Proses perakitan sel hidrogen dijaga ketat oleh seluruh anggota. Kurangnya produksi gas disikapi dengan menambah konsentrasi katalis."
-  },
-  {
-    "SisaSaka: Pengembangan Material Tatakan Gelas Tahan Panas Berbahan Dasar Kompresi Cacahan Tutup Botol": "Daur ulang produk fungsional sangat kreatif, daya kritis uji ketahanan panas perlu dilatih.",
-    "narasi": "Proses pencacahan plastik dilakukan bergiliran tanpa keluhan. Pengepresan yang tidak merata diperbaiki dengan mengulang teknik kompresi."
-  },
-  {
-    "Inovasi Penghapus Papan Tulis Otomatis CleanSwipe untuk Pembelajaran yang Lebih Efisien": "Desain mekanis yang kreatif dan gotong royong, analisis kritis daya tahan motor penggerak perlu diperhatikan.",
-    "narasi": "Perakitan kerangka alat dikerjakan secara sinergis. Tersendatnya gerakan penghapus diselesaikan dengan melumasi ulang poros lintasan."
-  },
-  {
-    "Perancangan Sistem Pendeteksi Banjir Dini (BanjirGuard) Sebagai Indikator Alarm": "Siswa menunjukkan empati dan kreativitas sosial, nalar kritis keakuratan sensor harus dibiasakan.",
-    "narasi": "Tim berbagi tugas mengkalibrasi pelampung air. Bunyi alarm palsu segera diatasi dengan memprogram fungsi jeda waktu."
-  },
-  {
-    "Inovasi Botol Pintar RemindMe Berbasis Arduino Nano untuk Membentuk Kebiasaan Hidup Sehat dan Terhidrasi": "Kreativitas teknologi yang sangat baik, pemikiran kritis kenyamanan portabilitas botol perlu dipandu.",
-    "narasi": "Pemasangan komponen di dalam botol dibantu seluruh anggota. Kegagalan fungsi timer ditelusuri bersama pada baris kode program."
-  },
-  {
-    "Sistem Lampu Jalan Otomatis Berbasis Energi Kinetik Piezoelektrik": "Ide energi alternatif yang kreatif, nalar kritis perhitungan daya total jalan harus dikembangkan.",
-    "narasi": "Pembuatan panel pijak diselesaikan dengan sangat gotong royong. Saat lampu berkedip redup, mereka logis mencari perbaikan kapasitor."
-  },
-  {
-    "PEMANFAATAN LIMBAH KULIT PISANG AMBON DAN BAYAM SEBAGAI BIOBATERAI YANG RAMAH LINGKUNGAN": "Eksperimen biokimia yang kreatif, kemandirian evaluasi kuat arus biobaterai perlu ditingkatkan.",
-    "narasi": "Siswa bekerja teliti memblender bahan uji coba. Tegangan yang cepat turun didiskusikan untuk mencari campuran logam pelat yang lebih baik."
-  },
-  {
-    "ANALYSIS OF DURIAN SKIN WASTE EXTRACT USAGE AS BASIC INGREDIENT FOR ACNE PATCH": "Ide farmasi alami yang kreatif, nalar kritis uji iritasi pada kulit harus dibiasakan.",
-    "narasi": "Mereka berbagi tugas meramu ekstrak dengan disiplin. Sulitnya gel untuk menempel membuat tim meracik proporsi perekat alami baru."
-  },
-  {
-    "Pemanfaatan Teknologi Remote Sensing untuk Memantau Efektivitas Perkembangan Reboisasi Pohon di Pegunungan Kendeng": "Pemanfaatan perangkat lunak luar biasa, evaluasi kritis interpretasi citra satelit butuh latihan khusus.",
-    "narasi": "Analisis peta dikerjakan bersama dengan saling melengkapi. Perbedaan bacaan spektrum warna didiskusikan untuk mendapat kesimpulan objektif."
-  },
-  {
-    "CRUNCHY PURPLE POWER; PENGARUH PENGGUNAAN UBI JALAR UNGU, TEPUNG OAT, DAN GULA AREN TERHADAP NILAI GIZI DAN POTENSI KESEHATAN REMAJA BERBASIS COOKIES FUNGSIONAL": "Gotong royong membuat produk sangat baik, pemikiran kritis menghitung asupan kalori perlu ditingkatkan.",
-    "narasi": "Panggang kue dan penimbangan bahan dilakukan super kompak. Tekstur cookies yang terlalu keras diatasi dengan menambah sedikit cairan mentega."
-  },
-  {
-    "SCAN HARGA PRODUK": "Pemrograman dasar terasah, namun analisis kritis terhadap fleksibilitas database butuh didorong.",
-    "narasi": "Setiap anak menyumbang dataset gambar produk. Sulitnya mendeteksi barcode kusam dipecahkan lewat penambahan fungsi auto-kontras."
-  },
-  {
-    "Pemanfaatan Minyak Jelantah Menjadi Sabun Padat": "Kreativitas terapan terlihat, nalar kritis soal uji pH pasca-produksi perlu terus dibiasakan.",
-    "narasi": "Proses penyaringan jelantah dikerjakan bergantian secara teliti. Aroma yang kurang sedap segera diatasi dengan penambahan pewangi alami."
-  },
-  {
-    "Inovasi Pengembangan Smart Bin Berbasis Sensor Di Lingkungan Pesantren": "Ide sosial terapan sangat kreatif, kemampuan kritis menakar kapasitas sampah harian perlu pendampingan.",
-    "narasi": "Mereka mendesain tempat sampah dengan saling bahu-membahu. Tutup bin yang sering macet dievaluasi dengan menukar jenis motor servo."
-  },
-  {
-    "Pengembangan Jemuran Otomatis Berbasis Sensor Hujan dan Cahaya": "Gotong royong teknis menonjol, nalar kritis merespon perubahan cuaca ekstrem perlu dibiasakan.",
-    "narasi": "Kerangka diukur dan dipotong bersama oleh tim. Lambatnya atap jemuran menutup ditelusuri hingga rasio gir penggeraknya."
-  },
-  {
-    "Inovasi Minuman Herbal Edible: Alternatif Minuman Fungsional Berbasis Bahan Alami": "Ide sangat menyegarkan, daya kritis memperkirakan masa kedaluwarsa produk harus dilatih.",
-    "narasi": "Tim berbagi tugas mengekstraksi tanaman herbal. Endapan yang terlalu banyak diatasi dengan penyaringan berlapis berdiskusi secara logis."
-  },
-  {
-    "Rancangan Uji Eksperimental Lampu Indikator Berbasis Sensor untuk Optimasi Monitoring Konsumsi Energi Listrik Harian": "Eksplorasi sensor kreatif, nalar kritis mengonversi data analog ke watt butuh dipertajam.",
-    "narasi": "Instalasi sirkuit listrik dirakit dengan pembagian kerja jelas. Ketidakakuratan sensor arus dipecahkan dengan metode kalibrasi ulang."
-  },
-  {
-    "ECO BANANA: INOVASI LIMBAH KULIT PISANG MENJADI PUPUK ORGANIK DENGAN EM4": "Gotong royong fermentasi sangat baik, analisis kritis waktu panen pupuk perlu ditingkatkan.",
-    "narasi": "Pengadukan kompos dikerjakan tanpa keluhan secara bergantian. Suhu pupuk yang terlalu tinggi segera didiskusikan untuk dibolak-balik."
-  },
-  {
-    "Smart Fisheries Village: Desa Nelayan Pintar": "Kreativitas konsep tata ruang brilian, pemikiran kritis hambatan infrastruktur di lapangan perlu dibimbing.",
-    "narasi": "Sinergi penyusunan desain 3D dikerjakan bahu-membahu. Ide yang berbenturan dicari titik tengahnya melalui curah pendapat tim."
-  },
-  {
-    "Mengubah Limbah Menjadi Manfaat: Pembuatan Body Scrub Alami dari Biji Alpukat": "Pemanfaatan bahan luar biasa kreatif, uji kritis tekstur scrub pada kulit sensitif perlu diperhatikan.",
-    "narasi": "Proses penjemuran dan penumbukan dilakukan bergotong-royong. Tekstur yang terlalu kasar diperhalus ulang bersama-sama hingga merata."
-  },
-  {
-    "KARAKTERISTIK TEPUNG BUAH KELAPA SEBAGAI PRODUK PANGAN SEHAT DALAM UPAYA MEWUJUDKAN KONSUMSI BERKELANJUTAN": "Kreativitas diversifikasi pangan sangat baik, pemikiran kritis daya simpan tepung harus dibiasakan.",
-    "narasi": "Parutan dan oven dijaga oleh anggota tim secara bergilir. Hasil yang menggumpal segera disikapi dengan perbaikan metode sangrai."
-  },
-  {
-    "pemanfaatan ampas singkong dan dry fish sebagai pakan ternak alternatif": "Gotong royong dan kemandirian terlihat, kemampuan analitik uji protein pakan perlu pendampingan.",
-    "narasi": "Mereka mencari bahan baku di pasar bersama-sama. Pelet yang mudah hancur dievaluasi dengan menata ulang proporsi perekat."
-  },
-  {
-    "PEMANFAATAN SAMPAH PLASTIK DENGAN MEMODIFIKASI CANGKANG KERANG ANADARA GRANOSA DALAM PEMBUATAN PAVING BLOCK RAMAH LINGKUNGAN": "Ide penguatan material sangat kreatif, analisis kritis uji kuat tekan paving block harus diperkuat.",
-    "narasi": "Peleburan plastik dan penumbukan cangkang dikerjakan dengan solid. Retakan halus pada sampel awal dibahas solusinya lewat variasi pendinginan."
-  },
-  {
-    "Implementasi Teknologi Sensor pada Smart Waste Bin untuk Pemilahan Sampah Organik dan Anorganik sebagai Solusi Smart Society": "Sangat kreatif mengembangkan alat pilah, nalar kritis akurasi detektor material perlu terus dibiasakan.",
-    "narasi": "Koding dan mekanik dikerjakan saling dukung antarteman. Sampah basah yang tersangkut diatasi dengan mendesain ulang corong masuk."
-  },
-  {
-    "Pemanfaatan Limbah Organik dan Kotoran Sapi Sebagai Biogas dan Pupuk Kompos": "Kerja tim kotor-kotoran patut diacungi jempol, evaluasi kritis kebocoran gas metana perlu diawasi.",
-    "narasi": "Proses memasukkan kotoran ke biodigester dilakukan penuh tawa bersama. Tekanan gas yang hilang ditelusuri menyeluruh ke setiap katup pipa."
-  },
-  {
-    "Inovasi Masker Gel Madu - Aloe Vera Menggunakan Metode Cold Process untuk Perawatan Kulit Wajah": "Kreativitas proses dingin sangat bagus, nalar kritis soal kebersihan wadah agar tak berjamur harus diutamakan.",
-    "narasi": "Mereka menimbang ekstrak lidah buaya secara bergantian. Konsistensi masker yang encer langsung ditanggapi dengan mencari penstabil nabati."
-  },
-  {
-    "Ride The Sun: Inovasi Mobil Surya Ramah Lingkungan": "Gotong royong merakit sasis sangat kuat, analisis kritis rugi daya motor listrik perlu didorong.",
-    "narasi": "Semua anggota aktif dalam pemotongan dan pengelasan kerangka. Kecepatan mobil yang kurang maksimal dievaluasi dari rasio gigi roda."
-  },
-  {
-    "Smart RVM (Reverse Vending Machine): Optimalisasi Daur Ulang Plastik Melalui Sistem Penghancur Terintegrasi dan Barcode Voucher Insentif.": "Sistem insentif cerdas nan kreatif, pemikiran kritis akan sensor barcode tertutup noda perlu dibiasakan.",
-    "narasi": "Desain antarmuka dan mesin penghancur dibagi secara efisien. Motor pencacah macet diatasi dengan merevisi torsi penggerak."
-  },
-  {
-    "MONITORING KUALITAS AIR KOLAM ΙΚΑΝ ΚΟΙ": "Siswa sangat mandiri dan kompak, analisis kritis interpretasi pH dan kelembapan butuh pendampingan.",
-    "narasi": "Masing-masing mendapat tugas menguji probe di air. Sensor yang error dipecahkan bersama lewat isolasi sambungan kabel."
-  },
-  {
-    "ZZZ-PODS: Inovasi Sediaan Anti-Insomnia Berbasis Teknologi Mikroenkapsulasi Spray dengan Peningkatan Daya Tahan Pelepasan Zat Aktif": "Kreativitas mikrobiologi sangat progresif, daya kritis memastikan ukuran partikel seragam harus dilatih.",
-    "narasi": "Kerja laboratorium dijalani bergilir tanpa mengeluh. Uji pelepasan yang gagal direvisi dengan mengatur konsentrasi polimer ulang."
-  },
-  {
-    "Smart Trash Bin: Pemilah Sampah Otomatis dan Pengolah Sampah Organik menjadi Ecoenzym sebagai Energi Terbarukan Menuju Masa Depan Berkelanjutan": "Integrasi alat multi-fungsi brilian, kemandirian analisis kritis keandalan sistem jangka panjang perlu dipandu.",
-    "narasi": "Mereka menggabungkan dua sistem besar dengan kompak. Kesalahan pemilahan botol diatasi dengan penambahan sensor kapasitif pembantu."
-  },
-  {
-    "SIBERLIH: Sistem Filtrasi Berbasis Biomaterial Lokal sebagai Strategi Ketahanan Air Bersih di Wilayah Rentan Intrusi Air Payau, Tanggulangin, Sidoarjo": "Respons empati krisis air sangat tinggi, evaluasi kritis standar baku mutu air hasil perlu ditegaskan.",
-    "narasi": "Siswa bahu-membahu menyusun lapisan filtrasi organik. Air yang masih terasa asin segera ditindaklanjuti dengan mencari media adsorben lain."
-  },
-  {
-    "Integrasi Bioflok, Akuaponik, dan Waterloop System Sebagai Model Pertanian Perkotaan Terpadu, Mandiri, dan Berkelanjutan": "Ide sistem sirkular sangat kreatif, namun nalar kritis titik rawan matinya pompa harus dibiasakan.",
-    "narasi": "Tim merakit paralon dan kolam dalam kerja sama solid. Kegagalan sirkulasi diselesaikan lewat kalkulasi ulang gravitasi dan hisapan air."
-  },
-  {
-    "EduPoint: Pengembangan Platform Pembelajaran Berbasis Gamifikasi dengan Sistem Hadiah Digital": "Kreativitas antarmuka menarik, nalar kritis efektivitas peningkatan nilai belajar harus diobservasi jangka panjang.",
-    "narasi": "Anggota membagi peran antara materi dan desain grafis secara seimbang. Bugs di dalam poin hadiah diselesaikan dengan mereview ulang kode database."
-  },
-  {
-    "Hydrofish Bucket: Inovasi Hidroponik dan Akuakultur Sebagai Solusi Keberlanjutan Pangan di Kawasan Perkotaan": "Konsep urban farming mandiri, evaluasi kritis tingkat stres ikan akibat volume air sempit butuh ditinjau.",
-    "narasi": "Perakitan ember terpadu dikerjakan bersama di sela waktu. Air yang cepat keruh diatasi logis dengan memperbanyak tanaman air penyerap kotoran."
-  },
-  {
-    "Inovasi Biskuit Daun Kelor dengan Penambahan Ubi Madu sebagai Camilan Sehat Tinggi Serat dan Betakaroten": "Gotong royong boga sangat baik, nalar kritis mencari takaran rasa pahit kelor yang toleran perlu dilatih.",
-    "narasi": "Masing-masing bertugas menimbang dan mencicipi adonan. Pahitnya hasil awal segera diatasi dengan menambah porsi ubi madu berdasar diskusi."
-  },
-  {
-    "Peel to Brwonies Cookies: Inovasi Brownies Cookies Berbasis Kulit Pisang dengan Konsep Sustainable Food dalam Mengurangi Food Waste and Energy Footprint": "Kreativitas pangan sisa bernilai jual, analisis kritis menghitung jejak karbon aktual perlu bimbingan khusus.",
-    "narasi": "Persiapan kulit pisang dikerjakan bergantian demi kebersihan. Rasa yang tidak pas dirombak kembali dengan menyetel waktu panggang yang tepat."
-  },
-  {
-    "Konversi Limbah Sabut Kelapa Menjadi Bioethanol Menggunakan Fermentasi Mikrobial Saccharomyces Cerivisiae": "Gotong royong biokimia sangat baik, pemikiran kritis sterilisasi kontaminan pada proses fermentasi perlu ditegaskan.",
-    "narasi": "Siswa saling mengawasi suhu inkubator fermentasi. Hasil destilasi yang keruh didiskusikan untuk menyaring ulang larutan lebih teliti."
-  },
-  {
-    "Sistem Pengelolaan Data Inventaris Kelas Menggunakan Deteksi Objek Berbasis YOLOV8": "Pemanfaatan AI sangat kreatif, nalar kritis sudut kemiringan kamera deteksi butuh dibiasakan.",
-    "narasi": "Pengumpulan gambar kursi dan meja dibagi secara kompak. Benda yang tidak terdeteksi membuat kelompok menambah variasi data latih pencahayaan."
-  },
-  {
-    "Rancang Bangun Prototype MicroTrap Berbasis Bio-Flokulan dan Muatan Elektrostatik sebagai Teknologi Filtrasi Mikroplastik dan Pemurnian Air Kumuh": "Ide filtrasi tingkat lanjut brilian, kemandirian analisis efisiensi jaring elektrostatis perlu ditingkatkan.",
-    "narasi": "Merakit jaring muatan dikerjakan ekstra hati-hati oleh tim. Gumpalan flokulan yang hancur disikapi dengan meninjau ulang kecepatan aliran air."
-  },
-  {
-    "Pengembangan dan Uji Efektivitas Golden Grow Hair sebagai Tonik Rambut Alami untuk Meningkatkan Pertumbuhan Rambut Remaja": "Eksplorasi jamu modern sangat baik, evaluasi kritis uji efektivitas rambut rontok butuh dipertajam.",
-    "narasi": "Siswa bergantian mengekstraksi bahan tanpa keluhan. Aroma tonik yang menyengat dihilangkan dengan mendiskusikan penambahan esensial oil alami."
-  },
-  {
-    "Kolga: Pemanfaatan Limbah Ampas Kopi Sebagai Alternatif Pakan Alga Pada Budidaya Ikan dengan Teknologi Bioflok": "Gotong royong mengumpulkan sisa kopi terlihat solid, nalar kritis tingkat kafein bagi ikan perlu pendampingan.",
-    "narasi": "Observasi kolam bioflok dibagi berdasarkan jadwal piket. Pertumbuhan alga yang lambat membuat mereka mengatur ulang sistem aerasi air."
-  },
-  {
-    "Inovasi IFOAM (Innovative Fungi Organic Alternative Material): Biofoam Berbasis Miselium Pluerotus Ostreatus Sebagai Kemasan Pengganti Styrofoam Ramah Lingkungan": "Kreativitas biomaterial sangat maju, pemikiran kritis daya redam guncangan biofoam perlu dilatih secara konkret.",
-    "narasi": "Inkubasi miselium dijaga bersama agar tetap higienis. Cetakan yang mudah patah diselesaikan dengan mencampur sedikit serabut penguat."
-  },
-  {
-    "GreenhAl: Pengembangan Smart Gardening Assistant Berbasis Al untuk Optimalisasi Siklus Tumbuh Melon dan Efisiensi Sumber Daya pada Greenhouse": "Kemandirian riset AI luar biasa, evaluasi kritis pada kegagalan aktuator penyiraman harus dibiasakan.",
-    "narasi": "Pemrograman dan pemasangan perangkat dinikmati bersama oleh tim. Algoritma prediksi yang meleset segera diperbaiki dengan memperbanyak data cuaca."
-  },
-  {
-    "uji antibakteri hydrogel wound dressing berbasis lidah buaya dan madu untuk aplikasi luka bakar": "Kreativitas bidang kesehatan sangat tinggi, nalar kritis sterilitas pembalut luka wajib diperketat.",
-    "narasi": "Mereka sangat rapi mengeringkan hidrogel di lab. Kegagalan bentuk gel dievaluasi dengan menakar ulang agen pengikat silang."
-  },
-  {
-    "inovasi Dye-sensitized solar cell dengan ekstrak bunga telang sebagai elektrolit alami": "Sinergi eksperimental fisika dan biologi brilian, analisis kritis konversi foton ke elektron perlu diasah.",
-    "narasi": "Tugas pelapisan kaca konduktif dilakukan bahu-membahu. Output nol volt segera dicari penyebabnya dengan memeriksa ulang lapisan karbon."
-  },
-  {
-    "Pengembangan Sistem AGROPATCH: irigasi AWD Otomatis Berbasis Sensor Ultrasonik Sebagai Upaya Efisiensi Air dan Mitigasi Emisi Dalam Menghadapi Krisis Iklim Mendukung SDGs 13": "Sangat inovatif dan gotong royong, evaluasi kritis validitas pantulan gelombang sensor air perlu ditingkatkan.",
-    "narasi": "Tim merakit sensor apung di lahan dengan saling memotivasi. Kesalahan baca ketinggian air diselesaikan dengan memperbaiki tabung pelindung sensor."
-  },
-  {
-    "Integrasi Teknologi Daur Ulang Botol Plastik dengan Pembuatan Filamen Fungsional untuk 3D Printing": "Kreativitas konversi mesin luar biasa, nalar kritis diameter benang filamen plastik harus konsisten.",
-    "narasi": "Mesin penarik filamen dirakit secara gotong royong. Putusnya filamen karena kepanasan diperbaiki dengan merombak pendingin otomatis."
-  },
-  {
-    "INTEGRASI FACE RECOGNITION DALAM SISTEM PENITIPAN LAPTOP DI SEKOLAH": "Ide digital mandiri dan bermanfaat, pemikiran kritis pada manipulasi foto wajah di sensor butuh perhatian.",
-    "narasi": "Siswa sangat kompak mencari sampel puluhan wajah teman. Akses yang tertunda dipecahkan dengan optimalisasi pencahayaan bilik."
-  },
-  {
-    "Survive & Thrive For Aethera Company Strategi Untuk Menghadapi Krisis Iklim di Masa Depan Dengan Menerapkan Mikroalga Sebagai Penyerap Karbon Dioksida Berbasis Sistem Internet of Things (IOT)": "Gotong royong visioner di bidang iklim, pemahaman kritis perhitungan tonase karbon terserap perlu pendampingan.",
-    "narasi": "Perawatan reaktor alga dibagi sesuai waktu luang masing-masing. Terhentinya aliran IoT disikapi lewat pengaturan ulang koneksi modem."
-  },
-  {
-    "Smart Inhaler dengan Deteksi Kualitas Udara untuk Pencegahan Asma Kambuh": "Ide medis sangat kreatif dan praktis, evaluasi kritis pada ukuran partikulat udara pemicu alergi perlu dibiasakan.",
-    "narasi": "Merakit sensor mikrokontroler kecil butuh kesabaran tim. Kegagalan modul bluetooth diatasi bersama dengan mencari pin yang longgar."
-  },
-  {
-    "Pengembangan Panel Surya Berbahan Limbah Plastik dengan Biaya Rendah untuk Pemenuhan Kebutuhan Listrik Rumah Tangga di Daerah Terpencil": "Inovasi mandiri yang berdampak, analisis kritis ketahanan cuaca panel buatan harus terus didorong.",
-    "narasi": "Pencetakan plastik panel diawasi beramai-ramai. Hasil tegangan yang kecil memotivasi tim mencari sudut lensa plastik yang optimal."
-  },
-  {
-    "Pemanfaatan Limbah Tulang Ayam di Pesantren sebagai Pupuk Alami Bayam": "Ide sirkular ekonomi gotong royong yang apik, nalar kritis menghancurkan kalsium tulang perlu dibiasakan.",
-    "narasi": "Membersihkan tulang diawali dengan berbagi tugas yang adil. Tulang yang kurang halus ditumbuk ulang beramai-ramai setelah direbus."
-  },
-  {
-    "SmartFarm: Sistem Irigasi Otomatis dan Pengusir Hama Pada tanaman Sawi": "Sangat kreatif dan aplikatif, kemandirian analisis spektrum frekuensi pengusir hama perlu dilatih.",
-    "narasi": "Tim membentangkan kabel irigasi dan sensor bersama-sama. Hama yang tidak terpengaruh suara disikapi dengan menaikkan rentang ultrasonik."
-  },
-  {
-    "Auto Timer Penghilang Phantom Load: Inovasi Pengendali Daya pada Perangkat Boros Energi": "Ide gotong royong bidang energi terapan, analisis kritis kalibrasi arus kecil yang mengalir perlu dipertajam.",
-    "narasi": "Pembagian tugas menyolder relai sangat rapi. Relay yang terus berbunyi cetek diperbaiki dengan menambahkan dioda penyearah."
-  },
-  {
-    "Program CERDAS (Cegah Risiko Diabetes): Edukasi Pola Hidup Sehat dan Pengendalian Glukosa Darah pada Masyarakat": "Inovasi sosial bergotong royong sangat bagus, evaluasi kritis dampak pre-test dan post-test masyarakat perlu diawasi.",
-    "narasi": "Sosialisasi dirancang dengan pembagian job deskripsi yang jelas. Kurangnya audiens disikapi cepat dengan mendatangi warga door-to-door."
-  },
-  {
-    "Prototipe Alat Penghancur Sampah Got Ramah Lingkungan sebagai Upaya Adaptasi Perubahan Iklim": "Kreativitas desain alat penanggulangan banjir luar biasa, analisis kritis kemacetan pisau pencacah perlu ditingkatkan.",
-    "narasi": "Mereka bekerja mengelas baja dengan saling mengawasi standar keamanan. Pisau yang nyangkut diatasi dengan mendesain gigi pencacah lebih besar."
-  },
-  {
-    "Eksplorasi Material Komposit Serbuk Kayu dan Resin: Upaya Peningkatan Nilai Guna Limbah Menjadi Produk Fungsional": "Produk material sangat kreatif, daya kritis uji kelenturan dan retak produk perlu dibiasakan.",
-    "narasi": "Proses pencampuran dan pengamplasan dikerjakan dengan gotong royong tinggi. Resin yang tak kunjung kering dibahas lewat pengaturan proporsi katalis."
-  },
-  {
-    "Pengembangan Sistem Peringatan Dini Penyakit Menular Berbasis n8n Workflow Automation dan Algoritma Al": "Integrasi sistem mandiri brilian, kemampuan kritis memverifikasi sumber data wabah butuh pendampingan ahli.",
-    "narasi": "Programmer dan analis data di tim bekerja sangat kompak. Notifikasi peringatan yang terlambat diperbaiki dengan memotong jalur alur kerja digital."
-  },
-  {
-    "Rancang Bangun Prototipe Kendaraan Listrik Bertenaga Surya (Solar-Car) Berbasis Sel Fotovoltaik": "Sinergi luar biasa bidang otomotif, evaluasi kritis efisiensi berat kendaraan dibanding motor dorong perlu dilatih.",
-    "narasi": "Perakitan bodi mobil mainan dan panelnya dikerjakan penuh canda tapi serius. Mobil yang kesulitan menanjak dievaluasi dengan menukar motor DC."
-  },
-  {
-    "Inovasi Sediaan Cooling Gel Stick Lavender: Solusi Portabel Reduksi Kelelahan dan Stres pada Remaja": "Produk relaksasi yang sangat kreatif, nalar kritis dosis aroma esensial agar tidak memicu pusing perlu diperhatikan.",
-    "narasi": "Semua saling mencium dan mencoba prototipe secara suportif. Gel yang mudah patah diracik ulang dengan menambah komposisi lilin lebah."
-  },
-  {
-    "Sistem Kontrol dan Pemantauan Konsumsi Listrik Rumah Tangga Real- Time Berbasis Internet of Things (IoT)": "Gotong royong teknis sistem kontrol mantap, analisis kritis latensi pengiriman data perlu diawasi.",
-    "narasi": "Siswa berbagi tugas membuat dashboard IoT dan alat pengukur tegangan. Koneksi server down cepat mereka lacak pada konfigurasi API."
-  },
-  {
-    "LEAFPACK: INOVASI KEMASAN BIODEGRADABLE DARI DAUN KERING DAN TEPUNG TAPIOKA SEBAGAI ALTERNATIF PENGGANTI STYROFOAM": "Ide substitusi plastik yang bergotong royong tinggi, evaluasi kritis laju pelapukan saat lembap harus diutamakan.",
-    "narasi": "Mengumpulkan dan memilah daun dilakukan di lapangan bersama-sama. Cetakan yang menempel diatasi dengan melumasi cetakan memakai minyak nabati."
-  },
-  {
-    "SMART SEABIN: PENGEMBANGAN SISTEM PENYARING SAMPAH LAUT OTOMATIS DENGAN ANALISIS POTENSI INTEGRASI PANEL SURYA DAN OSCILLATING WATER COLUMN SEBAGAI SUMBER ENERGI BERKELANJUTAN UNTUK MENDUKUNG KEBERLANJUTAN EKOSISTEM LAUT": "Ide energi gelombang yang sangat kreatif dan visioner, kemampuan kritis menahan korosi laut perlu dipertimbangkan.",
-    "narasi": "Mereka berbagi tugas antara desain struktur dan sistem panel kelistrikan. Baling-baling yang tersangkut sampah didiskusikan untuk memasang pelindung jaring."
-  },
-  {
-    "Sistem Irigasi Otomatis Berbasis Mikrokontroler untuk Mitigasi Kekeringan pada Lahan Pertanian": "Solidaritas tim instalasi sangat baik, nalar kritis distribusi merata debit selang air perlu dilatih.",
-    "narasi": "Memotong pipa dan merakit relay air dikerjakan bahu-membahu. Air yang tidak menetes di ujung saluran diatasi dengan menambah kapasitas pompa kecil."
-  },
-  {
-    "PEMANFAATAN KEMIRI SEBAGAI MINYAK RAMBUT SEBAGAI PENCEGAHAN RAMBUT RONTOK DENGAN METODE SANGRAI": "Praktik mandiri penyulingan tradisional sangat baik, nalar kritis memisahkan ampas dan minyak murni perlu pendampingan.",
-    "narasi": "Proses menyangrai dan menumbuk kemiri dipilah gilirannya. Bau tengik pada minyak diselesaikan bersama lewat metode pengendapan semalaman."
-  },
-  {
-    "Pemanfaatan Kulit Jeruk sebagai Elektrolit Alternatif pada Bio Baterai Ramah Lingkungan": "Eksplorasi energi biokimia bergotong royong bagus, kemandirian membandingkan asam jenis jeruk lain butuh dikritisi.",
-    "narasi": "Membuat sel baterai dan mengekstrak air jeruk dijalani bersama dengan tawa. Saat lampu LED tak nyala, mereka serentak merangkai ulang sambungan kabel."
-  },
-  {
-    "Optimasi Fermentasi Kulit Pisang sebagai Elektrolit Organik untuk Bio Baterai Ramah Lingkungan Berbasis Energi Terbarukan": "Inovasi baterai alami yang kreatif, kemampuan kritis lamanya proses pembusukan elektrolit harus ditegaskan.",
-    "narasi": "Pengkondisian fermentasi dijaga ketat oleh tim. Arus yang terlalu lemah segera disikapi dengan menaikkan kadar larutan asam penunjang."
-  },
-  {
-    "Pengembangan Prototipe Alat Pendeteksi Banjir Berbasis Indikator Multisensor": "Kerja tim instalasi berlapis sangat mantap, analisis kritis sensitivitas tumpang tindih antar sensor perlu dievaluasi.",
-    "narasi": "Pembagian kalibrasi per sensor diawasi masing-masing anggota. Kegagalan kirim SMS peringatan segera diatasi dengan mengganti simcard pada modul GSM."
-  },
-  {
-    "Rancang Bangun Smart Floating Barrier Berbasis Sensor Ultrasonik dan Monitoring Aliran Air untuk Deteksi Penumpukan Sampah Sungai Secara Real-Time sebagai Upaya Pengurangan Pencemaran sungai di Indonesia": "Ide halang rintang air sungai brilian dan kolaboratif, kemampuan kritis daya apung pipa barier perlu diasah.",
-    "narasi": "Sinergi mengapungkan alat uji coba di kolam buatan sangat solid. Pagar mengambang yang terbalik diperbaiki dengan menambahkan pemberat pasir logis."
-  },
-  {
-    "Bumbu tabur penambah gizi berbasisi kombinasi tulang ayam & kulit udang dengan penambahan cangkang kerang": "Eksplorasi gizi kalsium sangat kreatif, evaluasi kritis keamanan pangan mikrobiologi perlu bimbingan khusus.",
-    "narasi": "Mereka berbagi tugas antara penyangraian, penumbukan, dan uji rasa. Tekstur bumbu yang masih menusuk diatasi dengan memperbanyak proses ayakan."
-  },
-  {
-    "Konversi Minyak Jelantah Menjadi Biodiesel: Studi Komparasi Efektivitas Tahap Esterifikasi (H2SO4) dan Uji Kualitas Pembakaran": "Sangat mandiri bereksperimen esterifikasi, daya kritis pada rasio katalis asam dan metanol perlu dipertajam.",
-    "narasi": "Pencampuran bahan kimia asam diawasi sangat ketat oleh tim demi keselamatan. Pemisahan gliserol yang gagal diatasi dengan memanaskan ulang dalam suhu ideal."
-  }
+{
+"Natural Citronella Repellent: Pemanfaatan Limbah Kertas Minyak sebagai Obat Nyamuk dengan Penambahan Ekstrak Serai": "Semangat gotong royong siswa sangat baik, ke depannya kemandirian mencari literatur perlu dibiasakan.",
+"narasi": "Siswa menunjukkan kekompakan yang tinggi saat merakit alat dan membagi tugas. Mereka mengatasi kendala teknis dengan berdiskusi aktif bersama pembimbing."
+},
+{
+"Penerapan Deep Learning pada Decision Support System dalam Perancangan Konsep Chatbot Interaktif "Loopa": Personalisasi Rekomendasi Material Health-Conscious Fashion bagi Remaja Urban": "Sikap bernalar kritis kelompok sudah terlihat menonjol, namun kreativitas dalam penyusunan laporan bisa ditingkatkan.",
+"narasi": "Tim ini sangat responsif saat uji coba tidak sesuai harapan awal. Mereka langsung memikirkan alternatif solusi pemrograman secara kolektif."
+},
+{
+"ArgoGenius : Inovasi Platform Pertanian Cerdas berbasis Al dan Sistem Hidroponik untuk Optimalisasi Lahan Sempit di Era Krisis Iklim": "Kreativitas dalam merancang solusi patut diapresiasi, ke depannya sikap gotong royong saat eksekusi perlu lebih merata.",
+"narasi": "Kolaborasi terlihat jelas saat pengumpulan data di lapangan meski sempat ada perbedaan pendapat. Mereka menyelesaikan perdebatan dengan kepala dingin dan fokus pada tujuan."
+},
+{
+"Website Cek Kesehatan Berbasis Al": "Kemandirian kelompok sudah terbentuk dengan baik, namun kejelian berpikir kritis saat analisis data masih perlu bimbingan.",
+"narasi": "Setiap anggota saling melengkapi saat merancang alur website proyek. Saat menghadapi bug sistem, mereka berinisiatif mencari referensi perbaikan bersama."
+},
+{
+"Studi Eksperimental Thermoelectric Generator (Teg) Dalam Memanen Energi Dari Panas Buangan Ac Atau Kulkas Rumah Tangga Menggunakan Efek Seebeck": "Semangat gotong royong siswa sangat baik, ke depannya kemandirian mencari literatur eksperimental perlu dibiasakan.",
+"narasi": "Siswa membagi peran dengan sangat rapi saat melakukan pengukuran termal. Ketika hasil uji fluktuatif, mereka bahu-membahu melakukan kalibrasi ulang alat."
+},
+{
+"PEMBUATAN BIOETANOL DARI LIMBAH KULIT NANAS UNTUK PENCAMPURAN PERTALITE MENJADI BAHAN BAKAR ALTERNATIF (GASOHOL)": "Sikap bernalar kritis kelompok sudah terlihat menonjol, namun kreativitas presentasi visual bisa ditingkatkan.",
+"narasi": "Kelompok ini bekerja sama dengan kompak selama proses fermentasi bahan. Mereka sigap mengubah takaran ragi ketika proses awal tidak berjalan optimal."
+},
+{
+"FIT-LIFE: Sistem Pengatur Pola Makan & Latihan Berbasis Web": "Kreativitas dalam merancang fitur aplikasi patut diapresiasi, ke depannya kemandirian coding setiap anggota perlu dipastikan.",
+"narasi": "Tim menunjukkan komunikasi yang efektif dalam mendesain antarmuka sistem. Saat fitur tidak berjalan sinkron, mereka menguji ulang kode baris demi baris secara tim."
+},
+{
+"Penerapan Sistem Kombinasi Bioflok-Akuaponik sebagai Solusi penghematan biaya.": "Semangat gotong royong siswa saat merakit instalasi sangat baik, namun penalaran kritis terhadap efisiensi air perlu dikembangkan.",
+"narasi": "Mereka saling bantu dalam menyusun pipa dan kolam tanpa mengeluh lelah. Hambatan sirkulasi air diselesaikan lewat diskusi intensif dengan narasumber."
+},
+{
+"Penyegar nafas berbahan dasar Tanaman stevia": "Kemandirian kelompok sudah terbentuk, namun kreativitas pengemasan produk masih perlu eksplorasi.",
+"narasi": "Siswa solid dalam proses ekstraksi dan uji rasa produk buatan mereka. Ketika formula awal terlalu pekat, mereka berunding dan menyesuaikan rasio pelarut."
+},
+{
+"Analisis Potensi Energi Listrik dari Limbah Peternakan Melalui Sistem Biogas sebagai Upaya Pemanfaatan Energi Terbarukan": "Sikap bernalar kritis sangat tajam dalam analisis, namun pembagian tugas gotong royong perlu lebih seimbang.",
+"narasi": "Tim ini tidak ragu turun ke lapangan untuk mengambil sampel limbah secara bersama. Bau dan kondisi sulit justru membuat mereka semakin rekat menemukan solusi energi."
+},
+{
+"HydroPlast Block: Inovasi Paving Berpori Ramah Lingkungan dari Limbah Plastik dan Agregat Organik sebagai Solusi Resapan Air dan Pencegahan Banjir Perkotaan": "Kreativitas daur ulang patut dicontoh, ke depannya kemandirian dalam uji kuat tekan material perlu dibiasakan.",
+"narasi": "Proses peleburan plastik dilakukan dengan kerja sama keamanan yang ketat antarsiswa. Saat cetakan paving retak, mereka langsung memodifikasi rasio agregat organik bersama."
+},
+{
+"Perancangan Chatbot Berbasis Al sebagai Media Dukungan Psikologis bagi Anak Muda": "Semangat empati dan gotong royong sangat baik, namun pemikiran kritis pada aspek privasi data perlu diperdalam.",
+"narasi": "Mereka mendiskusikan kalimat respons chatbot dengan sangat hati-hati dan saling koreksi. Kesulitan melatih AI diatasi dengan membagi jadwal input data secara bergilir."
+},
+{
+"Teknologi Siaga Bencana: Prototipe Sensor Pintar untuk Deteksi Dini Banjir dan Peningkatan Ketahanan Komunitas.": "Kemandirian merakit sensor sudah baik, namun kreativitas bentuk fisik alat masih perlu ditingkatkan.",
+"narasi": "Kerja sama sangat terlihat saat menyolder komponen dan mengetes alarm di genangan air. Mereka tidak panik saat terjadi korsleting, melainkan langsung mengevaluasi rangkaian bersama."
+},
+{
+"Merevolusi Mobilitas Tunanetra: Implementasi Computer Vision Berbasis Aplikasi Smartphone TRAE (Tunanetra Real-Time Application Equipment) Terintegrasi Sensor Suara": "Sikap bernalar kritis kelompok sangat cemerlang, ke depannya gotong royong dengan target pengguna (tunanetra) bisa lebih diintensifkan.",
+"narasi": "Tim saling menutupi kekurangan saat mengintegrasikan kamera dan sensor suara. Kendala akurasi deteksi diselesaikan dengan melatih ulang model secara sabar dan kolektif."
+},
+{
+"Step to Power: Inovasi Sepatu Piezoelectric Penghasil Energi Listrik Ramah Lingkungan": "Kreativitas inovasi energi mekanik ini luar biasa, kemandirian mencari referensi efisiensi tegangan perlu ditingkatkan.",
+"narasi": "Pemasangan elemen piezo pada sol sepatu dilakukan dengan sangat teliti melalui pembagian tugas. Saat tegangan yang dihasilkan kecil, mereka bereksperimen menambah rangkaian secara seri."
+},
+{
+"Pengembangan Peredam Suara Eco-Acoustic Berbasis Serabut Kelapa sebagai Bahan Ramah Lingkungan": "Gotong royong saat pengumpulan bahan sangat solid, namun sikap kritis dalam pengukuran desibel suara perlu lebih presisi.",
+"narasi": "Siswa saling bergantian mencacah dan mengepres serabut kelapa. Uji coba peredaman yang berulang kali gagal justru memicu diskusi kelompok yang lebih kritis dan hidup."
+},
+{
+"TERRA- Smart Monitoring Technology for Environmental Root Response Analysis Guna Meningkatkan Kepedulian Siswa Pada Taman Sekolah.": "Kemandirian instalasi alat baik, namun gotong royong dalam merawat tanaman uji perlu lebih konsisten.",
+"narasi": "Mereka membagi waktu piket memantau akar dan kelembaban tanpa ada yang terlewat. Masalah kalibrasi sensor diselesaikan melalui riset literatur yang dilakukan bersama."
+},
+{
+"EcoBreath: Inovasi Alat Penyaring CO2 Ramah Lingkungan untuk Udara Lebih Bersih": "Sikap kritis terhadap polusi udara bagus, kreativitas dalam desain filter perlu dioptimalkan agar ergonomis.",
+"narasi": "Kolaborasi menonjol saat meracik media penyerap karbon di laboratorium. Ketika aliran udara tersumbat, tim secara cepat mendesain ulang sekat filter secara musyawarah."
+},
+{
+"GTA (GROW TOGETHER with ABK) Website Edukasi Digital Untuk Pendampingan dan Dukungan Orang Tua Anak Berkebutuhan Khusus.": "Kreativitas dan empati sangat tinggi, namun kemandirian memvalidasi konten ke pakar psikologi perlu ditingkatkan.",
+"narasi": "Mereka membagi tugas riset konten dan desain web dengan sangat proporsional. Kesulitan merangkum materi edukasi diatasi dengan sesi curah pendapat yang intens."
+},
+{
+"PENGEMBANGAN BIO BATERAI BERBASIS HIDROGEL PVA DENGAN EKSTRAK KULIT JERUK DENGAN INOVASI COLLOIDAL TIO UNTUK PENYIMPANAN ENERGI RAMAH LINGKUNGAN": "Semangat gotong royong riset kimiawi sangat tangguh, namun bernalar kritis saat menyusun laporan akhir harus lebih teliti.",
+"narasi": "Tim saling mengingatkan prosedur keselamatan saat membuat hidrogel di lab. Kegagalan tegangan baterai direspons dengan analisis kolektif terhadap ketebalan pasta elektrolit."
+},
+{
+"Pemanfaatan Limbah Kapas Micellar Water sebagai Media Tanam Biodegradable Melalui Detoksifikasi, Adsorpsi Biochar, dan Penguatan Struktur Selulosa": "Sikap kritis detoksifikasi limbah kimia sangat baik, kemandirian memantau pertumbuhan bibit perlu kedisiplinan ekstra.",
+"narasi": "Proses pencucian dan pencampuran biochar dilakukan bergiliran tanpa keluhan. Mereka menyikapi lambatnya degradasi kapas dengan memodifikasi takaran biochar secara bersama-sama."
+},
+{
+"MOTECTOR (Moisture Detector) - Rancang Bangun Pendeteksi Kelembapan Tanah di Lahan Pertanian Berbasis IoT": "Kreativitas integrasi IoT sangat terlihat, ke depannya semangat gotong royong membuat casing pelindung hujan perlu diasah.",
+"narasi": "Tim ini sangat kompak merakit mikrokontroler dan memasang probe ke tanah. Saat koneksi internet terputus di lahan, mereka tenang dan memperbaiki kode modul WiFi secara kolaboratif."
+},
+{
+"AI-NINE: Anti-rain Electric Clothesline": "Semangat mandiri membangun kerangka mekanis jemuran bagus, namun nalar kritis terhadap beban maksimal motorik perlu diperhitungkan.",
+"narasi": "Mereka saling bahu-membahu merangkai motor penggerak tali jemuran. Saat sensor hujan terlambat merespons, tim langsung mengevaluasi sensitivitas sensor dalam diskusi terbuka."
+},
+{
+"Pengembangan Alat Pengingat Minum Air Berbasis Buzzer dan Timer untuk Siswa": "Kreativitas dalam ide sehari-hari sangat relevan, namun gotong royong dalam menyempurnakan bentuk botol bisa ditingkatkan.",
+"narasi": "Siswa membagi tugas programming timer dan merakit buzzer dengan seimbang. Mereka tertawa bersama dan memperbaiki rangkaian saat buzzer berbunyi tidak sesuai jadwal."
+},
+{
+"Rancang Bangun Kincir Air Hibrida sebagai Pemanen Energi Air Hujan untuk Pembangkitan Listrik Skala Kecil": "Sikap kritis memanfaatkan air hujan patut dipuji, kemandirian mengolah data arus listrik perlu dibiasakan tanpa banyak bergantung.",
+"narasi": "Kelompok menunjukkan kekompakan luar biasa saat menguji kincir di bawah guyuran air. Kendala putaran dinamo yang lambat diselesaikan dengan mengubah sudut sudu kincir bersama-sama."
+},
+{
+"Pengolahan Limbah Plastik Polethylene Terephthlate (PET) dan Serbuk Kayu Sebagai Material Alternatif Untuk Pembuatan Kursi": "Semangat gotong royong mengumpulkan botol PET luar biasa, kreativitas finishing produk akhir (kursi) bisa lebih diperindah.",
+"narasi": "Tim melebur plastik dan mencetak campuran kayu dengan pembagian sif kerja yang adil. Saat material awal mudah patah, mereka tidak menyerah dan mengubah perbandingan suhu lebur."
+},
+{
+"Pengembangan Smart Air Purifer Berbasis Al dan IOT dengan Kontrol Filtrasi Otomatis Untuk Mitigasi Polusi Urban": "Kemandirian coding AI sudah sangat mantap, ke depannya bernalar kritis terhadap ketahanan filter fisik perlu dikembangkan.",
+"narasi": "Setiap anggota berkontribusi aktif merakit kipas dan memprogram dashboard IoT. Ketika modul debu tidak terbaca, mereka menelusuri jalur kabel satu per satu dengan sabar."
+},
+{
+"Analisis Potensi Limbah Singkong (Manihot Esculenta) Sebagai Bahan Baku Bioetanol Dalam Upaya Pemanfaatan Biomassa Lokal Menuju Transisi Energi Terbarukan": "Sikap kritis membedah potensi gula singkong sudah bagus, gotong royong dalam proses destilasi butuh lebih banyak kesabaran tim.",
+"narasi": "Mereka berkolaborasi memarut dan memeras singkong dengan semangat tinggi. Masalah pada proses penyulingan disikapi dengan mengevaluasi kerapatan suhu secara kolektif."
+},
+{
+"Hugspice Inovasi Pembuatan Rempah Celup Sebagai Alternatif Pereda Nyeri Haid": "Kreativitas mengolah rempah tradisional patut diacungi jempol, kemandirian melakukan uji organoleptik ke banyak responden perlu didorong.",
+"narasi": "Siswa membagi peran dalam menimbang racikan dan mendesain kantong teh. Mereka menerima kritik rasa dari penguji dengan pikiran terbuka dan merevisi formula bersama."
+},
+{
+"Eco Turbine Ventilator Kaleng Bekas Untuk Memperbaiki Kenyamanan Termal Pada Bangunan Di Daerah Tropis": "Gotong royong merakit kaleng bekas sangat kompak, penalaran kritis tentang aerodinamika sirip turbin bisa lebih dieksplorasi.",
+"narasi": "Pemotongan dan perakitan seng dilakukan dengan pembagian tugas yang sangat berhati-hati. Saat turbin macet ditiup angin, mereka bersama-sama melumasi dan mengatur ulang porosnya."
+},
+{
+"PEMBUATAN BRIKET DARI SERBUK GERGAJI KAYU KERING": "Kemandirian mengolah bahan baku mentah sudah terlihat, kreativitas bentuk cetakan briket masih bisa dikembangkan agar lebih unik.",
+"narasi": "Kelompok bekerja keras mencampur tepung kanji dan serbuk gergaji tanpa takut kotor. Mereka mencari solusi bersama saat briket sulit kering dengan memodifikasi teknik penjemuran."
+},
+{
+"Implementasi CCTV Berbasis Internet of Things (IoT) Sebagai Smart Security untuk Mengurangi Tindakan Kejahatan Di Masyarakat": "Sikap kritis terhadap isu keamanan lingkungan patut diapresiasi, namun gotong royong menyusun laporan operasional perlu disinergikan.",
+"narasi": "Tim saling bantu menghubungkan modul kamera ke jaringan lokal. Saat delay video terlalu tinggi, mereka kompak mencari referensi kompresi data yang lebih efisien."
+},
+{
+"Rancang Bangun AE-Rofit sebagai Penyedia Air Bersih Alternatif Berbasis Modul TEC dan Batu Zeolit": "Kreativitas menggabungkan kondensasi TEC dan filtrasi sangat cerdas, kemandirian menganalisis pH air perlu dibiasakan lebih presisi.",
+"narasi": "Mereka berbagi tugas antara merakit elektronik dan menyusun media zeolit. Ketika embun yang dihasilkan minim, kelompok ini dengan sigap mengatur ulang sirkulasi udara pendingin."
+},
+{
+"Grow T sebagai Inovasi Media Tanam Sekali Pakai Berbasis Ampas Teh sebagai Upaya Pemenuhan Gizi Sayuran pada Masyarakat Indonesia": "Gotong royong mengeringkan ampas teh sangat baik, sikap kritis terhadap kandungan nutrisi NPK ampas perlu diperdalam melalui literatur.",
+"narasi": "Setiap siswa membawa sisa teh dari rumah dan mengolahnya bersama di sekolah. Kegagalan tumbuh pada benih pertama dievaluasi tim dengan mencari tahu tingkat keasaman ampas teh."
+},
+{
+"HOME "Hybrid Of Microfiltration Equipment" Sistem Filtrasi Air Sederhana Ramah Lingkungan untuk Pengolahan Air Sumur Rumah Tangga": "Kemandirian merakit tabung filter cukup tangguh, kreativitas memanfaatkan material sisa pipa PVC bisa lebih dioptimalkan.",
+"narasi": "Pemasangan lapisan pasir, karbon, dan membran dilakukan secara estafet oleh anggota tim. Saat terjadi kebocoran tabung, mereka menambalnya bersama tanpa saling melempar tanggung jawab."
+},
+{
+"Pemanfaatan Limbah Minyak Jelantah dan Ampas Kopi dalam Pembuatan Sabun Padat Organk": "Sikap kritis mendaur ulang minyak bekas sangat bagus, gotong royong saat pengadukan reaksi saponifikasi perlu pergantian yang lebih adil.",
+"narasi": "Siswa menunjukkan kehati-hatian luar biasa saat menuang soda api. Mereka memecahkan masalah tekstur sabun yang terlalu lembek dengan menghitung ulang rasio alkali."
+},
+{
+"Efektivitas Filtrasi Biologis Terhadap Penurunan Kadar Amonia pada Sistem Budidaya kuaponik": "Semangat gotong royong merawat ikan dan tanaman luar biasa, kemandirian mengambil sampel air harian perlu lebih disiplin.",
+"narasi": "Tim membagi tugas memberi pakan dan mengecek sirkulasi filter bio secara bergantian. Lonjakan amonia mendadak diselesaikan lewat diskusi cepat untuk menambah jumlah bakteri pengurai."
+},
+{
+"Pemanfaatan Kulit Pisang dan Kulit Buah Naga sebagai Bahan Dasar Pembuatan Bioleather Ramah Lingkungan": "Kreativitas menciptakan tekstur kulit nabati ini tinggi, nalar kritis saat proses pengeringan agar tidak berjamur perlu ditingkatkan.",
+"narasi": "Mereka sangat kompak saat memblender bahan dan mencetak lembaran bioleather. Ketika lembaran awal mudah sobek, tim berinisiatif menambahkan sedikit gliserin sayur sebagai plastisizer."
+},
+{
+"Uji Efektivitas Formulasi Bio-Pupuk Organik Berbasis Kombinasi Limbah Tulang Ayam, Ampas Kopi, dan Kulit Jeruk Terhadap Kecepatan Perkecambahan Tanaman Cabai (Capsicum annuum L.)": "Kemandirian mencacah limbah keras sudah terbentuk, kreativitas merancang grafik perbandingan kecambah perlu dibuat lebih menarik.",
+"narasi": "Proses dekomposisi pupuk dipantau bersama dengan buku log harian yang rapi. Mereka merespons bau menyengat pupuk dengan memodifikasi wadah fermentasi secara kolektif."
+},
+{
+"Optimasi Waktu Adsorpsi Klorofil Rumput Liar untuk Meningkatkan Karakteristik Elektrik DSSC": "Sikap bernalar kritis meracik pigmen fotosintesis sangat kuat, gotong royong melapisi kaca ITO (Indium Tin Oxide) perlu ketelitian bersama.",
+"narasi": "Setiap anggota fokus pada sterilisasi dan penyiapan sel surya organik ini. Saat voltase terukur nol, mereka membongkar sel dan mengecat ulang pasta titania tanpa frustrasi."
+},
+{
+"PEMANFAATAN EKSTRAK DAUN PEGAGAN (Centella asiatica (L.)) SEBAGAI SABUN CAIR ANTIOKSIDAN BEBAS Sodium Lauryl Sulfate (SLS) UNTUK MENCEGAH PENUAAN DINI": "Kreativitas meracik produk perawatan diri patut dipuji, kemandirian menguji viskositas sabun cair masih perlu panduan teknis.",
+"narasi": "Kelompok saling bantu memeras ekstrak pegagan dan meracik basis sabun. Mereka sepakat mengatur ulang takaran pengental alami saat mendapati sabun terlalu encer."
+},
+{
+"PENGEMBANGAN SISTEM KEAMANAN PINTU DENGAN PENGGABUNGAN METODE FISHERFACE DAN PENGAWASAN KAMERA BERBASIS IOT": "Gotong royong mendaftarkan dataset wajah sangat kompak, sikap kritis dalam menangani pencahayaan kamera redup perlu dipersiapkan.",
+"narasi": "Tim berbagi tugas menjadi model data wajah dan pemrogram sistem identifikasi. Kendala wajah tidak dikenali saat malam diselesaikan dengan menambahkan lampu inframerah bersama."
+},
+{
+"Sistem Penampungan Air Hujan Berfilter (SKYFILTER) Solusi Efektif Untuk Penanganan Permasalahan Hujan Mikroplastik": "Kemandirian menguji sampel mikroplastik di mikroskop sangat telaten, kreativitas presentasi urgensi isu bisa lebih menggugah.",
+"narasi": "Pemasangan kasa berlapis di talang air dikerjakan bersama dengan pembagian peran mekanik. Mereka tidak menyerah saat filter mudah mampet, melainkan mengubah urutan kerapatan saringan."
+},
+{
+"Digital Health: Aplikasi Cerdas Deteksi Penyakit Jantung Iskemik": "Sikap kritis memproses dataset medis sangat tajam, namun gotong royong dalam pembuatan desain UI aplikasi perlu ditingkatkan.",
+"narasi": "Mereka fokus melatih algoritma dan mendiskusikan akurasi prediksi secara mendalam. Perdebatan mengenai tata letak tombol aplikasi diselesaikan melalui pemungutan suara kelompok."
+},
+{
+"Pemanfaatan Gas Oxy-Hidrogen Dari Air Sebagai Energi Terbarukan Dengan Metode Pemecahan H2O Menggunakan Katalisator Kalium Hidroksida Melalui Single Wet Cell Elektrolisis Untuk Sumber Energi Alternatif Dan Mengurangi Emisi Karbon": "Kreativitas eksperimen energi gas hidrogen sangat berani, kemandirian mematuhi protokol keselamatan HHO perlu dipertahankan.",
+"narasi": "Tim merakit sel basah dan sistem kelistrikan dengan koordinasi keamanan yang tinggi. Saat produksi gas lambat, mereka duduk bersama mengevaluasi konsentrasi katalis tanpa gegabah."
+},
+{
+"SisaSaka: Pengembangan Material Tatakan Gelas Tahan Panas Berbahan Dasar Kompresi Cacahan Tutup Botol": "Semangat gotong royong mencacah plastik sangat ulet, sikap kritis dalam mengukur ketahanan suhu maksimum perlu diuji lebih detail.",
+"narasi": "Kerja sama sangat menonjol saat proses pelelehan dan pengepresan tatakan gelas. Mereka menanggapi hasil cetakan yang miring dengan memperbaiki teknik klem pres bersama-sama."
+},
+{
+"Inovasi Penghapus Papan Tulis Otomatis CleanSwipe untuk Pembelajaran yang Lebih Efisien": "Kemandirian merakit rel mekanis pada papan tulis baik, kreativitas mengatur gerak motor agar tidak bising bisa dieksplorasi.",
+"narasi": "Siswa saling memegang komponen saat memasang dinamo di ujung papan. Kendala penghapus tersangkut diselesaikan dengan mengevaluasi ketegangan tali penarik secara berkelompok."
+},
+{
+"Perancangan Sistem Pendeteksi Banjir Dini (BanjirGuard) Sebagai Indikator Alarm": "Sikap kritis menempatkan titik sensor air sangat tepat, gotong royong membungkus sirkuit agar kedap air butuh kerapian ekstra.",
+"narasi": "Mereka berbagi tugas memprogram notifikasi dan menguji pelampung mekanis. Tim menghadapi masalah alarm palsu dengan meriset batas ambang batas air secara kolektif."
+},
+{
+"Inovasi Botol Pintar RemindMe Berbasis Arduino Nano untuk Membentuk Kebiasaan Hidup Sehat dan Terhidrasi": "Kreativitas integrasi alat ke dalam botol minum patut diapresiasi, kemandirian merapikan kabel jumper agar muat perlu kesabaran.",
+"narasi": "Tim sangat solid membagi kerja antara soldering dan coding RTC (Real Time Clock). Saat lampu indikator tidak berkedip tepat waktu, mereka mengurutkan kode logika bersama."
+},
+{
+"Sistem Lampu Jalan Otomatis Berbasis Energi Kinetik Piezoelektrik": "Gotong royong merakit susunan piezo di bawah papan pijakan sangat baik, nalar kritis menstabilkan arus searah butuh penyempurnaan.",
+"narasi": "Mereka menguji injakan secara bergiliran sambil mencatat output daya listrik. Kurangnya daya untuk menyalakan LED disikapi dengan musyawarah menambah kapasitor penyimpan."
+},
+{
+"PEMANFAATAN LIMBAH KULIT PISANG AMBON DAN BAYAM SEBAGAI BIOBATERAI YANG RAМАН LINGKUNGAN": "Kemandirian menghancurkan pasta organik sudah baik, kreativitas mencari pelat elektroda alternatif (selain seng/tembaga murni) bisa dipertimbangkan.",
+"narasi": "Anggota kelompok berbagi peran menumbuk bayam dan mengukur voltase sel. Mereka tidak putus asa saat voltase turun cepat, melainkan mengevaluasi kadar kelembaban pasta."
+},
+{
+"ANALYSIS OF DURIAN SKIN WASTE EXTRACT USAGE AS BASIC INGREDIENT FOR ACNE PATCH": "Sikap kritis mengekstrak zat anti-bakteri dari kulit durian sangat bagus, gotong royong mencetak plester jerawat butuh ketelitian bersama.",
+"narasi": "Mereka saling mengingatkan saat menggunakan pelarut di laboratorium. Masalah plester yang kurang menempel diatasi dengan mendiskusikan penambahan agen perekat organik yang aman."
+},
+{
+"Pemanfaatan Teknologi Remote Sensing untuk Memantau Efektivitas Perkembangan Reboisasi Pohon di Pegunungan Kendeng": "Kreativitas mengolah data citra satelit sangat visioner, kemandirian memverifikasi ground-check langsung mungkin perlu diagendakan jika memungkinkan.",
+"narasi": "Tim berdiskusi intens di depan layar untuk membedakan spektrum warna tajuk pohon. Perbedaan interpretasi data diselesaikan dengan mencari jurnal panduan bersama."
+},
+{
+"CRUNCHY PURPLE POWER; PENGARUH PENGGUNAAN UBI JALAR UNGU, TEPUNG OAT, DAN GULA AREN TERHADAP NILAI GIZI DAN POTENSI KESEHATAN REMAJA BERBASIS COOKIES FUNGSIONAL": "Semangat gotong royong saat baking cookies luar biasa, sikap kritis menghitung kalori pasti setiap keping perlu dibiasakan.",
+"narasi": "Mereka berbagi tugas menimbang adonan, memanggang, dan mengemas secara rapi. Kritik tentang tekstur kue yang terlalu keras diterima dengan modifikasi waktu panggang bersama."
+},
+{
+"SCAN HARGA PRODUK": "Kemandirian menyusun database harga sangat telaten, kreativitas fitur perbandingan harga antartoko bisa dikembangkan lebih lanjut.",
+"narasi": "Siswa bahu-membahu memindai ratusan barcode untuk melatih aplikasi scanner. Bug pada kamera pemindai disikapi dengan melakukan update library sistem operasi bersama."
+},
+{
+"Pemanfaatan Minyak Jelantah Menjadi Sabun Padat": "Sikap kritis memurnikan minyak jelantah dengan arang aktif patut dicontoh, gotong royong saat penanganan bahan kimia korosif perlu kewaspadaan merata.",
+"narasi": "Tim saling mengawal prosedur keamanan saat mencampur NaOH dan air. Mereka memecahkan masalah aroma sabun yang tengik dengan menambahkan essential oil."
+},
+{
+"Inovasi Pengembangan Smart Bin Berbasis Sensor Di Lingkungan Pesantren": "Kreativitas desain tempat sampah pintar sangat bermanfaat, kemandirian memastikan sensor ultrasonik bebas kotoran perlu dibiasakan.",
+"narasi": "Mereka merakit mekanik pembuka tutup sampah dengan kerja sama yang apik. Saat servo tidak kuat mengangkat tutup, tim langsung berdiskusi mengganti tuas mekanis."
+},
+{
+"Pengembangan Jemuran Otomatis Berbasis Sensor Hujan dan Cahaya": "Gotong royong membangun prototipe atap penutup sangat gesit, penalaran kritis menyikapi cuaca berawan (sensor cahaya redup) perlu disesuaikan.",
+"narasi": "Siswa saling memegang gergaji dan bor saat membuat rangka miniatur jemuran. Mereka mengatasi atap yang lambat menutup dengan melumasi rel secara gotong royong."
+},
+{
+"Inovasi Minuman Herbal Edible: Alternatif Minuman Fungsional Berbasis Bahan Alami": "Kemandirian meracik formula edible cup (gelas bisa dimakan) sangat berani, kreativitas mencari tekstur agar tidak mudah bocor perlu iterasi.",
+"narasi": "Tim bereksperimen dengan berbagai campuran gelatin dan pektin tanpa lelah. Kegagalan gelas yang meleleh terkena air hangat diselesaikan lewat riset literatur pengeras alami."
+},
+{
+"Rancangan Uji Eksperimental Lampu Indikator Berbasis Sensor untuk Optimasi Monitoring Konsumsi Energi Listrik Harian": "Sikap kritis mendeteksi arus beban listrik sangat detail, gotong royong membungkus panel indikator agar aman sentuh harus diprioritaskan.",
+"narasi": "Mereka berbagi peran mencatat perubahan daya listrik dan memprogram modul pzem. Kesalahan pembacaan watt dievaluasi dengan menukar kabel arus secara kolektif dan hati-hati."
+},
+{
+"ECO BANANA: INOVASI LIMBAH KULIT PISANG MENJADI PUPUK ORGANIK DENGAN EM4": "Kreativitas mengolah limbah organik tinggi, kemandirian mencatat pH dan suhu komposter setiap hari perlu komitmen ekstra.",
+"narasi": "Semua anggota bergantian mengaduk komposter pupuk cair untuk aerasi. Bau proses fermentasi dihadapi dengan senyum dan memindahkan letak tong komposter bersama-sama."
+},
+{
+"Smart Fisheries Village: Desa Nelayan Pintar": "Semangat empati pada nelayan dan ide makro sangat bagus, penalaran kritis mengerucutkan satu fitur prototipe utama perlu dibimbing.",
+"narasi": "Tim berdebat secara konstruktif menentukan fitur utama antara navigasi atau pencatat cuaca. Mereka menyelesaikannya dengan survei kecil-kecilan dan sepakat pada fitur navigasi."
+},
+{
+"Mengubah Limbah Menjadi Manfaat: Pembuatan Body Scrub Alami dari Biji Alpukat": "Kemandirian memparut dan mengeringkan biji alpukat patut diacungi jempol, kreativitas pengemasan scrub bisa dibuat kekinian.",
+"narasi": "Mereka membagi tugas pengeringan, penumbukan, dan pencampuran bahan lulur. Saat scrub terasa terlalu kasar di kulit, tim langsung mencampurkan pelembab alami aloe vera."
+},
+{
+"KARAKTERISTIK TEPUNG BUAH KELAPA SEBAGAI PRODUK PANGAN SEHAT DALAM UPAYA MEWUJUDKAN KONSUMSI BERKELANJUTAN": "Sikap kritis menganalisis kadar air dan serat kelapa parut bagus, gotong royong saat menyangrai tepung butuh kesabaran tim.",
+"narasi": "Kerja sama terlihat saat mereka secara bergantian mengayak hasil blender kelapa. Gumpalan pada tepung diselesaikan dengan mendiskusikan pengaturan suhu oven pengering."
+},
+{
+"pemanfaatan ampas singkong dan dry fish sebagai pakan ternak alternatif": "Kreativitas mencari substitusi pakan murah sangat aplikatif, kemandirian menguji daya simpan pelet pakan butuh observasi rutin.",
+"narasi": "Kelompok saling menutupi bau menyengat ikan kering saat proses pencetakan pelet. Mereka memecahkan masalah pelet yang mudah hancur dengan menambahkan sedikit perekat kanji bersama."
+},
+{
+"PEMANFAATAN SAMPAH PLASTIK DENGAN MEMODIFIKASI CANGKANG KERANG ANADARA GRANOSA DALAM PEMBUATAN PAVING BLOCK RAMAH LINGKUNGAN": "Gotong royong menumbuk cangkang kerang luar biasa gigih, sikap kritis mengatur rasio plastik dan cangkang perlu uji coba berulang.",
+"narasi": "Siswa saling berganti memakai masker dan kacamata pengaman saat melebur limbah. Ketahanan paving block yang rendah disikapi dengan memformulasikan ulang rasio kepadatan cangkang."
+},
+{
+"Implementasi Teknologi Sensor pada Smart Waste Bin untuk Pemilahan Sampah Organik dan Anorganik sebagai Solusi Smart Society": "Kemandirian merakit sensor induktif dan kapasitif sangat teknis, kreativitas mekanisme pembuangan flap bin perlu dirancang lebih halus.",
+"narasi": "Mereka berbagi tugas antara pengkabelan sensor dan mendesain rangka sampah. Saat sensor salah mendeteksi plastik tebal, tim secara kolektif melatih ulang sensitivitas sensor."
+},
+{
+"Pemanfaatan Limbah Organik dan Kotoran Sapi Sebagai Biogas dan Pupuk Kompos": "Sikap kritis memanen metana sebagai energi sangat baik, gotong royong mengamankan kebocoran tabung reaktor digester harus lebih teliti.",
+"narasi": "Tim tidak segan menangani kotoran sapi dan limbah sisa sayuran bersama-sama. Kebocoran gas kecil pada selang langsung ditangani lewat pengeleman rapat yang dilakukan kompak."
+},
+{
+"Inovasi Masker Gel Madu - Aloe Vera Menggunakan Metode Cold Process untuk Perawatan Kulit Wajah": "Kreativitas metode cold process menjaga nutrisi bahan patut dipuji, kemandirian melakukan uji iritasi terbatas butuh pendampingan.",
+"narasi": "Mereka sangat rapi dan higienis saat membagi tugas peracikan gel masker. Ketidakstabilan gel saat disimpan lama direspons tim dengan riset pengawet alami."
+},
+{
+"Ride The Sun: Inovasi Mobil Surya Ramah Lingkungan": "Semangat gotong royong merakit sasis mobil surya sangat heroik, penalaran kritis menghitung daya dorong motor DC perlu presisi matematik.",
+"narasi": "Siswa bahu-membahu memasang panel surya dan menyambungkan aki ke dinamo roda. Saat mobil tidak kuat menanjak, mereka berdiskusi dan mengurangi bobot sasis kerangka."
+},
+{
+"Smart RVM (Reverse Vending Machine): Optimalisasi Daur Ulang Plastik Melalui Sistem Penghancur Terintegrasi dan Barcode Voucher Insentif.": "Kemandirian memprogram barcode scanner dan database poin bagus, kreativitas mekanisme pencacah internal (shredder) perlu diperhatikan aspek safetynya.",
+"narasi": "Tim saling bantu menyambungkan motor pencacah dengan mikrokontroler. Saat mesin macet oleh botol tebal, mereka sigap memutus arus dan mengevaluasi torsi mesin pemotong."
+},
+{
+"MONITORING KUALITAS AIR KOLAM IKAΝ ΚΟΙ": "Sikap kritis memantau TDS dan pH air secara realtime terbukti efektif, gotong royong membuat antarmuka dashboard perlu pemerataan tugas.",
+"narasi": "Mereka bergantian mencelupkan sensor ke kolam uji dan mencatat anomali data. Masalah pembacaan sensor yang berkarat diselesaikan dengan melapisinya menggunakan resin kedap air."
+},
+{
+"ZZZ-PODS: Inovasi Sediaan Anti-Insomnia Berbasis Teknologi Mikroenkapsulasi Spray dengan Peningkatan Daya Tahan Pelepasan Zat Aktif": "Kreativitas mikroenkapsulasi setara riset lanjutan, kemandirian menyiapkan bahan penyalut polimer perlu dilakukan dengan penuh ketelitian.",
+"narasi": "Kolaborasi sangat padu saat menggunakan alat spray dryer di laboratorium. Mereka mengatasi penggumpalan bubuk zat aktif dengan mengatur ulang laju aliran penyemprot."
+},
+{
+"Smart Trash Bin: Pemilah Sampah Otomatis dan Pengolah Sampah Organik menjadi Ecoenzym sebagai Energi Terbarukan Menuju Masa Depan Berkelanjutan": "Gotong royong merakit dua ruang pengolah sampah sangat ambisius, sikap kritis menjaga selang ecoenzym agar tidak tersumbat harus dipikirkan.",
+"narasi": "Siswa berbagi tugas berat antara merakit elektronik pemilah dan merancang wadah enzim. Saat cairan enzim bocor merusak kabel, mereka saling bahu-membahu merapikan insulasi ulang."
+},
+{
+"SIBERLIH: Sistem Filtrasi Berbasis Biomaterial Lokal sebagai Strategi Ketahanan Air Bersih di Wilayah Rentan Intrusi Air Payau, Tanggulangin, Sidoarjo": "Kemandirian menyusun lapisan karbon lokal sangat gigih, kreativitas mendesain pompa filter bertekanan bisa ditambahkan ke depan.",
+"narasi": "Tim berangkat ke lapangan untuk mencari material lokal bersama-sama tanpa sungkan. Saat air payau belum sepenuhnya tawar, mereka berdiskusi untuk mempertebal lapisan zeolit aktif."
+},
+{
+"Pengembangan Smart Energy Management System (SMENTS) Berbasis PLTB sebagai Solusi Smart Society 5.0 dalam Optimalisasi Kemandirian Energi Pulau Kalaotoa": "Sikap kritis merancang sistem manajemen energi sangat komprehensif, gotong royong mensimulasikan alat dengan angin buatan perlu kekompakan.",
+"narasi": "Setiap anggota mengambil peran spesifik dari coding distribusi daya hingga merakit kincir angin skala kecil. Hambatan ketidakstabilan tegangan diselesaikan lewat eksperimen kapasitor cadangan."
+},
+{
+"Pemanfaatan Kulit Pisang sebagai Bio-Baterai untuk Ketahanan Energi berbasis Potensi Keruangan guna Mendukung Kemandirian Energi Lokal pada Era Krisis Iklim": "Kreativitas menghubungkan potensi lokal pisang dengan isu energi sangat baik, kemandirian menyusun banyak sel seri butuh kedisiplinan.",
+"narasi": "Siswa saling bergantian menumbuk kulit pisang menjadi pasta elektrolit. Kegagalan menyalakan lampu LED direspon dengan musyawarah menambah kotak sel baterai."
+},
+{
+"Inovasi Produk Fortifikasi Bubuk Dari Kurma Ajwa (Phoenix dactylifera) dan Daun Kelor (Moringa oleifera) sebagai Upaya Pencegahan Stunting pada Bayi Usia 6-24 Bulan": "Semangat empati kesehatan balita luar biasa, sikap kritis memastikan tekstur bubuk aman tanpa tersedak perlu verifikasi lanjutan.",
+"narasi": "Tim sangat kompak saat mengeringkan daun kelor dan menghaluskan kurma. Rasa bubuk yang sedikit langu diperbaiki bersama dengan menyesuaikan persentase kurma ajwa."
+},
+{
+"URBANSTEP (Sustainable Transduction of Energy from Pedestrian): Inovasi Lantai Kinetik Mendukung Pembangunan Smart City Berbasis Energi Terbarukan": "Kemandirian memotong akrilik dan merakit per pada lantai kinetik bagus, kreativitas meningkatkan luasan penampang injakan bisa diperluas.",
+"narasi": "Mereka saling mencoba melompat di atas lantai kinetik untuk menguji ketahanan pegas mekanis. Saat pegas miring ke satu sisi, tim langsung membongkar dan menyeimbangkan posisi per."
+},
+{
+"Integrasi Bioflok, Akuaponik, dan Waterloop System Sebagai Model Pertanian Perkotaan Terpadu, Mandiri, dan Berkelanjutan": "Sikap kritis menggabungkan tiga sistem sekaligus sangat menantang, gotong royong merawat sirkulasi air harus dilakukan secara bergiliran.",
+"narasi": "Siswa saling bantu mengebor pipa paralon dan menyiapkan wadah media tanam. Masalah pompa air tersumbat feses ikan langsung diatasi dengan kerja bakti membersihkan saringan."
+},
+{
+"EduPoint: Pengembangan Platform Pembelajaran Berbasis Gamifikasi dengan Sistem Hadiah Digital": "Kreativitas merancang elemen game edukasi sangat menarik, kemandirian melacak bug database poin siswa perlu keuletan.",
+"narasi": "Tim mendesain ikon avatar dan alur permainan dengan pembagian kerja yang kreatif. Kendala sistem tidak mereset hadiah disikapi dengan pengecekan baris kode logika secara tim."
+},
+{
+"Hydrofish Bucket: Inovasi Hidroponik dan Akuakultur Sebagai Solusi Keberlanjutan Pangan di Kawasan Perkotaan": "Gotong royong merakit ember budidaya sangat kompak, penalaran kritis tentang sirkulasi oksigen di ruang sempit perlu terus dievaluasi.",
+"narasi": "Mereka bekerja sama menyusun pot-pot kecil di tutup ember dan mengisi air nutrisi. Ketika air ember menjadi keruh berbau, tim bermusyawarah dan memutuskan memasang aerator mini."
+},
+{
+"Inovasi Biskuit Daun Kelor dengan Penambahan Ubi Madu sebagai Camilan Sehat Tinggi Serat dan Betakaroten": "Kemandirian membuat adonan camilan bergizi sangat mantap, kreativitas mencetak bentuk biskuit yang disukai anak bisa lebih dieksplor.",
+"narasi": "Proses pencampuran tepung kelor dan ubi madu dilakukan dengan ceria dan bersih. Mereka menerima masukan tentang biskuit yang gosong dengan memperbaiki pengaturan timer oven bersama."
+},
+{
+"Peel to Brwonies Cookies: Inovasi Brownies Cookies Berbasis Kulit Pisang dengan Konsep Sustainable Food dalam Mengurangi Food Waste and Energy Footprint": "Sikap kritis mengolah limbah kulit menjadi makanan sangat out-of-the-box, gotong royong mencuci dan menetralisir getah pisang butuh kesabaran ekstra.",
+"narasi": "Setiap anggota terlibat aktif dari merebus kulit pisang hingga mencetak adonan brownies. Tim menyelesaikan masalah tekstur berpasir dengan menyaring ulang pure kulit pisang."
+},
+{
+"Konversi Limbah Sabut Kelapa Menjadi Bioethanol Menggunakan Fermentasi Mikrobial Saccharomyces Cerivisiae": "Kreativitas meracik hidrolisis selulosa kelapa menjadi gula patut dibanggakan, kemandirian memantau laju fermentasi ragi perlu kedisiplinan.",
+"narasi": "Mereka saling bantu menyaring cairan sabut kelapa yang tebal dan berserat. Minimnya tetesan bioetanol hasil penyulingan disikapi dengan memodifikasi pemanas destilator bersama."
+},
+{
+""Sistem Pengelolaan Data Inventaris Kelas Menggunakan Deteksi Objek Berbasis YOLOv8"": "Semangat gotong royong mengumpulkan ribuan foto inventaris kelas untuk dataset luar biasa, sikap kritis menangani akurasi objek mirip perlu dipertajam.",
+"narasi": "Tim membagi area kelas untuk dipotret dari berbagai sudut pencahayaan. Saat AI salah mengenali spidol sebagai pulpen, mereka melabeli ulang dataset secara bergotong royong."
+},
+{
+"Rancang Bangun Prototype MicroTrap Berbasis Bio-Flokulan dan Muatan Elektrostatik sebagai Teknologi Filtrasi Mikroplastik dan Pemurnian Air Kumuh": "Kemandirian merakit jaring elektrostatik teruji baik, kreativitas menyatukan bio-flokulan cair agar tersalur otomatis butuh desain inovatif.",
+"narasi": "Kolaborasi menonjol saat menyusun lapis elektroda untuk menangkap partikel tersuspensi. Mereka tidak panik ketika flokulan menggumpal sebelum waktunya, melainkan meriset ulang pH air uji."
+},
+{
+"Pengembangan dan Uji Efektivitas Golden Grow Hair sebagai Tonik Rambut Alami untuk Meningkatkan Pertumbuhan Rambut Remaja": "Sikap kritis membedah jurnal botani rambut patut diapresiasi, gotong royong melakukan ekstraksi maserasi tanaman butuh pembagian waktu luang.",
+"narasi": "Siswa menyaring dan mencampur ekstrak tonik dengan penuh ketelitian di lab. Saat aroma tonik terlalu herbal menyengat, tim berdiskusi dan menambahkan ekstrak mint pelega."
+},
+{
+"Kolga: Pemanfaatan Limbah Ampas Kopi Sebagai Alternatif Pakan Alga Pada Budidaya Ikan dengan Teknologi Bioflok": "Kreativitas menggabungkan ampas kopi dan kultur alga sangat unik, kemandirian menjaga aerasi kultur alga agar tidak mati sangat penting.",
+"narasi": "Mereka mengawasi botol kultur hijau alga dan memberi pakan secara bergiliran tiap pagi. Saat kepadatan alga menurun tajam, tim mengevaluasi intensitas paparan cahaya lampu bersama."
+},
+{
+"Inovasi IFOAM (Innovative Fungi Organic Alternative Material): Biofoam Berbasis Miselium Pluerotus Ostreatus Sebagai Kemasan Pengganti Styrofoam Ramah Lingkungan": "Gotong royong mensterilkan media tanam jamur sangat kompak, sikap kritis menyikapi kontaminasi jamur liar harus lebih waspada.",
+"narasi": "Tim mencetak serbuk kayu dan bibit miselium ke dalam cetakan kotak dengan sangat higienis. Ketika ada cetakan yang ditumbuhi kapang hitam, mereka mengevaluasi proses sterilisasi autoklaf."
+},
+{
+"GreenhAl: Pengembangan Smart Gardening Assistant Berbasis Al untuk Optimalisasi Siklus Tumbuh Melon dan Efisiensi Sumber Daya pada Greenhouse": "Kemandirian mengelola data suhu dan kelembaban rumah kaca sangat canggih, kreativitas membuat bot antarmuka Al bisa lebih ramah pengguna.",
+"narasi": "Setiap anggota berbagi peran mulai dari penanaman benih melon hingga pemasangan sensor tanah. Masalah pompa irigasi yang macet diselesaikan melalui pemeriksaan algoritma relay cerdas."
+},
+{
+"uji antibakteri hydrogel wound dressing berbasis lidah buaya dan madu untuk aplikasi luka bakar": "Sikap kritis meracik plester luka bakar hidrogel sangat berkelas, gotong royong menjaga sterilitas proses pembuatan perlu pengawasan ketat.",
+"narasi": "Mereka saling mengingatkan kebersihan saat mencampur ekstrak lidah buaya murni. Tim memodifikasi suhu pembekuan gel saat mendapati plester hydrogel terlalu kaku dan tidak elastis."
+},
+{
+"inovasi Dye-sensitized solar cell dengan ekstrak bunga telang sebagai elektrolit alami": "Kreativitas memanfaatkan antosianin telang untuk sel surya brilian, kemandirian dalam proses pelapisan kaca konduktif perlu kesabaran berlapis.",
+"narasi": "Siswa bekerja dengan ekstra hati-hati mengecat larutan telang ke permukaan kaca kecil. Nolnya angka pada multimeter disikapi tim dengan melakukan pengecekan kontinuitas pelat konduktif."
+},
+{
+"Pengembangan Sistem AGROPATCH: irigasi AWD Otomatis Berbasis Sensor Ultrasonik Sebagai Upaya Efisiensi Air dan Mitigasi Emisi Dalam Menghadapi Krisis Iklim Mendukung SDGs 13": "Semangat gotong royong membangun maket persawahan padi luar biasa, nalar kritis menyetel batas bawah ketinggian air sensor butuh presisi.",
+"narasi": "Mereka berbagi tugas antara membuat lumpur tiruan dan merakit tiang sensor jarak. Saat sensor membaca riak air sebagai benda padat, tim memperbaiki posisi tabung pelindung sensor bersama."
+},
+{
+"Integrasi Teknologi Daur Ulang Botol Plastik dengan Pembuatan Filamen Fungsional untuk 3D Printing": "Kemandirian memotong botol menjadi pita panjang sangat terampil, kreativitas mengatur suhu lebur ekstruder 3D filamen sangat krusial diuji.",
+"narasi": "Tim bergantian menarik benang plastik melewati pemanas ekstruder buatan sendiri. Terputusnya benang plastik diatasi dengan memutar tuas penarik lebih perlahan sambil berdiskusi."
+},
+{
+"INTEGRASI FACE RECOGNITION DALAM SISTEM PENITIPAN LAPTOP DI SEKOLAH": "Sikap kritis mengamankan aset siswa sangat relevan, gotong royong membangun kabinet fisik penyimpan laptop butuh tenaga merata.",
+"narasi": "Setiap anggota saling merekam sudut wajah berbeda untuk database loker pintar. Mereka menghadapi kendala engsel pintu loker otomatis yang macet dengan memperkuat dudukan motor servo."
+},
+{
+"Survive & Thrive For Aethera Company Strategi Untuk Menghadapi Krisis Iklim di Masa Depan Dengan Menerapkan Mikroalga Sebagai Penyerap Karbon Dioksida Berbasis Sistem Internet of Things (IOT)": "Kreativitas simulasi perusahaan penangkap karbon sangat visioner, kemandirian memelihara bioreaktor alga butuh dedikasi harian.",
+"narasi": "Siswa bahu-membahu merancang skema bisnis alat IOT penyerap karbon ruangan. Saat pertumbuhan alga mandek, mereka melakukan uji coba penambahan durasi penyinaran lampu LED."
+},
+{
+"Smart Inhaler dengan Deteksi Kualitas Udara untuk Pencegahan Asma Kambuh": "Gotong royong mendesain casing inhaler mungil sangat kompak, sikap kritis menempatkan sensor partikulat agar tidak terhalang butuh ketelitian.",
+"narasi": "Tim merakit modul mikrokontroler super kecil dengan kaca pembesar bergantian. Mereka memecahkan masalah koneksi bluetooth yang sering putus lewat evaluasi ketersediaan daya baterai koin."
+},
+{
+"Pengembangan Panel Surya Berbahan Limbah Plastik dengan Biaya Rendah untuk Pemenuhan Kebutuhan Listrik Rumah Tangga di Daerah Terpencil": "Kemandirian mencari bahan pelapis semikonduktor dari limbah patut diuji, kreativitas menyatukan lembaran plastik transparan agar fokus cahaya butuh teknik.",
+"narasi": "Mereka bekerja sama menempelkan lapisan kolektor panas di atas lembaran plastik PET. Tegangan listrik yang belum stabil dievaluasi tim dengan mencari referensi sudut kemiringan ideal."
+},
+{
+"Pemanfaatan Limbah Tulang Ayam di Pesantren sebagai Pupuk Alami Bayam": "Sikap kritis mengolah limbah dapur pesantren sangat responsif, gotong royong menghancurkan tulang ayam kering butuh alat bantu yang aman.",
+"narasi": "Tim memungut tulang dari sisa makan dan mencucinya bersih dengan semangat pantang jijik. Saat proses penghancuran manual terlalu lama, mereka berinisiatif meminjam mesin giling kompos."
+},
+{
+"SmartFarm: Sistem Irigasi Otomatis dan Pengusir Hama Pada tanaman Sawi": "Kreativitas menggabungkan irigasi dan ultrasonik pengusir hama sangat fungsional, kemandirian merakit selang drip air butuh presisi.",
+"narasi": "Siswa saling memegang kabel dan menyolder buzzer ultrasonik hama. Ketidakefektifan gelombang suara mengusir tikus disikapi dengan memodifikasi rentang frekuensi secara tim."
+},
+{
+"Auto Timer Penghilang Phantom Load: Inovasi Pengendali Daya pada Perangkat Boros Energi": "Semangat gotong royong membedah kabel colokan listrik sangat hati-hati, penalaran kritis tentang keamanan relay arus tinggi perlu standar ganda.",
+"narasi": "Mereka bergantian memprogram batas waktu idle untuk memutus arus listrik perangkat siaga. Saat relay berbunyi cetik berulang kali, tim membongkar rangkaian dan menstabilkan arus pemicu."
+},
+{
+"Program CERDAS (Cegah Risiko Diabetes): Edukasi Pola Hidup Sehat dan Pengendalian Glukosa Darah pada Masyarakat": "Kemandirian mendata responden untuk edukasi sangat berani, kreativitas menyusun modul sosialisasi yang interaktif bisa dibuat lebih pop.",
+"narasi": "Tim membagi zona sosialisasi di lingkungan sekitar sekolah dengan kooperatif. Mereka menghadapi masyarakat yang enggan dengan senyuman dan memperbaiki gaya komunikasi bersama."
+},
+{
+"Prototipe Alat Penghancur Sampah Got Ramah Lingkungan sebagai Upaya Adaptasi Perubahan Iklim": "Sikap kritis mencegah banjir akibat sampah got patut didukung, gotong royong merakit baling-baling pencacah air butuh keamanan kerja.",
+"narasi": "Siswa turun ke saluran air sekolah untuk mengukur dimensi alat pencacah sampah cair. Terbelitnya baling-baling oleh kain bekas diselesaikan tim dengan mendesain sekat pra-saring."
+},
+{
+"Eksplorasi Material Komposit Serbuk Kayu dan Resin: Upaya Peningkatan Nilai Guna Limbah Menjadi Produk Fungsional": "Kreativitas mendesain produk komposit sangat bernilai estetik, kemandirian menakar rasio katalis resin agar tidak cepat keras butuh latihan.",
+"narasi": "Mereka saling bantu menuang dan mengaduk campuran kayu-resin agar tidak ada gelembung udara. Cetakan yang retak akibat reaksi eksoterm direspons tim dengan mengurangi takaran pengeras."
+},
+{
+"Pengembangan Sistem Peringatan Dini Penyakit Menular Berbasis n8n Workflow Automation dan Algoritma Al": "Gotong royong merangkai alur logika automation n8n sangat cepat, sikap kritis memastikan sumber data API penyakit terpercaya sangat esensial.",
+"narasi": "Tim berbagi tugas memprogram trigger notifikasi ke platform perpesanan. Kegagalan pengiriman pesan otomatis diatasi dengan melacak error log API bersama-sama."
+},
+{
+"Rancang Bangun Prototipe Kendaraan Listrik Bertenaga Surya (Solar- Car) Berbasis Sel Fotovoltaik": "Kemandirian merakit poros roda dan sistem kemudi patut diacungi jempol, kreativitas mengecat bodi mobil surya agar aerodinamis butuh sentuhan.",
+"narasi": "Setiap anak memegang obeng dan tang untuk merakit panel surya ke atap mobil mainan. Beban berat mobil yang memperlambat laju disikapi tim dengan merampingkan kerangka sasis."
+},
+{
+"Inovasi Sediaan Cooling Gel Stick Lavender: Solusi Portabel Reduksi Kelelahan dan Stres pada Remaja": "Sikap kritis meracik gel anti stres dari lavender sangat berdasar, gotong royong mengemas gel ke dalam tube stick butuh ketelatenan.",
+"narasi": "Mereka bahu-membahu memanaskan lilin lebah dan mencampur ekstrak lavender. Masalah sediaan gel yang meleleh di suhu ruangan diselesaikan dengan menambah persentase pengeras alami."
+},
+{
+"Sistem Kontrol dan Pemantauan Konsumsi Listrik Rumah Tangga Real-Time Berbasis Internet of Things (IoT)": "Kreativitas visualisasi grafik konsumsi daya di HP sangat apik, kemandirian merakit sensor arus CT (Current Transformer) butuh panduan K3.",
+"narasi": "Siswa membagi layar monitor dan papan sirkuit untuk mengerjakan coding sekaligus perakitan. Saat pembacaan daya melenceng jauh dari meteran asli, mereka melakukan kalibrasi rumus bersama."
+},
+{
+"LEAFPACK: INOVASI KEMASAN BIODEGRADABLE DARI DAUN KERING DAN TEPUNG TAPIOKA SEBAGAI ALTERNATIF PENGGANTI STYROFOAM": "Semangat gotong royong memungut daun kering sangat seru, penalaran kritis menyikapi ketahanan air kemasan leafpack perlu diuji.",
+"narasi": "Tim bergantian mengepres cetakan daun dan tapioka di bawah alat pemanas bersuhu tinggi. Saat kemasan melunak terkena kuah, mereka berinisiatif meriset pelapis lilin lebah organik."
+},
+{
+"SMART SEABIN: PENGEMBANGAN SISTEM PENYARING SAMPAH LAUT OTOMATIS DENGAN ANALISIS POTENSI INTEGRASI PANEL SURYA DAN OSCILLATING WATER COLUMN SEBAGAI SUMBER ENERGI BERKELANJUTAN UNTUK MENDUKUNG KEBERLANJUTAN EKOSISTEM LAUT": "Kemandirian membuat pelampung penarik sampah makro patut dipuji, kreativitas menyederhanakan cara kerja turbin ombak butuh studi literatur mendalam.",
+"narasi": "Mereka bekerja sama memasang jaring dan pompa hisap miniatur seabin di bak air besar. Saat daya hisap pompa lemah menangkap plastik, tim memodifikasi corong penyedot menjadi lebih lebar."
+},
+{
+"Sistem Irigasi Otomatis Berbasis Mikrokontroler untuk Mitigasi Kekeringan pada Lahan Pertanian": "Sikap kritis membagi zona penyiraman sesuai kelembaban sangat efektif, gotong royong memendam selang air di tanah butuh tenaga.",
+"narasi": "Siswa saling bahu-membahu mengatur posisi pompa mini dan menancapkan sensor kelembapan. Kekurangan daya angkat air ke lahan atas diselesaikan dengan mencari pompa bertorsi lebih besar bersama."
+},
+{
+"PEMANFAATAN KEMIRI SEBAGAI MINYAK RAMBUT SEBAGAI PENCEGAHAN RAMBUT RONTOK DENGAN METODE SANGRAI": "Kreativitas menyaring minyak kemiri murni sangat telaten, kemandirian menjaga suhu sangrai agar tidak gosong butuh keawasan penuh.",
+"narasi": "Tim bergiliran menumbuk dan menyangrai biji kemiri dengan kompor portabel. Masalah aroma minyak yang terlalu gosong disikapi dengan mengevaluasi durasi penyangraian selanjutnya."
+},
+{
+"Pemanfaatan Kulit Jeruk sebagai Elektrolit Alternatif pada Bio Baterai Ramah Lingkungan": "Gotong royong memeras asam kulit jeruk sangat kompak, sikap kritis memperpanjang umur nyala lampu LED dari baterai butuh pemikiran.",
+"narasi": "Setiap anggota membawa kulit jeruk dan mengekstrak airnya bersama-sama. Ketika lampu LED meredup dalam hitungan menit, mereka menambah plat tembaga pada sel baterai."
+},
+{
+"Optimasi Fermentasi Kulit Pisang sebagai Elektrolit Organik untuk Bio Baterai Ramah Lingkungan Berbasis Energi Terbarukan": "Kemandirian mengukur arus miliampere dari baterai pisang baik, kreativitas mencari wadah sekat baterai agar tidak bocor perlu dirapikan.",
+"narasi": "Mereka membagi selang waktu untuk mengecek voltase harian hasil fermentasi kulit pisang. Loncatan arus yang tidak stabil diatasi dengan memastikan capit buaya elektroda terpasang kuat."
+},
+{
+"Pengembangan Prototipe Alat Pendeteksi Banjir Berbasis Indikator Multisensor": "Sikap kritis menggabungkan sensor air dan kecepatan arus sangat logis, gotong royong mendirikan tiang ukur di simulasi sungai sangat solid.",
+"narasi": "Tim saling memegang kerangka pralon dan menyolder modul komunikasi SMS peringatan dini. Kegagalan kirim SMS saat sinyal lemah disikapi dengan memanjangkan kabel antena bersama."
+},
+{
+"Rancang Bangun Smart Floating Barrier Berbasis Sensor Ultrasonik dan Monitoring Aliran Air untuk Deteksi Penumpukan Sampah Sungai Secara Real-Time sebagai Upaya Pengurangan Pencemaran sungai di Indonesia": "Kreativitas menyusun pembatas pelampung cerdas sangat visioner, kemandirian merakit kincir penahan sampah butuh perhitungan gaya dorong air.",
+"narasi": "Mereka berkolaborasi memasang botol bekas sebagai pelampung mekanik pemisah sampah. Kesalahan sensor membaca pantulan gelombang air ditangani lewat modifikasi arah hadap sensor."
+},
+{
+"Bumbu tabur penambah gizi berbasisi kombinasi tulang ayam & kulit udang dengan penambahan cangkang kerang": "Semangat gotong royong membersihkan cangkang kerang sangat kuat, nalar kritis menyaring bubuk agar tidak melukai kerongkongan butuh ekstra ayak.",
+"narasi": "Siswa bahu-membahu mencuci dan memanggang sisa tulang serta kulit udang sampai rapuh. Mereka mengatasi bubuk yang bergerindil dengan mengayaknya menggunakan saringan teh bertingkat."
+},
+{
+"Konversi Minyak Jelantah Menjadi Biodiesel: Studi Komparasi Efektivitas Tahap Esterifikasi (H2SO4) dan Uji Kualitas Pembakaran": "Kemandirian mengamati reaksi transesterifikasi sangat hati-hati, kreativitas mempresentasikan kualitas nyala api biodiesel perlu dokumentasi yang jelas.",
+"narasi": "Tim memakai peralatan pelindung diri lengkap saat mencampur katalis asam sulfat. Masalah gliserol yang tidak mau terpisah diatasi dengan meriset ulang rasio pelarut metanol lewat diskusi tim."
+}
 ]

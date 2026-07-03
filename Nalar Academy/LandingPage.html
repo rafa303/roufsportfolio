@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nalar Academy | Siap Hadapi UTBK-SNBT & TKA 2026</title>
+    <link rel="icon" type="image/png" href="logonalar.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Bottom Nav Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        html {
+            scroll-behavior: initial;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FAFAFA; /* Light mode background */
+            color: #1B355A; /* Darkest palette color for main text */
+            overscroll-behavior-y: none; /* Prevent elastic bounce on page */
+        }
+
+        section {
+            scroll-margin-top: 80px; /* Offset for fixed header */
+        }
+
+        /* Lenis Smooth Scroll CSS recommendations */
+        html.lenis, html.lenis body {
+            height: auto;
+        }
+        
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+        
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+        
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+        
+        /* Custom Gradients and Glow Effects based on provided palette */
+        .text-gradient {
+            background: linear-gradient(135deg, #A03A55 0%, #FF6B35 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .bg-gradient-primary {
+            background: linear-gradient(135deg, #A03A55 0%, #FF6B35 100%);
+        }
+        
+        .bg-gradient-secondary {
+            background: linear-gradient(135deg, #5B316C 0%, #A03A55 100%);
+        }
+
+        .glow-button {
+            position: relative;
+            background: linear-gradient(135deg, #A03A55, #FF6B35);
+            color: white;
+            border: none;
+        }
+        .glow-button::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(135deg, #A03A55, #FFC72C);
+            z-index: -1;
+            border-radius: 9999px;
+            filter: blur(10px);
+            opacity: 0.4;
+            transition: opacity 0.3s ease;
+        }
+        .glow-button:hover::before {
+            opacity: 0.8;
+            filter: blur(14px);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(91, 49, 108, 0.1); /* #5B316C with low opacity */
+            box-shadow: 0 8px 32px 0 rgba(27, 53, 90, 0.05); /* Soft shadow using #1B355A */
+        }
+
+        .card-hover-effect {
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px -10px rgba(160, 58, 85, 0.2); /* #A03A55 shadow */
+            border-color: rgba(160, 58, 85, 0.3);
+        }
+
+        /* 3D Floating Element Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+            animation: float 6s ease-in-out 3s infinite;
+        }
+        
+        /* Justify all description texts */
+        p.text-slate-600, 
+        p.text-slate-500,
+        p.text-slate-400,
+        p.text-slate-300,
+        .faq-answer p,
+        #team-modal-bio {
+            text-align: justify;
+        }
+
+        /* Hide scrollbar utility */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Safe area bottom padding for mobile devices */
+        .pb-safe {
+            padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden selection:bg-[#A03A55] selection:text-white">
+
+    <nav class="fixed w-full z-50 transition-all duration-300 backdrop-blur-md bg-white/80 border-b border-[#1B355A]/10 py-4">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" id="navbar-logo-link" class="flex items-center gap-2 group">
+                <img id="navbar-logo-img" src="logonalar.png" alt="Nalar Academy Logo" class="h-8 w-8 object-contain transition-transform duration-700 ease-out group-hover:rotate-12">
+                <span class="text-xl font-bold tracking-tight text-[#1B355A]">Nalar <span class="text-[#5B316C] font-medium">Academy.</span></span>
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex space-x-5 items-center">
+                <a href="#tentang" class="text-sm font-medium text-[#5B316C] hover:text-[#A03A55] transition-colors">Tentang</a>
+                <a href="#keuntungan" class="text-sm font-medium text-[#5B316C] hover:text-[#A03A55] transition-colors">Keuntungan</a>
+                <a href="#program" class="text-sm font-medium text-[#5B316C] hover:text-[#A03A55] transition-colors">Program</a>
+                <a href="#fitur" class="text-sm font-medium text-[#5B316C] hover:text-[#A03A55] transition-colors">Fitur</a>
+                <a href="#paket" class="text-sm font-medium text-[#5B316C] hover:text-[#A03A55] transition-colors">Paket</a>
+                <a href="#faq" class="text-sm font-medium text-[#5B316C] hover:text-[#A03A55] transition-colors">FAQ</a>
+                <div class="h-4 w-px bg-[#1B355A]/20"></div>
+                <a href="Auth.html?mode=login" id="nav-login-btn" class="text-sm font-bold text-[#1B355A] hover:text-[#A03A55] transition-colors">Masuk</a>
+                <a href="Auth.html?mode=register" id="nav-register-btn" class="glow-button px-5 py-2.5 rounded-full font-semibold text-sm transition-colors relative z-10 text-center">
+                    Daftar Tryout
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-[#1B355A] hover:text-[#A03A55] focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+    </nav>
+
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-[#FAFAFA]">
+        <!-- Abstract Background Glows using Palette -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-[#FFC72C] rounded-full mix-blend-multiply filter blur-[100px] opacity-20 animate-float"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#A03A55] rounded-full mix-blend-multiply filter blur-[128px] opacity-15 animate-float-delayed"></div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+                
+                <!-- Left: Text Content & Actions -->
+                <div class="text-left order-2 lg:order-1">
+                    <h1 class="text-4xl lg:text-5xl font-extrabold tracking-tight mb-6 leading-tight text-[#1B355A]">
+                        Taklukkan <span class="text-gradient">UTBK-SNBT</span> <br>
+                        & <span class="text-gradient">TKA 2026</span> Pakai Nalar.
+                    </h1>
+                    
+                    <p class="text-base text-slate-600 mb-8 leading-relaxed font-medium">
+                        Platform tryout adaptif dengan sistem penilaian IRT tercanggih. Validasi nilai rapormu dengan skor TKA maksimal dan pastikan kursi PTN lewat SNBT.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row items-center gap-4">
+                        <a href="Auth.html?mode=register" id="hero-cta-btn" class="w-full sm:w-auto px-8 py-4 bg-gradient-primary text-white font-bold rounded-xl shadow-[0_10px_20px_rgba(160,58,85,0.2)] hover:shadow-[0_15px_30px_rgba(160,58,85,0.4)] hover:-translate-y-1 transition-all text-center">
+                            Mulai Simulasi Gratis
+                        </a>
+                        <a href="#program" class="w-full sm:w-auto px-8 py-4 bg-white text-[#1B355A] border border-[#1B355A]/10 font-bold rounded-xl hover:bg-gray-50 hover:border-[#1B355A]/30 transition-colors text-center shadow-sm">
+                            Pelajari Program
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right: Visual Illustration (Mascot) -->
+                <div class="relative w-full max-w-lg mx-auto aspect-square flex items-center justify-center order-1 lg:order-2">
+                    <!-- Background Decorative Circles -->
+                    <div class="absolute w-72 h-72 rounded-full bg-[#FF6B35]/15 blur-2xl animate-float"></div>
+                    <div class="absolute w-60 h-60 rounded-full bg-[#5B316C]/10 blur-xl animate-float-delayed -bottom-4 -left-4"></div>
+                    
+                    <!-- Mascot Image -->
+                    <img src="removebg_main.png" alt="Siswa Sukses Nalar Academy" class="relative max-w-full lg:max-w-[110%] h-auto z-10 animate-float drop-shadow-2xl object-contain">
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION TENTANG -->
+    <section id="tentang" class="py-16 lg:py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Left: Interactive CSS Laptop Mockup -->
+                <div class="relative flex justify-center items-center w-full">
+                    <!-- Laptop Screen container -->
+                    <div class="w-full max-w-md bg-[#0F172A] p-2 rounded-2xl shadow-2xl border border-slate-700/50 relative">
+                        <!-- Camera dot -->
+                        <div class="absolute top-1.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-slate-800"></div>
+                        
+                        <!-- Screen Inner -->
+                        <div class="bg-slate-900 rounded-lg overflow-hidden border border-slate-950 aspect-[4/3] flex flex-col text-[10px] text-slate-300 font-sans relative">
+                            <!-- Browser Top Bar -->
+                            <div class="bg-slate-950 px-3 py-1.5 flex items-center gap-2 border-b border-slate-800 shrink-0">
+                                <div class="flex gap-1.5">
+                                    <div class="w-2 h-2 rounded-full bg-red-500"></div>
+                                    <div class="w-2 h-2 rounded-full bg-yellow-500"></div>
+                                    <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                </div>
+                                <div class="bg-slate-900/80 px-4 py-0.5 rounded text-[8px] text-slate-500 font-mono flex-1 text-center truncate">
+                                    nalaracademy.id/tryout-utbk
+                                </div>
+                            </div>
+                            
+                            <!-- Exam Header -->
+                            <div class="bg-slate-900 px-3 py-2 flex justify-between items-center border-b border-slate-800/60 shrink-0">
+                                <div class="flex items-center gap-1.5 font-bold text-slate-200">
+                                    <span class="w-2 h-2 rounded-full bg-[#FF6B35]"></span>
+                                    UTBK SNBT 2026: Penalaran Matematika
+                                </div>
+                                <div class="bg-[#5B316C]/30 text-[#A03A55] font-bold px-2 py-0.5 rounded text-[8px] border border-[#5B316C]/20">
+                                    ⏱ 18:45
+                                </div>
+                            </div>
+                            
+                            <!-- Exam Dashboard Area -->
+                            <div class="flex-grow p-3 overflow-y-auto space-y-3 flex flex-col justify-between">
+                                <!-- Question Box -->
+                                <div class="space-y-1.5">
+                                    <div class="flex items-center justify-between text-[8px] text-slate-500 font-bold uppercase tracking-wider">
+                                        <span>Soal No. 12 dari 20</span>
+                                        <span class="text-[#FFC72C]">Tingkat Kesulitan: Tinggi</span>
+                                    </div>
+                                    <p class="text-slate-200 font-bold leading-relaxed">
+                                        Jika g(x) = x² - 6x + 8, manakah dari nilai berikut yang TIDAK mungkin menjadi nilai dari g(x) untuk setiap bilangan riil x?
+                                    </p>
+                                </div>
+                                
+                                <!-- Multiple Choice Dummy Answers -->
+                                <div class="grid grid-cols-2 gap-2 text-[8px]">
+                                    <div class="p-2 rounded bg-slate-950/40 border border-slate-800 text-slate-400 font-semibold">
+                                        A. -1
+                                    </div>
+                                    <div class="p-2 rounded bg-slate-950/40 border border-slate-800 text-slate-400 font-semibold">
+                                        B. 0
+                                    </div>
+                                    <div class="p-2 rounded bg-slate-950/40 border border-slate-800 text-slate-400 font-semibold">
+                                        C. 3
+                                    </div>
+                                    <div class="p-2 rounded bg-slate-950/40 border border-slate-800 text-slate-400 font-semibold">
+                                        D. -2
+                                    </div>
+                                </div>
+                                
+                                <!-- Cara Nalar Academy overlay / solution card -->
+                                <div class="bg-gradient-to-r from-[#FF6B35]/15 to-[#5B316C]/15 border border-[#FF6B35]/30 rounded-xl p-3 shadow-inner relative overflow-hidden mt-2">
+                                    <div class="absolute -top-6 -right-6 w-12 h-12 bg-[#FF6B35]/10 rounded-full blur-lg"></div>
+                                    <div class="flex items-center gap-1.5 text-[9px] font-extrabold text-[#FF6B35] mb-1">
+                                        <span>💡</span> Solusi Smart Logic Nalar Academy
+                                    </div>
+                                    <p class="text-slate-200 text-[8px] leading-relaxed font-semibold">
+                                        Ubah bentuk g(x) menjadi bentuk kuadrat sempurna: <br>
+                                        <span class="text-[#FFC72C]">g(x) = (x - 3)² - 1</span>. <br>
+                                        Karena kuadrat bernilai ≥ 0, nilai minimal g(x) adalah <span class="text-green-400 font-bold">-1</span>. Jadi, nilai <span class="text-[#FF6B35] font-bold">-2</span> (D) adalah nilai yang tidak mungkin!
+                                    </p>
+                                    <div class="mt-2 text-[7px] text-green-400 font-bold flex items-center gap-1">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-ping"></span>
+                                        Selesaikan dalam 10 detik tanpa rumus cepat berbelit!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Keyboard part -->
+                        <div class="h-2 w-full bg-slate-700 rounded-b-xl border-t border-slate-600/50"></div>
+                        <div class="w-20 h-1 bg-slate-800 mx-auto rounded-b-md"></div>
+                    </div>
+                </div>
+                
+                <!-- Right: Text Content -->
+                <div>
+                    <h2 class="text-3xl lg:text-4xl font-extrabold text-[#1B355A] mb-6 leading-tight">
+                        <span class="text-gradient">Tentang Nalar Academy:</span> <br>
+                        Sistem Pendamping Belajar Terbaikmu.
+                    </h2>
+                    <p class="text-slate-600 mb-6 leading-relaxed font-medium">
+                        Nalar Academy dibangun oleh para akademisi dan alumni PTN ternama yang peduli terhadap sistem seleksi perguruan tinggi nasional. Kami merancang materi dan tryout agar siswa tidak hanya lulus ujian, melainkan memiliki kemampuan akademis (TKA) yang kokoh selama masa kuliah.
+                    </p>
+                    <p class="text-slate-600 mb-8 leading-relaxed font-medium">
+                        Melalui sistem evaluasi adaptif, kami memetakan kelemahan materi Anda secara mendalam dan merekomendasikan video pemahaman konsep yang relevan.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION KEUNTUNGAN -->
+    <section id="keuntungan" class="py-16 lg:py-24 bg-[#FAFAFA] relative border-t border-[#1B355A]/5">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl lg:text-4xl font-extrabold mb-4 text-[#1B355A]">Mengapa Memilih Nalar Academy?</h2>
+                <p class="text-[#5B316C] max-w-2xl mx-auto font-medium">Kami mengutamakan kualitas materi, keakuratan sistem penilaian, dan pendampingan komprehensif bagi kelulusan ujian Anda.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Card 1: Bank Soal Terkini -->
+                <div class="bg-white border border-[#1B355A]/10 rounded-3xl p-6 card-hover-effect relative overflow-hidden shadow-md flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-[#FFC72C]/10 flex items-center justify-center text-[#FF6B35] mb-5 border border-[#FFC72C]/20">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-lg font-bold text-[#1B355A] mb-2">Soal Selalu Update</h4>
+                        <p class="text-slate-500 text-sm leading-relaxed font-medium">
+                            Setiap materi disesuaikan dengan regulasi SNPMB terbaru 2026 sehingga Anda belajar materi yang tepat.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 2: Penilaian IRT Asli -->
+                <div class="bg-white border border-[#1B355A]/10 rounded-3xl p-6 card-hover-effect relative overflow-hidden shadow-md flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-[#5B316C]/10 flex items-center justify-center text-[#5B316C] mb-5 border border-[#5B316C]/20">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-lg font-bold text-[#1B355A] mb-2">Algoritma IRT Realistis</h4>
+                        <p class="text-slate-500 text-sm leading-relaxed font-medium">
+                            Skor tryout dihitung berdasarkan bobot tingkat kesulitan soal seperti yang diterapkan panitia SNBT resmi.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 3: Pembahasan Video -->
+                <div class="bg-white border border-[#1B355A]/10 rounded-3xl p-6 card-hover-effect relative overflow-hidden shadow-md flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-[#A03A55]/10 flex items-center justify-center text-[#A03A55] mb-5 border border-[#A03A55]/20">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-lg font-bold text-[#1B355A] mb-2">Video Smart Logic</h4>
+                        <p class="text-slate-500 text-sm leading-relaxed font-medium">
+                            Tiap tipe soal HOTS dilengkapi dengan penjelasan video terperinci yang mengedepankan logika analisis.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 4: Konsultasi Jurusan -->
+                <div class="bg-white border border-[#1B355A]/10 rounded-3xl p-6 card-hover-effect relative overflow-hidden shadow-md flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-[#1B355A]/10 flex items-center justify-center text-[#1B355A] mb-5 border border-[#1B355A]/20">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-lg font-bold text-[#1B355A] mb-2">Rasionalisasi PTN</h4>
+                        <p class="text-slate-500 text-sm leading-relaxed font-medium">
+                            Konsultasikan dan pantau peta peluang kelulusan nilai Anda terhadap passing grade jurusan terakurat.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Creators Sub-Section combined inside Keuntungan -->
+            <div class="mt-24 border-t border-[#1B355A]/10 pt-16">
+                <div class="flex flex-col lg:flex-row gap-12 items-stretch max-w-7xl mx-auto">
+                    
+                    <!-- Left: Header and Info -->
+                    <div class="w-full lg:w-1/3 flex flex-col justify-center lg:pr-8">
+                        <h3 class="text-3xl lg:text-4xl font-extrabold mb-4 text-[#1B355A] leading-tight">Dibalik Kualitas Soal Kami</h3>
+                        <p class="text-[#5B316C] font-medium text-base leading-relaxed lg:text-lg text-justify">
+                            Soal-soal latihan UTBK/TKA dirancang dan divalidasi oleh tim ahli akademisi dan tentor senior alumni perguruan tinggi terbaik Indonesia.
+                        </p>
+                    </div>
+                    
+                    <!-- Right: Horizontal Scrolling Cards Grid -->
+                    <div class="w-full lg:w-2/3 overflow-hidden relative group/carousel">
+                        <!-- Left & Right Fade Overlay for scroll -->
+                        <div class="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#FAFAFA] to-transparent pointer-events-none z-10"></div>
+                        <div class="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#FAFAFA] to-transparent pointer-events-none z-10"></div>
+                        
+                        <!-- Navigation Arrows -->
+                        <button id="slide-left-btn" class="flex absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-gradient-primary text-white items-center justify-center shadow-lg hover:scale-110 transition-all duration-300 z-20 opacity-0 pointer-events-none">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+                        </button>
+                        <button id="slide-right-btn" class="flex absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-gradient-primary text-white items-center justify-center shadow-lg hover:scale-110 transition-all duration-300 z-20 opacity-0 pointer-events-none">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                        
+                        <div id="creators-scroll-container" class="flex overflow-x-auto gap-6 pb-6 pt-2 snap-x snap-mandatory scroll-smooth no-scrollbar" style="scrollbar-width: none; -ms-overflow-style: none;">
+                            <!-- Card 1: ITB -->
+                            <div class="snap-center shrink-0 w-[310px] sm:w-[350px] bg-white border border-[#1B355A]/10 rounded-3xl p-6 shadow-md flex flex-col justify-between items-center text-center card-hover-effect">
+                                <div class="w-full flex flex-col items-center">
+                                    <div class="w-52 h-52 sm:w-60 sm:h-60 rounded-2xl overflow-hidden mb-6 bg-gradient-to-tr from-sky-500/5 to-[#5B316C]/5 border border-slate-100 flex items-center justify-center p-2">
+                                        <img src="study_student.png" alt="Dr. Ir. Hermawan Pratama, M.T." class="w-full h-full object-contain">
+                                    </div>
+                                    <h3 class="text-lg font-extrabold text-[#1B355A] mb-1">Dr. Ir. Hermawan Pratama, M.T.</h3>
+                                    <p class="text-xs font-bold text-[#5B316C] mb-4">Sains & Kuantitatif</p>
+                                    <p class="text-slate-500 text-xs leading-relaxed font-medium mb-6">
+                                        Spesialis Penalaran Matematika & Pengetahuan Kuantitatif dengan metode analisis terstruktur.
+                                    </p>
+                                </div>
+                                <button class="w-full py-2.5 bg-white border border-[#1B355A]/15 text-[#1B355A] hover:bg-slate-50 font-bold rounded-xl text-xs transition-all shadow-sm" onclick="openTeamModal('hermawan')">
+                                    Lihat Profil Lengkap
+                                </button>
+                            </div>
+                            
+                            <!-- Card 2: UI -->
+                            <div class="snap-center shrink-0 w-[310px] sm:w-[350px] bg-white border border-[#1B355A]/10 rounded-3xl p-6 shadow-md flex flex-col justify-between items-center text-center card-hover-effect">
+                                <div class="w-full flex flex-col items-center">
+                                    <div class="w-52 h-52 sm:w-60 sm:h-60 rounded-2xl overflow-hidden mb-6 bg-gradient-to-tr from-amber-500/5 to-[#A03A55]/5 border border-slate-100 flex items-center justify-center p-2">
+                                        <img src="think_student.png" alt="Amanda Kirana, S.Hum., M.A." class="w-full h-full object-contain">
+                                    </div>
+                                    <h3 class="text-lg font-extrabold text-[#1B355A] mb-1">Amanda Kirana, S.Hum., M.A.</h3>
+                                    <p class="text-xs font-bold text-[#5B316C] mb-4">Skolastik & Literasi</p>
+                                    <p class="text-slate-500 text-xs leading-relaxed font-medium mb-6">
+                                        Ahli Literasi Bahasa Indonesia & Penalaran Umum untuk melatih daya baca kritis peserta.
+                                    </p>
+                                </div>
+                                <button class="w-full py-2.5 bg-white border border-[#1B355A]/15 text-[#1B355A] hover:bg-slate-50 font-bold rounded-xl text-xs transition-all shadow-sm" onclick="openTeamModal('amanda')">
+                                    Lihat Profil Lengkap
+                                </button>
+                            </div>
+                            
+                            <!-- Card 3: UGM -->
+                            <div class="snap-center shrink-0 w-[310px] sm:w-[350px] bg-white border border-[#1B355A]/10 rounded-3xl p-6 shadow-md flex flex-col justify-between items-center text-center card-hover-effect">
+                                <div class="w-full flex flex-col items-center">
+                                    <div class="w-52 h-52 sm:w-60 sm:h-60 rounded-2xl overflow-hidden mb-6 bg-gradient-to-tr from-blue-900/5 to-[#5B316C]/5 border border-slate-100 flex items-center justify-center p-2">
+                                        <img src="tryout_student.png" alt="Dr. Bagus Wicaksono, M.Sc." class="w-full h-full object-contain">
+                                    </div>
+                                    <h3 class="text-lg font-extrabold text-[#1B355A] mb-1">Dr. Bagus Wicaksono, M.Sc.</h3>
+                                    <p class="text-xs font-bold text-[#5B316C] mb-4">Akademik & TKA</p>
+                                    <p class="text-slate-500 text-xs leading-relaxed font-medium mb-6">
+                                        Perancang soal Tes Kemampuan Akademik Saintek/Soshum adaptif berbasis HOTS.
+                                    </p>
+                                </div>
+                                <button class="w-full py-2.5 bg-white border border-[#1B355A]/15 text-[#1B355A] hover:bg-slate-50 font-bold rounded-xl text-xs transition-all shadow-sm" onclick="openTeamModal('bagus')">
+                                    Lihat Profil Lengkap
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="program" class="py-16 lg:py-24 bg-white relative border-y border-[#1B355A]/5">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl lg:text-4xl font-extrabold mb-4 text-[#1B355A]">Dua Ujian, Satu Platform.</h2>
+                <p class="text-[#5B316C] max-w-2xl mx-auto font-medium">Kami memisahkan kurikulum persiapan sesuai regulasi 2026 agar fokus belajarmu lebih tajam dan terarah.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                
+                <!-- TKA 2026 Card -->
+                <div class="bg-[#FAFAFA] border border-[#1B355A]/10 rounded-3xl p-8 card-hover-effect relative overflow-hidden group shadow-lg">
+                    <div class="absolute top-0 right-0 w-40 h-40 bg-gradient-radial from-[#5B316C]/10 to-transparent rounded-full blur-2xl -mr-10 -mt-10 group-hover:from-[#5B316C]/20 transition-colors"></div>
+                    
+                    <div class="w-14 h-14 rounded-2xl bg-[#5B316C]/10 border border-[#5B316C]/20 flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-[#5B316C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-extrabold mb-2 text-[#1B355A]">TKA 2026</h3>
+                    <p class="text-[#A03A55] text-sm font-bold mb-4">Tes Kemampuan Akademik (Validator SNBP)</p>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed font-medium">
+                        Fokus pada penguasaan mata pelajaran sekolah. Didesain khusus untuk meningkatkan skor validator bagi kamu yang mengejar jalur prestasi (SNBP) atau ujian mandiri PTN.
+                    </p>
+                    
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start text-sm font-medium text-[#1B355A]">
+                            <svg class="w-5 h-5 text-[#A03A55] mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            3 Mapel Wajib (Matematika, B. Indo, B. Inggris)
+                        </li>
+                        <li class="flex items-start text-sm font-medium text-[#1B355A]">
+                            <svg class="w-5 h-5 text-[#A03A55] mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            Mata Pelajaran Pilihan (Saintek/Soshum)
+                        </li>
+                        <li class="flex items-start text-sm font-medium text-[#1B355A]">
+                            <svg class="w-5 h-5 text-[#A03A55] mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            Format Soal Pilihan Ganda Kompleks
+                        </li>
+                    </ul>
+                    
+                    <a href="#paket" class="inline-flex items-center text-sm font-bold text-[#5B316C] hover:text-[#1B355A] group-hover:translate-x-1 transition-transform">
+                        Jelajahi Paket TKA <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </a>
+                </div>
+
+                <!-- UTBK-SNBT Card -->
+                <div class="bg-[#FAFAFA] border border-[#1B355A]/10 rounded-3xl p-8 card-hover-effect relative overflow-hidden group shadow-lg">
+                    <div class="absolute top-0 right-0 w-40 h-40 bg-gradient-radial from-[#FF6B35]/10 to-transparent rounded-full blur-2xl -mr-10 -mt-10 group-hover:from-[#FF6B35]/20 transition-colors"></div>
+                    
+                    <div class="w-14 h-14 rounded-2xl bg-[#FF6B35]/10 border border-[#FF6B35]/20 flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-[#FF6B35]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-extrabold mb-2 text-[#1B355A]">UTBK - SNBT</h3>
+                    <p class="text-[#FF6B35] text-sm font-bold mb-4">Ujian Tulis Berbasis Komputer</p>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed font-medium">
+                        Seleksi nasional jalur tes. Simulasi dirancang murni mengukur potensi kognitif, penalaran, dan literasi tanpa soal hafalan akademik.
+                    </p>
+                    
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start text-sm font-medium text-[#1B355A]">
+                            <svg class="w-5 h-5 text-[#FF6B35] mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            Tes Potensi Skolastik (PU, PBM, PPU, PK)
+                        </li>
+                        <li class="flex items-start text-sm font-medium text-[#1B355A]">
+                            <svg class="w-5 h-5 text-[#FF6B35] mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            Tes Literasi (B. Indonesia, B. Inggris)
+                        </li>
+                        <li class="flex items-start text-sm font-medium text-[#1B355A]">
+                            <svg class="w-5 h-5 text-[#FF6B35] mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            Penalaran Matematika (Aplikatif)
+                        </li>
+                    </ul>
+                    
+                    <a href="#paket" class="inline-flex items-center text-sm font-bold text-[#FF6B35] hover:text-[#A03A55] group-hover:translate-x-1 transition-transform">
+                        Jelajahi Paket SNBT <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="fitur" class="py-16 lg:py-24 relative bg-[#FAFAFA]">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl lg:text-4xl font-extrabold mb-4 text-[#1B355A]">Evaluasi Berbasis Data, Bukan Tebak-tebakan.</h2>
+                <p class="text-[#5B316C] max-w-2xl mx-auto font-medium">Sistem kami menggunakan algoritma <i>Item Response Theory</i> (IRT) yang serupa dengan sistem penilaian asli penyelenggara. Kami membedah kekuatan dan kelemahanmu per sub-materi.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1: Analisis IRT Presisi -->
+                <div class="bg-white border border-[#1B355A]/10 rounded-3xl p-8 card-hover-effect relative overflow-hidden shadow-lg glass-card flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-[#FFC72C]/10 flex items-center justify-center mb-6 border border-[#FFC72C]/20 shrink-0">
+                            <svg class="w-7 h-7 text-[#FF6B35]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-extrabold mb-3 text-[#1B355A]">Analisis IRT Presisi</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed font-medium">
+                            Penilaian dinamis menggunakan algoritma <i>Item Response Theory</i> seperti ujian asli UTBK, mendeteksi bobot tingkat kesulitan tiap soal secara presisi.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 2: Rasionalisasi Jurusan Real-time -->
+                <div class="bg-white border border-[#1B355A]/10 rounded-3xl p-8 card-hover-effect relative overflow-hidden shadow-lg glass-card flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-[#5B316C]/10 flex items-center justify-center mb-6 border border-[#5B316C]/20 shrink-0">
+                            <svg class="w-7 h-7 text-[#5B316C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-extrabold mb-3 text-[#1B355A]">Rasionalisasi Jurusan</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed font-medium">
+                            Prediksi kelulusan real-time berdasarkan akumulasi skor tryout Anda terhadap data passing grade resmi program studi impian di seluruh Indonesia.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 3: Pembahasan Smart Logic -->
+                <div class="bg-white border border-[#1B355A]/10 rounded-3xl p-8 card-hover-effect relative overflow-hidden shadow-lg glass-card flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-[#A03A55]/10 flex items-center justify-center mb-6 border border-[#A03A55]/20 shrink-0">
+                            <svg class="w-7 h-7 text-[#A03A55]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-extrabold mb-3 text-[#1B355A]">Pembahasan Smart Logic</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed font-medium">
+                            Solusi video interaktif dan teks super lengkap disertai metode pengerjaan taktis (<i>smart logic</i>) langsung dari tentor ahli.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION PAKET BELAJAR / HARGA -->
+    <section id="paket" class="py-16 lg:py-24 bg-white relative border-b border-[#1B355A]/5">
+        <!-- Background glows -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#5B316C]/5 rounded-full blur-[100px] pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl lg:text-4xl font-extrabold mb-4 text-[#1B355A]">
+                    Paket Simulasi & Tryout <span class="text-gradient">Nalar Academy</span>
+                </h2>
+                <p class="text-[#5B316C] max-w-2xl mx-auto font-medium">
+                    Pilih paket tryout yang sesuai dengan target seleksi masuk perguruan tinggi negeri impianmu.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch">
+                <!-- Paket 1: Simulasi Mandiri (Trial) -->
+                <div class="bg-white border border-[#1B355A]/10 rounded-3xl p-8 flex flex-col justify-between shadow-lg relative card-hover-effect">
+                    <div class="space-y-6">
+                        <div>
+                            <span class="text-xs font-bold text-slate-500 bg-slate-100 px-3 py-1 rounded-full uppercase tracking-wider">Mulai Belajar</span>
+                            <h3 class="text-xl font-extrabold text-[#1B355A] mt-4">Simulasi Mandiri</h3>
+                            <p class="text-xs text-slate-500 font-semibold mt-1">Uji kemampuan awalmu secara gratis</p>
+                        </div>
+                        <div class="py-4 border-y border-[#1B355A]/10">
+                            <span class="text-3xl font-black text-[#1B355A]">Rp 0</span>
+                            <span class="text-xs text-slate-500 font-bold">/ selamanya</span>
+                        </div>
+                        <ul class="space-y-3.5 text-xs text-slate-600 font-medium">
+                            <li class="flex items-center gap-2.5">
+                                <span class="text-green-500 text-sm">✓</span> 1x Tryout UTBK-SNBT Lengkap
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <span class="text-green-500 text-sm">✓</span> Skor Hasil Penilaian IRT Dasar
+                            </li>
+                            <li class="flex items-center gap-2.5 text-slate-400 line-through">
+                                <span>✗</span> Rekomendasi Video Pemahaman Konsep
+                            </li>
+                            <li class="flex items-center gap-2.5 text-slate-400 line-through">
+                                <span>✗</span> Analisis Kelemahan Sub-Materi Detail
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="Auth.html?mode=register" class="w-full py-3 bg-slate-100 hover:bg-slate-200 text-[#1B355A] font-bold rounded-xl text-xs transition-colors mt-8 block text-center">
+                        Mulai Simulasi Gratis
+                    </a>
+                </div>
+                
+                <!-- Paket 2: Premium UTBK-SNBT -->
+                <div class="bg-white border-2 border-[#A03A55] rounded-3xl p-8 flex flex-col justify-between shadow-xl relative card-hover-effect scale-100 md:scale-105 z-10">
+                    <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-primary text-white text-[10px] font-black uppercase tracking-widest px-4 py-1 rounded-full shadow-md">
+                        Paling Populer
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <span class="text-xs font-bold text-[#A03A55] bg-[#A03A55]/10 px-3 py-1 rounded-full uppercase tracking-wider">Rekomendasi Utama</span>
+                            <h3 class="text-xl font-extrabold text-[#1B355A] mt-4">Premium UTBK-SNBT</h3>
+                            <p class="text-xs text-slate-500 font-semibold mt-1">Persiapan lengkap menuju SNBT 2026</p>
+                        </div>
+                        <div class="py-4 border-y border-[#1B355A]/10">
+                            <span class="text-3xl font-black text-[#1B355A]">Rp 99.000</span>
+                            <span class="text-xs text-slate-500 font-bold">/ sekali bayar</span>
+                        </div>
+                        <ul class="space-y-3.5 text-xs text-slate-600 font-medium">
+                            <li class="flex items-center gap-2.5">
+                                <span class="text-green-500 text-sm">✓</span> Seluruh Paket Tryout UTBK-SNBT 2026
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <span class="text-green-500 text-sm">✓</span> Penilaian Algoritma IRT Real-Time
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <span class="text-green-500 text-sm">✓</span> Analisis Sub-Materi & Rekomendasi Video
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <span class="text-green-500 text-sm">✓</span> Sistem Analisis Peluang Kelulusan PTN
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="Auth.html?mode=register" class="w-full py-3 bg-gradient-primary text-white font-bold rounded-xl text-xs transition-transform hover:-translate-y-0.5 shadow-lg mt-8 block text-center">
+                        Daftar Paket Premium
+                    </a>
+                </div>
+                
+                <!-- Paket 3: Premium TKA -->
+                <div class="bg-white border border-[#1B355A]/10 rounded-3xl p-8 flex flex-col justify-between shadow-lg relative card-hover-effect">
+                    <div class="space-y-6">
+                        <div>
+                            <span class="text-xs font-bold text-[#5B316C] bg-[#5B316C]/10 px-3 py-1 rounded-full uppercase tracking-wider">Jalur Mandiri & Prestasi</span>
+                            <h3 class="text-xl font-extrabold text-[#1B355A] mt-4">Premium TKA</h3>
+                            <p class="text-xs text-slate-500 font-semibold mt-1">Kuasai Tes Kemampuan Akademik PTN</p>
+                        </div>
+                        <div class="py-4 border-y border-[#1B355A]/10">
+                            <span class="text-3xl font-black text-[#1B355A]">Rp 149.000</span>
+                            <span class="text-xs text-slate-500 font-bold">/ sekali bayar</span>
+                        </div>
+                        <ul class="space-y-3.5 text-xs text-slate-600 font-medium">
+                            <li class="flex items-center gap-2.5">
+                                <span class="text-green-500 text-sm">✓</span> Akses Seluruh Ujian TKA Saintek/Soshum
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <span class="text-green-500 text-sm">✓</span> Bank Soal Konseptual Berbasis HOTS
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <span class="text-green-500 text-sm">✓</span> Pembahasan Video Super Lengkap
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <span class="text-green-500 text-sm">✓</span> Konsultasi Jurusan Bersama Konselor
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="Auth.html?mode=register" class="w-full py-3 bg-[#5B316C] hover:bg-[#5B316C]/90 text-white font-bold rounded-xl text-xs transition-colors mt-8 block text-center">
+                        Daftar Paket TKA
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- SECTION FAQ -->
+    <section id="faq" class="py-16 lg:py-24 bg-white relative border-t border-[#1B355A]/5">
+        <div class="max-w-4xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl lg:text-4xl font-extrabold mb-4 text-[#1B355A]">Pertanyaan Yang Sering Diajukan (FAQ)</h2>
+                <p class="text-[#5B316C] font-medium">Temukan jawaban atas kebingungan Anda mengenai sistem Nalar Academy.</p>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="bg-white border border-[#1B355A]/10 rounded-2xl overflow-hidden transition-all duration-300 shadow-sm faq-item">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none faq-toggle">
+                        <span class="font-bold text-[#1B355A] text-base md:text-lg">Bagaimana sistem penilaian IRT (Item Response Theory) dihitung?</span>
+                        <span class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 transition-transform duration-300 faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-6">
+                        <p class="pb-5 text-slate-500 font-medium text-sm leading-relaxed">
+                            Sistem IRT menakar bobot nilai berdasarkan seberapa banyak peserta lain yang menjawab benar pada suatu soal. Soal yang sedikit dijawab dengan benar akan memiliki bobot poin yang lebih tinggi. Algoritma kami mensimulasikan sistem ini secara real-time berdasarkan data pengerjaan seluruh peserta tryout Nalar Academy.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="bg-white border border-[#1B355A]/10 rounded-2xl overflow-hidden transition-all duration-300 shadow-sm faq-item">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none faq-toggle">
+                        <span class="font-bold text-[#1B355A] text-base md:text-lg">Apakah soal tryout disesuaikan dengan Kurikulum SNPMB 2026?</span>
+                        <span class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 transition-transform duration-300 faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-6">
+                        <p class="pb-5 text-slate-500 font-medium text-sm leading-relaxed">
+                            Tentu saja! Kurikulum dan tipe soal yang disediakan di Nalar Academy selalu diperbarui sesuai dengan regulasi resmi SNPMB (Seleksi Nasional Penerimaan Mahasiswa Baru) terbaru, termasuk pemisahan porsi ujian TPS, Literasi Bahasa, Penalaran Matematika, serta Tes Kemampuan Akademik (TKA).
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="bg-white border border-[#1B355A]/10 rounded-2xl overflow-hidden transition-all duration-300 shadow-sm faq-item">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none faq-toggle">
+                        <span class="font-bold text-[#1B355A] text-base md:text-lg">Bagaimana cara rasionalisasi pilihan prodi impian?</span>
+                        <span class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 transition-transform duration-300 faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-6">
+                        <p class="pb-5 text-slate-500 font-medium text-sm leading-relaxed">
+                            Setelah Anda menyelesaikan tryout, skor Anda akan dibandingkan dengan statistik database nilai passing grade masuk universitas negeri di Indonesia tahun sebelumnya. Sistem rasionalisasi kami akan memunculkan nilai persentase kelulusan Anda secara real-time di dashboard.
+                        </p>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 lg:py-24 relative overflow-hidden bg-white border-t border-[#1B355A]/5">
+        <div class="absolute inset-0 bg-[#FAFAFA]"></div>
+        <!-- Glowing bg orb -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#FFC72C]/10 rounded-full blur-[120px] pointer-events-none"></div>
+        
+        <div class="max-w-6xl mx-auto px-6 relative z-10">
+            <!-- Glassmorphism Card -->
+            <div class="glass-card rounded-[40px] p-10 md:p-16 relative overflow-hidden border border-[#1B355A]/10 shadow-2xl bg-gradient-to-tr from-[#5B316C]/5 to-[#FFC72C]/5">
+                <div class="grid md:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Left: CTA Text content -->
+                    <div class="md:col-span-7 text-center md:text-left space-y-6 order-2 md:order-1">
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-[#1B355A] leading-tight">
+                            Waktu Terus Berjalan. <br class="hidden sm:inline">Siapkan Dirimu Sekarang.
+                        </h2>
+                        <p class="text-[#5B316C] font-medium text-base sm:text-lg text-justify md:text-left">
+                            Daftar sekarang dan dapatkan 1x Tryout UTBK gratis untuk mengukur kemampuan awalmu bersama sistem penilaian IRT terakurat.
+                        </p>
+                        <div class="pt-4">
+                            <a href="Auth.html?mode=register" id="bottom-cta-btn" class="glow-button px-10 py-4 font-bold rounded-full text-base sm:text-lg shadow-2xl hover:scale-105 transition-transform text-center block">
+                                Buat Akun Gratis
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Right: Mascot Illustration -->
+                    <div class="md:col-span-5 flex justify-center items-center relative order-1 md:order-2">
+                        <!-- Pulsing orb behind mascot -->
+                        <div class="absolute w-72 h-72 bg-gradient-primary rounded-full blur-3xl opacity-20 animate-pulse"></div>
+                        
+                        <div class="w-72 h-72 sm:w-80 sm:h-80 md:w-[380px] md:h-[380px] relative z-10 animate-float">
+                            <img src="semangat_student.png" alt="Nalar Student Mascot" class="w-full h-full object-contain">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#1B355A] text-white pt-16 pb-8 border-t-4 border-[#A03A55]">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 pb-12 border-b border-white/10 mb-8">
+                <!-- Col 1: Platform Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2">
+                        <img src="logonalar.png" alt="Nalar Academy Logo" class="h-8 w-8 object-contain brightness-0 invert">
+                        <span class="text-xl font-extrabold text-white">Nalar <span class="text-white/60 font-medium">Academy.</span></span>
+                    </div>
+                    <p class="text-white/60 text-xs leading-relaxed font-medium max-w-sm">
+                        Platform pendamping belajar UTBK & TKA adaptif berbasis sistem penilaian IRT terakurat. Membimbing pemahaman konsep logika siswa demi kelulusan PTN impian.
+                    </p>
+                </div>
+                
+                <!-- Col 2: Hubungi Kami / Contact -->
+                <div class="space-y-4 text-xs font-medium">
+                    <h4 class="text-sm font-bold tracking-wider uppercase text-white">Hubungi Kami</h4>
+                    <ul class="space-y-3 text-white/70">
+                        <li class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-[#FF6B35] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            <span class="hover:text-white transition-colors cursor-pointer">info@nalaracademy.id</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-[#FF6B35] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                            <span class="hover:text-white transition-colors cursor-pointer">+62 812-3456-7890</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-[#FF6B35] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <span class="hover:text-white transition-colors">Gedung Nalar Academy Lt. 3, Bandung, Jawa Barat</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Col 3: Kebijakan & Hukum -->
+                <div class="space-y-4 text-xs font-medium">
+                    <h4 class="text-sm font-bold tracking-wider uppercase text-white">Kebijakan & Hukum</h4>
+                    <ul class="space-y-3 text-white/70">
+                        <li>
+                            <button id="open-privacy-btn" class="hover:text-white transition-colors cursor-pointer focus:outline-none">Kebijakan Privasi</button>
+                        </li>
+                        <li>
+                            <button id="open-terms-btn" class="hover:text-white transition-colors cursor-pointer focus:outline-none">Syarat & Ketentuan</button>
+                        </li>
+                        <li>
+                            <a href="#faq" class="hover:text-white transition-colors cursor-pointer">Pertanyaan Umum (FAQ)</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-white/40 font-medium">
+                <div>
+                    &copy; 2026 Nalar Academy. All rights reserved.
+                </div>
+                <div class="flex gap-4">
+                    <span class="hover:text-white transition-colors cursor-pointer">Facebook</span>
+                    <span class="hover:text-white transition-colors cursor-pointer">Instagram</span>
+                    <span class="hover:text-white transition-colors cursor-pointer">Twitter</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Drawer Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-50 hidden transition-opacity duration-300" aria-modal="true" role="dialog">
+        <!-- Backdrop -->
+        <div id="mobile-menu-backdrop" class="fixed inset-0 bg-[#1B355A]/40 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
+        
+        <!-- Drawer Panel -->
+        <div id="mobile-menu-panel" class="fixed inset-y-0 right-0 w-full max-w-xs bg-white shadow-2xl p-6 flex flex-col justify-between translate-x-full transition-transform duration-300 ease-out z-10 border-l border-[#1B355A]/10" data-lenis-prevent>
+            <div>
+                <!-- Header -->
+                <div class="flex items-center justify-between mb-8">
+                    <a href="#" id="mobile-logo-link" class="flex items-center gap-2 group">
+                        <img id="mobile-logo-img" src="logonalar.png" alt="Nalar Academy Logo" class="h-8 w-8 object-contain transition-transform duration-700 ease-out group-hover:rotate-12">
+                        <span class="text-xl font-bold tracking-tight text-[#1B355A]">Nalar <span class="text-[#5B316C] font-medium">Academy.</span></span>
+                    </a>
+                    <button id="mobile-menu-close" class="text-[#1B355A] hover:text-[#A03A55] p-1.5 rounded-full hover:bg-slate-100 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Links -->
+                <div class="flex flex-col space-y-4">
+                    <a href="#tentang" class="mobile-menu-link text-base font-semibold text-[#5B316C] hover:text-[#A03A55] py-2 transition-colors border-b border-gray-100">Tentang</a>
+                    <a href="#keuntungan" class="mobile-menu-link text-base font-semibold text-[#5B316C] hover:text-[#A03A55] py-2 transition-colors border-b border-gray-100">Keuntungan</a>
+                    <a href="#program" class="mobile-menu-link text-base font-semibold text-[#5B316C] hover:text-[#A03A55] py-2 transition-colors border-b border-gray-100">Program</a>
+                    <a href="#fitur" class="mobile-menu-link text-base font-semibold text-[#5B316C] hover:text-[#A03A55] py-2 transition-colors border-b border-gray-100">Fitur</a>
+                    <a href="#paket" class="mobile-menu-link text-base font-semibold text-[#5B316C] hover:text-[#A03A55] py-2 transition-colors border-b border-gray-100">Paket</a>
+                    <a href="#faq" class="mobile-menu-link text-base font-semibold text-[#5B316C] hover:text-[#A03A55] py-2 transition-colors border-b border-gray-100">FAQ</a>
+                </div>
+            </div>
+            
+            <!-- Auth Buttons -->
+            <div class="flex flex-col gap-3 mt-auto">
+                <a href="Auth.html?mode=login" id="mobile-btn-login" class="w-full py-3 text-center text-base font-bold text-[#1B355A] border border-[#1B355A]/10 hover:border-[#1B355A]/30 hover:bg-slate-50 transition-all rounded-xl">
+                    Masuk
+                </a>
+                <a href="Auth.html?mode=register" id="mobile-btn-register" class="w-full py-3 text-center text-base font-bold glow-button rounded-xl transition-all shadow-md text-center">
+                    Daftar Tryout
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Navbar -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-[#1B355A]/10 shadow-[0_-8px_30px_rgba(27,53,90,0.08)] py-2 px-6 flex justify-between items-center z-40 select-none pb-safe">
+        <!-- 1. Tentang -->
+        <a href="#tentang" id="bottom-nav-tentang" class="bottom-nav-item flex flex-col items-center gap-1 text-slate-400 hover:text-[#A03A55] transition-colors duration-300 w-14">
+            <i class="fa-solid fa-circle-info text-lg"></i>
+            <span class="text-[9px] font-bold tracking-tight">Tentang</span>
+        </a>
+        
+        <!-- 2. Keuntungan -->
+        <a href="#keuntungan" id="bottom-nav-keuntungan" class="bottom-nav-item flex flex-col items-center gap-1 text-slate-400 hover:text-[#A03A55] transition-colors duration-300 w-14">
+            <i class="fa-solid fa-award text-lg"></i>
+            <span class="text-[9px] font-bold tracking-tight">Keuntungan</span>
+        </a>
+        
+        <!-- 3. Home (Center, Gradient, Elevated) -->
+        <div class="relative w-16 h-16 flex items-center justify-center -mt-6">
+            <a href="#" id="bottom-nav-home" class="bottom-nav-item flex items-center justify-center w-12 h-12 rounded-full bg-gradient-primary text-white shadow-[0_4px_20px_rgba(160,58,85,0.4)] hover:scale-105 active:scale-95 transition-all duration-300">
+                <i id="bottom-nav-home-icon" class="fa-solid fa-house text-lg transition-transform duration-700"></i>
+            </a>
+        </div>
+        
+        <!-- 4. Fitur -->
+        <a href="#fitur" id="bottom-nav-fitur" class="bottom-nav-item flex flex-col items-center gap-1 text-slate-400 hover:text-[#A03A55] transition-colors duration-300 w-14">
+            <i class="fa-solid fa-wand-magic-sparkles text-lg"></i>
+            <span class="text-[9px] font-bold tracking-tight">Fitur</span>
+        </a>
+        
+        <!-- 5. Paket -->
+        <a href="#paket" id="bottom-nav-paket" class="bottom-nav-item flex flex-col items-center gap-1 text-slate-400 hover:text-[#A03A55] transition-colors duration-300 w-14">
+            <i class="fa-solid fa-tags text-lg"></i>
+            <span class="text-[9px] font-bold tracking-tight">Paket</span>
+        </a>
+    </div>
+
+    <!-- Authentication Dialog Modal Removed (Using Auth.html) -->
+
+    <!-- Dialog Modal Kredibilitas Tim -->
+    <dialog id="team-dialog" class="backdrop:bg-[#1B355A]/40 backdrop:backdrop-blur-sm bg-transparent outline-none p-4 max-w-3xl w-full my-auto mx-auto border-none" data-lenis-prevent>
+        <div class="glass-card rounded-3xl overflow-hidden shadow-2xl border border-white/20 transition-all duration-300 transform scale-95 opacity-0 ease-out max-h-[90vh] flex flex-col" id="team-modal-content">
+            <!-- Modal Header -->
+            <div class="bg-white/40 border-b border-[#1B355A]/10 p-6 flex justify-between items-center relative">
+                <h3 class="font-extrabold text-lg text-[#1B355A]" id="team-modal-title">Profil Ahli Pembuat Soal</h3>
+                <button id="team-dialog-close" class="text-[#1B355A]/60 hover:text-[#A03A55] p-1.5 rounded-full hover:bg-[#1B355A]/5 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Modal Content (2-Column Grid) -->
+            <div class="p-6 md:p-8 bg-white/95 grid grid-cols-1 md:grid-cols-5 gap-8 items-stretch overflow-y-auto flex-grow">
+                <!-- Left Column: Big Image -->
+                <div class="md:col-span-2 flex flex-col items-center justify-center bg-gradient-to-tr from-[#5B316C]/10 to-[#FF6B35]/10 rounded-2xl p-4 border border-slate-100 shadow-sm aspect-square md:aspect-auto">
+                    <img id="team-modal-image" src="study_student.png" alt="Expert Avatar" class="w-full h-full max-h-60 md:max-h-full object-contain animate-float">
+                </div>
+                
+                <!-- Right Column: Detail Content -->
+                <div class="md:col-span-3 flex flex-col justify-between space-y-6">
+                    <div>
+                        <h4 class="font-extrabold text-[#1B355A] text-2xl leading-tight" id="team-modal-name">Dr. Ir. Hermawan Pratama, M.T.</h4>
+                        <p class="text-sm font-bold text-[#A03A55] mt-2" id="team-modal-inst">Institut Teknologi Bandung (ITB)</p>
+                        <p class="text-xs font-semibold text-slate-500 mt-1" id="team-modal-major">Matematika & Rekayasa Teknik</p>
+                    </div>
+                    
+                    <!-- Experience Badge -->
+                    <div class="bg-[#FAFAFA] border border-[#1B355A]/10 rounded-2xl p-4 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-[#5B316C]/10 flex items-center justify-center text-[#5B316C] font-bold text-sm shrink-0">🎓</div>
+                        <div>
+                            <p class="text-xs font-extrabold text-[#1B355A]">Pengalaman Akademik</p>
+                            <p class="text-[11px] font-bold text-[#5B316C]" id="team-modal-exp">12 Tahun Pengalaman Mengajar</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Bio Description -->
+                    <div class="space-y-2">
+                        <h5 class="text-xs font-bold text-[#1B355A] uppercase tracking-wider">Tentang Ahli</h5>
+                        <p class="text-slate-600 text-sm leading-relaxed font-medium" id="team-modal-bio">
+                            Dr. Hermawan adalah praktisi pendidikan kuantitatif dengan pengalaman lebih dari satu dekade di berbagai bimbel nasional terkemuka. Beliau memegang gelar Master dan Doktor dari ITB, dan telah menyusun lebih dari 5 buku panduan penyelesaian Penalaran Matematika bersistem Smart Logic.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Dialog Modal Kebijakan Privasi & Syarat -->
+    <dialog id="privacy-dialog" class="backdrop:bg-[#1B355A]/40 backdrop:backdrop-blur-sm bg-transparent outline-none p-4 max-w-2xl w-full my-auto mx-auto border-none" data-lenis-prevent>
+        <div class="glass-card rounded-3xl overflow-hidden shadow-2xl border border-white/20 transition-all duration-300 transform scale-95 opacity-0 ease-out max-h-[80vh] flex flex-col" id="privacy-modal-content">
+            <!-- Header -->
+            <div class="flex justify-between items-center px-6 py-4 border-b border-[#1B355A]/10 bg-white/40">
+                <h3 class="text-lg font-bold text-[#1B355A]">Kebijakan Privasi & Ketentuan</h3>
+                <button id="privacy-dialog-close" class="text-[#1B355A]/60 hover:text-[#A03A55] p-1.5 rounded-full hover:bg-[#1B355A]/5 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <!-- Body Content -->
+            <div class="p-6 overflow-y-auto space-y-4 text-sm text-slate-600 leading-relaxed font-medium">
+                <p class="font-bold text-[#1B355A]">Terakhir diperbarui: 3 Juli 2026</p>
+                <p>
+                    Nalar Academy berkomitmen untuk melindungi informasi pribadi Anda. Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi data pribadi yang Anda berikan melalui platform kami.
+                </p>
+                <h4 class="font-bold text-[#1B355A] pt-2">1. Informasi yang Kami Kumpulkan</h4>
+                <p>
+                    Kami mengumpulkan informasi pendaftaran seperti nama lengkap, alamat email, nomor telepon, serta data progres tryout dan jawaban ujian Anda untuk keperluan pemetaan analisis statistik IRT.
+                </p>
+                <h4 class="font-bold text-[#1B355A] pt-2">2. Penggunaan Informasi</h4>
+                <p>
+                    Informasi digunakan untuk memetakan kelemahan sub-materi belajar Anda secara personal, memberikan rekomendasi video pemahaman konsep yang relevan, dan memproyeksikan rasionalisasi skor kelulusan PTN.
+                </p>
+                <h4 class="font-bold text-[#1B355A] pt-2">3. Keamanan Data</h4>
+                <p>
+                    Semua transaksi dan data pendaftaran dienkripsi menggunakan protokol keamanan standar. Kami tidak membagikan atau menjual data pribadi Anda kepada pihak ketiga manapun untuk tujuan periklanan.
+                </p>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Lenis Smooth Scroll CDN -->
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script>
+        // Initialize Lenis Smooth Scroll
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+            infinite: false,
+        });
+
+        // Expose lenis to window object for scroll locks
+        window.lenis = lenis;
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
+
+        // Navigation & Modal Selectors
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuBackdrop = document.getElementById('mobile-menu-backdrop');
+        const mobileMenuPanel = document.getElementById('mobile-menu-panel');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+        // Standalone Auth.html navigation used (no in-page auth variables needed)
+
+        // Scroll Lock Utility
+        // Integrated with Lenis to fully arrest smooth scrolling on overlay open
+        function toggleBodyScroll(lock) {
+            if (lock) {
+                document.body.style.overflow = 'hidden';
+                if (window.lenis) window.lenis.stop();
+            } else {
+                document.body.style.overflow = '';
+                if (window.lenis) window.lenis.start();
+            }
+        }
+
+        // Mobile Menu Handlers
+        function openMobileMenu() {
+            mobileMenu.classList.remove('hidden');
+            toggleBodyScroll(true);
+            // Force reflow
+            void mobileMenu.offsetHeight;
+            
+            mobileMenuBackdrop.classList.remove('opacity-0');
+            mobileMenuBackdrop.classList.add('opacity-100');
+            mobileMenuPanel.classList.remove('translate-x-full');
+            mobileMenuPanel.classList.add('translate-x-0');
+        }
+
+        function closeMobileMenu() {
+            mobileMenuBackdrop.classList.remove('opacity-100');
+            mobileMenuBackdrop.classList.add('opacity-0');
+            mobileMenuPanel.classList.remove('translate-x-0');
+            mobileMenuPanel.classList.add('translate-x-full');
+            
+            setTimeout(() => {
+                mobileMenu.classList.add('hidden');
+                toggleBodyScroll(false);
+            }, 300);
+        }
+
+        mobileMenuBtn.addEventListener('click', openMobileMenu);
+        mobileMenuClose.addEventListener('click', closeMobileMenu);
+        mobileMenuBackdrop.addEventListener('click', closeMobileMenu);
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        // Intercept all hash anchor clicks for Lenis Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    
+                    lenis.scrollTo(target, {
+                        offset: -90, // Offset to prevent overlap with the fixed navbar
+                        duration: 1.2,
+                        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+                    });
+                }
+            });
+        });
+
+        // Navbar Logo Spin & Scroll to Top Handler
+        const navbarLogoLink = document.getElementById('navbar-logo-link');
+        const navbarLogoImg = document.getElementById('navbar-logo-img');
+        
+        if (navbarLogoLink && navbarLogoImg) {
+            navbarLogoLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Trigger 360 degree rotation
+                navbarLogoImg.classList.add('rotate-[360deg]');
+                
+                // Smooth scroll to top
+                lenis.scrollTo(0, {
+                    duration: 1.5,
+                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+                });
+                
+                // Clean up rotation class after animation completes to allow subsequent clicks
+                setTimeout(() => {
+                    navbarLogoImg.classList.remove('rotate-[360deg]');
+                }, 700);
+            });
+        }
+        // Mobile Drawer Logo Spin & Close Drawer Handler
+        const mobileLogoLink = document.getElementById('mobile-logo-link');
+        const mobileLogoImg = document.getElementById('mobile-logo-img');
+        
+        if (mobileLogoLink && mobileLogoImg) {
+            mobileLogoLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeMobileMenu();
+                
+                // Trigger 360 degree rotation
+                mobileLogoImg.classList.add('rotate-[360deg]');
+                
+                // Smooth scroll to top
+                lenis.scrollTo(0, {
+                    duration: 1.5,
+                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+                });
+                
+                // Clean up rotation class after animation completes to allow subsequent clicks
+                setTimeout(() => {
+                    mobileLogoImg.classList.remove('rotate-[360deg]');
+                }, 700);
+            });
+        }
+        // Standalone Auth.html forms submitted handled inside Auth.html page directly
+
+        // FAQ Accordion Handlers
+        const faqToggles = document.querySelectorAll('.faq-toggle');
+        faqToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const item = toggle.closest('.faq-item');
+                const answer = item.querySelector('.faq-answer');
+                const icon = item.querySelector('.faq-icon');
+                
+                // Toggle active state
+                const isOpen = item.classList.toggle('active');
+                
+                if (isOpen) {
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                    icon.textContent = '−';
+                    icon.classList.add('rotate-180');
+                } else {
+                    answer.style.maxHeight = '0px';
+                    icon.textContent = '+';
+                    icon.classList.remove('rotate-180');
+                }
+            });
+        });
+        // Team Modal Handlers
+        const teamDialog = document.getElementById('team-dialog');
+        const teamModalContent = document.getElementById('team-modal-content');
+        const teamDialogClose = document.getElementById('team-dialog-close');
+        
+        const expertsData = {
+            hermawan: {
+                name: "Dr. Ir. Hermawan Pratama, M.T.",
+                title: "Tim Sains & Kuantitatif (ITB)",
+                image: "study_student.png",
+                institution: "Institut Teknologi Bandung (ITB)",
+                major: "Matematika & Rekayasa Teknik",
+                experience: "12 Tahun Pengalaman Mengajar",
+                bio: "Dr. Hermawan adalah praktisi pendidikan kuantitatif dengan pengalaman lebih dari satu dekade di berbagai bimbel nasional terkemuka. Beliau memegang gelar Master dan Doktor dari ITB, dan telah menyusun lebih dari 5 buku panduan penyelesaian Penalaran Matematika bersistem Smart Logic."
+            },
+            amanda: {
+                name: "Amanda Kirana, S.Hum., M.A.",
+                title: "Tim Skolastik & Literasi (UI)",
+                image: "think_student.png",
+                institution: "Universitas Indonesia (UI)",
+                major: "Sastra Indonesia & Linguistik",
+                experience: "8 Tahun Pengalaman Mengajar",
+                bio: "Amanda memimpin divisi Skolastik & Literasi di Nalar Academy. Alumni Bahasa & Sastra UI ini sebelumnya merupakan konsultan ahli penyusun kisi-kisi bank soal ujian nasional dan asisten riset linguistik kognitif."
+            },
+            bagus: {
+                name: "Dr. Bagus Wicaksono, M.Sc.",
+                title: "Tim Akademik & TKA (UGM)",
+                image: "tryout_student.png",
+                institution: "Universitas Gadjah Mada (UGM)",
+                major: "Pendidikan Fisika & Kurikulum",
+                experience: "15 Tahun Pengalaman Mengajar",
+                bio: "Dr. Bagus adalah dosen tamu bidang pengembangan kurikulum di UGM dan koordinator tim penyusun soal Tes Kemampuan Akademik (TKA). Beliau mendedikasikan karirnya untuk melatih penalaran analitis berbasis HOTS."
+            }
+        };
+
+        function openTeamModal(expertId) {
+            const data = expertsData[expertId];
+            if (!data) return;
+            
+            document.getElementById('team-modal-name').textContent = data.name;
+            document.getElementById('team-modal-title').textContent = data.title;
+            document.getElementById('team-modal-image').src = data.image;
+            document.getElementById('team-modal-inst').textContent = data.institution;
+            document.getElementById('team-modal-major').textContent = data.major;
+            document.getElementById('team-modal-exp').textContent = data.experience;
+            document.getElementById('team-modal-bio').textContent = data.bio;
+            
+            teamDialog.showModal();
+            toggleBodyScroll(true);
+            
+            void teamDialog.offsetHeight;
+            teamModalContent.classList.remove('scale-95', 'opacity-0');
+            teamModalContent.classList.add('scale-100', 'opacity-100');
+        }
+
+        function closeTeamModal() {
+            teamModalContent.classList.remove('scale-100', 'opacity-100');
+            teamModalContent.classList.add('scale-95', 'opacity-0');
+            
+            setTimeout(() => {
+                teamDialog.close();
+                toggleBodyScroll(false);
+            }, 200);
+        }
+
+        teamDialogClose.addEventListener('click', closeTeamModal);
+        
+        teamDialog.addEventListener('click', (e) => {
+            const rect = teamModalContent.getBoundingClientRect();
+            const isInModal = (rect.top <= e.clientY && e.clientY <= rect.bottom &&
+                               rect.left <= e.clientX && e.clientX <= rect.right);
+            if (!isInModal) {
+                closeTeamModal();
+            }
+        });
+
+        teamDialog.addEventListener('cancel', (e) => {
+            e.preventDefault();
+            closeTeamModal();
+        });
+
+        // Horizontal Carousel Scroll Controls
+        const scrollContainer = document.getElementById('creators-scroll-container');
+        const slideLeftBtn = document.getElementById('slide-left-btn');
+        const slideRightBtn = document.getElementById('slide-right-btn');
+
+        if (scrollContainer && slideLeftBtn && slideRightBtn) {
+            const updateArrows = () => {
+                const scrollLeft = scrollContainer.scrollLeft;
+                const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+                
+                if (scrollLeft <= 5) {
+                    slideLeftBtn.classList.add('opacity-0', 'pointer-events-none');
+                    slideLeftBtn.classList.remove('opacity-100', 'pointer-events-auto');
+                } else {
+                    slideLeftBtn.classList.remove('opacity-0', 'pointer-events-none');
+                    slideLeftBtn.classList.add('opacity-100', 'pointer-events-auto');
+                }
+                
+                if (scrollLeft >= maxScrollLeft - 5) {
+                    slideRightBtn.classList.add('opacity-0', 'pointer-events-none');
+                    slideRightBtn.classList.remove('opacity-100', 'pointer-events-auto');
+                } else {
+                    slideRightBtn.classList.remove('opacity-0', 'pointer-events-none');
+                    slideRightBtn.classList.add('opacity-100', 'pointer-events-auto');
+                }
+            };
+
+            slideLeftBtn.addEventListener('click', () => {
+                scrollContainer.scrollBy({
+                    left: -374, // Card width (350px) + Gap (24px)
+                    behavior: 'smooth'
+                });
+            });
+
+            slideRightBtn.addEventListener('click', () => {
+                scrollContainer.scrollBy({
+                    left: 374,
+                    behavior: 'smooth'
+                });
+            });
+
+            scrollContainer.addEventListener('scroll', updateArrows);
+            window.addEventListener('resize', updateArrows);
+            
+            // Run initially with a delay to ensure correct scrollWidth initialization
+            setTimeout(updateArrows, 200);
+        }
+
+        // Privacy Modal Handlers
+        const privacyDialog = document.getElementById('privacy-dialog');
+        const privacyModalContent = document.getElementById('privacy-modal-content');
+        const privacyDialogClose = document.getElementById('privacy-dialog-close');
+        const openPrivacyBtn = document.getElementById('open-privacy-btn');
+        const openTermsBtn = document.getElementById('open-terms-btn');
+
+        function openPrivacyModal() {
+            if (!privacyDialog) return;
+            privacyDialog.showModal();
+            toggleBodyScroll(true);
+            void privacyDialog.offsetHeight;
+            privacyModalContent.classList.remove('scale-95', 'opacity-0');
+            privacyModalContent.classList.add('scale-100', 'opacity-100');
+        }
+
+        function closePrivacyModal() {
+            if (!privacyDialog) return;
+            privacyModalContent.classList.remove('scale-100', 'opacity-100');
+            privacyModalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                privacyDialog.close();
+                toggleBodyScroll(false);
+            }, 200);
+        }
+
+        if (openPrivacyBtn) openPrivacyBtn.addEventListener('click', openPrivacyModal);
+        if (openTermsBtn) openTermsBtn.addEventListener('click', openPrivacyModal);
+        if (privacyDialogClose) privacyDialogClose.addEventListener('click', closePrivacyModal);
+
+        if (privacyDialog) {
+            privacyDialog.addEventListener('click', (e) => {
+                const rect = privacyModalContent.getBoundingClientRect();
+                const isInModal = (rect.top <= e.clientY && e.clientY <= rect.bottom &&
+                                   rect.left <= e.clientX && e.clientX <= rect.right);
+                if (!isInModal) {
+                    closePrivacyModal();
+                }
+            });
+            privacyDialog.addEventListener('cancel', (e) => {
+                e.preventDefault();
+                closePrivacyModal();
+            });
+        }
+
+        // Bottom Nav Active Section Tracking
+        const sections = [
+            { id: 'tentang', navId: 'bottom-nav-tentang' },
+            { id: 'keuntungan', navId: 'bottom-nav-keuntungan' },
+            { id: 'fitur', navId: 'bottom-nav-fitur' },
+            { id: 'paket', navId: 'bottom-nav-paket' }
+        ];
+
+        const bottomNavItems = document.querySelectorAll('.bottom-nav-item');
+        const homeNavBtn = document.getElementById('bottom-nav-home');
+        const homeNavIcon = document.getElementById('bottom-nav-home-icon');
+
+        if (bottomNavItems.length > 0) {
+            const updateBottomNav = () => {
+                const scrollPos = window.scrollY + 180; // Trigger threshold offset
+                let activeId = '';
+
+                // If scrolled to top, reset active item
+                if (window.scrollY < 200) {
+                    bottomNavItems.forEach(item => {
+                        if (item !== homeNavBtn) {
+                            item.classList.remove('text-[#A03A55]');
+                            item.classList.add('text-slate-400');
+                        }
+                    });
+                    if (homeNavBtn) homeNavBtn.classList.add('scale-110');
+                    return;
+                } else {
+                    if (homeNavBtn) homeNavBtn.classList.remove('scale-110');
+                }
+
+                // Check scroll boundaries for sections
+                sections.forEach(sec => {
+                    const el = document.getElementById(sec.id);
+                    if (el) {
+                        const top = el.offsetTop;
+                        const height = el.offsetHeight;
+                        if (scrollPos >= top && scrollPos < top + height) {
+                            activeId = sec.navId;
+                        }
+                    }
+                });
+
+                // Force high highlight on last item when scrolling is close to bottom (FAQ)
+                if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 100) {
+                    activeId = 'bottom-nav-paket';
+                }
+
+                // Set color highlights accordingly
+                bottomNavItems.forEach(item => {
+                    if (item === homeNavBtn) return;
+                    if (item.id === activeId) {
+                        item.classList.add('text-[#A03A55]');
+                        item.classList.remove('text-slate-400');
+                    } else {
+                        item.classList.remove('text-[#A03A55]');
+                        item.classList.add('text-slate-400');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', updateBottomNav);
+            window.addEventListener('resize', updateBottomNav);
+            setTimeout(updateBottomNav, 200);
+        }
+
+        // Home Navigation Button Click Action
+        if (homeNavBtn && homeNavIcon) {
+            homeNavBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                homeNavIcon.classList.add('rotate-[360deg]');
+                
+                lenis.scrollTo(0, {
+                    duration: 1.5,
+                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+                });
+                
+                setTimeout(() => {
+                    homeNavIcon.classList.remove('rotate-[360deg]');
+                }, 700);
+            });
+        }
+    </script>
+
+</body>
+</html>

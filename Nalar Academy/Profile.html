@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profil | Nalar Academy</title>
+    <link rel="icon" type="image/png" href="logonalar.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #F8F3FC 0%, #EEF2F6 50%, #FCF5EE 100%);
+            color: #1B355A;
+            overscroll-behavior-y: none;
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #A03A55 0%, #FF6B35 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .bg-gradient-primary {
+            background: linear-gradient(135deg, #A03A55 0%, #FF6B35 100%);
+        }
+        .bg-gradient-secondary {
+            background: linear-gradient(135deg, #5B316C 0%, #A03A55 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-[#1B355A] font-sans antialiased relative overflow-y-auto flex items-center justify-center px-4 sm:px-6 py-10">
+
+    <!-- Decorative background glows (identical to Auth.html) -->
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-[#FFC72C] rounded-full mix-blend-multiply filter blur-[120px] opacity-15 animate-float pointer-events-none"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#A03A55] rounded-full mix-blend-multiply filter blur-[128px] opacity-10 pointer-events-none"></div>
+
+    <!-- Soft brand watermarks (identical to Auth.html) -->
+    <div class="absolute -top-12 -left-12 w-96 h-96 bg-[url('fulllogo.png')] bg-no-repeat bg-contain opacity-[0.08] filter blur-[6px] rotate-[15deg] pointer-events-none select-none"></div>
+    <div class="absolute -bottom-16 -right-16 w-[450px] h-[450px] bg-[url('fulllogo.png')] bg-no-repeat bg-contain opacity-[0.08] filter blur-[8px] -rotate-[20deg] pointer-events-none select-none"></div>
+
+    <div class="w-full max-w-4xl relative z-10">
+        <!-- Ambient shadow glow around the card -->
+        <div class="absolute -inset-2 bg-gradient-to-r from-[#5B316C]/15 via-[#A03A55]/10 to-[#FFC72C]/15 rounded-[36px] blur-2xl opacity-70 pointer-events-none"></div>
+        
+        <!-- Alert Toast -->
+        <div id="toast" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 transform translate-y-[-100px] opacity-0 transition-all duration-500 pointer-events-none bg-emerald-600 text-white font-bold px-6 py-3 rounded-2xl shadow-xl flex items-center gap-2 text-sm border border-emerald-500/20">
+            <i class="fa-solid fa-circle-check text-base"></i>
+            <span id="toast-message">Profil berhasil disimpan!</span>
+        </div>
+
+        <div class="glass-card rounded-[28px] overflow-hidden shadow-[0_24px_80px_-24px_rgba(27,53,90,0.35)] border border-white/50 relative">
+            
+            <!-- Close / Back Button (Redirects to Dashboard.html) -->
+            <a href="Dashboard.html" class="absolute top-4 right-4 text-[#1B355A]/60 hover:text-white md:hover:text-white hover:bg-[#1B355A]/5 p-1.5 rounded-full transition-colors z-20">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </a>
+
+            <!-- 2-Column Layout (Identical structure to Auth.html) -->
+            <div class="grid grid-cols-1 md:grid-cols-12 items-stretch overflow-hidden">
+                
+                <!-- Left Column: Profile Card & Mascot Preview (visible on md and up) -->
+                <div class="hidden md:flex md:col-span-5 flex-col justify-between p-8 bg-gradient-to-br from-[#1B355A] via-[#5B316C] to-[#A03A55] text-white relative overflow-hidden">
+                    <div class="absolute w-56 h-56 bg-white/10 rounded-full blur-3xl opacity-25 top-1/4 left-1/4"></div>
+                    
+                    <div class="flex flex-col items-center justify-center flex-grow mt-4 z-10">
+                        <div class="relative mb-6 animate-float cursor-pointer group" onclick="document.getElementById('input-avatar-file').click()">
+                            <div id="avatar-preview" class="w-24 h-24 rounded-full bg-white text-[#5B316C] font-black text-4xl flex items-center justify-center shadow-lg overflow-hidden relative">R</div>
+                            <div class="absolute inset-0 rounded-full bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white text-xs transition-opacity font-semibold">
+                                <i class="fa-solid fa-camera mr-1"></i> Ganti
+                            </div>
+                            <div class="absolute -bottom-1 -right-1 w-8 h-8 bg-gradient-primary rounded-full border-2 border-white flex items-center justify-center text-white text-xs"><i class="fa-solid fa-user-pen"></i></div>
+                        </div>
+                        <div class="text-center space-y-4">
+                            <h3 id="avatar-name-display" class="text-2xl font-black tracking-tight text-white">Rafa Rian</h3>
+                            <p id="avatar-id-display" class="text-xs text-white/80 font-semibold tracking-wide">ID: #NL8842</p>
+                            
+                            <!-- Dynamic Target Summary Box -->
+                            <div class="p-4 rounded-2xl bg-white/10 border border-white/20 inline-block text-left min-w-[240px]">
+                                <div class="text-[10px] uppercase font-bold text-white/60 tracking-wider">Target Impian Anda</div>
+                                <div class="mt-2 flex items-center gap-3">
+                                    <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-[#5B316C] font-bold shadow-sm">
+                                        <i class="fa-solid fa-graduation-cap text-xs"></i>
+                                    </div>
+                                    <div>
+                                        <h4 id="preview-ptn" class="text-sm font-bold text-white leading-tight">UGM Yogyakarta</h4>
+                                        <p id="preview-major" class="text-xs text-white/80 font-medium leading-tight mt-0.5">Kedokteran (S1)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="text-[10px] text-white/60 font-semibold tracking-wide text-center z-10 mt-6 border-t border-white/10 pt-4 w-full">
+                        Nalar Academy &mdash; Akun & Pengaturan Profil
+                    </p>
+                </div>
+
+                <!-- Right Column: Settings Form area -->
+                <div class="col-span-1 md:col-span-7 flex flex-col bg-white/95 p-6 sm:p-10 justify-center min-h-[540px] md:min-h-[580px]">
+                    <div class="max-w-md mx-auto w-full flex flex-col justify-center">
+                        
+                        <div class="text-center mb-6 md:text-left">
+                            <h1 class="text-2xl sm:text-3xl font-extrabold text-[#1B355A]">Pengaturan Profil</h1>
+                            <p class="text-xs text-slate-500 mt-1 font-semibold">Perbarui data diri dan kredensial akun Anda</p>
+                        </div>
+
+                        <!-- Profile Picture Circle (Preview) & Actions -->
+                        <div class="flex flex-col items-center gap-2 mb-4">
+                            <div class="relative group cursor-pointer md:hidden" onclick="document.getElementById('input-avatar-file').click()">
+                                <div id="avatar-preview-mobile" class="w-16 h-16 rounded-full bg-gradient-secondary text-white font-black text-2xl flex items-center justify-center shadow-lg overflow-hidden">R</div>
+                                <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-white rounded-full border border-slate-100 shadow flex items-center justify-center text-[#5B316C] text-[10px]"><i class="fa-solid fa-user"></i></div>
+                            </div>
+                            <span id="avatar-name-display-mobile" class="text-sm font-bold text-[#1B355A] md:hidden">Rafa Rian</span>
+                            
+                            <!-- Avatar upload actions (visible on both mobile and desktop) -->
+                            <div class="flex items-center gap-3">
+                                <button type="button" id="btn-delete-avatar" class="text-xs font-bold text-red-500 hover:underline hidden"><i class="fa-solid fa-trash mr-1"></i> Hapus Foto</button>
+                            </div>
+                        </div>
+
+                        <form id="profile-form" class="space-y-4">
+                            <!-- Hidden File Input for Avatar -->
+                            <input type="file" id="input-avatar-file" accept="image/*" class="hidden">
+                            
+                            <!-- Input Name -->
+                            <div class="space-y-1">
+                                <label for="input-name" class="block text-xs font-bold text-[#5B316C] uppercase tracking-wider">Nama Lengkap</label>
+                                <input type="text" id="input-name" required class="w-full px-4 py-2.5 rounded-xl border border-[#1B355A]/15 focus:border-[#A03A55] focus:ring-2 focus:ring-[#A03A55]/20 outline-none text-[#1B355A] font-medium text-sm transition-all" placeholder="Nama Lengkap Anda">
+                            </div>
+
+                            <!-- Input Email -->
+                            <div class="space-y-1">
+                                <label for="input-email" class="block text-xs font-bold text-[#5B316C] uppercase tracking-wider">Email</label>
+                                <input type="email" id="input-email" required class="w-full px-4 py-2.5 rounded-xl border border-[#1B355A]/15 focus:border-[#A03A55] focus:ring-2 focus:ring-[#A03A55]/20 outline-none text-[#1B355A] font-medium text-sm transition-all" placeholder="email@anda.com">
+                            </div>
+
+                            <!-- Target PTN & Major side-by-side (Identical structure to Auth.html) -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div class="space-y-1">
+                                    <label for="input-ptn" class="block text-xs font-bold text-[#5B316C] uppercase tracking-wider">Target PTN</label>
+                                    <input type="text" id="input-ptn" list="ptn-list" autocomplete="off" required class="w-full px-3 py-2.5 rounded-xl border border-[#1B355A]/15 focus:border-[#A03A55] focus:ring-2 focus:ring-[#A03A55]/20 outline-none text-[#1B355A] font-medium text-sm transition-all" placeholder="Ketik nama PTN...">
+                                    <datalist id="ptn-list"></datalist>
+                                </div>
+                                <div class="space-y-1">
+                                    <label for="input-major" class="block text-xs font-bold text-[#5B316C] uppercase tracking-wider">Jurusan Impian</label>
+                                    <input type="text" id="input-major" list="major-list" autocomplete="off" required class="w-full px-3 py-2.5 rounded-xl border border-[#1B355A]/15 focus:border-[#A03A55] focus:ring-2 focus:ring-[#A03A55]/20 outline-none text-[#1B355A] font-medium text-sm transition-all" placeholder="Ketik nama jurusan...">
+                                    <datalist id="major-list">
+                                        <option value="Kedokteran"></option>
+                                        <option value="Teknik Informatika"></option>
+                                        <option value="Sistem Informasi"></option>
+                                        <option value="Hukum"></option>
+                                        <option value="Psikologi"></option>
+                                        <option value="Manajemen"></option>
+                                        <option value="Akuntansi"></option>
+                                        <option value="Ekonomi Pembangunan"></option>
+                                        <option value="Ilmu Komunikasi"></option>
+                                        <option value="Hubungan Internasional"></option>
+                                        <option value="Teknik Sipil"></option>
+                                        <option value="Teknik Mesin"></option>
+                                        <option value="Teknik Elektro"></option>
+                                        <option value="Teknik Industri"></option>
+                                        <option value="Arsitektur"></option>
+                                        <option value="Farmasi"></option>
+                                        <option value="Keperawatan"></option>
+                                        <option value="Kesehatan Masyarakat"></option>
+                                        <option value="Matematika"></option>
+                                        <option value="Statistika"></option>
+                                        <option value="Ilmu Komputer"></option>
+                                        <option value="Sastra Inggris"></option>
+                                        <option value="Pendidikan Matematika"></option>
+                                        <option value="Pendidikan Dokter Gigi"></option>
+                                        <option value="Ilmu Gizi"></option>
+                                    </datalist>
+                                </div>
+                            </div>
+
+                            <!-- Input Password -->
+                            <div class="space-y-1">
+                                <label for="input-password" class="block text-xs font-bold text-[#5B316C] uppercase tracking-wider">Password Baru</label>
+                                <div class="relative">
+                                    <input type="password" id="input-password" class="w-full pl-4 pr-10 py-2.5 rounded-xl border border-[#1B355A]/15 focus:border-[#A03A55] focus:ring-2 focus:ring-[#A03A55]/20 outline-none text-[#1B355A] font-medium text-sm transition-all" placeholder="Kosongkan jika tidak diubah">
+                                    <button type="button" class="toggle-password absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none">
+                                        <svg class="eye-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                        </svg>
+                                        <svg class="eye-off-icon w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a10.024 10.024 0 014.17-5.384m12.83 12.83A10.012 10.012 0 0021.542 12c-1.274-4.057-5.064-7-9.542-7-1.173 0-2.285.21-3.316.59m-4.437 1.25L18 18M9.88 9.88a3 3 0 104.24 4.24" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Input Password Confirm -->
+                            <div class="space-y-1">
+                                <label for="input-password-confirm" class="block text-xs font-bold text-[#5B316C] uppercase tracking-wider">Konfirmasi Password Baru</label>
+                                <div class="relative">
+                                    <input type="password" id="input-password-confirm" class="w-full pl-4 pr-10 py-2.5 rounded-xl border border-[#1B355A]/15 focus:border-[#A03A55] focus:ring-2 focus:ring-[#A03A55]/20 outline-none text-[#1B355A] font-medium text-sm transition-all" placeholder="Kosongkan jika tidak diubah">
+                                    <button type="button" class="toggle-password absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none">
+                                        <svg class="eye-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                        </svg>
+                                        <svg class="eye-off-icon w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a10.024 10.024 0 014.17-5.384m12.83 12.83A10.012 10.012 0 0021.542 12c-1.274-4.057-5.064-7-9.542-7-1.173 0-2.285.21-3.316.59m-4.437 1.25L18 18M9.88 9.88a3 3 0 104.24 4.24" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Input ID (Read Only) -->
+                            <div class="space-y-1 pb-2">
+                                <label for="input-id" class="block text-xs font-bold text-[#5B316C] uppercase tracking-wider">ID Siswa (Tetap)</label>
+                                <input type="text" id="input-id" readonly class="w-full px-4 py-2.5 rounded-xl bg-slate-100/50 border border-[#1B355A]/10 text-slate-400 font-medium text-sm cursor-not-allowed" placeholder="#NL8842">
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="flex flex-col-reverse sm:flex-row gap-3 pt-2">
+                                <a href="Dashboard.html" class="flex-1 py-3 border border-slate-200 hover:bg-slate-50 text-slate-600 font-bold rounded-2xl text-center text-sm transition-all shadow-sm">Batal</a>
+                                <button type="submit" class="flex-1 py-3 bg-gradient-secondary text-white font-bold rounded-2xl text-sm shadow-md hover:shadow-[0_6px_18px_rgba(91,49,108,0.25)] hover:scale-[1.02] active:scale-95 transition-all">Simpan</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // DOM Elements
+        const form = document.getElementById('profile-form');
+        const inputName = document.getElementById('input-name');
+        const inputEmail = document.getElementById('input-email');
+        const inputPtn = document.getElementById('input-ptn');
+        const inputMajor = document.getElementById('input-major');
+        const inputId = document.getElementById('input-id');
+        const inputPassword = document.getElementById('input-password');
+        const inputPasswordConfirm = document.getElementById('input-password-confirm');
+        const inputAvatarFile = document.getElementById('input-avatar-file');
+        
+        // Avatar preview elements
+        const avatarPreview = document.getElementById('avatar-preview');
+        const avatarPreviewMobile = document.getElementById('avatar-preview-mobile');
+        const avatarNameDisplay = document.getElementById('avatar-name-display');
+        const avatarNameDisplayMobile = document.getElementById('avatar-name-display-mobile');
+        const avatarIdDisplay = document.getElementById('avatar-id-display');
+        const previewPtn = document.getElementById('preview-ptn');
+        const previewMajor = document.getElementById('preview-major');
+        
+        const toast = document.getElementById('toast');
+
+        // Load values from LocalStorage
+        const initialName = localStorage.getItem('profileName') || 'Rafa Rian';
+        const initialEmail = localStorage.getItem('profileEmail') || 'rafa.rian@email.com';
+        const initialPtn = localStorage.getItem('profilePTN') || 'UGM Yogyakarta';
+        const initialMajor = localStorage.getItem('profileMajor') || 'Kedokteran (S1)';
+        const initialId = localStorage.getItem('profileID') || '#NL8842';
+
+        // Load initial profile image state (using transaction pattern)
+        let currentProfileImage = localStorage.getItem('profileImage') || null;
+
+        inputName.value = initialName;
+        inputEmail.value = initialEmail;
+        inputPtn.value = initialPtn;
+        inputMajor.value = initialMajor;
+        inputId.value = initialId;
+
+        // Function to update previews
+        function updatePreviews(imgData = currentProfileImage) {
+            const nameVal = inputName.value.trim() || 'Rafa Rian';
+            const initial = nameVal.charAt(0).toUpperCase();
+            const ptnVal = inputPtn.value.trim() || 'Belum Diatur';
+            const majorVal = inputMajor.value.trim() || 'Belum Diatur';
+
+            if (imgData) {
+                const imgTag = `<img src="${imgData}" alt="Profile" class="w-full h-full object-cover rounded-full">`;
+                if (avatarPreview) avatarPreview.innerHTML = imgTag;
+                if (avatarPreviewMobile) avatarPreviewMobile.innerHTML = imgTag;
+                
+                // Show delete button
+                const btnDelete = document.getElementById('btn-delete-avatar');
+                if (btnDelete) btnDelete.classList.remove('hidden');
+            } else {
+                if (avatarPreview) avatarPreview.textContent = initial;
+                if (avatarPreviewMobile) avatarPreviewMobile.textContent = initial;
+                
+                // Hide delete button
+                const btnDelete = document.getElementById('btn-delete-avatar');
+                if (btnDelete) btnDelete.classList.add('hidden');
+            }
+
+            if (avatarNameDisplay) avatarNameDisplay.textContent = nameVal;
+            if (avatarNameDisplayMobile) avatarNameDisplayMobile.textContent = nameVal;
+            if (avatarIdDisplay) avatarIdDisplay.textContent = 'ID: ' + inputId.value;
+            if (previewPtn) previewPtn.textContent = ptnVal;
+            if (previewMajor) previewMajor.textContent = majorVal;
+        }
+
+        // Initialize previews
+        updatePreviews();
+
+        // Update previews dynamically on input typing
+        inputName.addEventListener('input', () => updatePreviews(currentProfileImage));
+        inputPtn.addEventListener('input', () => updatePreviews(currentProfileImage));
+        inputMajor.addEventListener('input', () => updatePreviews(currentProfileImage));
+
+        // File avatar input change
+        inputAvatarFile.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    currentProfileImage = event.target.result;
+                    updatePreviews(currentProfileImage);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Delete custom avatar photo action
+        const btnDeleteAvatar = document.getElementById('btn-delete-avatar');
+        if (btnDeleteAvatar) {
+            btnDeleteAvatar.addEventListener('click', () => {
+                currentProfileImage = null;
+                inputAvatarFile.value = ''; // Reset file input selector
+                updatePreviews(null);
+            });
+        }
+
+        // Toggle password visibility handler
+        document.querySelectorAll('.toggle-password').forEach(button => {
+            button.addEventListener('click', () => {
+                const input = button.parentElement.querySelector('input');
+                const eyeIcon = button.querySelector('.eye-icon');
+                const eyeOffIcon = button.querySelector('.eye-off-icon');
+                
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    eyeIcon.classList.add('hidden');
+                    eyeOffIcon.classList.remove('hidden');
+                } else {
+                    input.type = 'password';
+                    eyeIcon.classList.remove('hidden');
+                    eyeOffIcon.classList.add('hidden');
+                }
+            });
+        });
+
+        // Password matching validation resetting on input
+        if (inputPasswordConfirm) {
+            inputPasswordConfirm.addEventListener('input', () => {
+                inputPasswordConfirm.setCustomValidity("");
+            });
+        }
+
+        // Form Submit
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Password confirm check
+            if (inputPassword.value) {
+                if (inputPassword.value !== inputPasswordConfirm.value) {
+                    inputPasswordConfirm.setCustomValidity("Kata sandi konfirmasi tidak cocok.");
+                    inputPasswordConfirm.reportValidity();
+                    return;
+                }
+            }
+
+            // Save to LocalStorage
+            localStorage.setItem('profileName', inputName.value.trim());
+            localStorage.setItem('profileEmail', inputEmail.value.trim());
+            localStorage.setItem('profilePTN', inputPtn.value.trim());
+            localStorage.setItem('profileMajor', inputMajor.value.trim());
+            if (inputPassword.value) {
+                localStorage.setItem('profilePassword', inputPassword.value);
+            }
+            if (currentProfileImage) {
+                localStorage.setItem('profileImage', currentProfileImage);
+            } else {
+                localStorage.removeItem('profileImage');
+            }
+
+            // Show Toast Alert
+            toast.classList.remove('translate-y-[-100px]', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            // Redirect back to dashboard after 1.5 seconds
+            setTimeout(() => {
+                window.location.href = 'Dashboard.html';
+            }, 1500);
+        });
+
+        // Dynamic fetch of Indonesian Universities from Third-Party API (identical to Auth.html)
+        document.addEventListener('DOMContentLoaded', () => {
+            const ptnList = document.getElementById('ptn-list');
+            if (ptnList) {
+                fetch('https://universities.hipolabs.com/search?country=indonesia')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Sort alphabetically
+                        data.sort((a, b) => a.name.localeCompare(b.name));
+                        
+                        const names = new Set();
+                        data.forEach(univ => {
+                            const cleanName = univ.name.trim();
+                            if (!names.has(cleanName)) {
+                                names.add(cleanName);
+                                const option = document.createElement('option');
+                                option.value = cleanName;
+                                ptnList.appendChild(option);
+                            }
+                        });
+                    })
+                    .catch(err => {
+                        console.error("Error fetching universities list, using fallback:", err);
+                        const fallbacks = [
+                            "Universitas Gadjah Mada (UGM)",
+                            "Universitas Indonesia (UI)",
+                            "Institut Teknologi Bandung (ITB)",
+                            "Universitas Airlangga (UNAIR)",
+                            "Universitas Diponegoro (UNDIP)",
+                            "Institut Teknologi Sepuluh Nopember (ITS)",
+                            "Universitas Padjadjaran (UNPAD)",
+                            "Universitas Sebelas Maret (UNS)",
+                            "Universitas Brawijaya (UB)",
+                            "Universitas Hasanuddin (UNHAS)",
+                            "Universitas Pendidikan Indonesia (UPI)",
+                            "Universitas Negeri Yogyakarta (UNY)",
+                            "Universitas Negeri Semarang (UNNES)",
+                            "Universitas Negeri Malang (UM)",
+                            "Universitas Negeri Jakarta (UNJ)",
+                            "Universitas Telkom (Telkom University)",
+                            "Universitas Muhammadiyah Yogyakarta (UMY)",
+                            "Universitas Islam Indonesia (UII)"
+                        ];
+                        fallbacks.forEach(name => {
+                            const option = document.createElement('option');
+                            option.value = name;
+                            ptnList.appendChild(option);
+                        });
+                    });
+            }
+        });
+    </script>
+</body>
+</html>

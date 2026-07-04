@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masuk & Daftar | Nalar Academy</title>
+    <link rel="icon" type="image/png" href="logonalar.png">
+
+    <!-- Open Graph / Facebook Share Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nalar.academy/auth">
+    <meta property="og:title" content="Masuk & Daftar | Nalar Academy">
+    <meta property="og:description" content="Masuk atau buat akun baru di Nalar Academy untuk memulai tryout UTBK-SNBT & TKA berbasis IRT adaptif.">
+    <meta property="og:image" content="main_student.png">
+
+    <!-- Twitter Share Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://nalar.academy/auth">
+    <meta name="twitter:title" content="Masuk & Daftar | Nalar Academy">
+    <meta name="twitter:description" content="Masuk atau buat akun baru di Nalar Academy untuk memulai tryout UTBK-SNBT & TKA berbasis IRT adaptif.">
+    <meta name="twitter:image" content="main_student.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #F8F3FC 0%, #EEF2F6 50%, #FCF5EE 100%);
+            color: #1B355A;
+            overscroll-behavior-y: none;
+        }
+
+        .bg-gradient-primary {
+            background: linear-gradient(135deg, #A03A55 0%, #FF6B35 100%);
+        }
+
+        .bg-gradient-secondary {
+            background: linear-gradient(135deg, #5B316C 0%, #A03A55 100%);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-[#1B355A] font-sans antialiased relative overflow-x-hidden flex items-center justify-center px-4 sm:px-6 py-10">
+    
+    <!-- Decorative background glows (similar to LabCraft design) -->
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-[#FFC72C] rounded-full mix-blend-multiply filter blur-[120px] opacity-15 animate-float pointer-events-none"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#A03A55] rounded-full mix-blend-multiply filter blur-[128px] opacity-10 pointer-events-none"></div>
+
+    <!-- Soft brand watermarks with different rotations and blurs -->
+    <div class="absolute -top-12 -left-12 w-96 h-96 bg-[url('fulllogo.png')] bg-no-repeat bg-contain opacity-[0.08] filter blur-[6px] rotate-[15deg] pointer-events-none select-none"></div>
+    <div class="absolute -bottom-16 -right-16 w-[450px] h-[450px] bg-[url('fulllogo.png')] bg-no-repeat bg-contain opacity-[0.08] filter blur-[8px] -rotate-[20deg] pointer-events-none select-none"></div>
+
+    <div class="w-full max-w-4xl relative z-10">
+        <!-- Ambient shadow glow around the card -->
+        <div class="absolute -inset-2 bg-gradient-to-r from-[#5B316C]/15 via-[#A03A55]/10 to-[#FFC72C]/15 rounded-[36px] blur-2xl opacity-70 pointer-events-none"></div>
+        
+        <div class="glass-card rounded-[28px] overflow-hidden shadow-[0_24px_80px_-24px_rgba(27,53,90,0.35)] border border-white/50 relative">
+            
+            <!-- Close / Back Button (Redirects back to LandingPage.html) -->
+            <a href="LandingPage.html" class="absolute top-4 right-4 text-[#1B355A]/60 hover:text-white md:hover:text-white hover:bg-[#1B355A]/5 p-1.5 rounded-full transition-colors z-20">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </a>
+
+            <!-- 2-Column Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-12 items-stretch overflow-hidden">
+                <!-- Left side: Mascot & Rich Information (visible on md and up) -->
+                <div class="hidden md:flex md:col-span-5 flex-col justify-between p-8 bg-gradient-to-br from-[#1B355A] via-[#5B316C] to-[#A03A55] text-white relative overflow-hidden">
+                    <!-- Background pulsing orb -->
+                    <div class="absolute w-56 h-56 bg-white/10 rounded-full blur-3xl opacity-25 animate-pulse top-1/4 left-1/4"></div>
+                    
+                    <div class="flex flex-col items-center justify-center flex-grow mt-4 z-10">
+                        <div class="w-52 h-52 relative mb-6 animate-float">
+                            <img src="small_student.png" alt="Nalar Student Mascot" class="w-full h-full object-contain">
+                        </div>
+                        <div class="text-center space-y-4">
+                            <h3 class="text-2xl font-black tracking-tight text-white">Nalar Academy</h3>
+                            <p class="text-xs text-white/80 max-w-xs leading-relaxed text-center font-medium">
+                                Latih penalaran logis UTBK-SNBT & TKA dengan sistem tryout adaptif berbasis IRT terakurat di Indonesia.
+                            </p>
+                            
+                            <!-- Key Perks list -->
+                            <div class="space-y-2 pt-2 text-left max-w-[240px] mx-auto">
+                                <div class="flex items-center gap-2.5 text-xs text-white/90 font-semibold">
+                                    <span class="text-emerald-400"><i class="fa-solid fa-circle-check text-xs"></i></span>
+                                    <span>Tryout Sistem IRT Akurat</span>
+                                </div>
+                                <div class="flex items-center gap-2.5 text-xs text-white/90 font-semibold">
+                                    <span class="text-emerald-400"><i class="fa-solid fa-circle-check text-xs"></i></span>
+                                    <span>Video Solusi Smart Logic</span>
+                                </div>
+                                <div class="flex items-center gap-2.5 text-xs text-white/90 font-semibold">
+                                    <span class="text-emerald-400"><i class="fa-solid fa-circle-check text-xs"></i></span>
+                                    <span>Analisis Peluang Lolos PTN</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="text-[10px] text-white/60 font-semibold tracking-wide text-center z-10 mt-6 border-t border-white/10 pt-4 w-full">
+                        Nalar Academy &mdash; Belajar Logis, Hasil Maksimal.
+                    </p>
+                </div>
+
+                <!-- Right side: Tabs & Form Input fields (centered & not too wide) -->
+                <div class="col-span-1 md:col-span-7 flex flex-col bg-white/95 p-6 sm:p-10 justify-center min-h-[540px] md:min-h-[580px]">
+                    <div class="max-w-md mx-auto w-full flex flex-col justify-center">
+                        
+                        <!-- Brand Logo at the top -->
+                        <div class="flex flex-col items-center mb-6">
+                            <img src="logonalar.png" alt="Nalar Logo" class="w-14 h-14 object-contain">
+                        </div>
+
+                        <div class="md:hidden mb-6 rounded-3xl border border-[#5B316C]/10 bg-gradient-to-br from-[#5B316C]/5 via-white to-[#FFC72C]/10 p-4 space-y-3 text-center shadow-sm">
+                            <h2 class="text-xl font-extrabold text-[#1B355A]">Masuk ke Nalar Academy</h2>
+                            <p class="text-xs text-slate-500 font-semibold leading-relaxed">Tryout IRT, video solusi, dan analisis peluang PTN dalam satu dashboard yang enak dipakai dari layar kecil.</p>
+                            <div class="flex flex-wrap justify-center gap-2 text-[10px] font-bold text-[#5B316C]">
+                                <span class="px-3 py-1 rounded-full bg-white border border-slate-200">Tryout IRT</span>
+                                <span class="px-3 py-1 rounded-full bg-white border border-slate-200">Video Solusi</span>
+                                <span class="px-3 py-1 rounded-full bg-white border border-slate-200">Analitik PTN</span>
+                            </div>
+                        </div>
+
+                        <!-- Modal Tab Switcher (LabCraft style) -->
+                        <div class="mb-6">
+                            <div class="w-full inline-flex items-center gap-2 bg-slate-50/80 rounded-full p-1.5 border border-slate-200">
+                                <button
+                                  type="button"
+                                  id="tab-login"
+                                  class="flex-1 px-4 py-2.5 text-[14px] font-bold rounded-full transition-all active:scale-95 bg-white text-slate-900 shadow-sm"
+                                >
+                                  Masuk
+                                </button>
+                                <button
+                                  type="button"
+                                  id="tab-register"
+                                  class="flex-1 px-4 py-2.5 text-[14px] font-bold rounded-full transition-all active:scale-95 text-slate-600 hover:text-slate-900 hover:bg-white/70"
+                                >
+                                  Daftar
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Forms Wrapper using a Grid Stack layout to allow dynamic heights without layout jumps -->
+                        <div id="forms-wrapper" class="relative w-full grid grid-cols-1 grid-rows-1 justify-stretch transition-all duration-300 ease-out">
+                            
+                            <!-- Form LOGIN -->
+                            <form id="form-login" class="space-y-5 transition-all duration-200 ease-out opacity-100 translate-y-0 scale-100 blur-0 pointer-events-auto col-start-1 row-start-1 w-full h-fit">
+                                <div class="space-y-4">
+                                    <div class="space-y-1">
+                                        <label for="login-email" class="block text-xs font-bold text-[#5B316C] uppercase tracking-wider">Email</label>
+                                        <input type="email" id="login-email" required class="w-full px-4 py-3 rounded-xl border border-[#1B355A]/15 focus:border-[#A03A55] focus:ring-2 focus:ring-[#A03A55]/20 outline-none text-[#1B355A] font-medium text-sm transition-all" placeholder="nama@email.com">
+                                    </div>
+                                    
+                                    <div class="space-y-1">
+                                        <div class="flex justify-between items-center">
+                                            <label for="login-password" class="block text-xs font-bold text-[#5B316C] uppercase tracking-wider">Password</label>
+                                            <a href="#" class="text-xs font-bold text-[#A03A55] hover:underline">Lupa Password?</a>
+                                        </div>
+                                        <div class="relative">
+                                            <input type="password" id="login-password" required class="w-full pl-4 pr-10 py-3 rounded-xl border border-[#1B355A]/15 focus:border-[#A03A55] focus:ring-2 focus:ring-[#A03A55]/20 outline-none text-[#1B355A] font-medium text-sm transition-all" placeholder="••••••••">
+                                            <button type="button" class="toggle-password absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none">
+                                                <svg class="eye-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                </svg>
+                                                <svg class="eye-off-icon w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a10.024 10.024 0 014.17-5.384m12.83 12.83A10.012 10.012 0 0021.542 12c-1.274-4.057-5.064-7-9.542-7-1.173 0-2.285.21-3.316.59m-4.437 1.25L18 18M9.88 9.88a3 3 0 104.24 4.24" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-4 pt-2">
+                                    <button type="submit" class="w-full py-3.5 bg-gradient-primary hover:shadow-[0_8px_20px_rgba(160,58,85,0.3)] text-white font-bold rounded-xl transition-all">
+                                        Masuk Ke Akun
+                                    </button>
+                                    
+                                    <div class="relative flex py-1 items-center">
+                                        <div class="flex-grow border-t border-[#1B355A]/10"></div>
+                                        <span class="flex-shrink mx-4 text-slate-400 text-[10px] font-bold uppercase tracking-wider">atau</span>
+                                        <div class="flex-grow border-t border-[#1B355A]/10"></div>
+                                    </div>
+
+                                    <button type="button" class="w-full py-3 px-4 border border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-slate-700 font-bold rounded-xl transition-all flex items-center justify-center gap-3 active:scale-95">
+                                        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24">
+                                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C4 20.53 7.7 23 12 23z"/>
+                                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l3.66-2.85z"/>
+                                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 4 3.47 2.18 7.06l3.66 2.85c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                                        </svg>
+                                        <span class="text-xs">Masuk dengan Google</span>
+                                    </button>
+
+                                    <p class="text-center text-xs font-medium text-slate-500">
+                                        Belum punya akun? <button type="button" id="link-to-register" class="text-[#A03A55] font-bold hover:underline">Daftar Sekarang</button>
+                                    </p>
+                                </div>
+                            </form>
+
+                            <!-- Form REGISTER (Hidden/Transitioned by default) -->
+                            <form id="form-register" class="space-y-4 transition-all duration-200 ease-out opacity-0 translate-y-2 scale-[0.985] blur-[2px] pointer-events-none col-start-1 row-start-1 w-full h-fit absolute">
+                                 <div class="space-y-3">
+                                     <div class="space-y-1">
+                                         <label for="reg-name" class="block text-xs font-bold text-[#5B316C] uppercase tracking-wider">Nama Lengkap</label>
+                                         <input type="text" id="reg-name" required class="w-full px-4 py-2.5 rounded-xl border border-[#1B355A]/15 focus:border-[#A03A55] focus:ring-2 focus:ring-[#A03A55]/20 outline-none text-[#1B355A] font-medium text-sm transition-all" placeholder="Nama Lengkap Anda">
+                                     </div>
+                                     
+                                     <div class="space-y-1">
+                                         <label for="reg-email" class="block text-xs font-bold text-[#5B316C] uppercase tracking-wider">Email</label>
+                                         <input type="email" id="reg-email" required class="w-full px-4 py-2.5 rounded-xl border border-[#1B355A]/15 focus:border-[#A03A55] focus:ring-2 focus:ring-[#A03A55]/20 outline-none text-[#1B355A] font-medium text-sm transition-all" placeholder="email@anda.com">
+                                     </div>
+
+                                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                         <div class="space-y-1">
+                                             <label for="reg-ptn" class="block text-xs font-bold text-[#5B316C] uppercase tracking-wider">Target PTN</label>
+                                             <input type="text" id="reg-ptn" list="ptn-list" autocomplete="off" required class="w-full px-3 py-2.5 rounded-xl border border-[#1B355A]/15 focus:border-[#A03A55] focus:ring-2 focus:ring-[#A03A55]/20 outline-none text-[#1B355A] font-medium text-sm transition-all" placeholder="Ketik nama PTN...">
+                                             <datalist id="ptn-list"></datalist>
+                                         </div>
+                                         <div class="space-y-1">
+                                             <label for="reg-major" class="block text-xs font-bold text-[#5B316C] uppercase tracking-wider">Jurusan Impian</label>
+                                             <input type="text" id="reg-major" list="major-list" autocomplete="off" required class="w-full px-3 py-2.5 rounded-xl border border-[#1B355A]/15 focus:border-[#A03A55] focus:ring-2 focus:ring-[#A03A55]/20 outline-none text-[#1B355A] font-medium text-sm transition-all" placeholder="Ketik nama jurusan...">
+                                             <datalist id="major-list">
+                                                 <option value="Kedokteran"></option>
+                                                 <option value="Teknik Informatika"></option>
+                                                 <option value="Sistem Informasi"></option>
+                                                 <option value="Hukum"></option>
+                                                 <option value="Psikologi"></option>
+                                                 <option value="Manajemen"></option>
+                                                 <option value="Akuntansi"></option>
+                                                 <option value="Ekonomi Pembangunan"></option>
+                                                 <option value="Ilmu Komunikasi"></option>
+                                                 <option value="Hubungan Internasional"></option>
+                                                 <option value="Teknik Sipil"></option>
+                                                 <option value="Teknik Mesin"></option>
+                                                 <option value="Teknik Elektro"></option>
+                                                 <option value="Teknik Industri"></option>
+                                                 <option value="Arsitektur"></option>
+                                                 <option value="Farmasi"></option>
+                                                 <option value="Keperawatan"></option>
+                                                 <option value="Kesehatan Masyarakat"></option>
+                                                 <option value="Matematika"></option>
+                                                 <option value="Statistika"></option>
+                                                 <option value="Ilmu Komputer"></option>
+                                                 <option value="Sastra Inggris"></option>
+                                                 <option value="Pendidikan Matematika"></option>
+                                                 <option value="Pendidikan Dokter Gigi"></option>
+                                                 <option value="Ilmu Gizi"></option>
+                                             </datalist>
+                                         </div>
+                                     </div>
+                                     
+                                     <div class="space-y-1">
+                                         <label for="reg-password" class="block text-xs font-bold text-[#5B316C] uppercase tracking-wider">Password</label>
+                                         <div class="relative">
+                                             <input type="password" id="reg-password" required class="w-full pl-4 pr-10 py-2.5 rounded-xl border border-[#1B355A]/15 focus:border-[#A03A55] focus:ring-2 focus:ring-[#A03A55]/20 outline-none text-[#1B355A] font-medium text-sm transition-all" placeholder="••••••••">
+                                             <button type="button" class="toggle-password absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none">
+                                                 <svg class="eye-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                 </svg>
+                                                 <svg class="eye-off-icon w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a10.024 10.024 0 014.17-5.384m12.83 12.83A10.012 10.012 0 0021.542 12c-1.274-4.057-5.064-7-9.542-7-1.173 0-2.285.21-3.316.59m-4.437 1.25L18 18M9.88 9.88a3 3 0 104.24 4.24" />
+                                                 </svg>
+                                             </button>
+                                         </div>
+                                     </div>
+                                     
+                                     <div class="space-y-1">
+                                         <label for="reg-password-confirm" class="block text-xs font-bold text-[#5B316C] uppercase tracking-wider">Konfirmasi Password</label>
+                                         <div class="relative">
+                                             <input type="password" id="reg-password-confirm" required class="w-full pl-4 pr-10 py-2.5 rounded-xl border border-[#1B355A]/15 focus:border-[#A03A55] focus:ring-2 focus:ring-[#A03A55]/20 outline-none text-[#1B355A] font-medium text-sm transition-all" placeholder="••••••••">
+                                             <button type="button" class="toggle-password absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none">
+                                                 <svg class="eye-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                 </svg>
+                                                 <svg class="eye-off-icon w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a10.024 10.024 0 014.17-5.384m12.83 12.83A10.012 10.012 0 0021.542 12c-1.274-4.057-5.064-7-9.542-7-1.173 0-2.285.21-3.316.59m-4.437 1.25L18 18M9.88 9.88a3 3 0 104.24 4.24" />
+                                                 </svg>
+                                             </button>
+                                         </div>
+                                     </div>
+                                 </div>
+
+                                 <div class="space-y-3 pt-1">
+                                     <button type="submit" class="w-full py-3.5 bg-gradient-secondary hover:shadow-[0_8px_20px_rgba(91,49,108,0.3)] text-white font-bold rounded-xl transition-all">
+                                         Buat Akun Baru
+                                     </button>
+
+                                     <div class="relative flex py-1 items-center">
+                                         <div class="flex-grow border-t border-[#1B355A]/10"></div>
+                                         <span class="flex-shrink mx-4 text-slate-400 text-[10px] font-bold uppercase tracking-wider">atau</span>
+                                         <div class="flex-grow border-t border-[#1B355A]/10"></div>
+                                     </div>
+
+                                     <button type="button" class="w-full py-3 px-4 border border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-slate-700 font-bold rounded-xl transition-all flex items-center justify-center gap-3 active:scale-95">
+                                         <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24">
+                                             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                             <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C4 20.53 7.7 23 12 23z"/>
+                                             <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l3.66-2.85z"/>
+                                             <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 4 3.47 2.18 7.06l3.66 2.85c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                                         </svg>
+                                         <span class="text-xs">Daftar dengan Google</span>
+                                     </button>
+                                     
+                                     <p class="text-center text-xs font-medium text-slate-500">
+                                         Sudah punya akun? <button type="button" id="link-to-login" class="text-[#5B316C] font-bold hover:underline">Masuk</button>
+                                     </p>
+                                 </div>
+                             </form>
+
+                            <!-- Status Sukses Animasi -->
+                            <div id="auth-success-state" class="transition-all duration-200 ease-out opacity-0 translate-y-2 scale-[0.985] blur-[2px] pointer-events-none flex flex-col items-center justify-center py-8 text-center space-y-4 absolute inset-0 w-full h-full">
+                                <div class="w-16 h-16 bg-green-50 text-green-500 rounded-full flex items-center justify-center shadow-inner border border-green-200 animate-bounce">
+                                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-[#1B355A] font-extrabold text-xl mb-1">Berhasil!</h4>
+                                    <p id="auth-success-msg" class="text-sm font-medium text-slate-500">Selamat datang di Nalar Academy.</p>
+                                </div>
+                                <div class="pt-4">
+                                    <a href="Dashboard.html" class="px-6 py-2.5 bg-gradient-primary hover:shadow-[0_8px_20px_rgba(160,58,85,0.3)] text-white font-bold rounded-xl shadow-md block text-center text-sm transition-all active:scale-95">
+                                        Masuk Ke Dashboard
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Active Tab switching JavaScript -->
+    <script>
+        const tabLogin = document.getElementById('tab-login');
+        const tabRegister = document.getElementById('tab-register');
+        const formLogin = document.getElementById('form-login');
+        const formRegister = document.getElementById('form-register');
+        const authSuccessState = document.getElementById('auth-success-state');
+        const linkToRegister = document.getElementById('link-to-register');
+        const linkToLogin = document.getElementById('link-to-login');
+        const authSuccessMsg = document.getElementById('auth-success-msg');
+        const formsWrapper = document.getElementById('forms-wrapper');
+
+        function switchTab(mode) {
+            if (mode === 'login') {
+                tabLogin.className = "flex-1 px-4 py-2.5 text-[14px] font-bold rounded-full transition-all active:scale-95 bg-white text-slate-900 shadow-sm";
+                tabRegister.className = "flex-1 px-4 py-2.5 text-[14px] font-bold rounded-full transition-all active:scale-95 text-slate-600 hover:text-slate-900 hover:bg-white/70";
+                
+                formLogin.className = "space-y-5 transition-all duration-200 ease-out opacity-100 translate-y-0 scale-100 blur-0 pointer-events-auto col-start-1 row-start-1 w-full h-fit";
+                formRegister.className = "space-y-4 transition-all duration-200 ease-out opacity-0 translate-y-2 scale-[0.985] blur-[2px] pointer-events-none col-start-1 row-start-1 w-full h-fit absolute";
+                authSuccessState.className = "transition-all duration-200 ease-out opacity-0 translate-y-2 scale-[0.985] blur-[2px] pointer-events-none flex flex-col items-center justify-center py-8 text-center space-y-4 col-start-1 row-start-1 w-full h-fit absolute";
+                
+                if (formsWrapper && formLogin) {
+                    setTimeout(() => {
+                        formsWrapper.style.height = formLogin.offsetHeight + 'px';
+                    }, 50);
+                }
+            } else if (mode === 'register') {
+                tabRegister.className = "flex-1 px-4 py-2.5 text-[14px] font-bold rounded-full transition-all active:scale-95 bg-[#5B316C] text-white shadow-lg shadow-[#5B316C]/20";
+                tabLogin.className = "flex-1 px-4 py-2.5 text-[14px] font-bold rounded-full transition-all active:scale-95 text-slate-600 hover:text-slate-900 hover:bg-white/70";
+                
+                formRegister.className = "space-y-4 transition-all duration-200 ease-out opacity-100 translate-y-0 scale-100 blur-0 pointer-events-auto col-start-1 row-start-1 w-full h-fit";
+                formLogin.className = "space-y-5 transition-all duration-200 ease-out opacity-0 translate-y-2 scale-[0.985] blur-[2px] pointer-events-none col-start-1 row-start-1 w-full h-fit absolute";
+                authSuccessState.className = "transition-all duration-200 ease-out opacity-0 translate-y-2 scale-[0.985] blur-[2px] pointer-events-none flex flex-col items-center justify-center py-8 text-center space-y-4 col-start-1 row-start-1 w-full h-fit absolute";
+                
+                if (formsWrapper && formRegister) {
+                    setTimeout(() => {
+                        formsWrapper.style.height = formRegister.offsetHeight + 'px';
+                    }, 50);
+                }
+            }
+        }
+
+        if (tabLogin) tabLogin.addEventListener('click', () => switchTab('login'));
+        if (tabRegister) tabRegister.addEventListener('click', () => switchTab('register'));
+        if (linkToRegister) linkToRegister.addEventListener('click', () => switchTab('register'));
+        if (linkToLogin) linkToLogin.addEventListener('click', () => switchTab('login'));
+
+        // Parse query params to load target mode
+        const urlParams = new URLSearchParams(window.location.search);
+        const modeParam = urlParams.get('mode') || 'login';
+        switchTab(modeParam);
+
+        // Simulated form submissions
+        if (formLogin) {
+            formLogin.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Save login credentials to localStorage
+                const emailVal = document.getElementById('login-email').value.trim();
+                const passVal = document.getElementById('login-password').value;
+                localStorage.setItem('profileEmail', emailVal);
+                localStorage.setItem('profilePassword', passVal);
+                if (!localStorage.getItem('profileName')) {
+                    localStorage.setItem('profileName', emailVal.split('@')[0]);
+                }
+                
+                formLogin.className = "space-y-5 transition-all duration-200 ease-out opacity-0 translate-y-2 scale-[0.985] blur-[2px] pointer-events-none col-start-1 row-start-1 w-full h-fit absolute";
+                authSuccessMsg.textContent = "Selamat datang kembali di Nalar Academy.";
+                authSuccessState.className = "transition-all duration-200 ease-out opacity-100 translate-y-0 scale-100 blur-0 pointer-events-auto flex flex-col items-center justify-center py-8 text-center space-y-4 col-start-1 row-start-1 w-full h-fit";
+                if (formsWrapper) {
+                    setTimeout(() => {
+                        formsWrapper.style.height = authSuccessState.offsetHeight + 'px';
+                    }, 50);
+                }
+            });
+        }
+
+        const regConfirm = document.getElementById('reg-password-confirm');
+        if (regConfirm) {
+            regConfirm.addEventListener('input', () => {
+                regConfirm.setCustomValidity("");
+            });
+        }
+
+        if (formRegister) {
+            formRegister.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const password = document.getElementById('reg-password');
+                if (password.value !== regConfirm.value) {
+                    regConfirm.setCustomValidity("Kata sandi konfirmasi tidak cocok.");
+                    regConfirm.reportValidity();
+                    return;
+                }
+                
+                // Save register credentials to localStorage
+                const nameVal = document.getElementById('reg-name').value.trim();
+                const emailVal = document.getElementById('reg-email').value.trim();
+                const ptnVal = document.getElementById('reg-ptn').value.trim();
+                const majorVal = document.getElementById('reg-major').value.trim();
+                const passVal = password.value;
+                
+                localStorage.setItem('profileName', nameVal);
+                localStorage.setItem('profileEmail', emailVal);
+                localStorage.setItem('profilePTN', ptnVal);
+                localStorage.setItem('profileMajor', majorVal);
+                localStorage.setItem('profilePassword', passVal);
+
+                formRegister.className = "space-y-4 transition-all duration-200 ease-out opacity-0 translate-y-2 scale-[0.985] blur-[2px] pointer-events-none col-start-1 row-start-1 w-full h-fit absolute";
+                authSuccessMsg.textContent = "Pendaftaran berhasil! Akun Anda telah siap.";
+                authSuccessState.className = "transition-all duration-200 ease-out opacity-100 translate-y-0 scale-100 blur-0 pointer-events-auto flex flex-col items-center justify-center py-8 text-center space-y-4 col-start-1 row-start-1 w-full h-fit";
+                if (formsWrapper) {
+                    setTimeout(() => {
+                        formsWrapper.style.height = authSuccessState.offsetHeight + 'px';
+                    }, 50);
+                }
+            });
+        }
+
+        // Toggle password visibility handler
+        document.querySelectorAll('.toggle-password').forEach(button => {
+            button.addEventListener('click', () => {
+                const input = button.parentElement.querySelector('input');
+                const eyeIcon = button.querySelector('.eye-icon');
+                const eyeOffIcon = button.querySelector('.eye-off-icon');
+                
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    eyeIcon.classList.add('hidden');
+                    eyeOffIcon.classList.remove('hidden');
+                } else {
+                    input.type = 'password';
+                    eyeIcon.classList.remove('hidden');
+                    eyeOffIcon.classList.add('hidden');
+                }
+            });
+        });
+
+        // Dynamic fetch of Indonesian Universities from Third-Party API
+        document.addEventListener('DOMContentLoaded', () => {
+            // Adjust wrapper height to active form height snugly
+            const activeForm = document.querySelector('form.opacity-100');
+            if (formsWrapper && activeForm) {
+                setTimeout(() => {
+                    formsWrapper.style.height = activeForm.offsetHeight + 'px';
+                }, 100);
+            }
+
+            const ptnList = document.getElementById('ptn-list');
+            if (ptnList) {
+                fetch('https://universities.hipolabs.com/search?country=indonesia')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Sort alphabetically
+                        data.sort((a, b) => a.name.localeCompare(b.name));
+                        
+                        const names = new Set();
+                        data.forEach(univ => {
+                            const cleanName = univ.name.trim();
+                            if (!names.has(cleanName)) {
+                                names.add(cleanName);
+                                const option = document.createElement('option');
+                                option.value = cleanName;
+                                ptnList.appendChild(option);
+                            }
+                        });
+                    })
+                    .catch(err => {
+                        console.error("Error fetching universities list, using fallback:", err);
+                        const fallbacks = [
+                            "Universitas Gadjah Mada (UGM)",
+                            "Universitas Indonesia (UI)",
+                            "Institut Teknologi Bandung (ITB)",
+                            "Universitas Airlangga (UNAIR)",
+                            "Universitas Diponegoro (UNDIP)",
+                            "Institut Teknologi Sepuluh Nopember (ITS)",
+                            "Universitas Padjadjaran (UNPAD)",
+                            "Universitas Sebelas Maret (UNS)",
+                            "Universitas Brawijaya (UB)",
+                            "Universitas Hasanuddin (UNHAS)",
+                            "Universitas Pendidikan Indonesia (UPI)",
+                            "Universitas Negeri Yogyakarta (UNY)",
+                            "Universitas Negeri Semarang (UNNES)",
+                            "Universitas Negeri Malang (UM)",
+                            "Universitas Negeri Jakarta (UNJ)",
+                            "Universitas Telkom (Telkom University)",
+                            "Universitas Muhammadiyah Yogyakarta (UMY)",
+                            "Universitas Islam Indonesia (UII)"
+                        ];
+                        fallbacks.forEach(name => {
+                            const option = document.createElement('option');
+                            option.value = name;
+                            ptnList.appendChild(option);
+                        });
+                    });
+            }
+        });
+    </script>
+</body>
+</html>

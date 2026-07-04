@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisis Nilai Detail | Nalar Academy</title>
+    <link class="favicon" rel="icon" type="image/png" href="logonalar.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: linear-gradient(135deg, #F8F3FC 0%, #EEF2F6 50%, #FCF5EE 100%); color: #1B355A; overscroll-behavior-y: none; }
+        .text-gradient { background: linear-gradient(135deg, #A03A55 0%, #FF6B35 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .bg-gradient-primary { background: linear-gradient(135deg, #A03A55 0%, #FF6B35 100%); }
+        .bg-gradient-secondary { background: linear-gradient(135deg, #5B316C 0%, #A03A55 100%); }
+        .glass-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.5); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
+        .pb-safe { padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col text-[#1B355A] font-sans antialiased relative overflow-x-hidden">
+
+    <!-- Background glows -->
+    <div class="absolute top-10 left-10 w-96 h-96 bg-[#FFC72C] rounded-full mix-blend-multiply filter blur-[120px] opacity-[0.18] pointer-events-none z-0"></div>
+    <div class="absolute bottom-10 right-10 w-[500px] h-[500px] bg-[#A03A55] rounded-full mix-blend-multiply filter blur-[128px] opacity-[0.14] pointer-events-none z-0"></div>
+    <div class="absolute top-48 -left-20 w-80 h-80 opacity-[0.04] rotate-12 blur-[1px] pointer-events-none z-0"><img src="fulllogo.png" alt="" class="w-full h-full object-contain"></div>
+
+    <!-- NAVBAR -->
+    <nav class="fixed w-full z-40 backdrop-blur-md bg-white/80 border-b border-[#1B355A]/10 py-3.5 shadow-sm">
+        <div class="max-w-7xl mx-auto px-5 lg:px-8 flex justify-between items-center w-full">
+            <a href="LandingPage.html" class="flex items-center gap-2 group shrink-0">
+                <img src="logonalar.png" alt="Nalar Academy Logo" class="h-7 w-7 object-contain transition-transform duration-700 ease-out group-hover:rotate-12">
+                <span class="text-lg font-bold tracking-tight text-[#1B355A]">Nalar <span class="text-[#5B316C] font-medium">Academy.</span></span>
+            </a>
+            <div class="hidden" id="desktop-nav"></div>
+            <div class="hidden md:flex items-center gap-3">
+                <a href="Profile.html" class="flex items-center gap-2.5 hover:opacity-85 transition-opacity">
+                    <div class="text-right">
+                        <h4 class="font-bold text-xs text-[#1B355A] profile-name">Rafa Rian</h4>
+                        <p class="text-[9px] font-semibold text-slate-400 profile-id">ID: #NL8842</p>
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-gradient-secondary text-white font-extrabold flex items-center justify-center text-sm shadow-sm profile-initial">R</div>
+                </a>
+                <a href="LandingPage.html" class="px-3.5 py-1.5 bg-slate-100 hover:bg-red-50 hover:text-red-500 text-slate-500 font-semibold rounded-xl transition-all text-xs flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-arrow-right-from-bracket text-[11px]"></i> Keluar
+                </a>
+            </div>
+            <div class="md:hidden flex items-center gap-2">
+                <a href="Profile.html" class="w-8 h-8 rounded-full bg-gradient-secondary text-white font-extrabold flex items-center justify-center text-sm shadow-sm profile-initial">R</a>
+                <button id="open-drawer-btn" class="text-[#1B355A] p-2 hover:bg-slate-100/60 rounded-xl transition-all">
+                    <i class="fa-solid fa-bars text-base"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MOBILE DRAWER -->
+    <div id="mobile-drawer" class="fixed inset-0 bg-[#1B355A]/40 backdrop-blur-sm z-50 transition-all duration-300 opacity-0 pointer-events-none md:hidden flex justify-end">
+        <aside id="mobile-sidebar" class="w-64 max-w-[80vw] h-full bg-white flex flex-col justify-between transition-transform duration-300 translate-x-full shadow-2xl" data-lenis-prevent>
+            <div>
+                <div class="p-5 border-b border-[#1B355A]/10 flex justify-between items-center">
+                    <div class="flex items-center gap-2.5">
+                        <img src="logonalar.png" alt="" class="w-6 h-6 object-contain">
+                        <span class="font-extrabold text-sm text-[#1B355A]">Nalar Academy</span>
+                    </div>
+                    <button id="close-drawer-btn" class="text-slate-400 hover:text-[#A03A55] p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
+                </div>
+                <div class="p-4 flex flex-col gap-2">
+                    <a href="Dashboard.html#home" class="flex items-center gap-3 p-3 text-slate-600 hover:bg-slate-50 rounded-xl text-xs font-bold transition-all"><i class="fa-solid fa-house w-4 text-center"></i> Home</a>
+                    <a href="Dashboard.html#analitik" class="flex items-center gap-3 p-3 text-slate-600 hover:bg-slate-50 rounded-xl text-xs font-bold transition-all"><i class="fa-solid fa-chart-line w-4 text-center"></i> Analitik &amp; Riwayat</a>
+                    <a href="Dashboard.html#tryout" class="flex items-center gap-3 p-3 text-slate-600 hover:bg-slate-50 rounded-xl text-xs font-bold transition-all"><i class="fa-solid fa-pen-to-square w-4 text-center"></i> Daftar Tryout</a>
+                    <a href="Dashboard.html#video" class="flex items-center gap-3 p-3 bg-gradient-secondary text-white rounded-xl text-xs font-bold transition-all shadow-sm"><i class="fa-solid fa-circle-play w-4 text-center"></i> Video Pembahasan</a>
+                </div>
+            </div>
+            <div class="p-4 border-t border-[#1B355A]/10">
+                <a href="LandingPage.html" class="flex items-center justify-center gap-2 w-full py-3 bg-red-50 hover:bg-red-100 text-red-500 font-bold rounded-xl text-xs transition-all shadow-sm"><i class="fa-solid fa-arrow-right-from-bracket"></i> Keluar Akun</a>
+            </div>
+        </aside>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-6 lg:px-8 pt-24 pb-28 space-y-6 relative z-10">
+        
+        <!-- Welcome banner (Matches Dashboard.html, but with no container box) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-2">
+            <div class="lg:col-span-7 space-y-4">
+                <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight text-[#1B355A]">
+                    Analisis Nilai: <span class="text-gradient profile-name">Rafa Rian</span>
+                </h1>
+                <p class="text-base text-slate-600 leading-relaxed font-medium max-w-2xl">
+                    Laporan kecerdasan belajar dan proyeksi kelolosan program studi impian Anda. Terus tingkatkan kemampuan untuk menembus ambang batas kelolosan target PTN!
+                </p>
+                <div class="text-slate-600 font-bold text-sm sm:text-base flex items-center gap-2">
+                    <i class="fa-solid fa-graduation-cap text-[#5B316C]"></i> Target PTN: <span id="profile-target-full" class="text-[#5B316C] font-extrabold">UGM Yogyakarta &mdash; Ilmu Komputer</span>
+                </div>
+            </div>
+            <div class="hidden lg:flex lg:col-span-5 relative w-full max-w-[340px] mx-auto aspect-square items-center justify-center">
+                <div class="absolute w-64 h-64 rounded-full bg-gradient-to-tr from-[#FF6B35]/40 to-[#5B316C]/35 blur-2xl animate-float pointer-events-none"></div>
+                <div class="absolute w-48 h-48 rounded-full bg-gradient-to-bl from-[#A03A55]/40 to-[#FFC72C]/30 blur-xl animate-float pointer-events-none -bottom-2 -left-2"></div>
+                <img src="study_student.png" alt="Mascot" class="relative max-w-full h-[320px] z-10 animate-float drop-shadow-2xl object-contain">
+            </div>
+        </div>
+
+        <!-- PACKAGE TO CATEGORIZATION DROPDOWN -->
+        <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 bg-white border border-slate-200/60 p-5 rounded-3xl shadow-sm">
+            <div>
+                <h3 class="text-sm sm:text-base font-extrabold text-[#1B355A]">Kategorisasi Analisis</h3>
+                <p class="text-xs text-slate-400 font-semibold mt-0.5">Pilih paket Tryout tertentu untuk menyaring visualisasi data nilai Anda</p>
+            </div>
+            <div class="relative w-full sm:max-w-xs">
+                <select id="to-select" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:border-[#5B316C] focus:ring-2 focus:ring-[#5B316C]/10 outline-none rounded-xl text-sm font-extrabold text-[#5B316C] transition-all cursor-pointer">
+                    <option value="all">Semua Paket Ujian (Akumulasi)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- QUICK METRICS ROW -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            
+            <!-- Metric 1 -->
+            <div class="bg-white border border-slate-200/50 p-5 rounded-2xl shadow-sm space-y-1.5">
+                <span class="text-xs uppercase font-extrabold text-slate-400 tracking-wider block" id="score-label-title">Skor Rata-Rata</span>
+                <div class="text-2xl sm:text-3xl font-black text-[#5B316C] flex items-baseline gap-1">
+                    <span id="stat-avg-score">575</span>
+                    <span class="text-xs font-semibold text-slate-400">/ 1000</span>
+                </div>
+                <p class="text-xs font-bold text-emerald-600 flex items-center gap-0.5" id="progres-trend-label"><i class="fa-solid fa-caret-up"></i> +12% progres</p>
+            </div>
+
+            <!-- Metric 2 -->
+            <div class="bg-white border border-slate-200/50 p-5 rounded-2xl shadow-sm space-y-1.5">
+                <span class="text-xs uppercase font-extrabold text-slate-400 tracking-wider block" id="count-label-title">Ujian Diselesaikan</span>
+                <div class="text-2xl sm:text-3xl font-black text-[#1B355A]" id="stat-exam-count">4</div>
+                <p class="text-xs font-bold text-slate-400" id="count-desc-label">Sertifikat terdaftar nasional</p>
+            </div>
+
+            <!-- Metric 3 -->
+            <div class="bg-white border border-slate-200/50 p-5 rounded-2xl shadow-sm space-y-1.5">
+                <span class="text-xs uppercase font-extrabold text-slate-400 tracking-wider block">Kekuatan Terbesar</span>
+                <div class="text-sm sm:text-base font-extrabold text-emerald-600 truncate" id="stat-strong-sub">P. Kuantitatif</div>
+                <p class="text-xs font-bold text-slate-400">Nilai subtes tertinggi Anda</p>
+            </div>
+
+            <!-- Metric 4 -->
+            <div class="bg-white border border-slate-200/50 p-5 rounded-2xl shadow-sm space-y-1.5">
+                <span class="text-xs uppercase font-extrabold text-slate-400 tracking-wider block">Fokus Utama</span>
+                <div class="text-sm sm:text-base font-extrabold text-[#A03A55] truncate" id="stat-focus-sub">Lit. Inggris</div>
+                <p class="text-xs font-bold text-slate-400">Subtes pembenahan prioritas</p>
+            </div>
+        </div>
+
+        <!-- CHARTS SECTION -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Chart 1: Radar Chart Sebaran Skor -->
+            <div class="bg-white border border-slate-200/60 p-6 rounded-3xl shadow-sm space-y-4">
+                <div class="border-b border-slate-100 pb-3">
+                    <h3 class="text-sm font-black text-[#5B316C] uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-spider"></i> Distribusi Nilai Subtes
+                    </h3>
+                    <p class="text-xs text-slate-400 font-semibold mt-0.5">Membandingkan skor pemetaan bidang terhadap nilai passing grade</p>
+                </div>
+                <div class="relative w-full aspect-square md:h-[300px] flex items-center justify-center">
+                    <canvas id="radarChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Chart 2: Progress Line Chart -->
+            <div class="bg-white border border-slate-200/60 p-6 rounded-3xl shadow-sm space-y-4">
+                <div class="border-b border-slate-100 pb-3">
+                    <h3 class="text-sm font-black text-[#5B316C] uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-chart-line"></i> Grafik Perkembangan Skor
+                    </h3>
+                    <p class="text-xs text-slate-400 font-semibold mt-0.5">Tren kenaikan skor IRT dari simulasi ke simulasi</p>
+                </div>
+                <div class="relative w-full aspect-video md:h-[300px] flex items-center justify-center">
+                    <canvas id="lineChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTTOM ROW: PTN TARGET DOUGHNUT & DETAILED RECOMMENDATIONS -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- Column 1: Doughnut Chart Target PTN -->
+            <div class="bg-white border border-slate-200/60 p-6 rounded-3xl shadow-sm space-y-4 flex flex-col justify-between">
+                <div class="border-b border-slate-100 pb-3">
+                    <h3 class="text-sm font-black text-[#5B316C] uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-bullseye"></i> Indikator Kelolosan
+                    </h3>
+                    <p class="text-xs text-slate-400 font-semibold mt-0.5">Skor terpilih vs ambang batas UGM</p>
+                </div>
+                <div class="relative flex items-center justify-center h-48">
+                    <canvas id="targetDoughnut" class="max-h-full"></canvas>
+                    <!-- Center score overlay -->
+                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                        <span class="text-xs uppercase font-extrabold text-slate-400">Proyeksi</span>
+                        <span id="target-percentage" class="text-3xl font-black text-[#5B316C]">88%</span>
+                        <span class="text-[10px] font-bold text-slate-400">Peluang Lolos</span>
+                    </div>
+                </div>
+                <div class="text-center pt-2 text-xs font-bold text-slate-400">
+                    Skor Pembanding: <strong class="text-[#1B355A]" id="target-highest-score">610</strong> (Target UGM: <span id="ptn-threshold">680</span>)
+                </div>
+            </div>
+
+            <!-- Column 2-3: Detailed Recommendations list -->
+            <div class="bg-white border border-slate-200/60 p-6 rounded-3xl shadow-sm space-y-5 lg:col-span-2 flex flex-col justify-between">
+                <div class="border-b border-slate-100 pb-3">
+                    <h3 class="text-sm font-black text-[#A03A55] uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-compass"></i> Strategi Peningkatan & Pembenahan
+                    </h3>
+                    <p class="text-xs text-slate-400 font-semibold mt-0.5">Saran aksi terarah berdasarkan analisis item respons theory (IRT)</p>
+                </div>
+
+                <div class="space-y-6 flex-grow justify-center flex flex-col">
+                    <div class="flex gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-500 border border-emerald-100 flex items-center justify-center shrink-0 text-sm"><i class="fa-solid fa-square-poll-vertical"></i></div>
+                        <div>
+                            <h4 class="text-sm sm:text-base font-extrabold text-[#1B355A]">Pertahankan Akurasi Kuantitatif</h4>
+                            <p class="text-xs sm:text-sm text-slate-400 font-bold leading-relaxed">Anda berhasil memecahkan soal aljabar dan deret berpola tingkat 2 dalam durasi di bawah 38 detik. Pertahankan efisiensi ini agar dapat mendistribusikan sisa waktu ke subtes literasi.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-500 border border-amber-100 flex items-center justify-center shrink-0 text-sm"><i class="fa-solid fa-circle-exclamation"></i></div>
+                        <div>
+                            <h4 class="text-sm sm:text-base font-extrabold text-[#1B355A]">Fokus Peningkatan Literasi Bahasa Inggris</h4>
+                            <p class="text-xs sm:text-sm text-slate-400 font-bold leading-relaxed">Kelemahan terbesar terletak pada pemetaan gagasan utama paragraf. Disarankan meluangkan waktu 15 menit per hari membaca artikel jurnal akademik internasional.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-500 border border-indigo-100 flex items-center justify-center shrink-0 text-sm"><i class="fa-solid fa-circle-play"></i></div>
+                        <div>
+                            <h4 class="text-sm sm:text-base font-extrabold text-[#1B355A]">Tonton Pembahasan Soal-Soal Sulit (Skor IRT Tinggi)</h4>
+                            <p class="text-xs sm:text-sm text-slate-400 font-bold leading-relaxed">Gunakan fitur Video Solusi di Dashboard untuk menonton tentor senior menjabarkan pengerjaan subtes Penalaran Matematika tingkat tinggi.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-slate-100 flex justify-end">
+                    <a href="Videos.html" class="px-5 py-2.5 bg-gradient-secondary hover:scale-[1.02] text-white text-xs font-bold rounded-xl transition-all shadow-sm flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-play"></i> Belajar Lewat Video Pembahasan
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white/60 backdrop-blur-sm border-t border-[#1B355A]/08 py-5 px-6 text-center text-sm text-[#1B355A]/40 font-semibold mt-10 mb-16 md:mb-8">
+        &copy; 2025 Nalar Academy. All rights reserved.
+    </footer>
+
+    <!-- MOBILE BOTTOM NAV -->
+    <div class="fixed bottom-0 left-0 right-0 md:left-1/2 md:right-auto md:-translate-x-1/2 w-full md:w-auto bg-white/95 backdrop-blur-md border-t border-[#1B355A]/10 md:border md:border-[#1B355A]/10 md:rounded-full shadow-[0_-16px_40px_rgba(27,53,90,0.18)] py-2 px-6 md:px-5 flex justify-between md:justify-center items-center gap-1 md:gap-4 z-40 select-none pb-safe">
+        <!-- 1. Home -->
+        <a href="Dashboard.html#home" class="bottom-nav-item flex flex-col items-center gap-1 text-slate-400 hover:text-[#A03A55] transition-colors duration-300 w-14">
+            <i class="fa-solid fa-house text-lg"></i>
+            <span class="text-[10px] font-bold tracking-tight">Home</span>
+        </a>
+        
+        <!-- 2. Analitik -->
+        <a href="Dashboard.html#analitik" class="bottom-nav-item flex flex-col items-center gap-1 text-[#A03A55] transition-colors duration-300 w-14">
+            <i class="fa-solid fa-chart-line text-lg"></i>
+            <span class="text-[10px] font-bold tracking-tight">Analitik</span>
+        </a>
+        
+        <!-- 3. Tryout -->
+        <div class="relative w-16 h-16 flex items-center justify-center -mt-6">
+            <a href="Dashboard.html#tryout" class="bottom-nav-item flex items-center justify-center w-12 h-12 rounded-full bg-gradient-primary text-white shadow-[0_4px_20px_rgba(160,58,85,0.4)] hover:scale-105 active:scale-95 transition-all duration-300">
+                <i class="fa-solid fa-pen-to-square text-lg"></i>
+            </a>
+        </div>
+        
+        <!-- 4. Video -->
+        <a href="Dashboard.html#video" class="bottom-nav-item flex flex-col items-center gap-1 text-slate-400 hover:text-[#A03A55] transition-colors duration-300 w-14">
+            <i class="fa-solid fa-circle-play text-lg"></i>
+            <span class="text-[10px] font-bold tracking-tight">Video</span>
+        </a>
+        
+        <!-- 5. Profil -->
+        <a href="Profile.html" class="bottom-nav-item flex flex-col items-center gap-1 text-slate-400 hover:text-[#A03A55] transition-colors duration-300 w-14">
+            <div class="w-5 h-5 rounded-full bg-gradient-secondary text-white font-extrabold flex items-center justify-center text-[9px] shadow-sm mb-0.5 profile-initial">R</div>
+            <span class="text-[10px] font-bold tracking-tight">Profil</span>
+        </a>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script>
+        // Initialize Lenis Smooth Scroll
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            touchMultiplier: 2,
+            infinite: false
+        });
+        window.lenis = lenis;
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // Mobile drawer handlers
+        const openDrawerBtn = document.getElementById('open-drawer-btn');
+        const closeDrawerBtn = document.getElementById('close-drawer-btn');
+        const mobileDrawer = document.getElementById('mobile-drawer');
+        const mobileSidebar = document.getElementById('mobile-sidebar');
+
+        function toggleDrawer(open) {
+            if (open) {
+                if (window.lenis) window.lenis.stop();
+                mobileDrawer.classList.remove('opacity-0', 'pointer-events-none');
+                mobileDrawer.classList.add('opacity-100');
+                mobileSidebar.classList.remove('translate-x-full');
+            } else {
+                if (window.lenis) window.lenis.start();
+                mobileDrawer.classList.add('opacity-0', 'pointer-events-none');
+                mobileDrawer.classList.remove('opacity-100');
+                mobileSidebar.classList.add('translate-x-full');
+            }
+        }
+
+        if (openDrawerBtn) openDrawerBtn.addEventListener('click', () => toggleDrawer(true));
+        if (closeDrawerBtn) closeDrawerBtn.addEventListener('click', () => toggleDrawer(false));
+        if (mobileDrawer) {
+            mobileDrawer.addEventListener('click', (e) => {
+                if (e.target === mobileDrawer) toggleDrawer(false);
+            });
+        }
+
+        // Load profile target settings
+        function loadProfileInfo() {
+            const name = localStorage.getItem('profileName') || 'Rafa Rian';
+            const id = localStorage.getItem('profileID') || '#NL8842';
+            const ptn = localStorage.getItem('profileTargetPTN') || 'UGM Yogyakarta';
+            const major = localStorage.getItem('profileTargetMajor') || 'Ilmu Komputer';
+
+            document.querySelectorAll('.profile-name').forEach(el => el.textContent = name);
+            document.querySelectorAll('.profile-initial').forEach(el => el.textContent = name.charAt(0).toUpperCase());
+            document.querySelectorAll('.profile-id').forEach(el => el.textContent = "ID: " + id);
+            
+            const targetEl = document.getElementById('profile-target-full');
+            if (targetEl) targetEl.textContent = `${ptn} — ${major}`;
+            
+            const nameLower = ptn.toLowerCase();
+            if (nameLower.includes('ugm') || nameLower.includes('ui') || nameLower.includes('itb')) {
+                return 680;
+            }
+            return 620;
+        }
+
+        const threshold = loadProfileInfo();
+        document.getElementById('ptn-threshold').textContent = threshold;
+
+        // Fetch exam history from LocalStorage
+        let historyStr = localStorage.getItem('tryoutHistory');
+        let history = [];
+        
+        if (historyStr) {
+            history = JSON.parse(historyStr);
+        } else {
+            history = [
+                {
+                    title: "Tryout UTBK-SNBT Mandiri #1",
+                    date: "20 Juni 2025",
+                    score: 610,
+                    subtests: { pu: 635, pk: 610, lbi: 650, lbe: 580 }
+                },
+                {
+                    title: "Tryout UTBK Awal Mei",
+                    date: "10 Mei 2025",
+                    score: 590,
+                    subtests: { pu: 610, pk: 590, lbi: 620, lbe: 540 }
+                },
+                {
+                    title: "Tryout Pelatihan April",
+                    date: "12 April 2025",
+                    score: 560,
+                    subtests: { pu: 580, pk: 560, lbi: 590, lbe: 510 }
+                },
+                {
+                    title: "Tryout Diagnostik Awal",
+                    date: "05 Maret 2025",
+                    score: 510,
+                    subtests: { pu: 520, pk: 510, lbi: 530, lbe: 480 }
+                }
+            ];
+            localStorage.setItem('tryoutHistory', JSON.stringify(history));
+        }
+
+        const toSelect = document.getElementById('to-select');
+        history.forEach((to, idx) => {
+            const opt = document.createElement('option');
+            opt.value = idx;
+            opt.textContent = to.title;
+            toSelect.appendChild(opt);
+        });
+
+        let radarChartInstance = null;
+        let lineChartInstance = null;
+        let doughnutChartInstance = null;
+
+        function renderDashboardCharts(selectedIdx) {
+            let activeScore = 0;
+            let activeSubtests = { pu: 0, pk: 0, lbi: 0, lbe: 0 };
+            
+            if (selectedIdx === 'all') {
+                const scoresList = history.map(item => item.score);
+                activeScore = Math.round(scoresList.reduce((a, b) => a + b, 0) / scoresList.length);
+                
+                activeSubtests.pu = Math.round(history.reduce((sum, item) => sum + (item.subtests.pu || 0), 0) / history.length);
+                activeSubtests.pk = Math.round(history.reduce((sum, item) => sum + (item.subtests.pk || 0), 0) / history.length);
+                activeSubtests.lbi = Math.round(history.reduce((sum, item) => sum + (item.subtests.lbi || 0), 0) / history.length);
+                activeSubtests.lbe = Math.round(history.reduce((sum, item) => sum + (item.subtests.lbe || 0), 0) / history.length);
+
+                document.getElementById('score-label-title').textContent = "Skor Rata-Rata";
+                document.getElementById('stat-avg-score').textContent = activeScore;
+                document.getElementById('stat-exam-count').textContent = history.length;
+                document.getElementById('count-label-title').textContent = "Ujian Diselesaikan";
+                document.getElementById('count-desc-label').textContent = "Sertifikat terdaftar nasional";
+                
+                const initialScore = history[history.length - 1].score;
+                const diff = activeScore - initialScore;
+                document.getElementById('progres-trend-label').innerHTML = `<i class="fa-solid fa-caret-${diff >= 0 ? 'up' : 'down'}"></i> ${diff >= 0 ? '+' : ''}${diff} progres`;
+            } else {
+                const item = history[selectedIdx];
+                activeScore = item.score;
+                activeSubtests.pu = item.subtests.pu || 0;
+                activeSubtests.pk = item.subtests.pk || 0;
+                activeSubtests.lbi = item.subtests.lbi || 0;
+                activeSubtests.lbe = item.subtests.lbe || 0;
+
+                document.getElementById('score-label-title').textContent = "Skor Hasil Ujian";
+                document.getElementById('stat-avg-score').textContent = activeScore;
+                document.getElementById('stat-exam-count').textContent = item.date;
+                document.getElementById('count-label-title').textContent = "Tanggal Ujian";
+                document.getElementById('count-desc-label').textContent = "Waktu pengerjaan terverifikasi";
+                
+                const targetDiff = activeScore - threshold;
+                if (targetDiff >= 0) {
+                    document.getElementById('progres-trend-label').innerHTML = `<span class="text-emerald-600 font-bold"><i class="fa-solid fa-circle-check"></i> Lolos Passing Grade</span>`;
+                } else {
+                    document.getElementById('progres-trend-label').innerHTML = `<span class="text-[#A03A55] font-bold"><i class="fa-solid fa-circle-xmark"></i> Kurang ${Math.abs(targetDiff)} poin</span>`;
+                }
+            }
+
+            const subtestPairs = [
+                { name: "Penalaran Umum", val: activeSubtests.pu },
+                { name: "P. Kuantitatif", val: activeSubtests.pk },
+                { name: "Lit. B. Indo", val: activeSubtests.lbi },
+                { name: "Lit. B. Inggris", val: activeSubtests.lbe }
+            ];
+            subtestPairs.sort((a, b) => b.val - a.val);
+            document.getElementById('stat-strong-sub').textContent = subtestPairs[0].name;
+            document.getElementById('stat-focus-sub').textContent = subtestPairs[subtestPairs.length - 1].name;
+
+            const scoreToCompare = selectedIdx === 'all' ? Math.max(...history.map(item => item.score)) : activeScore;
+            const ptnPercentage = Math.round(Math.min(100, (scoreToCompare / threshold) * 100));
+            document.getElementById('target-percentage').textContent = ptnPercentage + "%";
+            document.getElementById('target-highest-score').textContent = scoreToCompare;
+
+            if (radarChartInstance) radarChartInstance.destroy();
+            if (lineChartInstance) lineChartInstance.destroy();
+            if (doughnutChartInstance) doughnutChartInstance.destroy();
+
+            const radarCtx = document.getElementById('radarChart').getContext('2d');
+            radarChartInstance = new Chart(radarCtx, {
+                type: 'radar',
+                data: {
+                    labels: ["Penalaran Umum", "Pengetahuan Kuantitatif", "Literasi B. Indonesia", "Literasi B. Inggris"],
+                    datasets: [
+                        {
+                            label: 'Skor Subtes',
+                            data: [activeSubtests.pu, activeSubtests.pk, activeSubtests.lbi, activeSubtests.lbe],
+                            backgroundColor: 'rgba(91, 49, 108, 0.18)',
+                            borderColor: '#5B316C',
+                            borderWidth: 2,
+                            pointBackgroundColor: '#5B316C',
+                            pointBorderColor: '#fff'
+                        },
+                        {
+                            label: 'Rata-Rata Kelolosan UGM',
+                            data: [threshold, threshold, threshold, threshold],
+                            backgroundColor: 'rgba(160, 58, 85, 0.04)',
+                            borderColor: 'rgba(160, 58, 85, 0.35)',
+                            borderWidth: 1.2,
+                            pointBackgroundColor: 'rgba(160, 58, 85, 0.4)',
+                            pointBorderColor: '#fff',
+                            borderDash: [3, 3]
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { display: true, color: 'rgba(27, 53, 90, 0.08)' },
+                            grid: { color: 'rgba(27, 53, 90, 0.08)' },
+                            pointLabels: {
+                                font: { family: 'Plus Jakarta Sans', size: 10, weight: 'bold' },
+                                color: '#1B355A'
+                            },
+                            ticks: { display: false, stepSize: 200 },
+                            min: 200,
+                            max: 1000
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: { family: 'Plus Jakarta Sans', size: 10, weight: 'bold' },
+                                color: '#1B355A',
+                                boxWidth: 12
+                            }
+                        }
+                    }
+                }
+            });
+
+            const chronologicalHistory = [...history].reverse();
+            const lineLabels = chronologicalHistory.map(item => item.title.replace("Tryout ", ""));
+            const lineData = chronologicalHistory.map(item => item.score);
+
+            const pointBackgroundColors = lineData.map((_, i) => {
+                if (selectedIdx !== 'all' && (chronologicalHistory.length - 1 - selectedIdx) === i) {
+                    return '#FFC72C';
+                }
+                return '#A03A55';
+            });
+            const pointRadii = lineData.map((_, i) => {
+                if (selectedIdx !== 'all' && (chronologicalHistory.length - 1 - selectedIdx) === i) {
+                    return 8;
+                }
+                return 4;
+            });
+
+            const lineCtx = document.getElementById('lineChart').getContext('2d');
+            lineChartInstance = new Chart(lineCtx, {
+                type: 'line',
+                data: {
+                    labels: lineLabels,
+                    datasets: [{
+                        label: 'Skor Akhir IRT',
+                        data: lineData,
+                        borderColor: '#A03A55',
+                        backgroundColor: 'rgba(160, 58, 85, 0.05)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.35,
+                        pointBackgroundColor: pointBackgroundColors,
+                        pointBorderColor: '#fff',
+                        pointHoverRadius: 8,
+                        pointRadius: pointRadii
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            grid: { color: 'rgba(27, 53, 90, 0.05)' },
+                            ticks: {
+                                font: { family: 'Plus Jakarta Sans', size: 10, weight: 'bold' },
+                                color: '#1B355A'
+                            },
+                            min: 400,
+                            max: 1000
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: {
+                                font: { family: 'Plus Jakarta Sans', size: 10, weight: 'bold' },
+                                color: '#1B355A'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+
+            const doughnutCtx = document.getElementById('targetDoughnut').getContext('2d');
+            doughnutChartInstance = new Chart(doughnutCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Tercapai', 'Sisa Target'],
+                    datasets: [{
+                        data: [scoreToCompare, Math.max(0, threshold - scoreToCompare)],
+                        backgroundColor: ['#5B316C', '#EEF2F6'],
+                        borderWidth: 0,
+                        hoverOffset: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '80%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: false }
+                    }
+                }
+            });
+        }
+
+        toSelect.addEventListener('change', (e) => {
+            renderDashboardCharts(e.target.value);
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderDashboardCharts('all');
+        });
+    </script>
+</body>
+</html>

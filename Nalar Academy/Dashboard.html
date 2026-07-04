@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Belajar | Nalar Academy</title>
+    <link rel="icon" type="image/png" href="logonalar.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: linear-gradient(135deg, #F8F3FC 0%, #EEF2F6 50%, #FCF5EE 100%); color: #1B355A; }
+        .text-gradient { background: linear-gradient(135deg, #A03A55 0%, #FF6B35 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .bg-gradient-primary { background: linear-gradient(135deg, #A03A55 0%, #FF6B35 100%); }
+        .bg-gradient-secondary { background: linear-gradient(135deg, #5B316C 0%, #A03A55 100%); }
+        .card-hover-effect { transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
+        .card-hover-effect:hover { transform: translateY(-4px); box-shadow: 0 12px 30px -8px rgba(160, 58, 85, 0.15); border-color: rgba(160, 58, 85, 0.22); }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+        html { scroll-behavior: initial; }
+        body { overscroll-behavior-y: none; }
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .horizontal-scroll-only {
+            touch-action: pan-x;
+            overscroll-behavior-y: contain;
+        }
+        .carousel-fade-right { position: relative; }
+        .carousel-fade-right::after { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 60px; background: linear-gradient(to right, transparent, rgba(248,243,252,0.95)); pointer-events: none; z-index: 5; }
+        .pb-safe { padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
+        @keyframes spin-slow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes spin-reverse { 0% { transform: rotate(360deg); } 100% { transform: rotate(0deg); } }
+        .animate-spin-slow { animation: spin-slow 4s linear infinite; }
+        .animate-spin-medium { animation: spin-slow 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+        .animate-spin-reverse { animation: spin-reverse 3s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+
+        /* Modal Transitions */
+        @keyframes modalFadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes modalScaleUp {
+            from { transform: scale(0.95); opacity: 0; filter: blur(4px); }
+            to { transform: scale(1); opacity: 1; filter: blur(0); }
+        }
+        @keyframes modalFadeOut { from { opacity: 1; } to { opacity: 0; } }
+        @keyframes modalScaleDown {
+            from { transform: scale(1); opacity: 1; }
+            to { transform: scale(0.95); opacity: 0; filter: blur(2px); }
+        }
+        
+        dialog[open] {
+            animation: modalFadeIn 0.22s ease-out forwards;
+        }
+        dialog[open] > .glass-card {
+            animation: modalScaleUp 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        dialog[open]::backdrop {
+            animation: modalFadeIn 0.22s ease-out forwards;
+        }
+        
+        dialog.hide {
+            animation: modalFadeOut 0.18s ease-in forwards;
+        }
+        dialog.hide > .glass-card {
+            animation: modalScaleDown 0.18s ease-in forwards;
+        }
+        dialog.hide::backdrop {
+            animation: modalFadeOut 0.18s ease-in forwards;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col text-[#1B355A] font-sans antialiased relative overflow-x-hidden">
+
+    <!-- Background glows -->
+    <div class="absolute top-10 left-10 w-96 h-96 bg-[#FFC72C] rounded-full mix-blend-multiply filter blur-[120px] opacity-[0.18] pointer-events-none z-0"></div>
+    <div class="absolute bottom-10 right-10 w-[500px] h-[500px] bg-[#A03A55] rounded-full mix-blend-multiply filter blur-[128px] opacity-[0.14] pointer-events-none z-0"></div>
+    <div class="absolute top-48 -left-20 w-80 h-80 opacity-[0.04] rotate-12 blur-[1px] pointer-events-none z-0"><img src="fulllogo.png" alt="" class="w-full h-full object-contain"></div>
+    <div class="absolute top-[550px] -right-32 w-[420px] h-[420px] opacity-[0.04] -rotate-12 blur-[2px] pointer-events-none z-0"><img src="fulllogo.png" alt="" class="w-full h-full object-contain"></div>
+
+    <!-- NAVBAR -->
+    <nav class="fixed w-full z-40 backdrop-blur-md bg-white/80 border-b border-[#1B355A]/10 py-3.5 shadow-sm">
+        <div class="max-w-7xl mx-auto px-5 lg:px-8 flex justify-between items-center w-full">
+            <a href="LandingPage.html" class="flex items-center gap-2 group shrink-0">
+                <img src="logonalar.png" alt="Nalar Academy Logo" class="h-7 w-7 object-contain transition-transform duration-700 ease-out group-hover:rotate-12">
+                <span class="text-lg font-bold tracking-tight text-[#1B355A]">Nalar <span class="text-[#5B316C] font-medium">Academy.</span></span>
+            </a>
+            <div class="hidden" id="desktop-nav"></div>
+            <div class="hidden md:flex items-center gap-3">
+                <a href="Profile.html" class="flex items-center gap-2.5 hover:opacity-85 transition-opacity">
+                    <div class="text-right">
+                        <h4 class="font-bold text-xs text-[#1B355A] profile-name">Rafa Rian</h4>
+                        <p class="text-[9px] font-semibold text-slate-400 profile-id">ID: #NL8842</p>
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-gradient-secondary text-white font-extrabold flex items-center justify-center text-sm shadow-sm profile-initial">R</div>
+                </a>
+                <a href="LandingPage.html" class="px-3.5 py-1.5 bg-slate-100 hover:bg-red-50 hover:text-red-500 text-slate-500 font-semibold rounded-xl transition-all text-xs flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-arrow-right-from-bracket text-[11px]"></i> Keluar
+                </a>
+            </div>
+            <div class="md:hidden flex items-center gap-2">
+                <a href="Profile.html" class="w-8 h-8 rounded-full bg-gradient-secondary text-white font-extrabold flex items-center justify-center text-sm shadow-sm profile-initial">R</a>
+                <button id="open-drawer-btn" class="text-[#1B355A] p-2 hover:bg-slate-100/60 rounded-xl transition-all">
+                    <i class="fa-solid fa-bars text-base"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MOBILE DRAWER -->
+    <div id="mobile-drawer" class="fixed inset-0 bg-[#1B355A]/40 backdrop-blur-sm z-50 transition-all duration-300 opacity-0 pointer-events-none md:hidden flex justify-end">
+        <aside id="mobile-sidebar" class="w-64 max-w-[80vw] h-full bg-white flex flex-col justify-between transition-transform duration-300 translate-x-full shadow-2xl" data-lenis-prevent>
+            <div>
+                <div class="p-5 border-b border-[#1B355A]/10 flex justify-between items-center">
+                    <div class="flex items-center gap-2.5">
+                        <img src="logonalar.png" alt="" class="w-6 h-6 object-contain">
+                        <span class="font-extrabold text-sm text-[#1B355A]">Nalar Academy</span>
+                    </div>
+                    <button id="close-drawer-btn" class="text-slate-400 p-1 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+                </div>
+                <nav class="p-4 space-y-1 pt-5">
+                    <a href="#home" onclick="toggleDrawer(false)" class="drawer-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-semibold text-[#5B316C] hover:bg-slate-50 transition-all"><i class="fa-solid fa-house w-4 text-center"></i><span>Home</span></a>
+                    <a href="#analitik" onclick="toggleDrawer(false)" class="drawer-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-semibold text-[#5B316C] hover:bg-slate-50 transition-all"><i class="fa-solid fa-chart-line w-4 text-center"></i><span>Analitik &amp; Riwayat</span></a>
+                    <a href="#tryout" onclick="toggleDrawer(false)" class="drawer-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-semibold text-[#5B316C] hover:bg-slate-50 transition-all"><i class="fa-solid fa-pen-to-square w-4 text-center"></i><span>Daftar Tryout</span></a>
+                    <a href="#video" onclick="toggleDrawer(false)" class="drawer-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-semibold text-[#5B316C] hover:bg-slate-50 transition-all"><i class="fa-solid fa-circle-play w-4 text-center"></i><span>Video Pembahasan</span></a>
+                </nav>
+            </div>
+            <div class="p-4 border-t border-[#1B355A]/10 bg-slate-50/80">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-9 h-9 rounded-full bg-gradient-secondary text-white flex items-center justify-center font-bold text-sm profile-initial">R</div>
+                    <div>
+                        <h5 class="font-bold text-xs text-[#1B355A] profile-name">Rafa Rian</h5>
+                        <p class="text-[10px] font-semibold text-slate-400 profile-id">ID: #NL8842</p>
+                    </div>
+                </div>
+                <a href="Profile.html" class="w-full py-2.5 mb-2 bg-[#5B316C] hover:bg-[#A03A55] text-white font-bold rounded-xl transition-all flex items-center justify-center gap-2 text-xs shadow-md">
+                    <i class="fa-solid fa-user-gear"></i> Edit Profil
+                </a>
+                <a href="LandingPage.html" class="w-full py-2.5 bg-white border border-slate-200 text-slate-500 hover:text-red-500 hover:border-red-200 font-semibold rounded-xl transition-all flex items-center justify-center gap-2 text-xs">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Keluar
+                </a>
+            </div>
+        </aside>
+    </div>
+
+    <!-- MAIN -->
+    <main class="flex-grow pt-20 relative z-10 pb-20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 py-6 space-y-12 w-full">
+
+            <!-- SECTION 1: HOME -->
+            <section id="home" class="scroll-mt-20">
+                <div class="grid lg:grid-cols-12 gap-6 items-center py-2">
+                    <div class="lg:col-span-8 text-left space-y-4 z-10 relative">
+                        <div class="flex items-center gap-2">
+                            <span class="px-3 py-1 bg-[#5B316C]/10 text-[#5B316C] rounded-full text-[11px] font-extrabold tracking-wider uppercase border border-[#5B316C]/20">UTBK-SNBT &amp; TKA</span>
+                        </div>
+                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-[#1B355A]">
+                            Halo, <span class="text-gradient profile-name">Rafa Rian</span>! 👋
+                        </h1>
+                        <p class="text-sm sm:text-base text-slate-600 leading-relaxed font-medium max-w-2xl">
+                            Pilihan utama kelolosan Anda: <span id="profile-target-summary" class="px-2 py-1 rounded-lg bg-[#FFC72C]/20 text-[#5B316C] font-extrabold border border-[#FFC72C]/40">Kedokteran &mdash; UGM</span>. Terus semangat, kamu sudah di jalur yang tepat!
+                        </p>
+                        <div class="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 pt-1">
+                            <a href="#tryout" class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-5 py-2.5 bg-gradient-secondary text-white font-bold rounded-xl text-sm shadow-md hover:shadow-[0_8px_20px_rgba(91,49,108,0.3)] transition-all active:scale-95">
+                                <i class="fa-solid fa-pen-to-square text-xs"></i> Mulai Tryout
+                            </a>
+                            <a href="#analitik" class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-5 py-2.5 bg-white border border-[#1B355A]/15 text-[#1B355A] font-semibold rounded-xl text-sm shadow-sm hover:border-[#5B316C]/40 transition-all active:scale-95">
+                                <i class="fa-solid fa-chart-line text-xs text-[#5B316C]"></i> Lihat Progres
+                            </a>
+                        </div>
+                    </div>
+                    <div class="hidden lg:flex lg:col-span-4 relative w-full max-w-xs mx-auto aspect-square items-center justify-center">
+                        <div class="absolute w-56 h-56 rounded-full bg-gradient-to-tr from-[#FF6B35]/40 to-[#5B316C]/35 blur-2xl animate-float pointer-events-none"></div>
+                        <div class="absolute w-44 h-44 rounded-full bg-gradient-to-bl from-[#A03A55]/40 to-[#FFC72C]/30 blur-xl animate-float pointer-events-none -bottom-2 -left-2"></div>
+                        <img src="semangat_student.png" alt="Mascot" class="relative max-w-full h-auto z-10 animate-float drop-shadow-2xl object-contain">
+                    </div>
+                </div>
+
+                <!-- STATS -->
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+                    <div class="bg-white border border-[#1B355A]/10 rounded-2xl p-4 flex flex-col gap-3 shadow-sm card-hover-effect">
+                        <div class="w-9 h-9 rounded-xl bg-[#5B316C]/10 flex items-center justify-center text-[#5B316C] border border-[#5B316C]/15"><i class="fa-solid fa-chart-simple text-sm"></i></div>
+                        <div>
+                            <span class="text-xs font-extrabold text-[#1B355A]/60 uppercase tracking-wider block mb-1">Skor Rata-Rata</span>
+                            <div class="flex items-end gap-1.5">
+                                <h3 class="text-3xl lg:text-4xl font-black text-[#1B355A] tracking-tight">628</h3>
+                                <span class="text-xs font-bold text-emerald-600 mb-0.5"><i class="fa-solid fa-arrow-trend-up"></i> +18</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white border border-[#1B355A]/10 rounded-2xl p-4 flex flex-col gap-3 shadow-sm card-hover-effect">
+                        <div class="w-9 h-9 rounded-xl bg-[#A03A55]/10 flex items-center justify-center text-[#A03A55] border border-[#A03A55]/15"><i class="fa-solid fa-bullseye text-sm"></i></div>
+                        <div>
+                            <span class="text-xs font-extrabold text-[#1B355A]/60 uppercase tracking-wider block mb-1">Peluang Kelolosan</span>
+                            <div class="flex items-end gap-1.5">
+                                <h3 class="text-3xl lg:text-4xl font-black text-emerald-600 tracking-tight">86%</h3>
+                                <span class="text-xs font-bold text-[#1B355A]/60 mb-0.5">Tinggi</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white border border-[#1B355A]/10 rounded-2xl p-4 flex flex-col gap-3 shadow-sm card-hover-effect">
+                        <div class="w-9 h-9 rounded-xl bg-[#FFC72C]/15 flex items-center justify-center text-[#FF6B35] border border-[#FFC72C]/20"><i class="fa-solid fa-circle-check text-sm"></i></div>
+                        <div>
+                            <span class="text-xs font-extrabold text-[#1B355A]/60 uppercase tracking-wider block mb-1">Tryout Selesai</span>
+                            <div class="flex items-end gap-1.5">
+                                <h3 class="text-3xl lg:text-4xl font-black text-[#1B355A] tracking-tight">4</h3>
+                                <span class="text-xs font-bold text-[#1B355A]/60 mb-0.5">/ 5 TO</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white border border-[#1B355A]/10 rounded-2xl p-4 flex flex-col gap-3 shadow-sm card-hover-effect">
+                        <div class="w-9 h-9 rounded-xl bg-[#1B355A]/10 flex items-center justify-center text-[#1B355A] border border-[#1B355A]/15"><i class="fa-solid fa-trophy text-sm"></i></div>
+                        <div>
+                            <span class="text-xs font-extrabold text-[#1B355A]/60 uppercase tracking-wider block mb-1">Ranking Nasional</span>
+                            <div class="flex items-end gap-1.5">
+                                <h3 class="text-3xl lg:text-4xl font-black text-[#1B355A] tracking-tight">#142</h3>
+                                <span class="text-xs font-bold text-[#1B355A]/60 mb-0.5">/ 12,480</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: ANALITIK & RIWAYAT -->
+            <section id="analitik" class="scroll-mt-20 space-y-5">
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-1.5 h-5 rounded-full bg-gradient-secondary inline-block"></span>
+                            <span class="text-[11px] font-extrabold text-[#5B316C]/70 uppercase tracking-widest">Analitik</span>
+                        </div>
+                        <h2 class="text-3xl lg:text-4xl font-extrabold text-[#1B355A] tracking-tight">Progres &amp; Riwayat Tryout</h2>
+                        <p class="text-[#5B316C] font-medium text-sm sm:text-base mt-1.5">Analisis tren kenaikan skor dan tinjau hasil pengerjaan Anda</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                    <!-- Left col -->
+                    <div class="lg:col-span-2 space-y-5">
+                        <!-- Chart -->
+                        <div class="bg-white border border-[#1B355A]/10 rounded-2xl p-5 shadow-sm">
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <h3 class="text-base font-bold text-[#1B355A]">Grafik Riwayat Progres Nilai</h3>
+                                    <p class="text-xs text-slate-500 font-medium mt-0.5">Tren kenaikan skor IRT Anda</p>
+                                </div>
+                                <span class="px-2.5 py-1 bg-emerald-50 text-emerald-600 rounded-lg text-[11px] font-extrabold border border-emerald-100">+18 poin</span>
+                            </div>
+                            <div class="w-full relative h-52 mb-4"><canvas id="scoreChart"></canvas></div>
+                            <div class="pt-3 border-t border-slate-100 flex justify-end">
+                                <a href="AnalitikNilai.html" class="px-4 py-2 bg-gradient-secondary hover:scale-[1.02] text-white text-[10px] font-bold rounded-xl transition-all shadow-sm flex items-center gap-1.5">
+                                    <i class="fa-solid fa-chart-line"></i> Lihat Analitik Selengkapnya
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- History carousel -->
+                        <div>
+                            <div class="flex items-center justify-between mb-2.5">
+                                <h3 class="text-sm font-bold text-[#1B355A]">Evaluasi Tryout Selesai</h3>
+                                <div class="flex items-center gap-3">
+                                    <span class="hidden sm:inline text-[11px] text-slate-400 font-semibold"><i class="fa-solid fa-hand-point-right text-[10px]"></i> geser</span>
+                                    <a href="RiwayatTryout.html" class="text-xs font-bold text-[#A03A55] hover:underline">Lihat Semua</a>
+                                </div>
+                            </div>
+                            <div class="carousel-fade-right">
+                                <div class="horizontal-scroll-only flex overflow-x-auto gap-3 pb-3 snap-x snap-mandatory scroll-smooth no-scrollbar" data-lenis-prevent>
+                                    <div class="w-[260px] shrink-0 snap-start bg-white border border-[#1B355A]/10 rounded-2xl p-4 shadow-sm card-hover-effect">
+                                        <div class="flex items-start justify-between mb-3">
+                                            <span class="px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded text-[10px] font-extrabold border border-emerald-100 uppercase">Selesai</span>
+                                            <span class="text-xl font-black text-[#5B316C]">610</span>
+                                        </div>
+                                        <h4 class="text-base font-bold text-[#1B355A] mb-3 leading-snug">Tryout UTBK-SNBT Mandiri #1</h4>
+                                        <a href="#video" class="w-full py-1.5 border border-[#5B316C]/25 hover:border-[#5B316C]/60 hover:bg-[#5B316C]/04 text-[#5B316C] font-bold rounded-xl text-xs transition-all text-center block"><i class="fa-solid fa-circle-play mr-1 text-[10px]"></i> Tonton Solusi</a>
+                                    </div>
+                                    <div class="w-[260px] shrink-0 snap-start bg-white border border-[#1B355A]/10 rounded-2xl p-4 shadow-sm card-hover-effect">
+                                        <div class="flex items-start justify-between mb-3">
+                                            <span class="px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded text-[10px] font-extrabold border border-emerald-100 uppercase">Selesai</span>
+                                            <span class="text-xl font-black text-[#5B316C]">645</span>
+                                        </div>
+                                        <h4 class="text-base font-bold text-[#1B355A] mb-3 leading-snug">Tryout UTBK-SNBT Mandiri #2</h4>
+                                        <a href="#video" class="w-full py-1.5 border border-[#5B316C]/25 hover:border-[#5B316C]/60 hover:bg-[#5B316C]/04 text-[#5B316C] font-bold rounded-xl text-xs transition-all text-center block"><i class="fa-solid fa-circle-play mr-1 text-[10px]"></i> Tonton Solusi</a>
+                                    </div>
+                                    <div class="w-[260px] shrink-0 snap-start bg-white border border-[#1B355A]/10 rounded-2xl p-4 shadow-sm card-hover-effect">
+                                        <div class="flex items-start justify-between mb-3">
+                                            <span class="px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded text-[10px] font-extrabold border border-emerald-100 uppercase">Selesai</span>
+                                            <span class="text-xl font-black text-[#5B316C]">628</span>
+                                        </div>
+                                        <h4 class="text-base font-bold text-[#1B355A] mb-3 leading-snug">Tryout TPS Logika Intensif #1</h4>
+                                        <a href="#video" class="w-full py-1.5 border border-[#5B316C]/25 hover:border-[#5B316C]/60 hover:bg-[#5B316C]/04 text-[#5B316C] font-bold rounded-xl text-xs transition-all text-center block"><i class="fa-solid fa-circle-play mr-1 text-[10px]"></i> Tonton Solusi</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: PTN Card -->
+                    <div class="bg-white border border-[#1B355A]/10 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-graduation-cap text-[#5B316C] text-sm"></i>
+                                <h3 class="text-base font-bold text-[#1B355A]">Target PTN Anda</h3>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-gradient-to-br from-[#5B316C]/05 to-[#A03A55]/04 border border-[#5B316C]/10 flex items-center gap-3">
+                                <div class="w-9 h-9 bg-white rounded-lg border border-slate-100 flex items-center justify-center shrink-0 shadow-sm">
+                                    <img src="logonalar.png" alt="UGM" class="w-6 h-6 object-contain">
+                                </div>
+                                <div>
+                                    <h4 id="profile-target-ptn" class="text-base font-bold text-[#1B355A]">UGM Yogyakarta</h4>
+                                    <p id="profile-target-major" class="text-xs font-semibold text-slate-500">Kedokteran (S1) &mdash; Pilihan 1</p>
+                                </div>
+                            </div>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between text-[11px] font-semibold text-slate-500 mb-1.5">
+                                        <span>Skor Anda vs Target</span>
+                                        <span class="text-[#1B355A] font-bold">628 / 650</span>
+                                    </div>
+                                    <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                                        <div class="h-full bg-gradient-secondary rounded-full" style="width: 96%"></div>
+                                    </div>
+                                    <p class="text-[10px] text-slate-400 font-semibold mt-1">Selisih 22 poin dari target</p>
+                                </div>
+                                <div class="space-y-2.5 pt-1 border-t border-slate-50">
+                                    <div class="flex justify-between items-center pt-2">
+                                        <span class="text-xs font-semibold text-slate-500">Keketatan</span>
+                                        <span class="px-2 py-0.5 bg-red-50 text-red-600 font-bold rounded text-[11px] border border-red-100">Tinggi (1.8%)</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-xs font-semibold text-slate-500">Status Kelolosan</span>
+                                        <span class="px-2 py-0.5 bg-emerald-50 text-emerald-600 font-bold rounded text-[11px] border border-emerald-100">Lolos PG</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-xs font-semibold text-slate-500">Estimasi Peluang</span>
+                                        <span class="px-2 py-0.5 bg-[#5B316C]/10 text-[#5B316C] font-bold rounded text-[11px]">86% Tinggi</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#tryout" class="w-full py-2.5 bg-gradient-secondary hover:shadow-[0_6px_18px_rgba(91,49,108,0.25)] text-white font-bold rounded-xl text-center text-sm block transition-all active:scale-95 mt-4">
+                            <i class="fa-solid fa-bolt mr-1.5 text-xs"></i> Tingkatkan Skor
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: DAFTAR TRYOUT -->
+            <section id="tryout" class="scroll-mt-20 space-y-5">
+                <div>
+                    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="w-1.5 h-5 rounded-full bg-gradient-primary inline-block"></span>
+                                <span class="text-[11px] font-extrabold text-[#A03A55]/70 uppercase tracking-widest">Tryout Aktif</span>
+                            </div>
+                            <h2 class="text-3xl lg:text-4xl font-extrabold text-[#1B355A] tracking-tight">Daftar Tryout</h2>
+                        </div>
+                        <a href="DaftarTryout.html" class="text-xs font-bold text-[#A03A55] hover:underline mb-1">Lihat Semua</a>
+                    </div>
+                    <p class="text-[#5B316C] font-medium text-sm sm:text-base mt-1.5">Kerjakan paket simulasi untuk melatih kecepatan dan ketepatan nalar Anda</p>
+                </div>
+
+                <div class="space-y-3">
+                    <!-- Berlangsung -->
+                    <div class="bg-white border border-amber-200/80 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center gap-4 shadow-sm card-hover-effect">
+                        <div class="w-11 h-11 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-circle-dot text-amber-500 text-base animate-pulse"></i>
+                        </div>
+                        <div class="flex-grow min-w-0">
+                            <span class="px-2 py-0.5 bg-amber-50 text-amber-600 rounded text-[10px] font-extrabold border border-amber-200 uppercase tracking-wide">Berlangsung</span>
+                            <h4 class="text-base font-bold text-[#1B355A] mt-1.5">Tryout Nasional Akbar Juni</h4>
+                            <p class="text-sm text-slate-500 font-medium mt-0.5">Sisa waktu: <span class="font-bold text-red-500">18:45</span> &bull; 120 Soal</p>
+                        </div>
+                        <button class="px-5 py-2.5 bg-[#5B316C] hover:bg-[#A03A55] text-white font-bold rounded-xl text-xs transition-all duration-200 active:scale-95 shadow-md shrink-0 w-full sm:w-auto">
+                            Lanjutkan &rarr;
+                        </button>
+                    </div>
+
+                    <!-- Belum Mulai 1 -->
+                    <div class="bg-white border border-[#1B355A]/10 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center gap-4 shadow-sm card-hover-effect">
+                        <div class="w-11 h-11 rounded-xl bg-[#1B355A]/06 border border-[#1B355A]/10 flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-pen-to-square text-[#1B355A]/50 text-base"></i>
+                        </div>
+                        <div class="flex-grow min-w-0">
+                            <span class="px-2 py-0.5 bg-slate-100 text-slate-500 rounded text-[10px] font-extrabold border border-slate-200 uppercase tracking-wide">Belum Mulai</span>
+                            <h4 class="text-base font-bold text-[#1B355A] mt-1.5">Tryout Kemampuan Akademik (TKA)</h4>
+                            <p class="text-sm text-slate-500 font-medium mt-0.5">90 Menit &bull; 75 Soal</p>
+                        </div>
+                        <button class="px-5 py-2.5 bg-gradient-primary hover:shadow-[0_6px_18px_rgba(160,58,85,0.3)] text-white font-bold rounded-xl text-xs transition-all duration-200 active:scale-95 shadow-md shrink-0 w-full sm:w-auto">
+                            Mulai TO &rarr;
+                        </button>
+                    </div>
+
+                    <!-- Belum Mulai 2 -->
+                    <div class="bg-white border border-[#1B355A]/10 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center gap-4 shadow-sm card-hover-effect">
+                        <div class="w-11 h-11 rounded-xl bg-[#5B316C]/08 border border-[#5B316C]/12 flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-pen-to-square text-[#5B316C]/60 text-base"></i>
+                        </div>
+                        <div class="flex-grow min-w-0">
+                            <div class="flex items-center gap-1.5">
+                                <span class="px-2 py-0.5 bg-slate-100 text-slate-500 rounded text-[10px] font-extrabold border border-slate-200 uppercase tracking-wide">Belum Mulai</span>
+                                <span class="px-2 py-0.5 bg-[#5B316C]/10 text-[#5B316C] rounded text-[10px] font-extrabold uppercase tracking-wide">Baru</span>
+                            </div>
+                            <h4 class="text-base font-bold text-[#1B355A] mt-1.5">Paket Literasi &amp; Penalaran Intensif</h4>
+                            <p class="text-sm text-slate-500 font-medium mt-0.5">60 Menit &bull; 50 Soal</p>
+                        </div>
+                        <button class="px-5 py-2.5 bg-white border border-[#5B316C]/25 hover:border-[#5B316C]/60 hover:bg-[#5B316C]/04 text-[#5B316C] font-bold rounded-xl text-xs transition-all duration-200 active:scale-95 shrink-0 w-full sm:w-auto">
+                            Lihat Detail
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: VIDEO PEMBAHASAN -->
+            <section id="video" class="scroll-mt-20 space-y-5">
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-1.5 h-5 rounded-full bg-[#FF6B35] inline-block"></span>
+                            <span class="text-[11px] font-extrabold text-[#FF6B35]/80 uppercase tracking-widest">Belajar</span>
+                        </div>
+                        <h2 class="text-3xl lg:text-4xl font-extrabold text-[#1B355A] tracking-tight">Video Pembahasan</h2>
+                        <p class="text-[#5B316C] font-medium text-sm sm:text-base mt-1.5">Strategi Smart Logic dari tentor senior &mdash; tonton sesuai kebutuhan</p>
+                    </div>
+                    <a href="Videos.html" class="hidden md:flex items-center gap-1.5 text-xs font-bold text-[#5B316C] hover:text-[#A03A55] transition-colors shrink-0 mb-1">
+                        Lihat Semua <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+
+                <div class="carousel-fade-right">
+                    <div class="horizontal-scroll-only flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory scroll-smooth no-scrollbar" data-lenis-prevent>
+
+                        <div class="w-[255px] sm:w-[290px] shrink-0 snap-start bg-white border border-[#1B355A]/10 rounded-2xl overflow-hidden shadow-sm card-hover-effect">
+                            <div class="relative aspect-video bg-slate-800 flex items-center justify-center overflow-hidden group">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10"></div>
+                                <div class="absolute inset-0 bg-gradient-to-br from-[#5B316C]/60 to-[#A03A55]/40"></div>
+                                <div class="absolute w-10 h-10 bg-white/15 group-hover:bg-white/30 group-hover:scale-110 text-white rounded-full flex items-center justify-center backdrop-blur-sm cursor-pointer transition-all z-20 border border-white/20"><i class="fa-solid fa-play text-xs ml-0.5"></i></div>
+                                <span class="absolute bottom-2 right-2 bg-black/70 px-1.5 py-0.5 rounded text-[9px] font-bold text-white z-20">08:42</span>
+                                <i class="fa-solid fa-graduation-cap text-white/15 text-5xl z-10"></i>
+                            </div>
+                            <div class="p-3.5">
+                                <span class="px-2 py-0.5 bg-[#5B316C]/10 text-[#5B316C] rounded text-[10px] font-extrabold uppercase tracking-wide">Penalaran Matematika</span>
+                                <h4 class="text-base font-bold text-[#1B355A] leading-snug mt-2">Logika Aritmatika IRT &mdash; Soal UTBK #12</h4>
+                            </div>
+                        </div>
+
+                        <div class="w-[255px] sm:w-[290px] shrink-0 snap-start bg-white border border-[#1B355A]/10 rounded-2xl overflow-hidden shadow-sm card-hover-effect">
+                            <div class="relative aspect-video bg-slate-800 flex items-center justify-center overflow-hidden group">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10"></div>
+                                <div class="absolute inset-0 bg-gradient-to-br from-[#A03A55]/60 to-[#FF6B35]/40"></div>
+                                <div class="absolute w-10 h-10 bg-white/15 group-hover:bg-white/30 group-hover:scale-110 text-white rounded-full flex items-center justify-center backdrop-blur-sm cursor-pointer transition-all z-20 border border-white/20"><i class="fa-solid fa-play text-xs ml-0.5"></i></div>
+                                <span class="absolute bottom-2 right-2 bg-black/70 px-1.5 py-0.5 rounded text-[9px] font-bold text-white z-20">11:15</span>
+                                <i class="fa-solid fa-brain text-white/15 text-5xl z-10"></i>
+                            </div>
+                            <div class="p-3.5">
+                                <span class="px-2 py-0.5 bg-[#A03A55]/10 text-[#A03A55] rounded text-[10px] font-extrabold uppercase tracking-wide">TPS Logika</span>
+                                <h4 class="text-base font-bold text-[#1B355A] leading-snug mt-2">Pola Premis Silogisme Kompleks Tanpa Rumus</h4>
+                            </div>
+                        </div>
+
+                        <div class="w-[255px] sm:w-[290px] shrink-0 snap-start bg-white border border-[#1B355A]/10 rounded-2xl overflow-hidden shadow-sm card-hover-effect">
+                            <div class="relative aspect-video bg-slate-800 flex items-center justify-center overflow-hidden group">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10"></div>
+                                <div class="absolute inset-0 bg-gradient-to-br from-[#1B355A]/60 to-[#5B316C]/40"></div>
+                                <div class="absolute w-10 h-10 bg-white/15 group-hover:bg-white/30 group-hover:scale-110 text-white rounded-full flex items-center justify-center backdrop-blur-sm cursor-pointer transition-all z-20 border border-white/20"><i class="fa-solid fa-play text-xs ml-0.5"></i></div>
+                                <span class="absolute bottom-2 right-2 bg-black/70 px-1.5 py-0.5 rounded text-[9px] font-bold text-white z-20">07:50</span>
+                                <i class="fa-solid fa-book-open text-white/15 text-5xl z-10"></i>
+                            </div>
+                            <div class="p-3.5">
+                                <span class="px-2 py-0.5 bg-[#1B355A]/08 text-[#1B355A] rounded text-[10px] font-extrabold uppercase tracking-wide">Literasi Inggris</span>
+                                <h4 class="text-base font-bold text-[#1B355A] leading-snug mt-2">Menemukan Ide Pokok Paragraf Akademik Padat</h4>
+                            </div>
+                        </div>
+
+                        <div class="w-[255px] sm:w-[290px] shrink-0 snap-start bg-white border border-[#1B355A]/10 rounded-2xl overflow-hidden shadow-sm card-hover-effect">
+                            <div class="relative aspect-video bg-slate-800 flex items-center justify-center overflow-hidden group">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10"></div>
+                                <div class="absolute inset-0 bg-gradient-to-br from-[#FF6B35]/50 to-[#FFC72C]/40"></div>
+                                <div class="absolute w-10 h-10 bg-white/15 group-hover:bg-white/30 group-hover:scale-110 text-white rounded-full flex items-center justify-center backdrop-blur-sm cursor-pointer transition-all z-20 border border-white/20"><i class="fa-solid fa-play text-xs ml-0.5"></i></div>
+                                <span class="absolute bottom-2 right-2 bg-black/70 px-1.5 py-0.5 rounded text-[9px] font-bold text-white z-20">09:20</span>
+                                <i class="fa-solid fa-calculator text-white/15 text-5xl z-10"></i>
+                            </div>
+                            <div class="p-3.5">
+                                <span class="px-2 py-0.5 bg-[#FF6B35]/10 text-[#FF6B35] rounded text-[10px] font-extrabold uppercase tracking-wide">Matematika Dasar</span>
+                                <h4 class="text-base font-bold text-[#1B355A] leading-snug mt-2">Strategi Cepat Soal Aljabar Non-Rutin UTBK</h4>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <a href="Videos.html" class="md:hidden flex items-center justify-center gap-2 py-2.5 border border-[#5B316C]/20 rounded-xl text-xs font-bold text-[#5B316C] hover:border-[#5B316C]/40 transition-all">
+                    Lihat Semua Video <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                </a>
+            </section>
+
+        </div>
+
+        <footer class="bg-white/60 backdrop-blur-sm border-t border-[#1B355A]/08 py-5 px-6 text-center text-xs text-[#1B355A]/40 font-semibold mt-10">
+            &copy; 2025 Nalar Academy. All rights reserved.
+        </footer>
+    </main>
+
+    <!-- MOBILE BOTTOM NAV -->
+    <div class="fixed bottom-0 left-0 right-0 md:left-1/2 md:right-auto md:-translate-x-1/2 w-full md:w-auto bg-white/95 backdrop-blur-md border-t border-[#1B355A]/10 md:border md:border-[#1B355A]/10 md:rounded-full shadow-[0_-16px_40px_rgba(27,53,90,0.18)] py-2 px-6 md:px-5 flex justify-between md:justify-center items-center gap-1 md:gap-4 z-40 select-none pb-safe">
+        <!-- 1. Home -->
+        <a href="#home" data-section="home" class="bottom-nav-item flex flex-col items-center gap-1 text-slate-400 hover:text-[#A03A55] transition-colors duration-300 w-14">
+            <i class="fa-solid fa-house text-lg"></i>
+            <span class="text-[9px] font-bold tracking-tight">Home</span>
+        </a>
+        
+        <!-- 2. Analitik -->
+        <a href="#analitik" data-section="analitik" class="bottom-nav-item flex flex-col items-center gap-1 text-slate-400 hover:text-[#A03A55] transition-colors duration-300 w-14">
+            <i class="fa-solid fa-chart-line text-lg"></i>
+            <span class="text-[9px] font-bold tracking-tight">Analitik</span>
+        </a>
+        
+        <!-- 3. Tryout (Center, Gradient, Elevated) -->
+        <div class="relative w-16 h-16 flex items-center justify-center -mt-6">
+            <a href="#tryout" data-section="tryout" class="bottom-nav-item flex items-center justify-center w-12 h-12 rounded-full bg-gradient-primary text-white shadow-[0_4px_20px_rgba(160,58,85,0.4)] hover:scale-105 active:scale-95 transition-all duration-300">
+                <i class="fa-solid fa-pen-to-square text-lg"></i>
+            </a>
+        </div>
+        
+        <!-- 4. Video -->
+        <a href="#video" data-section="video" class="bottom-nav-item flex flex-col items-center gap-1 text-slate-400 hover:text-[#A03A55] transition-colors duration-300 w-14">
+            <i class="fa-solid fa-circle-play text-lg"></i>
+            <span class="text-[9px] font-bold tracking-tight">Video</span>
+        </a>
+        
+        <!-- 5. Profil -->
+        <a href="Profile.html" class="bottom-nav-item flex flex-col items-center gap-1 text-slate-400 hover:text-[#A03A55] transition-colors duration-300 w-14">
+            <div class="w-5 h-5 rounded-full bg-gradient-secondary text-white font-extrabold flex items-center justify-center text-[9px] shadow-sm mb-0.5 profile-initial">R</div>
+            <span class="text-[9px] font-bold tracking-tight">Profil</span>
+        </a>
+    </div>
+
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script>
+        // Dynamic Chart.js
+        function loadTargetScore() {
+            const ptn = localStorage.getItem('profileTargetPTN') || 'UGM Yogyakarta';
+            const nameLower = ptn.toLowerCase();
+            if (nameLower.includes('ugm') || nameLower.includes('ui') || nameLower.includes('itb')) {
+                return 680;
+            }
+            return 620;
+        }
+        const targetScore = loadTargetScore();
+
+        let historyStr = localStorage.getItem('tryoutHistory');
+        let history = [];
+        if (historyStr) {
+            history = JSON.parse(historyStr);
+        } else {
+            history = [
+                {
+                    title: "Tryout UTBK-SNBT Mandiri #1",
+                    date: "20 Juni 2025",
+                    score: 610,
+                    subtests: { pu: 635, pk: 610, lbi: 650, lbe: 580 }
+                },
+                {
+                    title: "Tryout UTBK Awal Mei",
+                    date: "10 Mei 2025",
+                    score: 590,
+                    subtests: { pu: 610, pk: 590, lbi: 620, lbe: 540 }
+                },
+                {
+                    title: "Tryout Pelatihan April",
+                    date: "12 April 2025",
+                    score: 560,
+                    subtests: { pu: 580, pk: 560, lbi: 590, lbe: 510 }
+                },
+                {
+                    title: "Tryout Diagnostik Awal",
+                    date: "05 Maret 2025",
+                    score: 510,
+                    subtests: { pu: 520, pk: 510, lbi: 530, lbe: 480 }
+                }
+            ];
+            localStorage.setItem('tryoutHistory', JSON.stringify(history));
+        }
+
+        const chronologicalHistory = [...history].reverse();
+        const lineLabels = chronologicalHistory.map((item, idx) => `TO #${idx + 1}`);
+        const lineScores = chronologicalHistory.map(item => item.score);
+        const lineTargets = Array(chronologicalHistory.length).fill(targetScore);
+
+        const ctx = document.getElementById('scoreChart').getContext('2d');
+        const grad = ctx.createLinearGradient(0, 0, 0, 220);
+        grad.addColorStop(0, 'rgba(160, 58, 85, 0.22)');
+        grad.addColorStop(1, 'rgba(160, 58, 85, 0.0)');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: lineLabels,
+                datasets: [{
+                    label: 'Skor Anda', 
+                    data: lineScores,
+                    borderColor: '#A03A55', 
+                    borderWidth: 3,
+                    pointBackgroundColor: '#A03A55', 
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2.5, 
+                    pointRadius: 6, 
+                    pointHoverRadius: 9,
+                    fill: true, 
+                    backgroundColor: grad, 
+                    tension: 0.35
+                },{
+                    label: `Target Kelolosan (${targetScore})`, 
+                    data: lineTargets,
+                    borderColor: 'rgba(27,53,90,0.18)', 
+                    borderWidth: 1.5,
+                    borderDash: [5,5], 
+                    pointRadius: 0, 
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true, 
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { 
+                        display: true, 
+                        position: 'top', 
+                        labels: { 
+                            font: { family:'Plus Jakarta Sans', weight:'bold', size:10 }, 
+                            color:'#1B355A', 
+                            boxWidth:10, 
+                            padding:12 
+                        } 
+                    },
+                    tooltip: { 
+                        mode:'index', 
+                        intersect:false, 
+                        backgroundColor:'rgba(27,53,90,0.92)', 
+                        titleFont:{family:'Plus Jakarta Sans',weight:'bold',size:11}, 
+                        bodyFont:{family:'Plus Jakarta Sans',size:11}, 
+                        padding:10, 
+                        cornerRadius:10 
+                    }
+                },
+                scales: {
+                    y: { 
+                        min: 400, 
+                        max: 1000, 
+                        grid: { color: 'rgba(27,53,90,0.05)' }, 
+                        ticks: { font: { family:'Plus Jakarta Sans', weight:'bold', size:10 }, color:'#1B355A' } 
+                    },
+                    x: { 
+                        grid: { display: false }, 
+                        ticks: { font: { family:'Plus Jakarta Sans', weight:'bold', size:10 }, color:'#1B355A' } 
+                    }
+                }
+            }
+        });
+
+        // Drawer
+        const openBtn = document.getElementById('open-drawer-btn');
+        const closeBtn = document.getElementById('close-drawer-btn');
+        const drawer = document.getElementById('mobile-drawer');
+        const sidebar = document.getElementById('mobile-sidebar');
+        function toggleDrawer(open) {
+            if (open) { 
+                drawer.classList.remove('pointer-events-none','opacity-0'); 
+                sidebar.classList.remove('translate-x-full'); 
+                document.body.style.overflow='hidden'; 
+                if (window.lenis) window.lenis.stop();
+            }
+            else { 
+                drawer.classList.add('pointer-events-none','opacity-0'); 
+                sidebar.classList.add('translate-x-full'); 
+                document.body.style.overflow=''; 
+                if (window.lenis) window.lenis.start();
+            }
+        }
+        openBtn && openBtn.addEventListener('click', () => toggleDrawer(true));
+        closeBtn && closeBtn.addEventListener('click', () => toggleDrawer(false));
+        drawer && drawer.addEventListener('click', e => { if (e.target===drawer) toggleDrawer(false); });
+
+        // Active nav highlight
+        const sections = document.querySelectorAll('section[id]');
+        const desktopLinks = document.querySelectorAll('#desktop-nav a[data-nav]');
+        const drawerLinks = document.querySelectorAll('#mobile-sidebar a[href^="#"]');
+        const bnavItems = document.querySelectorAll('.bottom-nav-item[data-section]');
+
+        function highlight(id) {
+            desktopLinks.forEach(a => {
+                const active = a.getAttribute('data-nav') === id;
+                a.style.color = active ? '#A03A55' : '';
+                a.style.background = active ? 'rgba(160,58,85,0.07)' : '';
+                a.style.fontWeight = active ? '700' : '';
+            });
+            drawerLinks.forEach(a => {
+                const active = a.getAttribute('href') === '#'+id;
+                a.style.color = active ? '#A03A55' : '';
+                a.style.background = active ? 'rgba(160,58,85,0.06)' : '';
+            });
+            bnavItems.forEach(item => {
+                if (item.getAttribute('data-section') === 'tryout') return;
+                const active = item.getAttribute('data-section') === id;
+                if (active) {
+                    item.classList.add('text-[#A03A55]');
+                    item.classList.remove('text-slate-400');
+                } else {
+                    item.classList.remove('text-[#A03A55]');
+                    item.classList.add('text-slate-400');
+                }
+            });
+        }
+
+        let isAutoScrolling = false;
+
+        window.addEventListener('scroll', () => {
+            if (isAutoScrolling) return;
+            let cur = 'home';
+            sections.forEach(s => { if (window.scrollY >= s.offsetTop - 160) cur = s.id; });
+            
+            // If scrolled to bottom, force highlight last section ('video')
+            const scrollPercent = (window.innerHeight + window.scrollY) / document.documentElement.scrollHeight;
+            if (scrollPercent > 0.92 || (window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 180) {
+                cur = 'video';
+            }
+            highlight(cur);
+        }, { passive: true });
+        highlight('home');
+
+        // Load Profile dynamically
+        function loadProfile() {
+            const name = localStorage.getItem('profileName') || 'Rafa Rian';
+            const id = localStorage.getItem('profileID') || '#NL8842';
+            const ptn = localStorage.getItem('profilePTN') || 'UGM Yogyakarta';
+            const major = localStorage.getItem('profileMajor') || 'Kedokteran (S1)';
+            const initial = name.charAt(0).toUpperCase();
+
+            document.querySelectorAll('.profile-name').forEach(el => el.textContent = name);
+            document.querySelectorAll('.profile-id').forEach(el => el.textContent = 'ID: ' + id);
+            // Update initials / profile image
+            const profileImage = localStorage.getItem('profileImage');
+            document.querySelectorAll('.profile-initial').forEach(el => {
+                if (profileImage) {
+                    el.innerHTML = `<img src="${profileImage}" alt="Profile" class="w-full h-full object-cover rounded-full">`;
+                } else {
+                    el.innerHTML = initial;
+                }
+            });
+
+            const targetSummary = document.getElementById('profile-target-summary');
+            if (targetSummary) {
+                const ptnShort = ptn.split(' ')[0];
+                targetSummary.innerHTML = `${major} &mdash; ${ptnShort}`;
+            }
+
+            const targetPtnEl = document.getElementById('profile-target-ptn');
+            if (targetPtnEl) targetPtnEl.textContent = ptn;
+
+            const targetMajorEl = document.getElementById('profile-target-major');
+            if (targetMajorEl) targetMajorEl.textContent = `${major} — Pilihan 1`;
+        }
+        
+        loadProfile();
+
+        // Initialize Lenis Smooth Scroll
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            touchMultiplier: 2,
+            infinite: false
+        });
+
+        window.lenis = lenis;
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
+
+        // Keep dashboard carousels strictly horizontal.
+        document.querySelectorAll('.horizontal-scroll-only').forEach((scroller) => {
+            scroller.addEventListener('wheel', (e) => {
+                if (Math.abs(e.deltaX) > 0) {
+                    e.preventDefault();
+                    scroller.scrollLeft += e.deltaX;
+                    return;
+                }
+
+                if (Math.abs(e.deltaY) > 0) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+        });
+
+        // Bind Tryout list items (Daftar Tryout)
+        document.querySelectorAll('#tryout .card-hover-effect button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const card = button.closest('.card-hover-effect');
+                const title = card.querySelector('h4').textContent;
+                const info = card.querySelector('p').textContent;
+                
+                document.getElementById('mt-title').textContent = title;
+                document.getElementById('mt-info').textContent = info;
+                
+                const modalTryout = document.getElementById('modal-tryout');
+                const content = document.getElementById('mt-content');
+                if (modalTryout && content) {
+                    modalTryout.classList.remove('hide');
+                    modalTryout.showModal();
+                    void modalTryout.offsetHeight;
+                    content.classList.remove('scale-[0.98]', 'opacity-0', 'blur-[2px]');
+                    content.classList.add('scale-100', 'opacity-100', 'blur-0');
+                }
+            });
+        });
+
+        // Bind History carousel items (Riwayat Tryout)
+        document.querySelectorAll('#analitik .carousel-fade-right .card-hover-effect').forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                const isSolusiBtn = e.target.closest('a') || e.target.tagName === 'A';
+                if (isSolusiBtn) {
+                    e.stopPropagation();
+                    const title = card.querySelector('h4').textContent;
+                    
+                    const overlay = document.getElementById('loading-overlay');
+                    if (overlay) {
+                        document.getElementById('loader-title').textContent = "Memuat Pembahasan Video...";
+                        document.getElementById('loader-subtitle').textContent = "Menghubungkan ke CDN Video Solusi Nalar Academy";
+                        overlay.classList.remove('opacity-0', 'pointer-events-none');
+                        overlay.classList.add('opacity-100');
+                        setTimeout(() => {
+                            window.location.href = `TontonVideo.html?title=${encodeURIComponent(title)}&category=Riwayat Solusi`;
+                        }, 800);
+                    } else {
+                        window.location.href = `TontonVideo.html?title=${encodeURIComponent(title)}&category=Riwayat Solusi`;
+                    }
+                    return;
+                }
+                
+                const title = card.querySelector('h4').textContent;
+                const score = card.querySelector('.text-xl').textContent;
+                
+                document.getElementById('mr-title').textContent = title;
+                document.getElementById('mr-score').textContent = score;
+                
+                const modalRiwayat = document.getElementById('modal-riwayat');
+                const content = document.getElementById('mr-content');
+                if (modalRiwayat && content) {
+                    modalRiwayat.classList.remove('hide');
+                    modalRiwayat.showModal();
+                    void modalRiwayat.offsetHeight;
+                    content.classList.remove('scale-[0.98]', 'opacity-0', 'blur-[2px]');
+                    content.classList.add('scale-100', 'opacity-100', 'blur-0');
+                }
+            });
+        });
+
+        // Bind Video Pembahasan items (Video Solusi)
+        document.querySelectorAll('#video .card-hover-effect').forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                const title = card.querySelector('h4').textContent;
+                const category = card.querySelector('span').textContent;
+                
+                const overlay = document.getElementById('loading-overlay');
+                if (overlay) {
+                    document.getElementById('loader-title').textContent = "Memuat Pembahasan Video...";
+                    document.getElementById('loader-subtitle').textContent = "Menghubungkan ke CDN Video Solusi Nalar Academy";
+                    overlay.classList.remove('opacity-0', 'pointer-events-none');
+                    overlay.classList.add('opacity-100');
+                    setTimeout(() => {
+                        window.location.href = `TontonVideo.html?title=${encodeURIComponent(title)}&category=${encodeURIComponent(category)}`;
+                    }, 800);
+                } else {
+                    window.location.href = `TontonVideo.html?title=${encodeURIComponent(title)}&category=${encodeURIComponent(category)}`;
+                }
+            });
+        });
+
+        // Connect Lenis to anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const target = this.getAttribute('href');
+                if (target === '#') return;
+                e.preventDefault();
+                const targetEl = document.querySelector(target);
+                if (targetEl) {
+                    const sectionId = target.substring(1);
+                    isAutoScrolling = true;
+                    highlight(sectionId);
+
+                    lenis.scrollTo(targetEl, {
+                        offset: -80,
+                        duration: 1.2,
+                        onComplete: () => {
+                            setTimeout(() => {
+                                isAutoScrolling = false;
+                            }, 50);
+                        }
+                    });
+                }
+            });
+        });
+
+        // Simulated action loader for "Mulai Ujian"
+        function startTryoutUjian() {
+            const overlay = document.getElementById('loading-overlay');
+            if (overlay) {
+                document.getElementById('loader-title').textContent = "Menyiapkan Lembar Ujian...";
+                document.getElementById('loader-subtitle').textContent = "Harap tunggu, sistem sedang memverifikasi data pendaftaran Anda";
+                
+                overlay.classList.remove('opacity-0', 'pointer-events-none');
+                overlay.classList.add('opacity-100');
+                
+                setTimeout(() => {
+                    overlay.classList.remove('opacity-100');
+                    overlay.classList.add('opacity-0', 'pointer-events-none');
+                    window.location.href = "TryoutUjian.html";
+                }, 1200);
+            } else {
+                window.location.href = "TryoutUjian.html";
+            }
+        }
+
+        // Simulated action loader for video playback
+        function playVideo() {
+            const loader = document.getElementById('video-loader');
+            const playBtn = document.getElementById('video-play-btn');
+            if (loader && playBtn) {
+                playBtn.classList.add('hidden');
+                loader.classList.remove('opacity-0', 'pointer-events-none');
+                loader.classList.add('opacity-100');
+                
+                setTimeout(() => {
+                    loader.classList.remove('opacity-100');
+                    loader.classList.add('opacity-0', 'pointer-events-none');
+                    alert('Video solusi berhasil diputar!');
+                    playBtn.classList.remove('hidden');
+                }, 1200);
+            }
+        }
+
+        // Simulated logout loader
+        document.querySelectorAll('a[href="LandingPage.html"]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const overlay = document.getElementById('loading-overlay');
+                if (overlay) {
+                    document.getElementById('loader-title').textContent = "Keluar dari Akun...";
+                    document.getElementById('loader-subtitle').textContent = "Harap tunggu, sedang membersihkan sesi belajar Anda";
+                    overlay.classList.remove('opacity-0', 'pointer-events-none');
+                    overlay.classList.add('opacity-100');
+                    setTimeout(() => {
+                        window.location.href = "LandingPage.html";
+                    }, 1000);
+                } else {
+                    window.location.href = "LandingPage.html";
+                }
+            });
+        });
+
+        // Smooth close functions
+        function closeTryoutModal() {
+            const modal = document.getElementById('modal-tryout');
+            if (modal) {
+                modal.classList.add('hide');
+                setTimeout(() => {
+                    modal.close();
+                    modal.classList.remove('hide');
+                }, 180);
+            }
+        }
+
+        function closeRiwayatModal() {
+            const modal = document.getElementById('modal-riwayat');
+            if (modal) {
+                modal.classList.add('hide');
+                setTimeout(() => {
+                    modal.close();
+                    modal.classList.remove('hide');
+                }, 180);
+            }
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('modal-video');
+            if (modal) {
+                modal.classList.add('hide');
+                setTimeout(() => {
+                    modal.close();
+                    modal.classList.remove('hide');
+                }, 180);
+            }
+        }
+
+        // Add backdrop click listeners to close smoothly
+        ['modal-tryout', 'modal-riwayat', 'modal-video'].forEach(id => {
+            const modal = document.getElementById(id);
+            if (modal) {
+                modal.addEventListener('click', (e) => {
+                    const content = modal.querySelector('.glass-card');
+                    if (content) {
+                        const rect = content.getBoundingClientRect();
+                        const isInModal = (rect.top <= e.clientY && e.clientY <= rect.bottom &&
+                                           rect.left <= e.clientX && e.clientX <= rect.right);
+                        if (!isInModal) {
+                            if (id === 'modal-tryout') closeTryoutModal();
+                            if (id === 'modal-riwayat') closeRiwayatModal();
+                            if (id === 'modal-video') closeVideoModal();
+                        }
+                    }
+                });
+                modal.addEventListener('cancel', (e) => {
+                    e.preventDefault();
+                    if (id === 'modal-tryout') closeTryoutModal();
+                    if (id === 'modal-riwayat') closeRiwayatModal();
+                    if (id === 'modal-video') closeVideoModal();
+                });
+            }
+        });
+    </script>
+
+    <!-- LOADING OVERLAY -->
+    <div id="loading-overlay" class="fixed inset-0 bg-white/95 backdrop-blur-md z-[9999] flex flex-col items-center justify-center gap-6 transition-all duration-300 opacity-0 pointer-events-none">
+        <div class="relative w-28 h-28 flex items-center justify-center">
+            <!-- Custom CSS spinner (matched from user's loading.html design) -->
+            <div class="absolute inset-0 rounded-full animate-spin-slow" style="background: conic-gradient(from 0deg, transparent 0deg, #1B355A 90deg, transparent 180deg); mask: radial-gradient(circle, transparent 35%, black 37%, black 39%, transparent 41%); -webkit-mask: radial-gradient(circle, transparent 35%, black 37%, black 39%, transparent 41%); opacity: 0.8;"></div>
+            <div class="absolute inset-0 rounded-full animate-spin-medium" style="background: conic-gradient(from 0deg, transparent 0deg, #5B316C 120deg, rgba(91, 49, 108, 0.5) 240deg, transparent 360deg); mask: radial-gradient(circle, transparent 42%, black 44%, black 48%, transparent 50%); -webkit-mask: radial-gradient(circle, transparent 42%, black 44%, black 48%, transparent 50%); opacity: 0.9;"></div>
+            <div class="absolute inset-0 rounded-full animate-spin-reverse" style="background: conic-gradient(from 180deg, transparent 0deg, #A03A55 45deg, transparent 90deg); mask: radial-gradient(circle, transparent 52%, black 54%, black 56%, transparent 58%); -webkit-mask: radial-gradient(circle, transparent 52%, black 54%, black 56%, transparent 58%); opacity: 0.35;"></div>
+        </div>
+        <div class="text-center space-y-2 max-w-xs">
+            <h3 id="loader-title" class="font-extrabold text-base text-[#1B355A]">Menghubungkan Akun...</h3>
+            <p id="loader-subtitle" class="text-xs text-slate-500 font-semibold">Harap tunggu sementara kami menyiapkan data Anda</p>
+        </div>
+    </div>
+
+    <!-- DIALOG MODAL: DETAIL TRYOUT -->
+    <dialog id="modal-tryout" class="backdrop:bg-[#1B355A]/40 backdrop:backdrop-blur-sm bg-transparent outline-none p-4 max-w-lg w-full my-auto mx-auto border-none z-50">
+        <div class="glass-card bg-white rounded-3xl overflow-hidden shadow-2xl border border-white/20 flex flex-col max-h-[90vh] transition-all duration-300 transform scale-[0.98] opacity-0 blur-[2px] ease-out" id="mt-content">
+            <div class="bg-gradient-secondary p-5 text-white flex justify-between items-center">
+                <h3 class="font-extrabold text-base flex items-center gap-2"><i class="fa-solid fa-pen-to-square"></i> Detail Paket Ujian</h3>
+                <button onclick="closeTryoutModal()" class="text-white/80 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="p-6 space-y-4 overflow-y-auto">
+                <div>
+                    <span class="px-2 py-0.5 bg-[#FFC72C]/20 text-[#5B316C] rounded text-[10px] font-extrabold border border-[#FFC72C]/40 uppercase tracking-wide">IRT ADAPTIF</span>
+                    <h4 id="mt-title" class="text-xl font-extrabold text-[#1B355A] mt-1.5">Tryout Nasional Akbar Juni</h4>
+                    <p id="mt-info" class="text-xs text-slate-500 font-semibold mt-1">Sisa waktu: 18:45 • 120 Soal</p>
+                </div>
+                <div class="border-t border-[#1B355A]/10 pt-4 space-y-3">
+                    <h5 class="text-xs font-bold text-[#5B316C] uppercase tracking-wider">Materi Ujian (Subtes)</h5>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100"><strong class="text-[#1B355A] block mb-0.5">Penalaran Umum</strong> 30 Soal • 30 Menit</div>
+                        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100"><strong class="text-[#1B355A] block mb-0.5">Pengetahuan Kuantitatif</strong> 20 Soal • 25 Menit</div>
+                        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100"><strong class="text-[#1B355A] block mb-0.5">Pemahaman Bacaan</strong> 25 Soal • 25 Menit</div>
+                        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100"><strong class="text-[#1B355A] block mb-0.5">Literasi B. Inggris</strong> 20 Soal • 25 Menit</div>
+                    </div>
+                </div>
+                <div class="border-t border-[#1B355A]/10 pt-4 space-y-2">
+                    <h5 class="text-xs font-bold text-[#5B316C] uppercase tracking-wider">Peraturan & Instruksi</h5>
+                    <ul class="text-[11px] text-slate-500 space-y-1.5 font-medium pl-4 list-disc">
+                        <li>Sistem menggunakan penilaian IRT (Item Response Theory) nasional.</li>
+                        <li>Dilarang membuka tab/aplikasi lain (Anti-cheat akan mencatat pelanggaran).</li>
+                        <li>Ujian tidak dapat di-pause setelah tombol mulai ditekan.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="p-4 border-t border-[#1B355A]/10 bg-slate-50 flex gap-3">
+                <button onclick="closeTryoutModal()" class="flex-grow py-2.5 border border-slate-200 hover:bg-white text-slate-600 font-bold rounded-xl text-xs transition-all">Batal</button>
+                <button onclick="startTryoutUjian()" class="flex-grow py-2.5 bg-gradient-primary text-white font-bold rounded-xl text-xs shadow-md transition-all">Mulai Ujian</button>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- DIALOG MODAL: DETAIL RIWAYAT -->
+    <dialog id="modal-riwayat" class="backdrop:bg-[#1B355A]/40 backdrop:backdrop-blur-sm bg-transparent outline-none p-4 max-w-lg w-full my-auto mx-auto border-none z-50">
+        <div class="glass-card bg-white rounded-3xl overflow-hidden shadow-2xl border border-white/20 flex flex-col max-h-[90vh] transition-all duration-300 transform scale-[0.98] opacity-0 blur-[2px] ease-out" id="mr-content">
+            <div class="bg-gradient-secondary p-5 text-white flex justify-between items-center">
+                <h3 class="font-extrabold text-base flex items-center gap-2"><i class="fa-solid fa-chart-line"></i> Analisis Skor & Riwayat</h3>
+                <button onclick="closeRiwayatModal()" class="text-white/80 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="p-6 space-y-4 overflow-y-auto">
+                <div class="flex items-start justify-between border-b border-[#1B355A]/10 pb-4">
+                    <div>
+                        <h4 id="mr-title" class="text-lg font-extrabold text-[#1B355A] leading-snug">Tryout UTBK-SNBT Mandiri #1</h4>
+                        <span class="px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded text-[10px] font-extrabold border border-emerald-100 uppercase mt-2 inline-block">Selesai</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-2xl font-black text-[#5B316C] block" id="mr-score">610</span>
+                        <span class="text-[10px] text-slate-400 font-semibold block">Skor Akhir IRT</span>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <h5 class="text-xs font-bold text-[#5B316C] uppercase tracking-wider">Rincian Nilai Subtes</h5>
+                    <div class="space-y-2">
+                        <div>
+                            <div class="flex justify-between text-[11px] font-semibold text-slate-600 mb-1">
+                                <span>Penalaran Umum</span>
+                                <span class="font-bold text-[#1B355A]">635 / 1000</span>
+                            </div>
+                            <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-secondary rounded-full" style="width: 63.5%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-[11px] font-semibold text-slate-600 mb-1">
+                                <span>Literasi Bahasa Indonesia</span>
+                                <span class="font-bold text-[#1B355A]">650 / 1000</span>
+                            </div>
+                            <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-secondary rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-[11px] font-semibold text-slate-600 mb-1">
+                                <span>Literasi Bahasa Inggris</span>
+                                <span class="font-bold text-[#1B355A]">580 / 1000</span>
+                            </div>
+                            <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-secondary rounded-full" style="width: 58%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-[11px] font-semibold text-slate-600 mb-1">
+                                <span>Pengetahuan Kuantitatif</span>
+                                <span class="font-bold text-[#1B355A]">610 / 1000</span>
+                            </div>
+                            <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-secondary rounded-full" style="width: 61%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-t border-[#1B355A]/10 pt-4 p-3 bg-slate-50 border border-slate-100 rounded-xl space-y-1">
+                    <h5 class="text-xs font-bold text-[#A03A55] flex items-center gap-1.5"><i class="fa-solid fa-circle-exclamation"></i> Rekomendasi Pembenahan</h5>
+                    <p class="text-[11px] text-slate-500 font-medium leading-relaxed">Persentase pengerjaan benar pada subtes Literasi Bahasa Inggris masih di bawah target kelolosan UGM (minimum 600). Disarankan mempelajari kembali materi kosakata akademik dan gagasan paragraf utama.</p>
+                </div>
+            </div>
+            <div class="p-4 border-t border-[#1B355A]/10 bg-slate-50 flex gap-3">
+                <button onclick="closeRiwayatModal()" class="py-2.5 border border-slate-200 hover:bg-white text-slate-600 font-bold rounded-xl text-xs transition-all w-1/3">Tutup</button>
+                <a href="AnalitikNilai.html" class="flex-grow py-2.5 bg-[#5B316C] hover:bg-[#A03A55] text-white font-bold rounded-xl text-xs shadow-md transition-all text-center flex items-center justify-center gap-1.5"><i class="fa-solid fa-chart-line"></i> Analisis Detail</a>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- DIALOG MODAL: VIDEO SOLUTIONS -->
+    <dialog id="modal-video" class="backdrop:bg-[#1B355A]/40 backdrop:backdrop-blur-sm bg-transparent outline-none p-4 max-w-lg w-full my-auto mx-auto border-none z-50">
+        <div class="glass-card bg-white rounded-3xl overflow-hidden shadow-2xl border border-white/20 flex flex-col max-h-[90vh] transition-all duration-300 transform scale-[0.98] opacity-0 blur-[2px] ease-out" id="mv-content">
+            <div class="bg-gradient-secondary p-5 text-white flex justify-between items-center">
+                <h3 class="font-extrabold text-base flex items-center gap-2"><i class="fa-solid fa-circle-play"></i> Video Solusi Smart Logic</h3>
+                <button onclick="closeVideoModal()" class="text-white/80 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="p-6 space-y-4 overflow-y-auto">
+                <!-- Video Mockup Screen -->
+                <div class="relative w-full aspect-video bg-slate-900 rounded-2xl overflow-hidden flex flex-col justify-between p-4 group border border-slate-800 shadow-inner" id="video-container">
+                    <!-- Loading state overlay inside video (hidden by default) -->
+                    <div id="video-loader" class="absolute inset-0 bg-black/80 z-30 flex flex-col items-center justify-center gap-3 opacity-0 pointer-events-none transition-all duration-300">
+                        <div class="w-10 h-10 rounded-full animate-spin-medium animate-spin-slow" style="background: conic-gradient(from 0deg, transparent 0deg, #A03A55 120deg, transparent 360deg); mask: radial-gradient(circle, transparent 40%, black 42%, black 48%, transparent 50%); -webkit-mask: radial-gradient(circle, transparent 40%, black 42%, black 48%, transparent 50%);"></div>
+                        <span class="text-[10px] text-white/60 font-semibold tracking-wider">Menghubungkan ke CDN...</span>
+                    </div>
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10 pointer-events-none"></div>
+                    <div class="absolute inset-0 bg-gradient-to-br from-[#5B316C]/40 to-[#A03A55]/30 pointer-events-none"></div>
+                    
+                    <!-- Play Overlay -->
+                    <div class="absolute inset-0 flex items-center justify-center z-20" id="video-play-btn">
+                        <button onclick="playVideo()" class="w-16 h-16 bg-white/25 hover:bg-white/45 text-white rounded-full flex items-center justify-center backdrop-blur-md cursor-pointer transition-all scale-105 border border-white/30 shadow-lg">
+                            <i class="fa-solid fa-play text-xl ml-1"></i>
+                        </button>
+                    </div>
+
+                    <!-- Top Bar of player -->
+                    <div class="flex justify-between items-center z-20 relative w-full text-white">
+                        <span id="mv-category" class="bg-[#5B316C]/70 px-2 py-0.5 rounded text-[10px] font-bold border border-white/20">Penalaran Umum</span>
+                        <span class="bg-black/60 px-1.5 py-0.5 rounded text-[9px] font-semibold">1080p HD</span>
+                    </div>
+
+                    <!-- Bottom Bar of player -->
+                    <div class="z-20 relative w-full text-white space-y-2 mt-auto">
+                        <div class="w-full h-1 bg-white/30 rounded-full overflow-hidden cursor-pointer relative group-hover:h-1.5 transition-all">
+                            <div class="h-full bg-[#A03A55] rounded-full" style="width: 35%"></div>
+                        </div>
+                        <div class="flex justify-between items-center text-[10px] font-medium">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-volume-high"></i>
+                                <span>03:15 / 08:42</span>
+                            </div>
+                            <i class="fa-solid fa-expand"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <div>
+                        <h4 id="mv-title" class="text-base font-bold text-[#1B355A] leading-snug">Logika Aritmatika IRT — Soal UTBK #12</h4>
+                        <div class="flex items-center gap-2 mt-2 pt-2 border-t border-slate-50">
+                            <div class="w-7 h-7 rounded-full bg-gradient-secondary text-white font-extrabold text-[10px] flex items-center justify-center shadow-sm">T</div>
+                            <div>
+                                <h5 class="text-xs font-bold text-[#1B355A]">Tentor Senior: Dr. Ahmad F.</h5>
+                                <p class="text-[9px] font-semibold text-slate-400">Ahli Matematika & SNBT Nalar Academy</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-500 font-medium leading-relaxed pt-1">Di video ini, Tentor Ahmad membahas trik khusus penyelesaian pola barisan deret angka bertingkat menggunakan logika pemetaan terarah. Metode ini melatih Anda menjawab soal penalaran matematika rata-rata di bawah 45 detik tanpa menghafalkan rumus-rumus rumit.</p>
+                </div>
+            </div>
+            <div class="p-4 border-t border-[#1B355A]/10 bg-slate-50 flex gap-3">
+                <button onclick="closeVideoModal()" class="flex-grow py-2.5 bg-[#5B316C] hover:bg-[#A03A55] text-white font-bold rounded-xl text-xs shadow-md transition-all text-center">Tutup Solusi</button>
+            </div>
+        </div>
+    </dialog>
+</body>
+</html>

@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CargoArch AI — AI-Powered Smart Truck Loading Optimization System. Showcase and research supporting files.">
+  <title>CargoArch AI — Research Showcase</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  
+  <!-- Three.js & OrbitControls for Interactive 3D Preview -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  
+  <style>
+    :root {
+      --bg: #0a0d0a;
+      --panel: rgba(18, 22, 18, 0.7);
+      --panel-border: rgba(0, 230, 118, 0.15);
+      --panel-border-hover: rgba(0, 229, 255, 0.4);
+      --green: #00e676;
+      --green-glow: rgba(0, 230, 118, 0.25);
+      --cyan: #00e5ff;
+      --cyan-glow: rgba(0, 229, 255, 0.25);
+      --amber: #ffa000;
+      --amber-glow: rgba(255, 160, 0, 0.25);
+      --red: #ef4444;
+      --text-primary: #e8eee8;
+      --text-secondary: #a3b8a3;
+      --text-muted: #5e735e;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'Share Tech Mono', monospace;
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      position: relative;
+    }
+
+    /* Canvas background */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.45;
+    }
+
+    /* Ambient glow elements */
+    .glow-orb {
+      position: fixed;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(120px);
+      opacity: 0.12;
+    }
+    .glow-orb-1 {
+      top: -100px;
+      left: -100px;
+      background: radial-gradient(circle, var(--green) 0%, transparent 70%);
+      animation: float-glow 20s infinite alternate;
+    }
+    .glow-orb-2 {
+      bottom: -100px;
+      right: -100px;
+      background: radial-gradient(circle, var(--cyan) 0%, transparent 70%);
+      animation: float-glow 25s infinite alternate-reverse;
+    }
+
+    @keyframes float-glow {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(50px, 30px) scale(1.15); }
+    }
+
+    /* Main Container */
+    .showcase-container {
+      width: 100%;
+      max-width: 620px;
+      padding: 50px 20px 60px 20px;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+
+    /* Profile Section */
+    .profile-section {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo-container {
+      width: 100px;
+      height: 100px;
+      border-radius: 24px;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 32px rgba(0, 230, 118, 0.1);
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .logo-container::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,230,118,0.1), rgba(0,229,255,0.1));
+      opacity: 0;
+      transition: var(--transition);
+    }
+    .logo-container:hover {
+      transform: translateY(-4px) scale(1.03);
+      border-color: var(--green);
+      box-shadow: 0 12px 36px var(--green-glow);
+    }
+    .logo-container:hover::before {
+      opacity: 1;
+    }
+    .logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      z-index: 1;
+      filter: drop-shadow(0 0 8px rgba(0, 230, 118, 0.2));
+    }
+
+    .titles {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .main-title {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: var(--text-primary);
+    }
+    .main-title span {
+      background: linear-gradient(90deg, var(--green), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .subtitle {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 1px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+    }
+
+    .badges-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .badge {
+      background: rgba(0, 229, 255, 0.06);
+      border: 1px solid rgba(0, 229, 255, 0.25);
+      border-radius: 99px;
+      padding: 4px 12px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: var(--cyan);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    /* Project Summary Card */
+    .summary-card {
+      width: 100%;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: left;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      transition: var(--transition);
+    }
+    .summary-card:hover {
+      border-color: rgba(0, 230, 118, 0.3);
+      box-shadow: 0 12px 40px rgba(0, 230, 118, 0.05);
+    }
+    .summary-title {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .summary-title::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 6px var(--green);
+    }
+    .summary-text {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    /* Links Section */
+    .links-section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .link-card {
+      width: 100%;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: 16px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .link-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      transition: var(--transition);
+    }
+    .link-card-proposal::after { background: var(--green); }
+    .link-card-blueprint::after { background: var(--cyan); }
+    .link-card-blender::after { background: var(--amber); }
+    .link-card-glb::after { background: #3f51b5; }
+    .link-card-youtube::after { background: #ff0000; }
+    .link-card-demo::after { background: #d500f9; }
+
+    .link-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--panel-border-hover);
+      box-shadow: 0 12px 32px rgba(0, 229, 255, 0.08);
+    }
+    .link-card:active {
+      transform: translateY(-1px);
+    }
+
+    .link-icon-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+    .link-card:hover .link-icon-wrap {
+      background: rgba(255, 255, 255, 0.06);
+      transform: scale(1.05);
+    }
+
+    .link-icon {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .link-card-proposal:hover .link-icon { stroke: var(--green); filter: drop-shadow(0 0 4px var(--green)); }
+    .link-card-blueprint:hover .link-icon { stroke: var(--cyan); filter: drop-shadow(0 0 4px var(--cyan)); }
+    .link-card-blender:hover .link-icon { stroke: var(--amber); filter: drop-shadow(0 0 4px var(--amber)); }
+    .link-card-glb:hover .link-icon { stroke: #3f51b5; filter: drop-shadow(0 0 4px #3f51b5); }
+    .link-card-youtube:hover .link-icon { stroke: #ff0000; filter: drop-shadow(0 0 4px #ff0000); }
+    .link-card-demo:hover .link-icon { stroke: #d500f9; filter: drop-shadow(0 0 4px #d500f9); }
+
+    .link-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .link-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: 0.3px;
+    }
+    .link-desc {
+      font-size: 11.5px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    .arrow-icon {
+      width: 18px;
+      height: 18px;
+      stroke: var(--text-muted);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+      transition: var(--transition);
+    }
+    .link-card:hover .arrow-icon {
+      stroke: var(--text-primary);
+      transform: translateX(3px);
+    }
+
+    /* Technical Stack Panel */
+    .tech-stack-section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .section-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      padding-left: 8px;
+    }
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      width: 100%;
+    }
+    .tech-item {
+      background: rgba(18, 22, 18, 0.4);
+      border: 1px solid rgba(0, 230, 118, 0.06);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: var(--transition);
+    }
+    .tech-item:hover {
+      border-color: var(--panel-border);
+      background: var(--panel);
+      transform: translateY(-2px);
+    }
+    .tech-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .tech-val {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      line-height: 1.3;
+    }
+    .tech-val span {
+      color: var(--cyan);
+    }
+
+    /* Footer Section */
+    footer {
+      width: 100%;
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.03);
+      z-index: 1;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 16px;
+    }
+    .social-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .social-icon:hover {
+      background: var(--panel);
+      border-color: var(--cyan);
+      color: var(--cyan);
+      box-shadow: 0 0 10px var(--cyan-glow);
+      transform: translateY(-2px);
+    }
+    .social-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .copyright {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .logo-text-img {
+      height: 38px;
+      max-width: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 0 10px rgba(0, 230, 118, 0.15));
+      transition: var(--transition);
+    }
+
+    .partners-section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .partners-card {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+      transition: var(--transition);
+    }
+
+    .partners-card:hover {
+      background: #ffffff;
+      border-color: var(--cyan);
+      box-shadow: 0 12px 40px rgba(0, 229, 255, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .partners-logo-img {
+      width: 100%;
+      max-height: 52px;
+      object-fit: contain;
+      transition: var(--transition);
+    }
+
+    /* Language Switcher Buttons */
+    .lang-switcher {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      display: flex;
+      align-items: center;
+      background: rgba(10, 13, 10, 0.75);
+      border: 1px solid var(--panel-border);
+      border-radius: 99px;
+      padding: 2px 6px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 1000;
+      transition: var(--transition);
+    }
+    .lang-switcher:hover {
+      border-color: var(--panel-border-hover);
+      box-shadow: 0 4px 24px rgba(0, 229, 255, 0.12);
+    }
+    .lang-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 8px;
+      cursor: pointer;
+      border-radius: 99px;
+      transition: var(--transition);
+    }
+    .lang-btn.active {
+      color: var(--cyan);
+      text-shadow: 0 0 8px var(--cyan-glow);
+    }
+    .lang-btn:hover:not(.active) {
+      color: var(--text-secondary);
+    }
+    .lang-divider {
+      width: 1px;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.15);
+      margin: 0 2px;
+    }
+
+    /* Language Toggle Classes */
+    .t-id, .t-en { display: none; }
+    body.lang-id .t-id { display: block; }
+    body.lang-en .t-en { display: block; }
+    
+    /* Inline levels */
+    span.t-id, span.t-en { display: none; }
+    body.lang-id span.t-id { display: inline; }
+    body.lang-en span.t-en { display: inline; }
+
+    /* 3D Preview Card */
+    .preview-3d-section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .preview-3d-card {
+      width: 100%;
+      height: 280px;
+      background: #050705;
+      border: 1px solid var(--panel-border);
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      transition: var(--transition);
+    }
+    .preview-3d-card:hover {
+      border-color: var(--panel-border-hover);
+    }
+    #preview-3d-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .preview-3d-overlay {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      background: rgba(10, 13, 10, 0.75);
+      border: 1px solid rgba(0, 230, 118, 0.15);
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      color: var(--text-secondary);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .preview-3d-controls-hint {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--text-muted);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .team-section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .team-card {
+      width: 100%;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      transition: var(--transition);
+    }
+    .team-card:hover {
+      border-color: var(--panel-border-hover);
+    }
+
+    .team-member {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .team-member:last-of-type {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .member-name {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .member-role {
+      font-size: 11px;
+      color: var(--text-secondary);
+      font-style: italic;
+      font-family: var(--font-mono);
+    }
+
+    .team-supervisor {
+      margin-top: 6px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(0, 230, 118, 0.15);
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-align: center;
+      font-style: italic;
+      line-height: 1.4;
+    }
+    .team-supervisor span {
+      font-weight: 700;
+      color: var(--cyan);
+      font-style: normal;
+    }
+
+    /* Small styles for mobile */
+    @media (max-width: 480px) {
+      .showcase-container {
+        padding: 30px 16px 40px 16px;
+        gap: 24px;
+      }
+      .logo-container {
+        width: 80px;
+        height: 80px;
+        padding: 8px;
+        border-radius: 18px;
+      }
+      .main-title {
+        font-size: 24px;
+      }
+      .link-card {
+        padding: 14px 16px;
+        gap: 14px;
+      }
+      .link-icon-wrap {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+      }
+      .link-icon {
+        width: 20px;
+        height: 20px;
+      }
+      .link-title {
+        font-size: 13.5px;
+      }
+      .tech-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .logo-text-img {
+        height: 28px;
+      }
+      .partners-card {
+        padding: 12px 14px;
+      }
+      .partners-logo-img {
+        max-height: 42px;
+      }
+      .team-member {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+      }
+      .member-role {
+        font-size: 10px;
+      }
+      .team-card {
+        padding: 16px;
+        gap: 10px;
+      }
+      .preview-3d-card {
+        height: 220px;
+      }
+      .lang-switcher {
+        top: 12px;
+        right: 12px;
+        padding: 1px 4px;
+      }
+      .lang-btn {
+        font-size: 10px;
+        padding: 3px 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Animated Particle Canvas Background -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Glow effects -->
+  <div class="glow-orb glow-orb-1"></div>
+  <div class="glow-orb glow-orb-2"></div>
+
+  <!-- Main Container -->
+  <div class="showcase-container">
+    
+    <!-- Language Switcher -->
+    <div class="lang-switcher">
+      <button class="lang-btn" id="btn-lang-id" onclick="setLanguage('id')">ID</button>
+      <div class="lang-divider"></div>
+      <button class="lang-btn" id="btn-lang-en" onclick="setLanguage('en')">EN</button>
+    </div>
+
+    <!-- Supported Partners Logo Strip -->
+    <section class="partners-section">
+      <div class="partners-card">
+        <img class="partners-logo-img" src="partners_logo.png" alt="Partners &amp; Sponsors">
+      </div>
+    </section>
+    
+    <!-- Profile Header -->
+    <header class="profile-section">
+      <div class="logo-container">
+        <img class="logo-img" src="LOGO CARGOARCH AI.png" alt="CargoArch AI Logo">
+      </div>
+      <div class="titles" style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+        <h1 class="main-title" style="display: flex; justify-content: center; align-items: center; margin-bottom: 2px;">
+          <img class="logo-text-img" src="cargoarch_text_logo.png" alt="CargoArch AI">
+        </h1>
+        <div class="subtitle">Empowering Smart Logistics.</div>
+      </div>
+    </header>
+
+    <!-- Project Abstract Brief -->
+    <div class="summary-card">
+      <div class="summary-title">
+        <span class="t-id">Ringkasan Proyek</span>
+        <span class="t-en">Project Overview</span>
+      </div>
+      <p class="summary-text t-id">
+        CargoArch AI adalah sistem sortasi dan penataan muatan berbasis Edge-AI yang mengintegrasikan Computer Vision, 3D Bin Packing, serta sensor LiDAR &amp; load-cell. Dirancang untuk mengoptimalkan efisiensi penataan kontainer (utilisasi volume ≥85%) berdasarkan rute logistik aktual secara real-time.
+      </p>
+      <p class="summary-text t-en">
+        CargoArch AI is an Edge-AI based smart sortation and loading system integrating Computer Vision, 3D Bin Packing, and LiDAR &amp; load-cell sensors. Designed to optimize container volume utilization (target ≥85%) based on actual logistic routes in real-time.
+      </p>
+    </div>
+
+    <!-- Interactive 3D Container Packing Preview -->
+    <section class="preview-3d-section">
+      <div class="section-title">
+        <span class="t-id">Simulasi Kontainer 3D Interaktif // Twin Digital</span>
+        <span class="t-en">Interactive 3D Container Simulation // Digital Twin</span>
+      </div>
+      <div class="preview-3d-card" id="preview-3d-card">
+        <div class="preview-3d-overlay">
+          <span class="t-id">Preview Aset 3D CargoArch AI</span>
+          <span class="t-en">CargoArch AI 3D Asset Preview</span>
+        </div>
+        <div class="preview-3d-controls-hint">
+          <span class="t-id">Seret untuk memutar · Scroll untuk zoom</span>
+          <span class="t-en">Drag to rotate · Scroll to zoom</span>
+        </div>
+        <canvas id="preview-3d-canvas"></canvas>
+      </div>
+    </section>
+
+    <!-- Links List -->
+    <section class="links-section">
+      
+      <!-- Link 1: Proposal (Hardcoded Link) -->
+      <a href="https://drive.google.com/file/d/181QfTpBeSeI_VBoDxRw9AwAKCRbR7tFA/view?usp=drive_link" class="link-card link-card-proposal" id="proposal-link" target="_blank">
+        <div class="link-icon-wrap">
+          <svg class="link-icon" viewBox="0 0 24 24" style="stroke: var(--green);">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+        </div>
+        <div class="link-info">
+          <div class="link-title">Research Proposal</div>
+          <div class="link-desc t-id">Dokumen proposal penelitian ilmiah, metodologi Edge-AI, dan formulasi 3D packing.</div>
+          <div class="link-desc t-en">Scientific research proposal document, Edge-AI methodology, and 3D packing formulations.</div>
+        </div>
+        <svg class="arrow-icon" viewBox="0 0 24 24">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </a>
+
+      <!-- Link 2: 2D Technical Blueprint (Hardcoded Link) -->
+      <a href="https://drive.google.com/file/d/1yiRTSmP1NSUYdmP4h3kWY8QiYuq18JXJ/view?usp=drive_link" class="link-card link-card-blueprint" id="blueprint-link" target="_blank">
+        <div class="link-icon-wrap">
+          <svg class="link-icon" viewBox="0 0 24 24" style="stroke: var(--cyan);">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <div class="link-info">
+          <div class="link-title">2D Technical Blueprint</div>
+          <div class="link-desc t-id">Skema detail dimensi gantry frame, diagram alur kabel AWG, dan konektivitas Orange Pi 5.</div>
+          <div class="link-desc t-en">Detailed schematics of gantry frame dimensions, AWG wiring diagram, and Orange Pi 5 connectivity.</div>
+        </div>
+        <svg class="arrow-icon" viewBox="0 0 24 24">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </a>
+
+      <!-- Link 3: Blender Assets (Hardcoded Link) -->
+      <a href="https://drive.google.com/file/d/1I6BGEmvwLaAwAZYeeKM3XbzU-6JxWh7I/view?usp=drive_link" class="link-card link-card-blender" id="blender-link" target="_blank">
+        <div class="link-icon-wrap">
+          <svg class="link-icon" viewBox="0 0 24 24" style="stroke: var(--amber);">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+          </svg>
+        </div>
+        <div class="link-info">
+          <div class="link-title">Blender 3D Model &amp; Assets</div>
+          <div class="link-desc t-id">Aset 3D model mekanis, konveyor, sensor assembly, dan digital twin kontainer.</div>
+          <div class="link-desc t-en">Mechanical 3D models, conveyor, sensor assemblies, and virtual container digital twin assets.</div>
+        </div>
+        <svg class="arrow-icon" viewBox="0 0 24 24">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </a>
+
+      <!-- Link 4: GLB 3D Asset (Hardcoded Link) -->
+      <a href="https://drive.google.com/file/d/1hoUs129mlmMD2XXEBR9ClCEinnDsuBmL/view?usp=drive_link" class="link-card link-card-glb" id="glb-link" target="_blank">
+        <div class="link-icon-wrap">
+          <svg class="link-icon" viewBox="0 0 24 24" style="stroke: #3f51b5;">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+            <line x1="12" y1="12" x2="12" y2="22"></line>
+          </svg>
+        </div>
+        <div class="link-info">
+          <div class="link-title">GLB 3D Model Asset</div>
+          <div class="link-desc t-id">Unduh langsung aset model 3D optimal format GLB untuk render web &amp; VR.</div>
+          <div class="link-desc t-en">Direct download of the optimized 3D model asset in GLB format for web &amp; VR.</div>
+        </div>
+        <svg class="arrow-icon" viewBox="0 0 24 24">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </a>
+
+      <!-- Link 5: YouTube Demo Video (Hardcoded Link) -->
+      <a href="https://youtu.be/9AYDOGzIBjI" class="link-card link-card-youtube" id="youtube-link" target="_blank">
+        <div class="link-icon-wrap">
+          <svg class="link-icon" viewBox="0 0 24 24" style="stroke: #ff0000;">
+            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25a29 29 0 0 0-.46-5.33z"></path>
+            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+          </svg>
+        </div>
+        <div class="link-info">
+          <div class="link-title">Video Prototype</div>
+          <div class="link-desc t-id">Video demonstrasi alat, alur kerja Edge-AI, dan uji sortasi fisik CargoArch AI.</div>
+          <div class="link-desc t-en">Demonstration video showing device operations, Edge-AI pipeline workflow, and physical sortation.</div>
+        </div>
+        <svg class="arrow-icon" viewBox="0 0 24 24">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </a>
+
+      <!-- Link 6: Interactive Demo (Hardcoded Link) -->
+      <a href="https://roufsportfolio.netlify.app/cargoarch.html" class="link-card link-card-demo" id="demo-link" target="_blank">
+        <div class="link-icon-wrap">
+          <svg class="link-icon" viewBox="0 0 24 24" style="stroke: #d500f9;">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+            <path d="M7 8l5 5 5-5"></path>
+          </svg>
+        </div>
+        <div class="link-info">
+          <div class="link-title">Interactive Live Demo Website</div>
+          <div class="link-desc t-id">Simulasi digital twin 3D penataan paket, timbangan, OCR resi, dan visualisasi pemuatan kontainer.</div>
+          <div class="link-desc t-en">Real-time 3D digital twin simulation of package loading, load cell scales, label OCR, and container visualization.</div>
+        </div>
+        <svg class="arrow-icon" viewBox="0 0 24 24">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </a>
+
+    </section>
+
+    <!-- Technical Specs Grid -->
+    <section class="tech-stack-section">
+      <div class="section-title">
+        <span class="t-id">Spesifikasi Fisik // System Specs</span>
+        <span class="t-en">System Specs // Physical Specifications</span>
+      </div>
+      <div class="tech-grid">
+        <div class="tech-item">
+          <span class="tech-label">Gantry Frame</span>
+          <span class="tech-val">Aluminum Extrusion (20x40)</span>
+        </div>
+        <div class="tech-item">
+          <span class="tech-label">
+            <span class="t-id">Prosesor Utama</span>
+            <span class="t-en">Core Processor</span>
+          </span>
+          <span class="tech-val">Orange Pi 5 <span>(Edge AI Pipeline)</span></span>
+        </div>
+        <div class="tech-item">
+          <span class="tech-label">
+            <span class="t-id">Sistem Visi</span>
+            <span class="t-en">Vision System</span>
+          </span>
+          <span class="tech-val">2x OV9281 Camera <span>(YOLOv8 + OCR)</span></span>
+        </div>
+        <div class="tech-item">
+          <span class="tech-label">
+            <span class="t-id">Telemetri Jarak</span>
+            <span class="t-en">Telemetry / Distance</span>
+          </span>
+          <span class="tech-val">2x LiDAR TF-Luna Sensors</span>
+        </div>
+        <div class="tech-item">
+          <span class="tech-label">
+            <span class="t-id">Platform Timbangan</span>
+            <span class="t-en">Weight Platform</span>
+          </span>
+          <span class="tech-val">Load Cell 5kg + HX711 Amplifier</span>
+        </div>
+        <div class="tech-item">
+          <span class="tech-label">
+            <span class="t-id">Aktuator Sortasi</span>
+            <span class="t-en">Sortation Actuator</span>
+          </span>
+          <span class="tech-val">Smart Sorter (Servo MG996R)</span>
+        </div>
+        <div class="tech-item">
+          <span class="tech-label">
+            <span class="t-id">Tampilan HMI</span>
+            <span class="t-en">HMI Display</span>
+          </span>
+          <span class="tech-val">5 Inch LCD Touchscreen</span>
+        </div>
+        <div class="tech-item">
+          <span class="tech-label">
+            <span class="t-id">Daya &amp; Pendingin</span>
+            <span class="t-en">Power &amp; Cooling</span>
+          </span>
+          <span class="tech-val">5V 20A PSU + Active Fan</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Members Section -->
+    <section class="team-section">
+      <div class="section-title">
+        <span class="t-id">Tim Penelitian // Research Team</span>
+        <span class="t-en">Research Team // Members of CargoArch AI</span>
+      </div>
+      <div class="team-card">
+        <div class="team-member">
+          <span class="member-name">Rafa Putra Ro'uf</span>
+          <span class="member-role">
+            <span class="t-id">Ketua Proyek &amp; AI Engineer</span>
+            <span class="t-en">Project Lead &amp; AI Engineer</span>
+          </span>
+        </div>
+        <div class="team-member">
+          <span class="member-name">Muhammad Hamdan Yuwafi Sulaim</span>
+          <span class="member-role">
+            <span class="t-id">Hardware Engineer</span>
+            <span class="t-en">Hardware Engineer</span>
+          </span>
+        </div>
+        <div class="team-member">
+          <span class="member-name">Aqil Afzal Al Farisi</span>
+          <span class="member-role">
+            <span class="t-id">Manajer Bisnis</span>
+            <span class="t-en">Business Manager</span>
+          </span>
+        </div>
+        <div class="team-member">
+          <span class="member-name">Farsya Naufal Rahmandika</span>
+          <span class="member-role">
+            <span class="t-id">Konseptor &amp; Hardware Engineer</span>
+            <span class="t-en">Brainstorm &amp; Hardware Engineer</span>
+          </span>
+        </div>
+        <div class="team-member">
+          <span class="member-name">Muhammad Saif Zuhairi</span>
+          <span class="member-role">
+            <span class="t-id">Software Engineer</span>
+            <span class="t-en">Software Engineer</span>
+          </span>
+        </div>
+        <div class="team-supervisor">
+          <span class="t-id">Dan juga pembimbing kami yang terhormat, <span>Farhan Fikri Safii</span>.</span>
+          <span class="t-en">And also our respected supervisor, <span>Farhan Fikri Safii</span>.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="social-links">
+        <!-- Github -->
+        <a href="https://github.com/rafa303" class="social-icon" target="_blank" title="Github Rafa Putra Ro'uf">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+          </svg>
+        </a>
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/rouffs__/" class="social-icon" target="_blank" title="Instagram Rafa Putra Ro'uf">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </a>
+        <!-- Email -->
+        <a href="mailto:rafaputrarouf@gmail.com" class="social-icon" title="Hubungi via Email">
+          <svg viewBox="0 0 24 24">
+            <path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 4.412v-9.378l4.623 4.966zm.26.279l5.117 5.496 5.117-5.496 5.758 6.892h-21.75l5.758-6.892zm10.494-.279l4.623-4.966v9.378l-4.623-4.412zm-5.377-1.139l-11-11.808h22l-11 11.808z"/>
+          </svg>
+        </a>
+      </div>
+      <div class="copyright">
+        &copy; 2026 Rafa Putra Ro'uf. All Rights Reserved.
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- JavaScript for background animation -->
+  <script>
+    // --- Language Switcher Logic ---
+    function setLanguage(lang) {
+      document.body.classList.remove('lang-id', 'lang-en');
+      document.body.classList.add('lang-' + lang);
+      
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      if (lang === 'id') {
+        document.getElementById('btn-lang-id').classList.add('active');
+      } else {
+        document.getElementById('btn-lang-en').classList.add('active');
+      }
+      
+      localStorage.setItem('cargoarch_lang', lang);
+    }
+
+    // Default to 'id' or saved language
+    const savedLang = localStorage.getItem('cargoarch_lang') || 'id';
+    setLanguage(savedLang);
+
+    // --- Canvas Particle Animation ---
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let particles = [];
+    const maxParticles = 65;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.45;
+        this.vy = (Math.random() - 0.5) * 0.45;
+        this.size = Math.random() * 2 + 1;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
+        if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
+      }
+
+      draw() {
+        ctx.fillStyle = 'rgba(0, 230, 118, 0.4)';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particles = [];
+      for (let i = 0; i < maxParticles; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Draw Grid lines first
+      ctx.strokeStyle = 'rgba(0, 230, 118, 0.02)';
+      ctx.lineWidth = 1;
+      const gridSize = 60;
+      for (let x = 0; x < canvas.width; x += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
+      }
+      for (let y = 0; y < canvas.height; y += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+      }
+
+      // Draw connections
+      ctx.strokeStyle = 'rgba(0, 229, 255, 0.05)';
+      ctx.lineWidth = 0.5;
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw particles
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      initParticles();
+    });
+
+    resizeCanvas();
+    initParticles();
+    animate();
+
+    // --- Three.js 3D Preview Animation ---
+    function init3DPreview() {
+      const container = document.getElementById('preview-3d-card');
+      const canvasEl = document.getElementById('preview-3d-canvas');
+      if (!container || !canvasEl) return;
+      
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x050705);
+      
+      // Camera
+      const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
+      camera.position.set(10, 8, 12);
+      
+      // Renderer
+      const renderer = new THREE.WebGLRenderer({ canvas: canvasEl, antialias: true });
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      
+      // Controls
+      const controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.05;
+      controls.maxPolarAngle = Math.PI / 2 - 0.05; // don't go below floor
+      controls.minDistance = 5;
+      controls.maxDistance = 25;
+      
+      // Lighting
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+      scene.add(ambientLight);
+      
+      const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+      dirLight.position.set(5, 10, 7);
+      scene.add(dirLight);
+
+      const dirLight2 = new THREE.DirectionalLight(0x00e5ff, 0.4);
+      dirLight2.position.set(-5, -5, -5);
+      scene.add(dirLight2);
+      
+      // Container Box (Wireframe)
+      const containerGeo = new THREE.BoxGeometry(8, 3.5, 3.5);
+      const containerMat = new THREE.MeshPhongMaterial({
+        color: 0x00e676,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.25
+      });
+      const containerMesh = new THREE.Mesh(containerGeo, containerMat);
+      scene.add(containerMesh);
+      
+      // Add a grid floor helper
+      const gridHelper = new THREE.GridHelper(16, 16, 0x00e676, 0x112211);
+      gridHelper.position.y = -1.76;
+      scene.add(gridHelper);
+
+      // Create some stylized packed cargo blocks inside
+      const blocksGroup = new THREE.Group();
+      scene.add(blocksGroup);
+      
+      // Load GLTF Model (with fallback to blocksGroup)
+      let modelLoaded = false;
+      const loader = new THREE.GLTFLoader();
+      loader.load(
+        './CargoARCH.glb',
+        function (gltf) {
+          const model = gltf.scene;
+          
+          // Compute bounding box to center and scale the model
+          const box = new THREE.Box3().setFromObject(model);
+          const center = box.getCenter(new THREE.Vector3());
+          const size = box.getSize(new THREE.Vector3());
+          
+          // Re-center model geometry
+          model.position.x += (model.position.x - center.x);
+          model.position.y += (model.position.y - center.y);
+          model.position.z += (model.position.z - center.z);
+          
+          // Scale model to fit wireframe container (container size is 8x3.5x3.5)
+          const maxDim = Math.max(size.x, size.y, size.z);
+          if (maxDim > 0) {
+            const scale = 5.5 / maxDim; // scale to fit comfortably
+            model.scale.set(scale, scale, scale);
+          }
+          
+          // Adjust lighting and shadow parameters for sub-meshes
+          model.traverse((node) => {
+            if (node.isMesh) {
+              node.castShadow = true;
+              node.receiveShadow = true;
+              if (node.material) {
+                node.material.roughness = 0.4;
+                node.material.metalness = 0.2;
+              }
+            }
+          });
+          
+          scene.add(model);
+          modelLoaded = true;
+          
+          // Hide procedural placeholder blocks so only loaded 3D GLB is shown
+          scene.remove(blocksGroup);
+        },
+        function (xhr) {
+          // Loading progress
+        },
+        function (error) {
+          console.warn('CORS restriction or model load failed. Displaying fallback procedural 3D pack layout instead.', error);
+          // Keep showing the procedural blocksGroup
+        }
+      );
+      
+      const blockData = [
+        { size: [2, 1.5, 2], pos: [-2.9, -0.9, -0.6], color: 0x00e676 }, // green
+        { size: [1.8, 1.2, 1.5], pos: [-1.0, -1.05, 0.9], color: 0x00e5ff }, // cyan
+        { size: [2.2, 2.0, 1.8], pos: [1.0, -0.65, -0.7], color: 0xffa000 }, // amber
+        { size: [1.5, 1.5, 1.5], pos: [2.8, -0.9, 0.9], color: 0xd500f9 }, // purple
+        { size: [1.6, 1.0, 1.4], pos: [-2.9, 0.35, -0.3], color: 0x00e5ff }, // cyan layer 2
+        { size: [1.4, 1.2, 1.4], pos: [1.0, 0.95, -0.5], color: 0x00e676 }  // green layer 2
+      ];
+      
+      blockData.forEach(data => {
+        const geo = new THREE.BoxGeometry(data.size[0] - 0.08, data.size[1] - 0.08, data.size[2] - 0.08);
+        
+        // Shiny box material with colors
+        const mat = new THREE.MeshPhongMaterial({
+          color: data.color,
+          shininess: 90,
+          transparent: true,
+          opacity: 0.85,
+          flatShading: true
+        });
+        
+        const mesh = new THREE.Mesh(geo, mat);
+        mesh.position.set(data.pos[0], data.pos[1], data.pos[2]);
+        
+        // Add wireframe outline edge helper to look like CAD models
+        const edges = new THREE.EdgesGeometry(geo);
+        const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0xffffff, linewidth: 1, transparent: true, opacity: 0.4 }));
+        mesh.add(line);
+        
+        blocksGroup.add(mesh);
+      });
+      
+      // Auto-rotation variable
+      let autoRotate = true;
+      
+      // Disable auto rotation on user interaction
+      controls.addEventListener('start', () => {
+        autoRotate = false;
+      });
+      
+      // Animation Loop
+      function animate3D() {
+        requestAnimationFrame(animate3D);
+        
+        if (autoRotate) {
+          scene.rotation.y += 0.0035;
+        }
+        
+        controls.update();
+        renderer.render(scene, camera);
+      }
+      
+      animate3D();
+      
+      // Resize handling
+      window.addEventListener('resize', () => {
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+      });
+    }
+    
+    // Run after DOM loaded
+    document.addEventListener('DOMContentLoaded', init3DPreview);
+  </script>
+</body>
+</html>
